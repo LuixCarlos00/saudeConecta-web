@@ -1,0 +1,10 @@
+
+main {
+  background: url(../assets/imagens/logo-Fundo.jpg);
+  background-size: cover; /* Para garantir que a imagem cubra toda a área */
+  background-position: center; /* Para centralizar a imagem */
+  min-height: 100vh; /* Define a altura mínima como 100% da altura da viewport */
+
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+}

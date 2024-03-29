@@ -1,0 +1,21 @@
+<div style="  display: flex;">
+  <div class="container">
+    <h2>Crie seu login </h2>
+    <form id="cadastroForm" class="responsivo" [formGroup]="FormularioUsuario">
+      <div class="form-group">
+        <label for="login">login:</label>
+        <input  [(ngModel)]="Usuario.login"  formControlName="login" type="text" id="login" name="login" placeholder="Exp:. CPF , Email " required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input [(ngModel)]="Usuario.senha" formControlName="password" type="password" id="password" name="password" placeholder="Senha deve conter mais de 8 caracteres"
+          required>
+      </div>
+
+    </form>
+    <button type="submit" (click)="cadatraUsuario()">Cadastrar</button>
+    <br>
+
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<div style="  display: flex;">
+  <div class="container">
+    <h2>Cadastro de Paciente</h2>
+    <form id="cadastroForm" class="responsivo" [formGroup]="FormularioPaciente">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input [(ngModel)]="Paciente.PaciNome" formControlName="nome" type="text" id="nome" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" [(ngModel)]="Paciente.PaciSexo" formControlName="sexo" name="sexo">
+          <option value="1">Masculino</option>
+          <option value="0">Feminino</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input [(ngModel)]="Paciente.PaciDataNacimento" formControlName="dataNascimento" type="date" id="dataNascimento"
+          name="dataNascimento" required>
+      </div>
+      <div class="form-group">
+        <label for="cpf">CPF:</label>
+        <input [(ngModel)]="Paciente.PaciCpf" formControlName="cpf" type="text" id="cpf" name="cpf" required>
+      </div>
+      <div class="form-group">
+        <label for="rg">RG:</label>
+        <input [(ngModel)]="Paciente.PaciRg" formControlName="rg" type="text" id="rg" name="rg" required>
+      </div>
+      <div class="form-group">
+        <label for="telefone">Telefone:</label>
+        <input [(ngModel)]="Paciente.PaciTelefone" formControlName="telefone" type="text" id="telefone" name="telefone">
+      </div>
+      <div class="form-group">
+        <label for="Email">Email:</label>
+        <input [(ngModel)]="Paciente.PaciEmail" formControlName="email" type="text" id="email" name="email">
+      </div>
+
+
+    </form>
+    <br>
+
+    <mat-expansion-panel hideToggle class="custom-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="custom-panel">
+          <h3>Endereço</h3>
+        </mat-panel-title>
+        <mat-panel-description>
+          <!-- This is a summary of the content -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form class="responsivo" [formGroup]="FormularioEndereco">
+
+        <div class="form-group">
+          <label for="nacionalidade">Nacionalidade:</label>
+          <input [(ngModel)]="Endereco.EndNacionalidade" formControlName="nacionalidade" type="text" id="nacionalidade"
+            name="nacionalidade" required>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado:</label>
+          <input [(ngModel)]="Endereco.EndEstado" formControlName="estado" type="text" id="estado" name="estado"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="uf">UF:</label>
+          <input [(ngModel)]="Endereco.EndUF" formControlName="uf" type="text" id="uf" name="uf" required>
+        </div>
+        <div class="form-group">
+          <label for="cep">CEP:</label>
+          <input [(ngModel)]="Endereco.EndCep" formControlName="cep" type="text" id="cep" name="cep" required>
+        </div>
+        <div class="form-group">
+          <label for="rua">Rua:</label>
+          <input [(ngModel)]="Endereco.EndRua" formControlName="rua" type="text" id="rua" name="rua" required>
+        </div>
+        <div class="form-group">
+          <label for="municipio">Município:</label>
+          <input [(ngModel)]="Endereco.EndMunicipio" formControlName="municipio" type="text" id="municipio"
+            name="municipio" required>
+        </div>
+        <div class="form-group">
+          <label for="bairro">Bairro:</label>
+          <input [(ngModel)]="Endereco.EndBairro" formControlName="bairro" type="text" id="bairro" name="bairro"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="numero">Número:</label>
+          <input [(ngModel)]="Endereco.EndNumero" formControlName="numero" type="number" id="numero" name="numero"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="complemento">Complemento:</label>
+          <input [(ngModel)]="Endereco.EndComplemento" formControlName="complemento" type="text" id="complemento"
+            name="complemento">
+        </div>
+
+      </form>
+    </mat-expansion-panel>
+
+    <br>
+
+
+    <br>
+
+    <button type="submit" (click)="cadastra()">Cadastrar</button>
+  </div>
+</div>
+<br><br>
