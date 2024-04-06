@@ -1,0 +1,47 @@
+
+
+  .container {
+    text-align: center;
+
+    font-family: 'Arial', sans-serif;
+    color: #555;
+
+  }
+
+  .mascote {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  h1 {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 4em;
+    animation: bounce 1s infinite alternate, colorChange 5s infinite alternate;
+  }
+
+  h6 {
+    font-size: 0.8em;
+  }
+
+  @keyframes bounce {
+    to {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes colorChange {
+    0% {
+      color: #555;
+    }
+    50% {
+      color: #ff5733;
+    }
+    100% {
+      color: #555;
+    }
+  }

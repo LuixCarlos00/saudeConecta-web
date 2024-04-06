@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginModule } from './features/login/login_Module/login.module';
 import { PacienteModule } from './features/paciente/paciente_Module/paciente.module';
+import { UtilModule } from './util/util/util.module';
+//import { JWT_OPTIONS, JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+
+
+
 
 @NgModule({
   declarations: [
@@ -16,16 +21,16 @@ import { PacienteModule } from './features/paciente/paciente_Module/paciente.mod
     BrowserModule,
     AppRoutingModule,
     LoginModule,
-    PacienteModule
+    PacienteModule,
+    UtilModule,
+
 
 
 
 
 
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+  providers: [ provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

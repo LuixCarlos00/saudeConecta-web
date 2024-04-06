@@ -9,14 +9,16 @@ import { RouterLink } from '@angular/router';
  import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CadastroUsuarioComponent } from '../cadastro/cadastro-usuario/cadastro-usuario.component';
-
+import {MatSelectModule} from '@angular/material/select';
+import { TelaInicialComponent } from '../../tela-inicial/tela-inicial.component';
 
 @NgModule({
   declarations: [
     CadastroPacienteComponent,
     CadastroMedicoComponent,
     CadastroComponent,
-    CadastroUsuarioComponent
+    CadastroUsuarioComponent,
+    TelaInicialComponent
 
 
   ],
@@ -29,7 +31,8 @@ import { CadastroUsuarioComponent } from '../cadastro/cadastro-usuario/cadastro-
     CommonModule,
     MatExpansionModule,
     BrowserModule,
-     HttpClientModule
+     HttpClientModule,
+     MatSelectModule
   ]
 })
 export class PacienteModule { }

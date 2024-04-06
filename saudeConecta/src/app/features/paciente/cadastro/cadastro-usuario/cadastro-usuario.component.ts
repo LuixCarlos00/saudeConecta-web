@@ -1,9 +1,10 @@
-import { TokenService } from './../../../../util/Token/Token.service';
+
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { PacienteService } from '../../../paciente/paciente_service/paciente.service';
+import { tokenService } from 'src/app/util/Token/token.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -18,8 +19,9 @@ export class CadastroUsuarioComponent {
 
   Usuario: Usuario = {
     id: 0,
-    login:'',
-    senha:'',
+    login: '',
+    senha: '',
+    roles: undefined
   };
 
 
@@ -28,7 +30,7 @@ export class CadastroUsuarioComponent {
     private form: FormBuilder,
     private router : Router ,
     private CadastroPaciete_Medico :PacienteService,
-    private TokenService :TokenService) {}
+    private TokenService :tokenService) {}
 
   ngOnInit(): void {
 
@@ -47,8 +49,8 @@ export class CadastroUsuarioComponent {
     if (this.FormularioUsuario.valid) {
       this.CadastroPaciete_Medico.cadastrarUsuario(this.Usuario).subscribe(
         (dados) => {
-          // Armazenar dados do usuário e token JWT
-          this.CadastroPaciete_Medico.dadosUsuario(dados.body);
+          console.log(dados,'lkk',dados.body  );
+
 
         },
         (error) => {

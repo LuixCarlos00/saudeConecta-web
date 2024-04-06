@@ -3,36 +3,52 @@
     <h2>Cadastro de Paciente</h2>
     <form id="cadastroForm" class="responsivo" [formGroup]="FormularioPaciente">
       <div class="form-group">
-        <label for="nome">Nome:</label>
+        <label for="nome">
+          <font color="#FF0000"><b>* </b></font> Nome :
+        </label>
         <input [(ngModel)]="Paciente.PaciNome" formControlName="nome" type="text" id="nome" name="nome" required>
       </div>
       <div class="form-group">
-        <label for="sexo">Sexo:</label>
+        <label for="sexo">
+          <font color="#FF0000"><b>* </b></font> Sexo :
+        </label>
         <select id="sexo" [(ngModel)]="Paciente.PaciSexo" formControlName="sexo" name="sexo">
           <option value="1">Masculino</option>
           <option value="0">Feminino</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="dataNascimento">Data de Nascimento:</label>
+        <label for="dataNascimento">
+          <font color="#FF0000"><b>* </b></font> Data de Nascimento :
+        </label>
         <input [(ngModel)]="Paciente.PaciDataNacimento" formControlName="dataNascimento" type="date" id="dataNascimento"
           name="dataNascimento" required>
       </div>
       <div class="form-group">
-        <label for="cpf">CPF:</label>
-        <input [(ngModel)]="Paciente.PaciCpf" formControlName="cpf" type="text" id="cpf" name="cpf" required>
+        <label for="cpf">
+          <font color="#FF0000"><b>* </b></font> CPF :
+        </label>
+        <input [(ngModel)]="Paciente.PaciCpf" placeholder="___.___.___-__" (input)="placeholderCPF($event)"
+          maxlength="14" formControlName="cpf" type="text" id="cpf" name="cpf" required>
       </div>
       <div class="form-group">
-        <label for="rg">RG:</label>
-        <input [(ngModel)]="Paciente.PaciRg" formControlName="rg" type="text" id="rg" name="rg" required>
+        <label for="rg">
+          <font color="#FF0000"><b>* </b></font> RG :
+        </label>
+        <input placeholder="XX__-___-___" (input)="placeholderRG($event)" maxlength="15" [(ngModel)]="Paciente.PaciRg"
+          formControlName="rg" type="text" id="rg" name="rg" required>
       </div>
       <div class="form-group">
-        <label for="telefone">Telefone:</label>
-        <input [(ngModel)]="Paciente.PaciTelefone" formControlName="telefone" type="text" id="telefone" name="telefone">
+        <label for="telefone">Telefone: :</label>
+        <input [(ngModel)]="Paciente.PaciTelefone" (input)="placeholderTelefone($event)" maxlength="17"
+          placeholder="55(__) _____-____" formControlName="telefone" type="text" id="telefone" name="telefone">
       </div>
       <div class="form-group">
-        <label for="Email">Email:</label>
-        <input [(ngModel)]="Paciente.PaciEmail" formControlName="email" type="text" id="email" name="email">
+        <label for="Email">
+          <font color="#FF0000"><b>* </b></font> Email :
+        </label>
+        <input [(ngModel)]="Paciente.PaciEmail" placeholder="Email@gmail.com" formControlName="email" type="text"
+          id="email" name="email">
       </div>
 
 
@@ -52,44 +68,64 @@
       <form class="responsivo" [formGroup]="FormularioEndereco">
 
         <div class="form-group">
-          <label for="nacionalidade">Nacionalidade:</label>
+          <label for="nacionalidade">
+            <font color="#FF0000"><b>* </b></font> Nacionalidade :
+          </label>
           <input [(ngModel)]="Endereco.EndNacionalidade" formControlName="nacionalidade" type="text" id="nacionalidade"
             name="nacionalidade" required>
         </div>
         <div class="form-group">
-          <label for="estado">Estado:</label>
+          <label for="estado">
+            <font color="#FF0000"><b>* </b></font> Estado :
+          </label>
           <input [(ngModel)]="Endereco.EndEstado" formControlName="estado" type="text" id="estado" name="estado"
             required>
         </div>
         <div class="form-group">
-          <label for="uf">UF:</label>
-          <input [(ngModel)]="Endereco.EndUF" formControlName="uf" type="text" id="uf" name="uf" required>
+          <label for="uf">
+            <font color="#FF0000"><b>* </b></font> UF :
+          </label>
+          <select [(ngModel)]="Endereco.EndUF" formControlName="uf" type="text" id="uf" name="uf" required>
+            <option *ngFor="let ufOption of ufOptions" [value]="ufOption.value">{{ ufOption.label }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cep">
+            <font color="#FF0000"><b>* </b></font> CEP :
+          </label>
+          <input [(ngModel)]="Endereco.EndCep" (input)="placeholderCEP($event)" placeholder="_____-___"
+            formControlName="cep" maxlength="9" type="text" id="cep" name="cep" required>
         </div>
         <div class="form-group">
-          <label for="cep">CEP:</label>
-          <input [(ngModel)]="Endereco.EndCep" formControlName="cep" type="text" id="cep" name="cep" required>
-        </div>
-        <div class="form-group">
-          <label for="rua">Rua:</label>
+          <label for="rua">
+            <font color="#FF0000"><b>* </b></font> Rua :
+          </label>
           <input [(ngModel)]="Endereco.EndRua" formControlName="rua" type="text" id="rua" name="rua" required>
         </div>
         <div class="form-group">
-          <label for="municipio">Município:</label>
+          <label for="municipio">
+            <font color="#FF0000"><b>* </b></font> Município :
+          </label>
           <input [(ngModel)]="Endereco.EndMunicipio" formControlName="municipio" type="text" id="municipio"
             name="municipio" required>
         </div>
         <div class="form-group">
-          <label for="bairro">Bairro:</label>
+          <label for="bairro">
+            <font color="#FF0000"><b>* </b></font> Bairro :
+          </label>
           <input [(ngModel)]="Endereco.EndBairro" formControlName="bairro" type="text" id="bairro" name="bairro"
             required>
         </div>
         <div class="form-group">
-          <label for="numero">Número:</label>
+          <label for="numero">
+            <font color="#FF0000"><b>* </b></font> Número :
+          </label>
           <input [(ngModel)]="Endereco.EndNumero" formControlName="numero" type="number" id="numero" name="numero"
             required>
         </div>
         <div class="form-group">
-          <label for="complemento">Complemento:</label>
+          <label for="complemento">Complemento: :</label>
           <input [(ngModel)]="Endereco.EndComplemento" formControlName="complemento" type="text" id="complemento"
             name="complemento">
         </div>
@@ -103,6 +139,11 @@
     <br>
 
     <button type="submit" (click)="cadastra()">Cadastrar</button>
+    <br>
+    <br>
+    <i>
+      <font color="#FF0000">*</font> - Campos Obrigatários
+    </i>
   </div>
 </div>
 <br><br>

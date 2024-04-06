@@ -5,21 +5,31 @@ import { CadastroPacienteComponent } from './features/paciente/cadastro/cadastro
 import { CadastroComponent } from './features/paciente/cadastro/cadastro/cadastro.component';
 import { CadastroMedicoComponent } from './features/paciente/cadastro/cadastro-medico/cadastro-medico/cadastro-medico.component';
 import { CadastroUsuarioComponent } from './features/paciente/cadastro/cadastro-usuario/cadastro-usuario.component';
+import { NotFoudComponent } from './util/Erros/Erro404/not-foud.component';
+import { GuardaRotasLogin } from './features/login/guards/GuardaRotasLogin';
+import { GuardaRotasCadastra } from './features/paciente/cadastro/cadastro/guards/GuardaRotasCadastro';
 
 const routes: Routes = [
 
 
 
-  {path:'',component:LoginComponent},
-  {path:'cadastro',component:CadastroComponent},
+  {path:'',component:LoginComponent,
+  //canActivate: [GuardaRotasLogin]
+},
+  {path:'cadastro',component:CadastroComponent
+ // ,canActivate:[GuardaRotasCadastra]
+},
   {path:'cadastroPaciente',component:CadastroPacienteComponent},
   {path:'cadastroMedico',component:CadastroMedicoComponent},
-  {path:'cadastroUsuario',component:CadastroUsuarioComponent}
+  {path:'cadastroUsuario',component:CadastroUsuarioComponent},
+
+
+  { path: '**', pathMatch: 'full', component: NotFoudComponent },
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
