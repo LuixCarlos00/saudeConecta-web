@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+
 constructor(private router : Router){}
 
   ngOnInit(): void {
@@ -18,7 +19,9 @@ constructor(private router : Router){}
     this.router.navigate(['cadastroUsuario'])
     }
 
-
+    recuperaSenha_Usuario() {
+      this.router.navigate(['recuperaCadastro'])
+      }
 
 
 }

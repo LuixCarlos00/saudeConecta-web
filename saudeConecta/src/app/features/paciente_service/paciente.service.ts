@@ -10,6 +10,7 @@ import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 
 import * as jwt_decode from 'jwt-decode';
+import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 
 @Injectable({
   providedIn: 'root',
@@ -30,13 +31,7 @@ export class PacienteService {
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();
 
-
-
-
-  constructor(private http: HttpClient, private tokenService: tokenService) {
-
-  }
-
+  constructor(private http: HttpClient, private tokenService: tokenService) {}
 
   iniciarObservacaoDadosUsuario() {
     if (this.tokenService.possuiToken()) {
@@ -46,55 +41,36 @@ export class PacienteService {
 
   public decodificaToken() {
     const token = this.tokenService.retornaToken();
-    const Usuario =  jwt_decode.jwtDecode(token) as Usuario;
-    console.log('o usuario sssssssssss ', Usuario);
+    if (token) {
+      const Usuario = jwt_decode.jwtDecode(token) as Usuario;
+      console.log('o usuario sssssssssss ', Usuario);
 
-    this.usuarioSubject.next(Usuario);
-}
-
-
-
-
+      this.usuarioSubject.next(Usuario);
+    }
+  }
 
   getDadosUsuario(): Observable<Usuario | null> {
     return this.usuarioSubject.asObservable();
   }
-
-
-
 
   salvarToken(token: string) {
     this.tokenService.salvarToken(token);
     this.decodificaToken();
   }
 
-
-
-
-
   deslogar() {
     this.tokenService.excluirToken();
     this.usuarioSubject.next(null);
   }
 
-
-
-
-  estaLogado(){
+  estaLogado() {
     return this.tokenService.possuiToken();
   }
-
-
-
 
   dadosUsuario(dados: Usuario) {
     this.Usuario = dados;
     console.log(dados);
   }
-
-
-
-
 
   cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
     return this.http
@@ -105,9 +81,8 @@ export class PacienteService {
         tap((response: HttpResponse<any>) => {
           if (response.body && response.body.tokenJWT) {
             this.tokenService.salvarToken(response.body.tokenJWT);
-
+            console.log(this.tokenService.retornaToken(), 'o token ');
           } else {
-
             console.error('Token JWT não encontrado na resposta');
           }
         })
@@ -135,6 +110,19 @@ export class PacienteService {
     const options = { headers, withCredentials: true };
     return this.http.post<Paciente>(
       `${this.apiUrl}/paciente/post`,
+      Paciente,
+      options
+    );
+  }
+
+  cadastrarMedico(Paciente: Medico): Observable<Medico> {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
+    };
+    const options = { headers, withCredentials: true };
+    return this.http.post<Medico>(
+      `${this.apiUrl}/medico/post`,
       Paciente,
       options
     );

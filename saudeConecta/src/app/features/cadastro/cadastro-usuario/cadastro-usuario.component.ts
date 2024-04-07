@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
-import { PacienteService } from '../../../paciente/paciente_service/paciente.service';
 import { tokenService } from 'src/app/util/Token/token.service';
+import { PacienteService } from '../../paciente_service/paciente.service';
 
 @Component({
   selector: 'app-cadastro-usuario',

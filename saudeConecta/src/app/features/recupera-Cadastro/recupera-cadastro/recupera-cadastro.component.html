@@ -1,0 +1,42 @@
+<div style="  display: flex;">
+  <div class="container" [formGroup]="FormularioEmail" >
+    <h2>Recupera senha ou login </h2>
+
+
+
+    <Label>Insira seu email </Label>
+    <input type="email" id="email" name="email"  formControlName="email"  >
+
+    <button style="margin: 5px;" (click)="enviarEmail()" >Enviar</button>
+
+
+
+    <form id="cadastroForm" class="responsivo"  *ngIf="FormularioAceito"  >
+      <div class="form-group">
+
+        <div class=" ">
+          <h1>Escolha uma opção:</h1>
+          <button class="buttons" style="margin: 5px;" (click)="mostrarRecuperarSenha()" >Recuperar Senha</button>
+
+          <button class="buttons" style="margin: 5px;" (click)="mostrarRecuperarLogin()">Recuperar Login</button>
+
+        </div>
+
+
+        <div *ngIf="mostraSenha">
+          <app-recupera-senha></app-recupera-senha>
+        </div>
+
+
+        <div *ngIf="mostralogin">
+
+         <app-recupera-login></app-recupera-login>
+        </div>
+      </div>
+
+
+
+    </form>
+
+  </div>
+</div>

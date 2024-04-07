@@ -9,6 +9,6 @@ MedCpf :string,
 MedRg :string,
 MedEmail :string,
 MedTelefone:string,
-Endereco :number,
-Usuario :number,
+endereco :number,
+usuario :number,
 }

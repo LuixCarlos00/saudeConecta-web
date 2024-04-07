@@ -1,16 +1,16 @@
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
-import { ufOptions } from './../../../../util/variados/options/options';
-import { Paciente } from './../../../../util/variados/interfaces/paciente/paciente';
-import { Endereco } from './../../../../util/variados/interfaces/endereco/endereco';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PacienteService } from '../../paciente_service/paciente.service';
 import { Subscription } from 'rxjs';
 
 import Swal from 'sweetalert2';
 
 import {   Router } from '@angular/router';
+import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
+import { PacienteService } from '../../paciente_service/paciente.service';
+import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
+import { ufOptions } from 'src/app/util/variados/options/options';
 
 @Component({
   selector: 'app-cadastro-paciente',
@@ -28,7 +28,7 @@ export class CadastroPacienteComponent implements OnInit {
   FormularioUsuario!: FormGroup;
   IdUsuario: number = 0;
 
-  ufOptions = ufOptions;
+  ufOptions =  ufOptions;
 
   Usuario: Usuario = {
     id: 0,
@@ -124,6 +124,8 @@ export class CadastroPacienteComponent implements OnInit {
 
   cadastra() {
 console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
+
+
 
     if (this.FormularioEndereco.valid && this.FormularioPaciente.valid) {
 
@@ -283,8 +285,5 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
       }
     }, 0);
   }
-}
-function log(arg0: boolean) {
-  throw new Error('Function not implemented.');
 }
 

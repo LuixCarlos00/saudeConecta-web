@@ -1,0 +1,150 @@
+<div style="  display: flex;">
+  <div class="container">
+    <h2>Cadastro de Medico</h2>
+    <form id="cadastroForm" class="responsivo" [formGroup]="FormularioMedico">
+      <div class="form-group">
+        <label for="nome">
+          <font color="#FF0000"><b>* </b></font>Nome:
+        </label>
+        <input formControlName="nome" [(ngModel)]="Medico.MedNome" type="text" id="nome" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label for="sexo">
+          <font color="#FF0000"><b>* </b></font>Sexo:
+        </label>
+        <select id="sexo" name="sexo" formControlName="sexo" [(ngModel)]="Medico.MedSexo">
+          <option value="1">Masculino</option>
+          <option value="0">Feminino</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="dataNascimento">
+          <font color="#FF0000"><b>* </b></font> Data de Nascimento:
+        </label>
+        <input formControlName="dataNascimento" [(ngModel)]="Medico.MedDataNacimento" type="date" id="dataNascimento"
+          name="dataNascimento" required>
+      </div>
+      <div class="form-group">
+        <label for="cpf">
+          <font color="#FF0000"><b>* </b></font>CPF:
+        </label>
+        <input formControlName="cpf" [(ngModel)]="Medico.MedCpf" type="text" id="cpf" name="cpf"
+          placeholder="___.___.___-__" (input)="placeholderCPF($event)" maxlength="14" required>
+      </div>
+      <div class="form-group">
+        <label for="CRM">
+          <font color="#FF0000"><b>* </b></font> CRM:
+        </label>
+        <input formControlName="crm" [(ngModel)]="Medico.MedCrm" type="text" id="CRM" name="CRM" required>
+      </div>
+      <div class="form-group">
+        <label for="rg">
+          <font color="#FF0000"><b>* </b></font> RG:
+        </label>
+        <input formControlName="rg" [(ngModel)]="Medico.MedRg" type="text" id="rg" name="rg" placeholder="XX__-___-___"
+          (input)="placeholderRG($event)" maxlength="15" required>
+      </div>
+      <div class="form-group">
+        <label for="telefone">Telefone:</label>
+        <input formControlName="telefone" [(ngModel)]="Medico.MedTelefone" type="text" id="telefone" name="telefone"
+          (input)="placeholderTelefone($event)" maxlength="17" placeholder="55(__) _____-____">
+      </div>
+      <div class="form-group">
+        <label for="Email">
+          <font color="#FF0000"><b>* </b></font> Email:
+        </label>
+        <input formControlName="email" [(ngModel)]="Medico.MedEmail" type="text" id="Email" name="Email"
+          placeholder="Email@gmail.com">
+      </div>
+    </form>
+    <br>
+
+    <mat-expansion-panel hideToggle class="custom-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="custom-panel">
+          <h3>Endereço</h3>
+        </mat-panel-title>
+        <mat-panel-description>
+          <!-- This is a summary of the content -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form class="responsivo" [formGroup]="FormularioEndereco">
+
+        <div class="form-group">
+          <label for="nacionalidade">
+            <font color="#FF0000"><b>* </b></font> Nacionalidade:
+          </label>
+          <input formControlName="nacionalidade" [(ngModel)]="Endereco.EndNacionalidade" type="text" id="nacionalidade"
+            name="nacionalidade" required>
+        </div>
+        <div class="form-group">
+          <label for="estado">
+            <font color="#FF0000"><b>* </b></font> Estado:
+          </label>
+          <input formControlName="estado" [(ngModel)]="Endereco.EndEstado" type="text" id="estado" name="estado"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="uf">
+            <font color="#FF0000"><b>* </b></font> UF:
+          </label>
+          <select formControlName="uf" [(ngModel)]="Endereco.EndUF" type="text" id="uf" name="uf" required>
+            <option *ngFor="let ufOption of ufOptions " [value]="ufOption.value">{{ufOption.label}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cep">
+            <font color="#FF0000"><b>* </b></font> CEP:
+          </label>
+          <input formControlName="cep" [(ngModel)]="Endereco.EndCep" (input)="placeholderCEP($event)"
+            placeholder="_____-___" maxlength="9" type="text" id="cep" name="cep" required>
+        </div>
+        <div class="form-group">
+          <label for="rua">
+            <font color="#FF0000"><b>* </b></font> Rua:
+          </label>
+          <input formControlName="rua" [(ngModel)]="Endereco.EndRua" type="text" id="rua" name="rua" required>
+        </div>
+        <div class="form-group">
+          <label for="municipio">
+            <font color="#FF0000"><b>* </b></font> Município:
+          </label>
+          <input formControlName="municipio" [(ngModel)]="Endereco.EndMunicipio" type="text" id="municipio"
+            name="municipio" required>
+        </div>
+        <div class="form-group">
+          <label for="bairro">
+            <font color="#FF0000"><b>* </b></font> Bairro:
+          </label>
+          <input formControlName="bairro" [(ngModel)]="Endereco.EndBairro" type="text" id="bairro" name="bairro"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="numero">
+            <font color="#FF0000"><b>* </b></font> Número:
+          </label>
+          <input formControlName="numero" [(ngModel)]="Endereco.EndNumero" type="number" id="numero" name="numero"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="complemento">Complemento:</label>
+          <input formControlName="complemento" [(ngModel)]="Endereco.EndComplemento" type="text" id="complemento"
+            name="complemento">
+        </div>
+
+      </form>
+    </mat-expansion-panel>
+    <br>
+    <br>
+    <button type="submit" (click)="cadastra()">Cadastrar</button>
+    <br>
+    <br>
+    <i>
+      <font color="#FF0000">*</font> - Campos Obrigatários
+    </i>
+  </div>
+</div>
+
+<br>
+<br>

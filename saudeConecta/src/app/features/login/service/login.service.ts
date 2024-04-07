@@ -10,18 +10,22 @@ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
+  constructor(private http: HttpClient, private TOkenService: tokenService) {
+    this.TOkenService.retornaToken() && this.decodificaToken();
+  }
+
   private apiUrl = 'http://localhost:8080';
 
   private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
   private nomeUsuario!: any;
 
-  constructor(private http: HttpClient, private tokenService: tokenService) {
-    this.tokenService.retornaToken() && this.decodificaToken();
-  }
+
+
+
 
   //!==============================================================================================================
   TemToken(): boolean {
-    const token = this.tokenService.retornaToken();
+    const token = this.TOkenService.retornaToken();
     if (!token) {
       ///token é nulo
       return false;
@@ -45,7 +49,7 @@ export class LoginService {
 
   public decodificaToken() {
     const jwt_decode = require('jwt-decode');
-    const token: any = this.tokenService.retornaToken();
+    const token: any = this.TOkenService.retornaToken();
 
     if (token) {
       const usuario: Usuario = jwt_decode(token) as Usuario;
@@ -60,7 +64,7 @@ export class LoginService {
   //!==============================================================================================================
 
   deslogar() {
-    this.tokenService.removeToken();
+    this.TOkenService.removeToken();
     this.usuarioSubject.next(null);
   }
 
@@ -74,13 +78,19 @@ export class LoginService {
 
   //!==============================================================================================================
   estaLogado(): boolean {
-    const token = this.tokenService.retornaToken();
+    const token = this.TOkenService.retornaToken();
+    console.log(token,'sssss');
 
     if (!token) {
       return false; // nao ta logado
-    } else if (this.tokenService.oTokenEstavalido(token)) {
+    } else if (this.TOkenService.oTokenEstavalido(token)) {
       return true; // token é valido e retorna  true
     } else return false; // user nao ta logado retorna false
+  }
+
+
+  pussuiToken():boolean{
+    return this.TOkenService.possuiToken();
   }
 
   //!==============================================================================================================
@@ -114,7 +124,7 @@ export class LoginService {
         }),
         tap((response) => {
           const authTokenBody: any = response.body;
-          this.tokenService.salvarToken(authTokenBody);
+          this.TOkenService.salvarToken(authTokenBody);
         })
       );
   }
@@ -122,7 +132,7 @@ export class LoginService {
   //!==============================================================================================================
 
   authentificacao2FA(verificationCode: string): Observable<any> {
-    const token = this.tokenService.retornaToken();
+    const token = this.TOkenService.retornaToken();
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -148,7 +158,7 @@ export class LoginService {
         tap(() => {
           this.decodificaToken();
           const authTwof: boolean = true;
-          this.tokenService.setAuthTwof(authTwof);
+          this.TOkenService.setAuthTwof(authTwof);
         })
       );
   }
