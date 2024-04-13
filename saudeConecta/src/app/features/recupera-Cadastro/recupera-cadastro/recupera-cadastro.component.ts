@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RecuperaCadastroService } from '../service/recupera-cadastro.service';
 
 @Component({
   selector: 'app-recupera-cadastro',
@@ -16,7 +17,7 @@ mostraSenha: boolean = false;
 FormularioAceito : boolean = false;
 FormularioEmail!:FormGroup;
 
-  constructor(private form : FormBuilder) { }
+  constructor(private form : FormBuilder , private recuperaCadastroService : RecuperaCadastroService) { }
 
   ngOnInit() {
 this.FormularioEmail = this.form.group({
@@ -39,8 +40,16 @@ this.FormularioEmail = this.form.group({
 
 
     enviarEmail() {
+      const email:string  = this.FormularioEmail.get('email')?.value;
+      this.recuperaCadastroService.recuperaCadastroMedico(email).subscribe((dadosUsuario)=>{
+        console.log('dados sao de um medico', dadosUsuario);
 
-      const email = this.FormularioEmail.get('email')?.value;
+      })
+
+      this.recuperaCadastroService.recuperaCadastroPaciente(email).subscribe((dadosUsuario)=>{
+        console.log('dados sao de um Paciente', dadosUsuario);
+
+      })
 
 
 
