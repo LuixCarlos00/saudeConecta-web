@@ -13,6 +13,7 @@ export class RecuperaCadastroService {
 
 
 
+
   private apiUrl = 'http://localhost:8080';
 
 
@@ -33,5 +34,9 @@ export class RecuperaCadastroService {
     return this.http.get<Paciente>(`${this.apiUrl}/paciente/buscarPorEmail/${Email}`   );
   }
 
+
+  codigoVerificacao(codigo: string):Observable<any> {
+    return this.http.get<number>(`${this.apiUrl}/paciente/InserirCodigo/${codigo}`   );
+  }
 
 }
