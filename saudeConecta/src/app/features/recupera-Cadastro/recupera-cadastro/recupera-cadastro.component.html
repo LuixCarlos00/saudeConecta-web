@@ -1,11 +1,19 @@
 <div style="  display: flex;">
   <div class="container">
-    <h2>Recupera senha ou login </h2>
+    <h2>Recupera senha ou login </h2> <i>
+      <font color="#FF0000">*</font> - Campos Obrigatários
+    </i>
+    <br>
+    <br>
 
     <form [formGroup]="FormularioEmail" *ngIf="CampoEmail">
-      <label>Insira seu email</label>
+
+      <br>
+      <label>
+        <font color="#FF0000"><b>* </b></font> Insira seu email
+      </label>
       <input type="email" id="email" name="email" formControlName="email">
-      <button style="margin: 5px;" (click)="enviarEmail()">Enviar</button>
+      <button style="margin: 5px;" (click)="enviarEmail()" *ngIf="FormularioEmail.valid">Enviar</button>
 
       <!-- Use o mat-progress-spinner com ngIf usando a variável isLoading -->
       <mat-progress-spinner *ngIf="isLoading" diameter="30" mode="indeterminate"></mat-progress-spinner>
@@ -14,9 +22,11 @@
 
 
     <form *ngIf="emailValido()" [formGroup]="FormularioCodigo">
-      <Label>Insira codigo de verificacao que foi enviado ao seu email </Label>
+      <Label>
+        <font color="#FF0000"><b>* </b></font> Insira codigo de verificacao que foi enviado ao seu email
+      </Label>
       <input type="codigo" id="codigo" name="codigo" formControlName="codigo">
-      <button style="margin: 5px;" (click)="enviaCodigoVerificacao()">Enviar</button>
+      <button style="margin: 5px;" (click)="enviaCodigoVerificacao()" *ngIf="FormularioCodigo.valid">Enviar</button>
     </form>
 
 
@@ -36,7 +46,29 @@
 
 
         <div *ngIf="mostraSenha">
-          <app-recupera-senha></app-recupera-senha>
+
+          <form [formGroup]="FormularioNovaSenha">
+            <br>
+            <label for="novaSenha">
+              <font color="#FF0000"><b>* </b></font> Insira a nova Sernha
+            </label>
+             <input formControlName="password" type="password" name="password" id="password">
+
+            <br>
+            <br>
+            <label for="novaSenha">
+              <font color="#FF0000"><b>* </b></font>Repita a Sernha
+            </label>
+            <input formControlName="password2" type="password2" name="password2" id="password2" type="password">
+
+            <br>
+
+            <button (click)="Confirmar()" *ngIf="FormularioNovaSenha.valid ;  else elseBlock ">Confirma</button>
+
+            <ng-template #elseBlock><i> <font color="#FF0000"><b>*Senhas não correspondem. </b></font></i></ng-template>
+
+          </form>
+
         </div>
 
 

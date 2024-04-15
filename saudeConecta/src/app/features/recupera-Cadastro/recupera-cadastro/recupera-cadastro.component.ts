@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecuperaCadastroService } from '../service/recupera-cadastro.service';
 import { tick } from '@angular/core/testing';
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+import Swal from 'sweetalert2';
+import { Router, RouterConfigOptions } from '@angular/router';
 
 @Component({
   selector: 'app-recupera-cadastro',
@@ -11,6 +14,7 @@ import { tick } from '@angular/core/testing';
   styleUrls: ['./recupera-cadastro.component.css'],
 })
 export class RecuperaCadastroComponent implements OnInit {
+
   //
   //
   //
@@ -21,15 +25,23 @@ export class RecuperaCadastroComponent implements OnInit {
   CampoEmail:Boolean=true;
   FormularioEmail!: FormGroup;
   FormularioCodigo!: FormGroup;
+  FormularioNovaSenha!: FormGroup ;
+
   isLoading: boolean = false;
   Paciente!: Boolean;
   Medico!: Boolean;
 
+
+  InstanciaPaciente!: Paciente;
+  InstanciaMedico!:Medico;
+  InstanciaUsuario!:any
+
+
   constructor(
+    private route : Router,
     private form: FormBuilder,
     private recuperaCadastroService: RecuperaCadastroService
   ) {}
-
 
 
   ngOnInit() {
@@ -38,10 +50,26 @@ export class RecuperaCadastroComponent implements OnInit {
     });
 
     this.FormularioCodigo = this.form.group({
-      codigo: ['', Validators.required],
+      codigo: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
     });
+
+    this.FormularioNovaSenha = this.form.group({
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      password2: ['', [Validators.required, Validators.minLength(8)]],
+    }, { validators: this.senhasCorrespondentes });
   }
 
+
+  senhasCorrespondentes(formGroup: FormGroup) {
+    const senha = formGroup.get('password')?.value;
+    const senha2 = formGroup.get('password2')?.value;
+
+    if (senha !== senha2) {
+      formGroup.get('password2')?.setErrors({ senhasNaoCorrespondem: true });
+    } else {
+      formGroup.get('password2')?.setErrors(null);
+    }
+  }
 
 
 
@@ -63,7 +91,10 @@ export class RecuperaCadastroComponent implements OnInit {
 
     this.recuperaCadastroService.recuperaCadastroMedico(email)
       .subscribe((dadosUsuario) => {
-        console.log('dados são de um médico', dadosUsuario);
+        this.InstanciaUsuario = dadosUsuario.usuario
+        console.log('dados são de um médico', dadosUsuario );
+        this.InstanciaMedico = dadosUsuario;
+
         this.Medico = true;
         this.CampoEmail = false;
         this.isLoading = false; // Esconde o spinner
@@ -71,7 +102,10 @@ export class RecuperaCadastroComponent implements OnInit {
 
     this.recuperaCadastroService.recuperaCadastroPaciente(email)
       .subscribe((dadosUsuario) => {
+        this.InstanciaUsuario = dadosUsuario.usuario
         console.log('dados são de um paciente', dadosUsuario);
+        this.InstanciaPaciente= dadosUsuario;
+
         this.Paciente = true;
         this.CampoEmail = false;
         this.isLoading = false; // Esconde o spinner
@@ -113,4 +147,60 @@ export class RecuperaCadastroComponent implements OnInit {
       }
     );
   }
+
+
+
+
+
+  Confirmar() {
+    if (this.FormularioNovaSenha.valid) {
+      const id: number = this.InstanciaUsuario.id;
+      const senha: string = this.FormularioNovaSenha.get('password')?.value;
+      const senha2: string = this.FormularioNovaSenha.get('password2')?.value;
+      const login : string = this.InstanciaUsuario.login;
+      // Criar o objeto do tipo Usuario apenas com id e senha
+      const usuario: Usuario = {
+        id: id, login: login, senha: senha,
+        roles: ''
+      };
+
+      console.log('usuario ', usuario);
+
+      if (senha === senha2) {
+
+        this.recuperaCadastroService.trocaSenhaUsuario(id,usuario).subscribe(
+          (dados)=>{
+
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: 'Senhas foram salvas com sucesso .',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.route.navigate(['']);
+              }
+            })
+        },
+        (erros)=>{
+
+          Swal.fire({
+            icon: 'error',
+            title: 'ops',
+            text: 'Erro inesperado.',
+          })
+
+        }
+      )
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: '!',
+          text:  'Formulario Invalido ',
+        })
+      }
+    }
+
+  }
+
+
 }

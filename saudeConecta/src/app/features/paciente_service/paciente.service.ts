@@ -26,7 +26,7 @@ export class PacienteService {
     id: 0,
     login: '',
     senha: '',
-    roles: undefined,
+    roles: '',
   };
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();

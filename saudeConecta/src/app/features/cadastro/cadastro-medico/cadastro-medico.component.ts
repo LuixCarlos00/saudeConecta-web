@@ -31,7 +31,7 @@ export class CadastroMedicoComponent {
     id: 0,
     login: '',
     senha: '',
-    roles: undefined,
+    roles:  '',
   };
   Medico: Medico = {
     MedCodigo: 0,

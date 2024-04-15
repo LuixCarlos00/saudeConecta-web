@@ -1,1 +1,14 @@
-mostra senha
+<form [formGroup]="novaSenha">
+  <br>
+  <label for="novaSenha"> Insira a nova Sernha</label>
+  <br><input formControlName="password" type="password" name="password" id="password">
+
+  <br>
+  <label for="novaSenha">Repita a Sernha</label><br>
+  <input formControlName="password2" type="password2" name="password2" id="password2">
+
+  <br>
+
+  <button (click)="Confirma()">Confirma</button>
+
+</form>

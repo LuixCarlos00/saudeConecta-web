@@ -21,7 +21,7 @@ export class CadastroUsuarioComponent {
     id: 0,
     login: '',
     senha: '',
-    roles: undefined
+    roles:  ''
   };
 
 

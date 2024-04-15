@@ -1,5 +1,5 @@
 export interface Usuario {
-  roles: any;
+  roles: string;
 
   id:number ,
   login:string,

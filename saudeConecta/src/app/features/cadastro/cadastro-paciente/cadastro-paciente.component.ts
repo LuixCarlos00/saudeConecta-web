@@ -34,7 +34,7 @@ export class CadastroPacienteComponent implements OnInit {
     id: 0,
     login: '',
     senha: '',
-    roles: undefined,
+    roles: '',
   };
   Paciente: Paciente = {
     PaciCodigo: 0,
