@@ -48,11 +48,13 @@
         <div *ngIf="mostraSenha">
 
           <form [formGroup]="FormularioNovaSenha">
+
             <br>
             <label for="novaSenha">
               <font color="#FF0000"><b>* </b></font> Insira a nova Sernha
+              <font color="#FF0000">*</font> - Senhas com 8 caracteres
             </label>
-             <input formControlName="password" type="password" name="password" id="password">
+            <input formControlName="password" type="password" name="password" id="password">
 
             <br>
             <br>
@@ -62,10 +64,12 @@
             <input formControlName="password2" type="password2" name="password2" id="password2" type="password">
 
             <br>
-
+            <br>
             <button (click)="Confirmar()" *ngIf="FormularioNovaSenha.valid ;  else elseBlock ">Confirma</button>
 
-            <ng-template #elseBlock><i> <font color="#FF0000"><b>*Senhas não correspondem. </b></font></i></ng-template>
+            <ng-template #elseBlock><i>
+                <font color="#FF0000"><b>*Senhas não correspondem. </b></font>
+              </i></ng-template>
 
           </form>
 
@@ -73,8 +77,7 @@
 
 
         <div *ngIf="mostralogin">
-
-          <app-recupera-login></app-recupera-login>
+          <span>O Login de sua conta foi enviado por email </span>
         </div>
       </div>
 

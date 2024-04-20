@@ -71,7 +71,7 @@ export class CadastroMedicoComponent {
     this.CadastroPaciete_Medico.getDadosUsuario().subscribe((dadosUsuario) => {
       if (dadosUsuario) {
         this.Usuario = dadosUsuario;
-        console.log(dadosUsuario, '22222222222');
+
       }
     });
 
@@ -86,12 +86,18 @@ export class CadastroMedicoComponent {
           Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
         ],
       ],
-
-      crm:['',Validators.required,],
+      crm: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z]{3}\/[a-zA-Z]{2}\d{6}$/),
+        ],
+      ],
       rg: ['', Validators.required],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
     });
+
 
     this.FormularioEndereco = this.form.group({
       nacionalidade: ['', Validators.required],
@@ -121,7 +127,8 @@ export class CadastroMedicoComponent {
   }
 
   cadastra() {
-    console.log(this.Medico ,"------", this.Endereco);
+
+
 
     if (this.FormularioEndereco.valid && this.FormularioMedico.valid) {
       this.CadastroPaciete_Medico.cadastraEndereco(this.Endereco).subscribe(
@@ -129,7 +136,7 @@ export class CadastroMedicoComponent {
           const EnderecoID = endereco.EndCodigo as number;
           this.Medico.endereco = EnderecoID;
           this.Medico.usuario = this.Usuario.id;
-          console.log('dados ', this.Medico);
+
 
           this.CadastroPaciete_Medico.cadastrarMedico(
             this.Medico
@@ -176,6 +183,8 @@ export class CadastroMedicoComponent {
       };
     }
   }
+
+
 
   placeholderRG(event: any): void {
     const input = event.target;
@@ -258,4 +267,28 @@ export class CadastroMedicoComponent {
       }
     }, 0);
   }
+
+
+
+  placeholderCRM(event: any): void {
+    const input = event.target;
+    setTimeout(() => {
+      let inputValue = input.value.replace(/\W/g, ''); // Remove caracteres não alfanuméricos
+
+      // Limita a entrada para 11 caracteres
+      if (inputValue.length > 11) {
+        inputValue = inputValue.substring(0, 11);
+      }
+
+      // Formato XXX/XXYYYYYY
+      if (inputValue.length <= 11) {
+        input.value = inputValue.replace(
+          /^([a-zA-Z]{0,3})([a-zA-Z]{0,2})(\d{0,6})/,
+          '$1/$2$3'
+        );
+      }
+    }, 0);
+  }
+
+
 }

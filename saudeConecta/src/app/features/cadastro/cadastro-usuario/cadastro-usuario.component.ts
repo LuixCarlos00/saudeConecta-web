@@ -49,22 +49,21 @@ export class CadastroUsuarioComponent {
     if (this.FormularioUsuario.valid) {
       this.CadastroPaciete_Medico.cadastrarUsuario(this.Usuario).subscribe(
         (dados) => {
-          console.log(dados,'lkk',dados.body  );
+
 
 
         },
         (error) => {
-          // Tratar erros
+
           console.error('Erro ao cadastrar usuário:', error);
-          // Exibir mensagem de erro para o usuário
+
           console.log('Não foi possível realizar o cadastro');
         }
       );
     } else {
-      // Exibir mensagem ao usuário para preencher corretamente o formulário
+
       console.log('Formulário inválido. Verifique os campos obrigatórios.');
     }
-    // Redirecionar sempre, mesmo se o formulário for inválido
     this.router.navigate(['cadastro']);
   }
 

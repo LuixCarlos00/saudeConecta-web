@@ -16,6 +16,7 @@ import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
   providedIn: 'root',
 })
 export class PacienteService {
+
   //
   //
   //
@@ -43,8 +44,6 @@ export class PacienteService {
     const token = this.tokenService.retornaToken();
     if (token) {
       const Usuario = jwt_decode.jwtDecode(token) as Usuario;
-      console.log('o usuario sssssssssss ', Usuario);
-
       this.usuarioSubject.next(Usuario);
     }
   }
@@ -72,12 +71,27 @@ export class PacienteService {
     console.log(dados);
   }
 
-  cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
-    return this.http
-      .post<Usuario>(`${this.apiUrl}/Home/cadastralogin`, usuario, {
-        observe: 'response',
+  fazerLogin(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Home/login`, usuario, { observe: 'response' }).pipe(
+      tap((response: HttpResponse<any>) => {
+        const tokenJWT = response.body.token
+        if (response.body.token) {
+          this.tokenService.salvarToken(tokenJWT);
+        } else {
+          console.error('Token JWT não encontrado no cabeçalho de resposta');
+        }
       })
-      .pipe(
+    );
+  }
+
+
+
+
+
+  cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
+    return this.http.post<Usuario>(`${this.apiUrl}/Home/cadastralogin`, usuario, {
+        observe: 'response',
+      }).pipe(
         tap((response: HttpResponse<any>) => {
           if (response.body && response.body.tokenJWT) {
             this.tokenService.salvarToken(response.body.tokenJWT);
@@ -90,41 +104,18 @@ export class PacienteService {
   }
 
   cadastraEndereco(Endereco: Endereco): Observable<Endereco> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
+    const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
     const options = { headers, withCredentials: true };
-    return this.http.post<Endereco>(
-      `${this.apiUrl}/endereco/post`,
-      Endereco,
-      options
-    );
+    return this.http.post<Endereco>(`${this.apiUrl}/endereco/post`, Endereco, options);
   }
 
   cadastrarPaciente(Paciente: Paciente): Observable<Paciente> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http.post<Paciente>(
-      `${this.apiUrl}/paciente/post`,
-      Paciente,
-      options
-    );
+    const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};const options = { headers, withCredentials: true };return this.http.post<Paciente>(`${this.apiUrl}/paciente/post`,Paciente,options);
   }
 
   cadastrarMedico(Paciente: Medico): Observable<Medico> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http.post<Medico>(
-      `${this.apiUrl}/medico/post`,
-      Paciente,
-      options
-    );
+  const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
+  const options = { headers, withCredentials: true };
+  return this.http.post<Medico>(`${this.apiUrl}/medico/post`,Paciente,options );
   }
 }

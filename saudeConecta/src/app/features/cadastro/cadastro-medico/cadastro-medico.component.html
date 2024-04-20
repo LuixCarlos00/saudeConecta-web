@@ -35,7 +35,8 @@
         <label for="CRM">
           <font color="#FF0000"><b>* </b></font> CRM:
         </label>
-        <input formControlName="crm" [(ngModel)]="Medico.MedCrm" type="text" id="CRM" name="CRM" required>
+        <input formControlName="crm" [(ngModel)]="Medico.MedCrm" type="text" id="CRM" name="CRM" placeholder="CRM/SP123456" required
+        (input)="placeholderCRM($event)" >
       </div>
       <div class="form-group">
         <label for="rg">
