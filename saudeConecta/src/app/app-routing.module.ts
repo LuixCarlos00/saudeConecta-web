@@ -11,8 +11,9 @@ import { GuardaRotasCadastroPaciente } from './features/cadastro/cadastro-pacien
 import { CadastroPacienteComponent } from './features/cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroMedicoComponent } from './features/cadastro/cadastro-medico/cadastro-medico.component';
 import { RecuperaCadastroComponent } from './features/recupera-Cadastro/recupera-cadastro/recupera-cadastro.component';
-import { RecuperaLoginComponent } from './features/recupera-Cadastro/recupera-login/recupera-login.component';
-import { RecuperaSenhaComponent } from './features/recupera-Cadastro/recupera-senha/recupera-senha.component';
+
+import { HomeComponent } from './features/home/home.component';
+import { PesquisaMedicosComponent } from './features/pesquisaMedicos/pesquisaMedicos.component';
 
 const routes: Routes = [
 
@@ -31,10 +32,9 @@ const routes: Routes = [
 
   {path:'recuperaCadastro',component:RecuperaCadastroComponent,  },//4
 
-  {path:'recuperaLogin',component:RecuperaLoginComponent,  },//4
+  {path:'pesquisar',component:PesquisaMedicosComponent,  },//4
 
-  {path:'recuperaSenha',component:RecuperaSenhaComponent,  },//4
-
+  {path:'home',component:HomeComponent,  },//5
 
 
 

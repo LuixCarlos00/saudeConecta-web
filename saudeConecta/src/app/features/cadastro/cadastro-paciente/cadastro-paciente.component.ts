@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 import {   Router } from '@angular/router';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
-import { PacienteService } from '../../paciente_service/paciente.service';
+import { PacienteService } from '../../../service/paciente_service/paciente.service';
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { ufOptions } from 'src/app/util/variados/options/options';
 

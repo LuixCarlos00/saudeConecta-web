@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { tokenService } from 'src/app/util/Token/token.service';
-import { PacienteService } from '../../paciente_service/paciente.service';
+import { PacienteService } from '../../../service/paciente_service/paciente.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -38,33 +38,36 @@ export class CadastroUsuarioComponent {
 
     this.FormularioUsuario = this.form.group({
       login:['',Validators.required],
-      password:['',Validators.required]
+      password:['',[Validators.required ,Validators.minLength(8)]],
     })
 
   }
 
-
   cadatraUsuario() {
-    console.log(this.Usuario);
     if (this.FormularioUsuario.valid) {
       this.CadastroPaciete_Medico.cadastrarUsuario(this.Usuario).subscribe(
         (dados) => {
-
-
+         this.router.navigate(['cadastro']);
 
         },
         (error) => {
+          if (error.status === 400) {
 
-          console.error('Erro ao cadastrar usuário:', error);
-
-          console.log('Não foi possível realizar o cadastro');
+            alert('Erro ao cadastrar usuário: \n[Login Ja Existente]'  );
+          } else {
+            alert('Erro durante a requisição: '+ error   );
+          }
         }
       );
     } else {
+      alert('Formulário inválido. Verifique os campos obrigatórios.' );
 
-      console.log('Formulário inválido. Verifique os campos obrigatórios.');
     }
-    this.router.navigate(['cadastro']);
   }
 
+
+
+
+
 }
+

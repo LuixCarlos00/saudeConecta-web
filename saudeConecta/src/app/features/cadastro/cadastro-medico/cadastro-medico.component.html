@@ -46,6 +46,13 @@
           (input)="placeholderRG($event)" maxlength="15" required>
       </div>
       <div class="form-group">
+        <label for="rg">
+          <font color="#FF0000"><b>* </b></font> Especialidade:
+        </label>
+        <input formControlName="Especialidade" [(ngModel)]="Medico.MedEspecialidade" type="text" id="Especialidade" name="Especialidade"
+            maxlength="30" required>
+      </div>
+      <div class="form-group">
         <label for="telefone">Telefone:</label>
         <input formControlName="telefone" [(ngModel)]="Medico.MedTelefone" type="text" id="telefone" name="telefone"
           (input)="placeholderTelefone($event)" maxlength="17" placeholder="55(__) _____-____">

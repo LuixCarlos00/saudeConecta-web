@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { RecuperaSenhaComponent } from './recupera-senha.component';
+import { RodapeComponent } from './rodape.component';
 
-describe('RecuperaSenhaComponent', () => {
-  let component: RecuperaSenhaComponent;
-  let fixture: ComponentFixture<RecuperaSenhaComponent>;
+describe('RodapeComponent', () => {
+  let component: RodapeComponent;
+  let fixture: ComponentFixture<RodapeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecuperaSenhaComponent ]
+      declarations: [ RodapeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecuperaSenhaComponent);
+    fixture = TestBed.createComponent(RodapeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

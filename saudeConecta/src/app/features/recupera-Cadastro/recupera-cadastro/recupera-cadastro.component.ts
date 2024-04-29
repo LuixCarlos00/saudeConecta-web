@@ -3,7 +3,7 @@ import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 import { Paciente } from './../../../util/variados/interfaces/paciente/paciente';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RecuperaCadastroService } from '../service/recupera-cadastro.service';
+import { RecuperaCadastroService } from '../../../service/service-recuperaCadastro/recupera-cadastro.service';
 import { tick } from '@angular/core/testing';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import Swal from 'sweetalert2';

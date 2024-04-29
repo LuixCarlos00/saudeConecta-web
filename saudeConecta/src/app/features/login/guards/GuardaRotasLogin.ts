@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
-import { LoginService } from "../service/login.service";
+import { LoginService } from "../../../service/service-login/login.service";
 import { tokenService } from "src/app/util/Token/token.service";
 
 

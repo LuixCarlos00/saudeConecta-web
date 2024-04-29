@@ -5,16 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginModule } from './features/login/login_Module/login.module';
-import { PacienteModule } from './features/paciente_Module/paciente.module';
+import { PacienteModule } from './paciente_Module/paciente.module';
 import { UtilModule } from './util/util/util.module';
-//import { JWT_OPTIONS, JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+import { RodapeComponent } from './util/variados/rodape/rodape.component';
+import { CabecalhoComponent } from './util/variados/cabecalho/cabecalho.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RodapeComponent,
+    CabecalhoComponent
+
   ],
   imports: [
 
@@ -23,6 +28,8 @@ import { UtilModule } from './util/util/util.module';
     LoginModule,
     PacienteModule,
     UtilModule,
+    MatIconModule
+
 
 
 

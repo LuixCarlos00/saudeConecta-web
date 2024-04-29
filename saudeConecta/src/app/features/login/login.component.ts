@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
- import { PacienteService } from '../paciente_service/paciente.service';
+import { PacienteService } from '../../service/paciente_service/paciente.service';
+import { tokenService } from 'src/app/util/Token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,11 @@ export class LoginComponent implements OnInit {
 
   FormularioUsuario!: FormGroup;
 
-  constructor(private router: Router, private form: FormBuilder,private pacienteService : PacienteService) {}
+  constructor(
+    private router: Router,
+    private form: FormBuilder,
+    private pacienteService: PacienteService
+  ) {}
 
   ngOnInit(): void {
     this.FormularioUsuario = this.form.group({
@@ -41,28 +46,28 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
-    const password  = this.FormularioUsuario.get('password')?.value
-    const username  = this.FormularioUsuario.get('username')?.value
+    const password = this.FormularioUsuario.get('password')?.value;
+    const username = this.FormularioUsuario.get('username')?.value;
 
-    console.log(username,"--",password);
+    console.log(username, '--', password);
 
-    this.Usuario.login=username;
-    this.Usuario.senha=password;
+    this.Usuario.login = username;
+    this.Usuario.senha = password;
 
+    // No componente onde você chama fazerLogin
+    this.pacienteService.fazerLogin(this.Usuario).subscribe(
+      (response) => {
+        console.log('Resposta recebida:', response);
+        if (response.body && response.body.token) {
+          const token = response.body.token;
+          console.log('Token de acesso:', token);
 
-
-  // No componente onde você chama fazerLogin
-  this.pacienteService.fazerLogin(this.Usuario).subscribe(
-    (response) => {
-
-    },
-    (error) => {
-      console.error('Erro durante o login:', error);
-
-    }
-  );
-
-
-
+          this.router.navigate(['/home']);
+        }
+      },
+      (error) => {
+        console.error('Erro durante o login:', error);
+      }
+    );
   }
 }

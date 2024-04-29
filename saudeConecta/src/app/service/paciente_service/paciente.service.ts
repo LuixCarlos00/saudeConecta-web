@@ -32,6 +32,12 @@ export class PacienteService {
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();
 
+  public Login : boolean = false;
+  public MedicoCidade: Medico[] | undefined;
+  public MedicoCRM :Medico[]|undefined;
+  public MedicoNome:Medico[]|undefined;
+  public MedicoEspecialidade : Medico[]|undefined;
+
   constructor(private http: HttpClient, private tokenService: tokenService) {}
 
   iniciarObservacaoDadosUsuario() {
@@ -77,6 +83,7 @@ export class PacienteService {
         const tokenJWT = response.body.token
         if (response.body.token) {
           this.tokenService.salvarToken(tokenJWT);
+          this.Login= true;
         } else {
           console.error('Token JWT não encontrado no cabeçalho de resposta');
         }
@@ -118,4 +125,50 @@ export class PacienteService {
   const options = { headers, withCredentials: true };
   return this.http.post<Medico>(`${this.apiUrl}/medico/post`,Paciente,options );
   }
+
+
+
+  buscarListaMedicosPorEspecialidade(pesquisa: string): Observable<Medico[]> {
+    const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
+    const options = { headers, withCredentials: true };
+    return this.http.get<Medico[]>(`${this.apiUrl}/medico/buscarPorMedEspecialidade/${pesquisa}` ,options ) .pipe(
+      tap((medicos: Medico[]) => {
+        this.MedicoEspecialidade = medicos;
+      })
+    );
+  }
+
+
+  buscarListaMedicosPorCidade(pesquisa: string) : Observable<Medico[]>{
+    const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
+    const options = { headers, withCredentials: true };
+    return this.http.get<Medico[]>(`${this.apiUrl}/medico/buscarPorCidade/${pesquisa}`, options ) .pipe(
+      tap((medicos: Medico[]) => {
+        this.MedicoCidade = medicos;
+      })
+    );
+  }
+
+  buscarListaMedicosPorCRM(pesquisa: string) : Observable<Medico[]>{
+    const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
+    const options = { headers, withCredentials: true };
+    return this.http.get<Medico[]>(`${this.apiUrl}/medico/buscarPorCRM/${pesquisa}`, options ) .pipe(
+      tap((medicos: Medico[]) => {
+        this.MedicoCRM = medicos;
+      })
+    );
+  }
+
+  buscarListaMedicosPorNome(pesquisa: string): Observable<Medico[]> {
+    const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
+    const options = { headers, withCredentials: true };
+    return this.http.get<Medico[]>(`${this.apiUrl}/medico/buscarPorNome/${pesquisa}`, options ) .pipe(
+      tap((medicos: Medico[]) => {
+        this.MedicoNome = medicos;
+      })
+    );
+  }
+
+
+
 }

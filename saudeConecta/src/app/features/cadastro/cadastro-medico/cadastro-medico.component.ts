@@ -7,7 +7,7 @@ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { ufOptions } from 'src/app/util/variados/options/options';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { PacienteService } from '../../paciente_service/paciente.service';
+import { PacienteService } from '../../../service/paciente_service/paciente.service';
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -44,7 +44,8 @@ export class CadastroMedicoComponent {
     MedEmail: '',
     MedTelefone: '',
     endereco: 0,
-    usuario: 0
+    usuario: 0,
+    MedEspecialidade: ''
   };
   Endereco: Endereco = {
     EndCodigo: 0,
@@ -94,6 +95,7 @@ export class CadastroMedicoComponent {
         ],
       ],
       rg: ['', Validators.required],
+      Especialidade:['',Validators.required],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
     });

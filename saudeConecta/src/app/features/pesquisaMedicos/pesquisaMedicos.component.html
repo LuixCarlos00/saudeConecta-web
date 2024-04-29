@@ -1,0 +1,57 @@
+<div class="desktop">
+
+  <div>
+    <div>
+      <div class="rectangle">
+
+        <div class="grid-container">
+          <div>
+            <br>
+
+            <form class="fomulario" [formGroup]="FormularioPesquisa">
+              <br>
+              <label class="label_search">
+                <font style="color: red;">* Selecione a opcao abaixo para fazer a Pesquisa</font>
+              </label>
+              <br>
+              <br>
+              <div>
+                <label class="label_search">Pesquisar Medicos </label>
+                <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required
+                  formControlName="Pesquisa">
+                <button class="btnPesquisar" (click)="PesquisarMedicosFiltro()">Pesquisar</button>
+              </div>
+              <br>
+              <div>
+
+                <label class="label_filtro">Nome</label>
+                <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="1" required>
+
+                <label class="label_filtro">CRM</label>
+                <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="2" required>
+
+                <label class="label_filtro">Cidade</label>
+                <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="3" required>
+
+                <label class="label_filtro">Especialidade</label>
+                <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="4" required>
+
+              </div>
+              <br>
+              <app-tabelas-Pesquisas-Medicos></app-tabelas-Pesquisas-Medicos>
+
+            </form>
+
+          </div>
+          <div style=" background-color: #209446;   ">
+            dashboard
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <br><br>
+
+  </div>
+  <br><br>
+</div>
