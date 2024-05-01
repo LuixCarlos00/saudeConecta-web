@@ -7,10 +7,22 @@ import { PacienteService } from 'src/app/service/paciente_service/paciente.servi
   styleUrls: ['./cabecalho.component.css']
 })
 export class CabecalhoComponent implements OnInit {
+aaa() {
+console.log('Logout clicked22');
+
+}
+console: any;
 
   constructor(public pacienteService: PacienteService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  estaLogado(): Boolean {
+    return this.pacienteService.verificarLogin();
   }
 
+  logout() {
+    console.log('Logout clicked');
+    this.pacienteService.logout();
+  }
 }

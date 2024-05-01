@@ -2,14 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Usuario } from '../variados/interfaces/usuario/usuario';
 
-
 const KEY: string = 'authToken';
 const authTwof: string = 'authTwof';
 
 @Injectable({ providedIn: 'root' })
 export class tokenService {
-
-
   //
   //
   //
@@ -19,18 +16,24 @@ export class tokenService {
     window.localStorage.setItem(KEY, token);
   }
 
-
   excluirToken() {
     localStorage.removeItem(KEY);
   }
 
-  retornaToken(){
-    return localStorage.getItem(KEY)  ?? ""
+  retornaToken() {
+    return localStorage.getItem(KEY) ?? '';
   }
 
-  possuiToken() {
-   return !!this.retornaToken()
+  possuiToken(): boolean {
+    const token = localStorage.getItem(KEY);
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
   }
+
+
 
   //!===========================================================================================================
   removeToken() {
@@ -92,4 +95,9 @@ export class tokenService {
        tokenService e extrair informações relevantes dele. */
   }
   //!===========================================================================================================
+
+
+
+
+
 }

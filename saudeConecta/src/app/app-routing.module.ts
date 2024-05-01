@@ -32,11 +32,9 @@ const routes: Routes = [
 
   {path:'recuperaCadastro',component:RecuperaCadastroComponent,  },//4
 
-  {path:'pesquisar',component:PesquisaMedicosComponent,  },//4
-
   {path:'home',component:HomeComponent,  },//5
 
-
+  {path:'pesquisar',component:PesquisaMedicosComponent,  },//6
 
 
 

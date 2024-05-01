@@ -14,4 +14,14 @@ export class RodapeComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+  estaLogado(): Boolean {
+    if (this.pacienteService.verificarLogin() ) {
+      return true;
+    }else{
+      return false;
+    }
+
+  }
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PacienteService } from 'src/app/service/paciente_service/paciente.service';
+import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 
 @Component({
   selector: 'app-pesquisaMedicos',
@@ -8,11 +10,26 @@ import { PacienteService } from 'src/app/service/paciente_service/paciente.servi
   styleUrls: ['./pesquisaMedicos.component.css'],
 })
 export class PesquisaMedicosComponent implements OnInit {
+
+
+
+
   FormularioPesquisa!: FormGroup;
+  mostraTabela: boolean = false;
+  @Input() MostraCamposDePEsquisa: boolean = true;
+  @Input() MostraDadosMedicos : boolean = false;
+  @Input() Medico!: Medico;
+
+
+  mostrarCamposPesquisa(value: boolean) {
+    this.mostraTabela = false;
+    this.MostraCamposDePEsquisa = value;
+  }
 
   constructor(
     private form: FormBuilder,
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -20,38 +37,61 @@ export class PesquisaMedicosComponent implements OnInit {
       Pesquisa: ['', Validators.required],
       FiltroPesquisa: ['', Validators.required],
     });
+    this.mostraTabela = this.pacienteService.MostraCamposDePEsquisa;
   }
 
   PesquisarMedicosFiltro() {
+
+
     const pesquisa: string = this.FormularioPesquisa.get('Pesquisa')?.value;
-    const FiltroPesquisa: number =
-      this.FormularioPesquisa.get('FiltroPesquisa')?.value;
+    const FiltroPesquisa: number = this.FormularioPesquisa.get('FiltroPesquisa')?.value;
 
     if (FiltroPesquisa === 1) {
       this.pacienteService.buscarListaMedicosPorNome(pesquisa).subscribe(
         (dados) => {
-          console.log('deu certo ', dados);
+          if (dados && dados.length > 0) {
+            // Se houver dados, exibe a tabela
+            this.mostraTabela = true;
+            this.MostraCamposDePEsquisa = false;
+          } else {
+            // Se não houver dados, exibe a mensagem de erro
+            this.exibirMensagemErro();
+          }
         },
         (erros) => {
-          console.log('deu erro', erros);
+          this.exibirMensagemErro();
         }
       );
     } else if (FiltroPesquisa === 2) {
       this.pacienteService.buscarListaMedicosPorCRM(pesquisa).subscribe(
         (dados) => {
-          console.log('deu certo ', dados);
+          if (dados && dados.length > 0) {
+            // Se houver dados, exibe a tabela
+            this.mostraTabela = true;
+            this.MostraCamposDePEsquisa = false;
+          } else {
+            // Se não houver dados, exibe a mensagem de erro
+            this.exibirMensagemErro();
+          }
         },
         (erros) => {
-          console.log('deu erro', erros);
+          this.exibirMensagemErro();
         }
       );
     } else if (FiltroPesquisa === 3) {
       this.pacienteService.buscarListaMedicosPorCidade(pesquisa).subscribe(
         (dados) => {
-          console.log('deu certo ', dados);
+          if (dados && dados.length > 0) {
+            // Se houver dados, exibe a tabela
+            this.mostraTabela = true;
+            this.MostraCamposDePEsquisa = false;
+          } else {
+            // Se não houver dados, exibe a mensagem de erro
+            this.exibirMensagemErro();
+          }
         },
         (erros) => {
-          console.log('deu erro', erros);
+          this.exibirMensagemErro();
         }
       );
     } else if (FiltroPesquisa === 4) {
@@ -59,14 +99,29 @@ export class PesquisaMedicosComponent implements OnInit {
         .buscarListaMedicosPorEspecialidade(pesquisa)
         .subscribe(
           (dados) => {
-            console.log('deu certo ', dados);
+            console.log(dados);
+
+            if (dados && dados.length > 0) {
+              // Se houver dados, exibe a tabela
+              this.mostraTabela = true;
+              this.MostraCamposDePEsquisa = false;
+            } else {
+              // Se não houver dados, exibe a mensagem de erro
+              this.exibirMensagemErro();
+            }
           },
           (erros) => {
-            console.log('deu erro', erros);
+            this.exibirMensagemErro();
           }
         );
     }
 
     console.log(pesquisa, FiltroPesquisa);
+  }
+
+  exibirMensagemErro() {
+    this._snackBar.open('Não ha registros com esse parametro.', 'Fechar', {
+      duration: 3000,
+    });
   }
 }

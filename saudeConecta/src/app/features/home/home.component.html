@@ -1,31 +1,23 @@
 <div class="desktop">
-  <div class="overlap-group" >
-    <div class="divCabecalhoDescktop">
-      <button class="ButonCabecalho">
-        <mat-icon>supervised_user_circle</mat-icon>
-      </button>
-      <button  class="ButonCabecalho">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </div>
-    <div style="margin: 50px;">
-      <button class="ButonCabecalho exit"  >
-        <mat-icon>exit_to_app</mat-icon>
-      </button>
-    </div>
+  <div class="container">
+    <div class="grid-container" >
+      <div class="rectangle">
+        <button class="pesquisar" (click)="PesquisarMedicos()">
+          <span class="texto">Pesquisa Por Medicos</span>
+        </button>
+        <div class="texto-abaixo" >
+          <span class="estilo">
+            Encontre um médico para atender às suas necessidades!<br>
+            Clique aqui para explorar nossa lista de médicos especializados em diferentes áreas de saúde.
+          </span>
+        </div>
 
-  </div>
-  <div>
-    <div class="grid-container">
-      <div class="rectangle"   >
-       <button class="pesquisar" (click)="PesquisarMedicos()">
-      <span class="texto">Pesquisa Por Medicos</span>
-    </button>
       </div>
+
       <div class="rectangle-2" style=" background-color: #337abd;"></div>
       <div class="rectangle-3" style=" background-color: #701579;"></div>
     </div>
 
-    <div class="rectangle-4" style=" background-color: #080808;"></div>
+
   </div>
 </div>

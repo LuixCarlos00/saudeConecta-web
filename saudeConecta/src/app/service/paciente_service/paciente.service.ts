@@ -11,11 +11,13 @@ import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 
 import * as jwt_decode from 'jwt-decode';
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PacienteService {
+
 
   //
   //
@@ -32,19 +34,38 @@ export class PacienteService {
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();
 
-  public Login : boolean = false;
+  public UsuarioEstaLogado : boolean = false;
   public MedicoCidade: Medico[] | undefined;
   public MedicoCRM :Medico[]|undefined;
   public MedicoNome:Medico[]|undefined;
   public MedicoEspecialidade : Medico[]|undefined;
+  public MostraCamposDePEsquisa: boolean = false;
 
-  constructor(private http: HttpClient, private tokenService: tokenService) {}
+  constructor(
+    private router : Router ,
+    private http: HttpClient,
+    private tokenService: tokenService) {}
+
+
+
+    LimparDadosPesquisa() {
+      this.MedicoCRM = [];
+      this.MedicoCidade = [];
+      this.MedicoNome = [];
+      this.MedicoEspecialidade = [];
+    }
+
+
+
+
 
   iniciarObservacaoDadosUsuario() {
     if (this.tokenService.possuiToken()) {
       this.decodificaToken();
     }
   }
+
+
 
   public decodificaToken() {
     const token = this.tokenService.retornaToken();
@@ -77,13 +98,14 @@ export class PacienteService {
     console.log(dados);
   }
 
+
   fazerLogin(usuario: Usuario): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/Home/login`, usuario, { observe: 'response' }).pipe(
       tap((response: HttpResponse<any>) => {
-        const tokenJWT = response.body.token
-        if (response.body.token) {
+        const tokenJWT = response.body.token;
+        if (tokenJWT) {
           this.tokenService.salvarToken(tokenJWT);
-          this.Login= true;
+
         } else {
           console.error('Token JWT não encontrado no cabeçalho de resposta');
         }
@@ -91,6 +113,15 @@ export class PacienteService {
     );
   }
 
+  verificarLogin(): boolean {
+    const userToken = this.tokenService.retornaToken()
+    return !!userToken; // Verificar se o token está presente no localStorage
+  }
+
+  logout() {
+    this.tokenService.excluirToken();
+    this.router.navigate(['']);
+  }
 
 
 

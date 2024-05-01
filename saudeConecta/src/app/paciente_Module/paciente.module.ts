@@ -13,6 +13,11 @@ import { HomeComponent } from '../features/home/home.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
+
 
 
 import { CadastroPacienteComponent } from '../features/cadastro/cadastro-paciente/cadastro-paciente.component';
@@ -22,7 +27,11 @@ import { CadastroUsuarioComponent } from '../features/cadastro/cadastro-usuario/
 import { RecuperaCadastroComponent } from '../features/recupera-Cadastro/recupera-cadastro/recupera-cadastro.component';
 import { PesquisaMedicosComponent } from '../features/pesquisaMedicos/pesquisaMedicos.component';
 import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
-import { RodapeComponent } from '../util/variados/rodape/rodape.component';
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -53,6 +62,8 @@ import { RodapeComponent } from '../util/variados/rodape/rodape.component';
     MatIconModule,
     FlexLayoutModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatSnackBarModule
 
   ],
 })

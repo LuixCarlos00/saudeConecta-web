@@ -1,39 +1,43 @@
-@media screen and ( min-width: 750px) {
+@media screen and (min-width: 750px) {
 
   .desktop {
     display: flex;
     flex-direction: column;
-    position: relative; /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
-    height: 100vh; /* Ocupa toda a altura da tela */
+    position: relative;
+    /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
+    height: 100vh;
+    /* Ocupa toda a altura da tela */
   }
 
 
-.fomulario{
-  background-color: white;
-  height: 550px;
-   border: 1px solid;
+  .fomulario {
+    background-color: white;
+    height: 550px;
+    border: 1px solid;
     border-radius: 10px;
-}
+  }
+
+
 
   .desktop .rectangle-4 {
-    position: fixed; /* Para fixar na parte inferior */
+    position: fixed;
+    /* Para fixar na parte inferior */
     bottom: 0;
     left: 0;
-    width: 100%; /* Ocupa toda a largura */
-    height: 50px; /* Altura desejada */
+    width: 100%;
+    /* Ocupa toda a largura */
+    height: 50px;
+    /* Altura desejada */
     background-color: #080808;
   }
 
-
-
-
-  .label_search{
+  .label_search {
     margin-top: 0;
     margin: 6px;
     padding: 10px;
   }
 
-  .input_search{
+  .input_search {
     width: 50%;
     margin-top: 0;
     display: flex;
@@ -41,20 +45,18 @@
     padding: 10px;
   }
 
-  .input_filtro{
+  .input_filtro {
     margin-left: -9px;
   }
 
-  .label_filtro{
+  .label_filtro {
     margin-top: 0;
     margin: 10px;
     padding: 10px;
   }
 
 
-
-.btnPesquisar {
-
+  .btnPesquisar {
     float: right;
     height: 35px;
     width: 100px;
@@ -63,20 +65,21 @@
     top: -40px;
     right: 0;
     padding: 10px;
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto do botão */
+    background-color: #007bff;
+    /* Cor de fundo do botão */
+    color: #fff;
+    /* Cor do texto do botão */
     border: none;
     cursor: pointer;
-
-}
+  }
 
 
 
   .grid-container {
-
     display: grid;
     grid-template-columns: 70% 30%;
     margin: 30px;
+    margin-top: 15px;
   }
 
 
@@ -106,27 +109,16 @@
   }
 
 
-.rectangle {
+  .rectangle {
     margin-left: 30px;
     height: 450px;
-
-    margin-top: 80px;
   }
 
 
-/*
-  .desktop .rectangle-2 {
-    margin-left: 30px;
-    height: 80px;
-
-    margin: 50px;
-    margin-top: 150px;
-
-  } */
-
 
   .pesquisar {
-    position: relative; /* Adicionado para que o texto seja posicionado em relação a este botão */
+    position: relative;
+    /* Adicionado para que o texto seja posicionado em relação a este botão */
     background: url(../../util/variados/imagens/pesquisar.jpg);
     background-size: cover;
     background-position: center;
@@ -157,99 +149,107 @@
 
 
   .pesquisar {
-    cursor: pointer;/*isso e impotante*/
+    cursor: pointer;
+    /*isso e impotante*/
+  }
+
+  .informacoesMedicos{
+    font-size: 12px;
+    font-family: 'Times New Roman', Times, serif;
+     margin: 5px;
+
+
+  }
+
+
+  .fomularioMedico{
+    background-color: rgb(206, 160, 108);
+    height: 550px;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top:20px ;
+     border: solid 1px black;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 750px) {
+
+  .desktop {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
+    height: 100vh;
+    /* Ocupa toda a altura da tela */
   }
 
 
 
+  .desktop .rectangle-4 {
+    position: fixed;
+    /* Para fixar na parte inferior */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Ocupa toda a largura */
+    height: 50px;
+    /* Altura desejada */
+    background-color: #080808;
+  }
+
+
+  .desktop .icon-person {
+    position: absolute;
+    width: 83px;
+    height: 69px;
+    top: 36px;
+    left: 180px;
+  }
+
+  .desktop .icon-logout {
+    position: absolute;
+    width: 56px;
+    height: 57px;
+    top: 40px;
+    left: 1290px;
+  }
+
+  .desktop .icon-menu {
+    position: absolute;
+    width: 90px;
+    height: 82px;
+    top: 30px;
+    left: 70px;
+  }
+
+
+
+  .desktop .rectangle-2 {
+    margin-left: 30px;
+    height: 150px;
+    margin: 20px;
+    margin-top: 50px;
+
+  }
+
+  .desktop .rectangle-3 {
+    margin-left: 30px;
+    height: 150px;
+    margin: 20px;
+    margin-top: 50px;
   }
 
 
 
 
 
-
-
-
-
-  @media screen and ( max-width: 750px) {
-
-    .desktop {
-      display: flex;
-      flex-direction: column;
-      position: relative; /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
-      height: 100vh; /* Ocupa toda a altura da tela */
-    }
-
-
-
-    .desktop .rectangle-4 {
-      position: fixed; /* Para fixar na parte inferior */
-      bottom: 0;
-      left: 0;
-      width: 100%; /* Ocupa toda a largura */
-      height: 50px; /* Altura desejada */
-      background-color: #080808;
-    }
-
-
-    .desktop .icon-person {
-      position: absolute;
-      width: 83px;
-      height: 69px;
-      top: 36px;
-      left: 180px;
-    }
-
-    .desktop .icon-logout {
-      position: absolute;
-      width: 56px;
-      height: 57px;
-      top: 40px;
-      left: 1290px;
-    }
-
-    .desktop .icon-menu {
-      position: absolute;
-      width: 90px;
-      height: 82px;
-      top: 30px;
-      left: 70px;
-    }
-
-
-
-
-    .desktop .rectangle {
-      background: url(../../util/variados/imagens/pesquisar.jpg);
-      background-size: cover; /* Ajusta o tamanho da imagem para cobrir completamente o elemento */
-      background-position: center; /* Centraliza a imagem vertical e horizontalmente */
-      background-repeat: no-repeat; /* Impede a repetição da imagem */
-      border-radius: 30px;
-      border: inset 4px;
-      margin-left: 30px;
-      height: 150px;
-      margin: 20px;
-      margin-top: 100px;
-    }
-
-    .desktop .rectangle-2 {
-      margin-left: 30px;
-      height: 150px;
-      margin: 20px;
-      margin-top: 50px;
-
-    }
-
-    .desktop .rectangle-3 {
-      margin-left: 30px;
-      height: 150px;
-      margin: 20px;
-      margin-top: 50px;
-    }
-
-
-
-
-
-    }
+}

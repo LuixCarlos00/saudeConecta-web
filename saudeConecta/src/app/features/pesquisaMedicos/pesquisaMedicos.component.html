@@ -1,15 +1,16 @@
 <div class="desktop">
 
   <div>
-    <div>
-      <div class="rectangle">
 
-        <div class="grid-container">
-          <div>
+    <div class="rectangle">
+
+      <div class="grid-container">
+        <div>
+          <br>
+
+          <form class="fomulario" [formGroup]="FormularioPesquisa">
             <br>
-
-            <form class="fomulario" [formGroup]="FormularioPesquisa">
-              <br>
+            <div *ngIf="MostraCamposDePEsquisa">
               <label class="label_search">
                 <font style="color: red;">* Selecione a opcao abaixo para fazer a Pesquisa</font>
               </label>
@@ -19,7 +20,8 @@
                 <label class="label_search">Pesquisar Medicos </label>
                 <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required
                   formControlName="Pesquisa">
-                <button class="btnPesquisar" (click)="PesquisarMedicosFiltro()">Pesquisar</button>
+                <button *ngIf="FormularioPesquisa.valid" class="btnPesquisar"
+                  (click)="PesquisarMedicosFiltro()">Pesquisar</button>
               </div>
               <br>
               <div>
@@ -37,21 +39,67 @@
                 <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="4" required>
 
               </div>
-              <br>
+            </div>
+            <br>
+
+            <div *ngIf="mostraTabela">
               <app-tabelas-Pesquisas-Medicos></app-tabelas-Pesquisas-Medicos>
+            </div>
 
-            </form>
+          </form>
 
-          </div>
-          <div style=" background-color: #209446;   ">
-            dashboard
-          </div>
         </div>
 
+        <div *ngIf="MostraDadosMedicos">
+          <form class="fomularioMedico">
+
+            <div style="justify-content: center; display: flex; margin-top: 50px;">
+              <mat-icon style="  width: 100px; height: 100px;">
+                <i class="fa-solid fa-user-doctor" style="color: rgb(142, 199, 221); font-size: 100px; "></i>
+              </mat-icon>
+            </div>
+
+
+            <div>
+              <br>
+              <div class="informacoesMedicos">
+                <label>Nome : </label>
+              </div>
+              <br>
+              <div class="informacoesMedicos">
+                <label>Especialidade : </label>
+              </div>
+              <br>
+              <div class="informacoesMedicos">
+                <label>Telefone  : </label>
+              </div>
+              <br>
+              <div class="informacoesMedicos">
+                <label>Empresa/Clinica : </label>
+              </div>
+              <br>
+              <div class="informacoesMedicos">
+                <label>CRM : </label>
+              </div>
+              <br>
+              <div class="informacoesMedicos">
+                <label>Formações : </label>
+              </div>
+            </div>
+
+
+
+
+
+
+
+          </form>
+        </div>
       </div>
+
     </div>
-    <br><br>
+
 
   </div>
-  <br><br>
+
 </div>

@@ -10,7 +10,7 @@ import { UtilModule } from './util/util/util.module';
 import { RodapeComponent } from './util/variados/rodape/rodape.component';
 import { CabecalhoComponent } from './util/variados/cabecalho/cabecalho.component';
 import { MatIconModule } from '@angular/material/icon';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 
@@ -28,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     LoginModule,
     PacienteModule,
     UtilModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule
 
 
 

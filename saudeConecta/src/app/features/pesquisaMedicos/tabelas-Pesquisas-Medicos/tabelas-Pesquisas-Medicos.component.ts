@@ -1,6 +1,11 @@
+import { MESSAGES_CONTAINER_ID } from '@angular/cdk/a11y';
+import { Medico } from './../../../util/variados/interfaces/medico/medico';
+import { PesquisaMedicosComponent } from './../pesquisaMedicos.component';
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { PacienteService } from 'src/app/service/paciente_service/paciente.service';
-import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
+
+
 
 @Component({
   selector: 'app-tabelas-Pesquisas-Medicos',
@@ -9,33 +14,87 @@ import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 })
 export class TabelasPesquisasMedicosComponent implements OnInit {
 
+
+
+
   private MedicoCidade: Medico[] | undefined;
   private MedicoCRM :Medico[]|undefined;
   private MedicoNome:Medico[]|undefined;
-  private MedicoEspecialidade : Medico[]|undefined;
+  private MedicoEspecialidade : Medico[]|undefined
+  clickedRows = new Set<any>();;
 
   dataSource: Medico[] = [];
+  highValue: number = 5;
+  lowValue!: number;
 
-  constructor(private pacienteService: PacienteService) {
+
+
+
+
+
+
+  constructor(private pacienteService: PacienteService , private PesquisaMedicosComponent:PesquisaMedicosComponent ) {
+
+
+
     this.MedicoCidade = pacienteService.MedicoCidade;
     this.MedicoCRM = pacienteService.MedicoCRM;
     this.MedicoNome = pacienteService.MedicoNome;
     this.MedicoEspecialidade = pacienteService.MedicoEspecialidade;
 
-    // Concatenando os arrays e atribuindo ao dataSource
+
+
+    this.dataSource = [];
+
+
     this.dataSource = [
       ...(this.MedicoCidade ?? []),
       ...(this.MedicoCRM ?? []),
       ...(this.MedicoNome ?? []),
       ...(this.MedicoEspecialidade ?? [])
     ];
+
+
   }
 
   ngOnInit() {
   }
 
 
+  getPaginatorData(event: PageEvent): PageEvent {
+    this.lowValue = event.pageIndex * event.pageSize;
+    this.highValue = this.lowValue + event.pageSize;
+    this.highValue = Math.min(this.highValue, this.dataSource.length);
+    return event;
+  }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
-}
+  displayedColumns: string[] = ['position' ,'MarcaConsulta'];
+
+
+
+  marcarConsulta(elemento: Medico,index: number) {
+    console.log(elemento, index);
+
+    }
+
+    pesquisarNovamente() {
+      this.PesquisaMedicosComponent.mostrarCamposPesquisa(true);
+      this.MedicoCidade=[];
+      this.MedicoCRM=[];
+      this.MedicoNome=[];
+      this.MedicoEspecialidade=[];
+      this.dataSource = [];
+      this.pacienteService.LimparDadosPesquisa();
+    }
+
+
+    clicked(Medico: Medico) {
+      this.PesquisaMedicosComponent.MostraDadosMedicos = true;
+      this.PesquisaMedicosComponent.Medico = Medico;
+    }
+
+
+  }
+
+

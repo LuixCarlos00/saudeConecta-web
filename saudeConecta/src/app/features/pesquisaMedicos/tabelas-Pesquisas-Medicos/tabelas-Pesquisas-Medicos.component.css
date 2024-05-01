@@ -1,0 +1,15 @@
+
+.btnPesquisar {
+  float: right;
+  height: 35px;
+  width: 150;
+  margin-right: 90px;
+  position: relative;
+  top: 20px;
+  right: 0;
+  padding: 10px;
+  background-color: #007bff; /* Cor de fundo do botão */
+  color: #fff; /* Cor do texto do botão */
+  border: none;
+  cursor: pointer;
+}
