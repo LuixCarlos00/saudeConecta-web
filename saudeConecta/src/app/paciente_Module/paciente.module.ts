@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -27,6 +27,7 @@ import { CadastroUsuarioComponent } from '../features/cadastro/cadastro-usuario/
 import { RecuperaCadastroComponent } from '../features/recupera-Cadastro/recupera-cadastro/recupera-cadastro.component';
 import { PesquisaMedicosComponent } from '../features/pesquisaMedicos/pesquisaMedicos.component';
 import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
+import { CriaConsultaComponent } from '../features/cria-consulta/cria-consulta.component';
 
 
 
@@ -43,6 +44,7 @@ import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/ta
     RecuperaCadastroComponent,
     HomeComponent,
     TabelasPesquisasMedicosComponent,
+    CriaConsultaComponent
 
   ],
   exports: [],
@@ -63,7 +65,8 @@ import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/ta
     FlexLayoutModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
 
   ],
 })

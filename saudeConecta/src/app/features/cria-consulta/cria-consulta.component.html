@@ -1,0 +1,70 @@
+<div class="desktop">
+
+  <div>
+
+    <div class="rectangle">
+
+      <div>
+        <br>
+
+        <form class="fomulario">
+          <br>
+          <div class="grid-container">
+            <div>
+
+              <br>
+              <br>
+
+
+
+
+              <label class="label_filtro">Date</label>
+              <input style="width: 150px; height: 50px;" type="date" id="date" name="date">
+
+              <br><br>
+              <label class="label_filtro">Hora</label>
+              <input style="width: 70px; height: 50px;" type="time" id="time" name="time"
+                (change)="validateTime($event)">
+
+            </div>
+            <div>
+
+              <label>
+                <font style="color: red; font-size: 12px;">* Preencha os campos a baixo pra realizar a consulta </font>
+              </label><br>
+
+              <i><br>
+                <font style="color: red; font-size: 12px;">* <label>Horario de
+                    atendimento</label><br></font>
+              </i><br>
+
+
+              <i>
+                <font style="color: red; font-size: 12px;">* <label>{{horario}}</label><br></font>
+              </i><br>
+
+              <i>
+                <font style="color: red; font-size: 12px;">* <label>As {{DiasDeFunionamento}}</label><br></font>
+              </i><br>
+
+
+
+
+
+
+            </div>
+            <br>
+
+
+          </div>
+        </form>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</div>

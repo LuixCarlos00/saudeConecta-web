@@ -62,29 +62,42 @@
 
             <div>
               <br>
-              <div class="informacoesMedicos">
-                <label>Nome : </label>
+
+              <div class="informacoesMedicos" *ngIf="Medico.medNome">
+                <hr>
+                <label>Nome : {{Medico.medNome}}</label><br>
               </div>
-              <br>
-              <div class="informacoesMedicos">
-                <label>Especialidade : </label>
+
+              <div class="informacoesMedicos" *ngIf="Medico.medEspecialidade" >
+                <hr>
+                <label>Especialidade :   {{Medico.medEspecialidade}}</label><br>
               </div>
-              <br>
-              <div class="informacoesMedicos">
-                <label>Telefone  : </label>
+
+              <div class="informacoesMedicos" *ngIf="Medico.medTelefone">
+                <hr>
+                <label>Telefone  :   {{Medico.medTelefone}}</label><br>
               </div>
-              <br>
-              <div class="informacoesMedicos">
-                <label>Empresa/Clinica : </label>
+
+              <div class="informacoesMedicos" *ngIf="Medico.medEmpresa">
+                <hr>
+                <label>Empresa/Clinica :  {{Medico.medEmpresa}}   </label>  <br>
               </div>
-              <br>
-              <div class="informacoesMedicos">
-                <label>CRM : </label>
+
+              <div class="informacoesMedicos" *ngIf="Medico.medCrm">
+                <hr>
+                <label>CRM :  {{Medico.medCrm}} </label> <br>
               </div>
-              <br>
-              <div class="informacoesMedicos">
-                <label>Formações : </label>
+
+              <div class="informacoesMedicos" *ngIf="Medico.medFormacoes">
+                <hr>
+                <label>Formações : {{Medico.medFormacoes}}   </label>
               </div>
+
+              <div class="informacoesMedicos" *ngIf="Medico.medGraduacao">
+                <hr>
+                <label>Graduacao : {{Medico.medGraduacao}}   </label>
+              </div>
+
             </div>
 
 

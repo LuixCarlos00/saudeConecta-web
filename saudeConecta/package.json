@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@fortawesome/fontawesome-free": "^6.5.2",
     "@types/jwt-decode": "^3.1.0",
+    "date-fns": "^2.30.0",
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.5.0",
     "sweetalert": "^2.1.2",

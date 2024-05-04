@@ -1,3 +1,4 @@
+import { Route, Router } from '@angular/router';
 import { MESSAGES_CONTAINER_ID } from '@angular/cdk/a11y';
 import { Medico } from './../../../util/variados/interfaces/medico/medico';
 import { PesquisaMedicosComponent } from './../pesquisaMedicos.component';
@@ -33,7 +34,9 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
 
 
 
-  constructor(private pacienteService: PacienteService , private PesquisaMedicosComponent:PesquisaMedicosComponent ) {
+  constructor(private pacienteService: PacienteService , private PesquisaMedicosComponent:PesquisaMedicosComponent,
+    private route :Router
+   ) {
 
 
 
@@ -75,6 +78,7 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
 
   marcarConsulta(elemento: Medico,index: number) {
     console.log(elemento, index);
+    this.route.navigate(['addconsulta']);
 
     }
 
@@ -90,6 +94,9 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
 
 
     clicked(Medico: Medico) {
+console.log(Medico);
+
+      this.pacienteService.changeMedicoData(Medico);
       this.PesquisaMedicosComponent.MostraDadosMedicos = true;
       this.PesquisaMedicosComponent.Medico = Medico;
     }

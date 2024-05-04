@@ -25,6 +25,12 @@ export class PacienteService {
 
   private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
 
+
+
+
+  private medicoData = new BehaviorSubject<Medico | null>(null);
+  currentMedicoData$ = this.medicoData.asObservable();
+
   Usuario: Usuario = {
     id: 0,
     login: '',
@@ -63,6 +69,11 @@ export class PacienteService {
     if (this.tokenService.possuiToken()) {
       this.decodificaToken();
     }
+  }
+
+
+  changeMedicoData(medico: Medico) {
+    this.medicoData.next(medico);
   }
 
 

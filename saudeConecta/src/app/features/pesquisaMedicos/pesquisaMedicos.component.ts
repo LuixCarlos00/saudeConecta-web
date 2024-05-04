@@ -18,21 +18,34 @@ export class PesquisaMedicosComponent implements OnInit {
   mostraTabela: boolean = false;
   @Input() MostraCamposDePEsquisa: boolean = true;
   @Input() MostraDadosMedicos : boolean = false;
-  @Input() Medico!: Medico;
+  @Input() Medico!: any;
 
 
   mostrarCamposPesquisa(value: boolean) {
     this.mostraTabela = false;
     this.MostraCamposDePEsquisa = value;
+    this.MostraDadosMedicos = false;
   }
 
   constructor(
     private form: FormBuilder,
     private pacienteService: PacienteService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
+    this.pacienteService.currentMedicoData$.subscribe(medico => {
+      console.log(medico);
+      if (medico) {
+      this.Medico = medico;
+      }
+    });
+
+
+
+
     this.FormularioPesquisa = this.form.group({
       Pesquisa: ['', Validators.required],
       FiltroPesquisa: ['', Validators.required],

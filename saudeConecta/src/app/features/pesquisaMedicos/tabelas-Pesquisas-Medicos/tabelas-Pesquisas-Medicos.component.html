@@ -1,5 +1,5 @@
 <div >
-<div style="margin: 10px; height: 300px; border: 1px solid black;">
+<div style="margin: 10px; height: 300px; ">
   <table style="height: 50%; font-size: 10px;" mat-table [dataSource]="(dataSource | slice :lowValue : highValue)" class="mat-elevation-z8">
 
     <!-- Definição das colunas -->
@@ -19,23 +19,18 @@
       </td>
     </ng-container>
 
-
-
-
-
-
+    <!-- Apenas uma linha de cabeçalho -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-      mat-row
-      (click)="clicked(row)"
-      [class.demo-row-is-clicked]="clickedRows.has(row)"
-      *matRowDef="let row; columns: displayedColumns;"
-  ></tr>
 
-
+    <!-- Definição das linhas de dados -->
+    <tr mat-row
+        (click)="clicked(row)"
+        [class.demo-row-is-clicked]="clickedRows.has(row)"
+        *matRowDef="let row; columns: displayedColumns;">
+    </tr>
 
   </table>
+
 
   <mat-paginator [pageSizeOptions]="[5,10,20]" (page)="getPaginatorData($event)" [length]="dataSource.length" showFirstLastButtons></mat-paginator>
 </div>

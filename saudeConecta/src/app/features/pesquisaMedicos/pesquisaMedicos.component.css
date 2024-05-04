@@ -60,7 +60,8 @@
     float: right;
     height: 35px;
     width: 100px;
-    margin-right: 90px;
+    margin-right: 260px;
+    padding: 20px;
     position: relative;
     top: -40px;
     right: 0;
@@ -154,9 +155,9 @@
   }
 
   .informacoesMedicos{
-    font-size: 12px;
+    font-size: 15px;
     font-family: 'Times New Roman', Times, serif;
-     margin: 5px;
+    margin: 5px;
 
 
   }

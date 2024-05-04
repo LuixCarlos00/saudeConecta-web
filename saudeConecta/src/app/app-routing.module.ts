@@ -14,6 +14,7 @@ import { RecuperaCadastroComponent } from './features/recupera-Cadastro/recupera
 
 import { HomeComponent } from './features/home/home.component';
 import { PesquisaMedicosComponent } from './features/pesquisaMedicos/pesquisaMedicos.component';
+import { CriaConsultaComponent } from './features/cria-consulta/cria-consulta.component';
 
 const routes: Routes = [
 
@@ -35,6 +36,8 @@ const routes: Routes = [
   {path:'home',component:HomeComponent,  },//5
 
   {path:'pesquisar',component:PesquisaMedicosComponent,  },//6
+
+  {path:'addconsulta',component:CriaConsultaComponent,  },//7
 
 
 

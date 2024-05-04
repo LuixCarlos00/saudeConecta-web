@@ -1,0 +1,64 @@
+@media screen and (min-width: 750px) {
+
+  .desktop {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
+    height: 100vh;
+    /* Ocupa toda a altura da tela */
+  }
+
+
+
+  .input_filtro {
+    margin-left: -9px;
+  }
+
+  .label_search {
+    margin-top: 0;
+    margin: 20px;
+    padding: 10px;
+  }
+
+
+  .label_filtro {
+    margin-top: 0;
+    margin: 10px;
+    padding: 10px;
+  }
+
+
+
+  .rectangle {
+    height: 450px;
+    display: flex;
+    justify-content: center;
+  }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 30px;
+  margin-top: 15px;
+}
+
+  .fomulario {
+
+    background-color: white;
+    height: 400px;
+    border: 1px solid;
+    width: 550px;
+    border-radius: 10px;
+    margin: 35px;
+  }
+
+
+
+
+
+}
+
+
+
+
