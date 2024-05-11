@@ -1,21 +1,34 @@
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PacienteService } from 'src/app/service/paciente_service/paciente.service';
+import {MatMenuModule} from '@angular/material/menu';
+
+
 
 @Component({
   selector: 'app-cabecalho',
   templateUrl: './cabecalho.component.html',
-  styleUrls: ['./cabecalho.component.css']
+  styleUrls: ['./cabecalho.component.css'],
+
 })
 export class CabecalhoComponent implements OnInit {
-aaa() {
-console.log('Logout clicked22');
 
-}
-console: any;
+  Usuario: Usuario | undefined;
 
-  constructor(public pacienteService: PacienteService) { }
+user = 'usuario';
+  constructor(public pacienteService: PacienteService,private router: Router, private tokenService: PacienteService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    this.tokenService.PacienteValue$.subscribe((paciente) => {
+      console.log(paciente, 'paciente');
+
+      if (paciente)
+      this.Usuario = paciente;
+    });
+    this.estaLogado();
+  }
 
   estaLogado(): Boolean {
     return this.pacienteService.verificarLogin();
@@ -25,4 +38,9 @@ console: any;
     console.log('Logout clicked');
     this.pacienteService.logout();
   }
+
+
+  Menu() {
+    this.router.navigate(['home']);
+    }
 }

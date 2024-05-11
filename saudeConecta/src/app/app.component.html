@@ -1,5 +1,5 @@
 <app-cabecalho></app-cabecalho>
-<main >
-  <router-outlet></router-outlet>
+<main *ngIf="estaLogado() ; else login">
+    <router-outlet></router-outlet>
 </main>
-
+<ng-template #login  login()>  <app-login></app-login>  </ng-template>

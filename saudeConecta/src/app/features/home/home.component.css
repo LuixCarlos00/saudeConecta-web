@@ -4,13 +4,14 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
+
     height: 100vh;
-    /* Ocupa toda a altura da tela */
+
   }
 
 
   .grid-container {
+
     display: grid;
     grid-template-columns: 33% 33% 33%;
   }
@@ -21,10 +22,23 @@
     margin-left: 30px;
     height: 280px;
     margin: 50px;
-    margin-top: 150px;
+    margin-top: 100px;
     position: relative;
   }
+  .desktop .rectangle-2 {
+    margin-left: 30px;
+    height: 280px;
+    margin: 50px;
+   margin-top: 100px;
 
+  }
+
+  .desktop .rectangle-3 {
+    margin-left: 30px;
+    height: 280px;
+    margin: 50px;
+   margin-top: 100px;
+  }
 
   .texto-abaixo {
     margin: 5px;
@@ -39,34 +53,26 @@
     font-weight: normal;
     text-align: center;
     width: 100%;
+    height: 100px;
   }
 
   .estilo {
+    color: rgb(29, 23, 23);
+    text-align: center;
+    margin: 5px;
+    background-color: aliceblue;
+    margin-top: 25px;
     font-size: 16px;
     font-weight: 500;
     font-family: 'Times New Roman', Times, serif;
     justify-items: centerS;
   }
 
-  .desktop .rectangle-2 {
-    margin-left: 30px;
-    height: 280px;
-    margin: 50px;
-    margin-top: 150px;
 
-  }
-
-  .desktop .rectangle-3 {
-    margin-left: 30px;
-    height: 280px;
-    margin: 50px;
-    margin-top: 150px;
-  }
 
   .pesquisar {
     position: relative;
-    /* Adicionado para que o texto seja posicionado em relação a este botão */
-    background: url(../../util/variados/imagens/pesquisar.jpg);
+    background: url(../../util/variados/imagens/procura.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -94,6 +100,67 @@
   }
 
 
+  .agenda {
+    position: relative;
+    background: url(../../util/variados/imagens/agenda.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    border: inset 4px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 12px 16px 0 rgba(182, 56, 56, 0.24), 0 17px 50px 0 rgba(160, 57, 57, 0.19);
+  }
+
+  .agenda:active {
+    transform: translateY(2px);
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.24), 0 12px 30px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .agenda .texto {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(29, 23, 23);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+
+
+  .historico {
+    position: relative;
+    background: url(../../util/variados/imagens/historico.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    border: inset 4px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 12px 16px 0 rgba(182, 56, 56, 0.24), 0 17px 50px 0 rgba(160, 57, 57, 0.19);
+
+  }
+
+  .historico:active {
+    transform: translateY(2px);
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.24), 0 12px 30px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .historico .texto {
+    position: absolute;
+
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(29, 23, 23);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
 
   .pesquisar {
     cursor: pointer;

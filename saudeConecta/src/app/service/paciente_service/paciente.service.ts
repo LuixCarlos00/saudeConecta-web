@@ -1,3 +1,4 @@
+import { Paciente } from './../../util/variados/interfaces/paciente/paciente';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
 import { HttpClient, HttpResponse } from '@angular/common/http';
@@ -7,29 +8,29 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { tokenService } from 'src/app/util/Token/token.service';
 
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
-import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
+
 
 import * as jwt_decode from 'jwt-decode';
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 import { Router } from '@angular/router';
+import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PacienteService {
 
-
   //
   //
   //
 
   private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
-
+  PacienteValue$ = this.usuarioSubject.asObservable();
 
 
 
   private medicoData = new BehaviorSubject<Medico | null>(null);
-  currentMedicoData$ = this.medicoData.asObservable();
+  MedicoValue$ = this.medicoData.asObservable();
 
   Usuario: Usuario = {
     id: 0,
@@ -47,6 +48,7 @@ export class PacienteService {
   public MedicoEspecialidade : Medico[]|undefined;
   public MostraCamposDePEsquisa: boolean = false;
 
+
   constructor(
     private router : Router ,
     private http: HttpClient,
@@ -54,7 +56,7 @@ export class PacienteService {
 
 
 
-    LimparDadosPesquisa() {
+    LimparDadosPesquisa(): void {
       this.MedicoCRM = [];
       this.MedicoCidade = [];
       this.MedicoNome = [];
@@ -65,20 +67,20 @@ export class PacienteService {
 
 
 
-  iniciarObservacaoDadosUsuario() {
+  iniciarObservacaoDadosUsuario(): void {
     if (this.tokenService.possuiToken()) {
       this.decodificaToken();
     }
   }
 
 
-  changeMedicoData(medico: Medico) {
+  changeMedicoData(medico: Medico): void {
     this.medicoData.next(medico);
   }
 
 
 
-  public decodificaToken() {
+  public decodificaToken(): void {
     const token = this.tokenService.retornaToken();
     if (token) {
       const Usuario = jwt_decode.jwtDecode(token) as Usuario;
@@ -95,19 +97,23 @@ export class PacienteService {
     this.decodificaToken();
   }
 
-  deslogar() {
+  deslogar(): void {
     this.tokenService.excluirToken();
     this.usuarioSubject.next(null);
   }
 
-  estaLogado() {
+  estaLogado(): boolean {
     return this.tokenService.possuiToken();
   }
 
-  dadosUsuario(dados: Usuario) {
+  dadosUsuario(dados: Usuario)  : void {
     this.Usuario = dados;
     console.log(dados);
   }
+
+
+
+
 
 
   fazerLogin(usuario: Usuario): Observable<any> {
@@ -116,7 +122,7 @@ export class PacienteService {
         const tokenJWT = response.body.token;
         if (tokenJWT) {
           this.tokenService.salvarToken(tokenJWT);
-
+          this.tokenService.setAuthTwof(true);
         } else {
           console.error('Token JWT não encontrado no cabeçalho de resposta');
         }
@@ -129,7 +135,7 @@ export class PacienteService {
     return !!userToken; // Verificar se o token está presente no localStorage
   }
 
-  logout() {
+  logout(): void {
     this.tokenService.excluirToken();
     this.router.navigate(['']);
   }

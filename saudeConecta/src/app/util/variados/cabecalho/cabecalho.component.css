@@ -4,15 +4,9 @@
 
 
 .overlap-group {
-
   background-color: rgb(43, 125, 197);
-
   height: 40px;
-
-
 }
-
-
 
 .icons {
   height: 20px;
@@ -21,10 +15,13 @@
   left: 10px;
 }
 
+.buttonMenu{
+  background-color: rgb(43, 125, 197);
+}
 .ButonCabecalho {
-  margin: 5px;
-  border-radius: 90px;
-  left: -20px;
+
+  border: hidden;
+
   width: 35px;
   height: 30px;
 }

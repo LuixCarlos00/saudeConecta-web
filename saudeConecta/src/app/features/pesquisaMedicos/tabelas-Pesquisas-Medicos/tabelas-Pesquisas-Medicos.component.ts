@@ -34,7 +34,9 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
 
 
 
-  constructor(private pacienteService: PacienteService , private PesquisaMedicosComponent:PesquisaMedicosComponent,
+  constructor(
+    private pacienteService: PacienteService ,
+    private PesquisaMedicosComponent:PesquisaMedicosComponent,
     private route :Router
    ) {
 
@@ -77,8 +79,8 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
 
 
   marcarConsulta(elemento: Medico,index: number) {
-    console.log(elemento, index);
     this.route.navigate(['addconsulta']);
+    this.pacienteService.changeMedicoData(elemento);
 
     }
 

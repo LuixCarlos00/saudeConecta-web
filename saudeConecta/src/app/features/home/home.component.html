@@ -1,9 +1,11 @@
 <div class="desktop">
   <div class="container">
+
     <div class="grid-container" >
+
       <div class="rectangle">
         <button class="pesquisar" (click)="PesquisarMedicos()">
-          <span class="texto">Pesquisa Por Medicos</span>
+          <span style="font-size: 12px;" class="texto">Pesquisa Por Medicos</span>
         </button>
         <div class="texto-abaixo" >
           <span class="estilo">
@@ -11,11 +13,33 @@
             Clique aqui para explorar nossa lista de médicos especializados em diferentes áreas de saúde.
           </span>
         </div>
-
       </div>
 
-      <div class="rectangle-2" style=" background-color: #337abd;"></div>
-      <div class="rectangle-3" style=" background-color: #701579;"></div>
+      <div class="rectangle-2">
+        <button class="agenda" (click)="VerificarAgenda()">
+          <span style="font-size: 12px;" class="texto">Agenda de Consultas</span>
+        </button>
+        <div class="texto-abaixo" >
+          <span class="estilo">
+            Que tal dar uma olhada na sua agenda de consultas?<br>
+            Clique aqui para explorar sua lista de consultas.
+          </span>
+        </div>
+      </div>
+
+
+      <div class="rectangle-3">
+        <button class="historico" (click)="VerificarHistorico()">
+          <span style="font-size: 12px;" class="texto">Historico de Consultas</span>
+        </button>
+        <div class="texto-abaixo" >
+          <span style="margin: 5px;"  class="estilo">
+           Procura no historico de consultas <br>
+            Clique aqui para explorar sua lista de consultas.
+          </span>
+        </div>
+      </div>
+
     </div>
 
 

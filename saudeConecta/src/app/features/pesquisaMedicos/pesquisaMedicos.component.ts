@@ -1,3 +1,4 @@
+import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,14 +31,13 @@ export class PesquisaMedicosComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private pacienteService: PacienteService,
-    private _snackBar: MatSnackBar
+    private DialogService: DialogService
   ) {
 
   }
 
   ngOnInit() {
-    this.pacienteService.currentMedicoData$.subscribe(medico => {
-      console.log(medico);
+    this.pacienteService.MedicoValue$.subscribe(medico => {
       if (medico) {
       this.Medico = medico;
       }
@@ -133,8 +133,6 @@ export class PesquisaMedicosComponent implements OnInit {
   }
 
   exibirMensagemErro() {
-    this._snackBar.open('Não ha registros com esse parametro.', 'Fechar', {
-      duration: 3000,
-    });
+    this.DialogService.exibirMensagemErro( )
   }
 }

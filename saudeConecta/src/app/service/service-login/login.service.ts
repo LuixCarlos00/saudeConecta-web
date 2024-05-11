@@ -7,11 +7,11 @@ import { tokenService } from 'src/app/util/Token/token.service';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
 
-
 @Injectable({ providedIn: 'root' })
 export class LoginService {
+
   constructor(private http: HttpClient, private TOkenService: tokenService) {
-    this.TOkenService.retornaToken() && this.decodificaToken();
+    this.TOkenService.retornaToken()
   }
 
   private apiUrl = 'http://localhost:8080';
@@ -23,69 +23,56 @@ export class LoginService {
 
 
 
-  //!==============================================================================================================
-  TemToken(): boolean {
-    const token = this.TOkenService.retornaToken();
-    if (!token) {
-      ///token é nulo
-      return false;
-    } else return true;
-    ///possui um token
-  }
 
-  //!==============================================================================================================
-  getUsuarioAtual(): Usuario | undefined {
-    const usuario = this.usuarioSubject.getValue();
-    return usuario !== null ? usuario : undefined;
-  }
+  // TemToken(): boolean {
+  //   const token = this.TOkenService.retornaToken();
+  //   if (!token) {
+  //     ///token é nulo
+  //     return false;
+  //   } else return true;
+  //   ///possui um token
+  // }
 
-  //!==============================================================================================================
 
-  getUsuario(): Observable<Usuario | null> {
-    return this.usuarioSubject.asObservable();
-  }
 
-  //!==============================================================================================================
 
-  public decodificaToken() {
-    const jwt_decode = require('jwt-decode');
-    const token: any = this.TOkenService.retornaToken();
 
-    if (token) {
-      const usuario: Usuario = jwt_decode(token) as Usuario;
-      this.nomeUsuario = usuario.login;
-      this.usuarioSubject.next(usuario);
-    }
-    /* O método decodificaToken() é responsável por
-       decodificar o token JWT armazenado no serviço
-       tokenService e extrair informações relevantes dele. */
-  }
 
-  //!==============================================================================================================
+
+
+  // getUsuarioAtual(): Usuario | undefined {
+  //   const usuario = this.usuarioSubject.getValue();
+  //   console.log(usuario, 'sssss');
+
+  //   return usuario !== null ? usuario : undefined;
+  // }
+
+
+
+  // getUsuario(): Observable<Usuario | null> {
+  //   console.log(this.usuarioSubject.asObservable());
+
+  //   return this.usuarioSubject.asObservable();
+  // }
+
+
+
 
   deslogar() {
     this.TOkenService.removeToken();
     this.usuarioSubject.next(null);
   }
 
-  //!==============================================================================================================
-  obterAutorizacao() {
-    this.decodificaToken();
-    const usuario = this.usuarioSubject.getValue();
-    return usuario ? usuario.
-    roles : [];
-  }
 
-  //!==============================================================================================================
-  estaLogado(): boolean {
+  estaLogado() {
     const token = this.TOkenService.retornaToken();
-    console.log(token,'sssss');
 
     if (!token) {
       return false; // nao ta logado
     } else if (this.TOkenService.oTokenEstavalido(token)) {
       return true; // token é valido e retorna  true
     } else return false; // user nao ta logado retorna false
+
   }
 
 
@@ -93,6 +80,6 @@ export class LoginService {
     return this.TOkenService.possuiToken();
   }
 
-  //!==============================================================================================================
+
 
 }

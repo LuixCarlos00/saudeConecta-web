@@ -7,6 +7,7 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+
   constructor(private router :Router) {}
 
   PesquisarMedicos() {
@@ -14,7 +15,12 @@ export class HomeComponent {
   }
 
 
+  VerificarAgenda() {
+    this.router.navigate(['agenda'])
+  }
 
-
+  VerificarHistorico() {
+    this.router.navigate(['historico'])
+    }
 
 }

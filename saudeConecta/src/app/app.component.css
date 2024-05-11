@@ -1,25 +1,8 @@
-@media screen and (min-width: 750px) {
 main {
-  background: url(../assets/imagens/logo-Fundo.jpg);
-  background-size: cover; /* Para garantir que a imagem cubra toda a área */
-  background-position: center; /* Para centralizar a imagem */
-  min-height: 100vh; /* Define a altura mínima como 100% da altura da viewport */
-  align-items: center; /* Centraliza verticalmente */
-  justify-content: center; /* Centraliza horizontalmente */
-}
+  margin: 0;
+  padding: 0;
+  background-color: rgb(206, 214, 219);
+  background-size: cover;
+  min-height: 100vh;
 }
 
-
-@media screen and (max-width: 750px) {
-  main {
-    background: url(../assets/imagens/background-completo.png);
-    background-size: cover; /* Para garantir que a imagem cubra toda a área */
-    background-position: center; /* Para centralizar a imagem */
-    min-height: 100vh; /* Define a altura mínima como 100% da altura da viewport */
-    width: 100%; /* Garante que a imagem ocupe toda a largura */
-    display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-  }
-
-}

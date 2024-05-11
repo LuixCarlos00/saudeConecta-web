@@ -126,7 +126,6 @@ export class CadastroPacienteComponent implements OnInit {
 console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
 
 
-
     if (this.FormularioEndereco.valid && this.FormularioPaciente.valid) {
 
       this.CadastroPaciete_Medico.cadastraEndereco(this.Endereco).subscribe(
@@ -135,8 +134,6 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
           this.Paciente.endereco = EnderecoID;
           this.Paciente.usuario = this.Usuario.id;
           console.log('dados ', this.Paciente);
-
-
 
           this.CadastroPaciete_Medico.cadastrarPaciente(this.Paciente)
           .subscribe(
@@ -163,8 +160,6 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
             }
           );
 
-
-
         },
         (erro) => {
           Swal.fire({
@@ -175,12 +170,6 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
           console.error('Erro ao cadastrar Endereco:', erro);
         }
       );
-
-
-
-
-
-
 
     } else {
       (errors: any)=>{
@@ -193,12 +182,6 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
       }
     }
 
-
-
-
-
-
-
   }
 
 
@@ -208,21 +191,14 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
     const input = event.target;
     setTimeout(() => {
       let inputValue = input.value.replace(/\W/g, '');
-
-      // Limitando a entrada para 15 caracteres
       if (inputValue.length > 15) {
         inputValue = inputValue.substring(0, 15);
       }
-
-      // Verificando se os dois primeiros caracteres são letras
       const firstTwoChars = inputValue.substring(0, 2);
       if (!/^[a-zA-Z]*$/.test(firstTwoChars)) {
-        // Se os dois primeiros caracteres não forem letras, limpe o campo
         input.value = '';
         return;
       }
-
-      // Formato XX-YY.HHH.HHH-Z
       if (inputValue.length >= 2 && inputValue.length <= 15) {
         input.value = inputValue.replace(
           /^(\w{0,2})[-]?(\d{0,2})[.]?(\d{0,3})[.]?(\d{0,3})[-]?(\d{0,1})?/,
@@ -242,8 +218,6 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
     const input = event.target;
     setTimeout(() => {
       const inputValue = input.value.replace(/\D/g, '');
-
-      // Formato XX(XX) XXXXX-XXXX
       input.value = inputValue.replace(
         /^(\d{0,2})(\d{0,2})(\d{0,5})(\d{0,4})/,
         '$1($2) $3-$4'
@@ -254,12 +228,8 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
   placeholderCEP(event: any): void {
     const input = event.target;
     setTimeout(() => {
-      let inputValue = input.value.replace(/\D/g, ''); // Remover todos os caracteres que não são dígitos
-
-      // Limitar a entrada para 8 caracteres
+      let inputValue = input.value.replace(/\D/g, '');
       inputValue = inputValue.substring(0, 8);
-
-      // Formato XXXXX-XXX
       if (inputValue.length >= 5 && inputValue.length <= 8) {
         input.value = inputValue.replace(/^(\d{5})(\d{3})/, '$1-$2');
       }
@@ -270,13 +240,9 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
     const input = event.target;
     setTimeout(() => {
       let inputValue = input.value.replace(/\D/g, '');
-
-      // Limitando a entrada para 11 caracteres
       if (inputValue.length > 11) {
         inputValue = inputValue.substring(0, 11);
       }
-
-      // Formato XXX.XXX.XXX-XX
       if (inputValue.length <= 11) {
         input.value = inputValue.replace(
           /^(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})/,

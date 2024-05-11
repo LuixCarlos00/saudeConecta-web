@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private form: FormBuilder,
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private tokenService: tokenService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +50,6 @@ export class LoginComponent implements OnInit {
     const password = this.FormularioUsuario.get('password')?.value;
     const username = this.FormularioUsuario.get('username')?.value;
 
-    console.log(username, '--', password);
 
     this.Usuario.login = username;
     this.Usuario.senha = password;
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         if (response.body && response.body.token) {
           const token = response.body.token;
           console.log('Token de acesso:', token);
-
+          this.tokenService.token();
           this.router.navigate(['/home']);
         }
       },

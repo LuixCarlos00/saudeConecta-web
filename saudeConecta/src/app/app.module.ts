@@ -11,14 +11,18 @@ import { RodapeComponent } from './util/variados/rodape/rodape.component';
 import { CabecalhoComponent } from './util/variados/cabecalho/cabecalho.component';
 import { MatIconModule } from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import { LoginComponent } from './features/login/login.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RodapeComponent,
-    CabecalhoComponent
+    CabecalhoComponent,
+    LoginComponent
 
   ],
   imports: [
@@ -29,8 +33,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     PacienteModule,
     UtilModule,
     MatIconModule,
-    MatToolbarModule
-
+    MatToolbarModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatMenuModule
 
 
 

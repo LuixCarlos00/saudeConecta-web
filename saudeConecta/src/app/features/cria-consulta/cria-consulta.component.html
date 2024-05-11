@@ -1,55 +1,71 @@
 <div class="desktop">
 
-  <div>
+
 
     <div class="rectangle">
 
       <div>
-        <br>
 
-        <form class="fomulario">
+
+        <form class="fomulario" [formGroup]="FormGroupConsulta">
+          <div style="margin-left: 10px; margin-top: 10px; ">
+            <button (click)="voltarParaPesquisaMedicos()">
+              <i class="fa-solid fa-arrow-left fa-xl"></i>
+            </button>
+          </div>
+
           <br>
           <div class="grid-container">
             <div>
 
-              <br>
-              <br>
 
+              <label class="label_filtro">
+                <font style="color: red; font-size: 12px;">* </font>Data
+              </label>
+              <input formControlName="date" style="width: 150px; height: 25px;" type="date" id="date" name="date"
+                (change)="onDateChange($event)">
 
-
-
-              <label class="label_filtro">Date</label>
-              <input style="width: 150px; height: 50px;" type="date" id="date" name="date">
 
               <br><br>
-              <label class="label_filtro">Hora</label>
-              <input style="width: 70px; height: 50px;" type="time" id="time" name="time"
-                (change)="validateTime($event)">
+              <label class="label_filtro">
+                <font style="color: red; font-size: 12px;">* </font>Hora
+              </label>
+              <select style="width: 80px; height: 25px;" formControlName="time" name="time" id="time">
+                @for (time of Hora; track time) {
+                <option [value]="time.label">{{time.label}}</option>
+                }
+              </select>
+
+
+              <br><br><br>
+              <div>
+                <label class="label_filtro">Observação:</label>
+                <textarea formControlName="observacao" style="margin-left: 20px; width: 450px; height: 100px;  "
+                  type="text" formControlName="observacao">
+                 {{observacao}}
+                 </textarea>
+              </div>
+
+
+              <br><br>
+              <div class="divbtnFP">
+                <button class="botaoFormaPagamento " (click)="pagamento=true">Forma de Pagamento</button>
+              </div>
 
             </div>
             <div>
 
               <label>
-                <font style="color: red; font-size: 12px;">* Preencha os campos a baixo pra realizar a consulta </font>
+                <font style="color: red; font-size: 10px;">* Preencha os campos ao lado pra realizar a consulta </font>
               </label><br>
 
-              <i><br>
-                <font style="color: red; font-size: 12px;">* <label>Horario de
-                    atendimento</label><br></font>
-              </i><br>
-
+              <i>
+                <font style="color: red; font-size: 10px;">* <label>{{horario}}</label><br></font>
+              </i>
 
               <i>
-                <font style="color: red; font-size: 12px;">* <label>{{horario}}</label><br></font>
-              </i><br>
-
-              <i>
-                <font style="color: red; font-size: 12px;">* <label>As {{DiasDeFunionamento}}</label><br></font>
-              </i><br>
-
-
-
-
+                <font style="color: red; font-size: 10px;">* <label>As {{DiasDeFunionamento}}</label><br></font>
+              </i>
 
 
             </div>
@@ -59,12 +75,40 @@
           </div>
         </form>
 
+
+
+
+
+
+
+
+        <form class="fomularioPagamneto" [formGroup]="FormGroupConsulta"   >
+          <ul>Como deseja pagar no local de consulta?</ul>
+          <div  >
+
+            <label class="label_filtro">Dinheiro</label>
+            <input formControlName="Pagamento" class="input_filtro" type="radio" [value]="1" required>
+
+            <label class="label_filtro">Cartao</label>
+            <input formControlName="Pagamento" class="input_filtro" type="radio" [value]="2" required>
+
+            <label class="label_filtro">PIx</label>
+            <input formControlName="Pagamento" class="input_filtro" type="radio" [value]="3" required>
+
+          </div>
+
+          <div class="divbtnMC" >
+            <button class="botaoMarcaConsulta" (click)="marcarConsulta()">Marca consulta</button>
+          </div>
+
+
+        </form>
+
+
       </div>
 
 
     </div>
 
-
-  </div>
 
 </div>

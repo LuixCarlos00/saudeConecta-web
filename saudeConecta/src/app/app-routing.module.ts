@@ -15,6 +15,8 @@ import { RecuperaCadastroComponent } from './features/recupera-Cadastro/recupera
 import { HomeComponent } from './features/home/home.component';
 import { PesquisaMedicosComponent } from './features/pesquisaMedicos/pesquisaMedicos.component';
 import { CriaConsultaComponent } from './features/cria-consulta/cria-consulta.component';
+import { AgendaComponent } from './features/agenda/agenda.component';
+import { HistoricoComponent } from './features/historico/historico.component';
 
 const routes: Routes = [
 
@@ -39,6 +41,9 @@ const routes: Routes = [
 
   {path:'addconsulta',component:CriaConsultaComponent,  },//7
 
+  {path:'agenda',component:AgendaComponent,  },//8
+
+  {path:'historico',component:HistoricoComponent,  },//9
 
 
   { path: '**', pathMatch: 'full', component: NotFoudComponent },

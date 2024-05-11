@@ -1,6 +1,11 @@
+import { Usuario } from './../variados/interfaces/usuario/usuario';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Usuario } from '../variados/interfaces/usuario/usuario';
+import { BehaviorSubject, map } from 'rxjs';
+
+
+import { jwtDecode } from "jwt-decode";
+import { HttpClient } from '@angular/common/http';
+import { Paciente } from '../variados/interfaces/paciente/paciente';
 
 const KEY: string = 'authToken';
 const authTwof: string = 'authTwof';
@@ -10,15 +15,35 @@ export class tokenService {
   //
   //
   //
-  private Subject = new BehaviorSubject<Usuario | null>(null);
+
+
+  constructor( private http: HttpClient,) {
+   this.token();
+  }
+
+
+  private apiUrl = 'http://localhost:8080';
+
+  private SubjectPaciente = new BehaviorSubject<Paciente | null>(null);
+  PacienteValue$ = this.SubjectPaciente.asObservable();
+
+  private Usuario = {
+    id: 0,
+    login: '',
+    senha: '',
+    roles: '',
+  };
+
 
   salvarToken(token: string) {
     window.localStorage.setItem(KEY, token);
   }
 
+
   excluirToken() {
     localStorage.removeItem(KEY);
   }
+
 
   retornaToken() {
     return localStorage.getItem(KEY) ?? '';
@@ -35,19 +60,19 @@ export class tokenService {
 
 
 
-  //!===========================================================================================================
+
   removeToken() {
     window.localStorage.removeItem(KEY);
     window.localStorage.removeItem(authTwof);
   }
 
-  //!===========================================================================================================
+
 
   setAuthTwof(authTwof: boolean): void {
     window.localStorage.setItem('authTwof', authTwof.toString());
   }
 
-  //!===========================================================================================================
+
 
   getAuthTwof(): boolean {
     if (!localStorage.getItem(authTwof)) {
@@ -55,7 +80,7 @@ export class tokenService {
     } else return true;
   }
 
-  //!===========================================================================================================
+
 
   oTokenEstavalido(token: any): boolean {
     if (!token) {
@@ -78,26 +103,32 @@ export class tokenService {
     }
   }
 
-  //!===========================================================================================================
-
-  public decodificaTokenPROFESSOR() {
-    const jwt_decode = require('jwt-decode');
-    const token: any = this.retornaToken();
-
-    if (token) {
-      const usuario: Usuario = jwt_decode(token) as Usuario;
-
-      this.Subject.next(usuario);
-    }
-
-    /* O método decodificaToken() é responsável por
-       decodificar o token JWT armazenado no serviço
-       tokenService e extrair informações relevantes dele. */
-  }
-  //!===========================================================================================================
-
-
-
-
-
+token (){
+  const token = this.retornaToken();
+  this.Usuario = jwtDecode(token);
+  this.Usuario.id
+  this.buscarPorUsuario(this.Usuario.id)
+//caso venha dar errado tente comentar a linha e descomentar , tbm tente fexha o VS e abrir novamente
 }
+
+
+
+
+buscarPorUsuario(id: number) {
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.retornaToken()}` };
+  const options = { headers, withCredentials: true };
+
+  this.http.get<Paciente>(`${this.apiUrl}/paciente/buscarIdDeUsusario/${id}`, options)
+    .subscribe(
+      (Paciente: Paciente) => {
+        this.SubjectPaciente.next(Paciente);
+      },
+      (error) => {
+        console.error('Erro ao buscar usuário:', error);
+      }
+    );
+}
+
+
+
+  }

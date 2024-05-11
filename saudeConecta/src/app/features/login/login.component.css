@@ -6,10 +6,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-   /* Substitua 'sua-imagem-de-fundo.jpg' pelo caminho da sua imagem */
   background-size: cover;
   background-position: center;
-   /* Aplica um efeito de desfoque à imagem */
+  background: url(../../../assets/imagens/logo-Fundo.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(205, 205, 209);
+  background-size: cover;
+  min-height: 100vh;
 }
 
 .login-container {
@@ -20,7 +27,7 @@ body {
 }
 
 .login-box {
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

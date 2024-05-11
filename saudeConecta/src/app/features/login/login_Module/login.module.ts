@@ -9,12 +9,9 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
 
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule
   ],
   declarations: [
-    LoginComponent,
+
 
   ],
   exports:[ ],
