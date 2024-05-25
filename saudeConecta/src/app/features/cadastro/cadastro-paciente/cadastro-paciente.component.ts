@@ -75,7 +75,7 @@ export class CadastroPacienteComponent implements OnInit {
     this.ModelService.getDadosUsuario().subscribe((dadosUsuario) => {
       if(dadosUsuario){
         this.Usuario = dadosUsuario;
-        console.log(dadosUsuario, '22222222222');
+
       }
     });
 
@@ -125,7 +125,6 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   cadastra() {
-console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
 
 
     if (this.FormularioEndereco.valid && this.FormularioPaciente.valid) {

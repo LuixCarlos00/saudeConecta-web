@@ -46,10 +46,6 @@ cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
     );
 }
 
-cadastrarUsuarioADM(codigo: string): Observable<Adiministrador> {
-  return this.http.get<Adiministrador>( `${this.apiUrl}/adm/buscarPorCoigoAutorizacao/${codigo}` );
-}
-
 
 
 }

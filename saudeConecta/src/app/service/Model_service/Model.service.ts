@@ -4,7 +4,7 @@ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { tokenService } from 'src/app/util/Token/token.service';
 
 
@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ModelService {
+
 
   //
   //
@@ -96,10 +97,6 @@ export class ModelService {
   }
 
 
-
-
-
-
   fazerLogin(usuario: Usuario): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/Home/login`, usuario, { observe: 'response' }).pipe(
       tap((response: HttpResponse<any>) => {
@@ -112,6 +109,11 @@ export class ModelService {
         }
       })
     );
+  }
+
+
+  buscarUsuarioExistente(username: any) {
+    return this.http.get<Usuario>(`${this.apiUrl}/Home/buscarUsuarioExistente/${username}` );
   }
 
   verificarLogin(): boolean {

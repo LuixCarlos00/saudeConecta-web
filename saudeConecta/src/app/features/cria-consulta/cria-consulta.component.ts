@@ -41,6 +41,8 @@ export class CriaConsultaComponent implements OnInit {
   observacao: string = 'Tem alguma observação? Quais:';
   Hora = HoradaConsulta;
   pagamento: Boolean = false;
+  dadosPaciente: any;
+  showResultadoPaciente: boolean = false;
 
   constructor(
     private form: FormBuilder,
@@ -84,8 +86,9 @@ export class CriaConsultaComponent implements OnInit {
       this.PacientesService.buscarListaPacientesPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
+           this.dadosPaciente =dados
             // Se houver dados, exibe a tabela
-
+            this.showResultadoPaciente = true;
             console.log(dados, 'dados');
           } else {
             // Se não houver dados, exibe a mensagem de erro
@@ -100,8 +103,9 @@ export class CriaConsultaComponent implements OnInit {
       this.PacientesService.buscarListaPacientesPorCPF(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
+           this.dadosPaciente =dados
             // Se houver dados, exibe a tabela
-
+            this.showResultadoPaciente = true;
             console.log(dados, 'dados');
           } else {
             // Se não houver dados, exibe a mensagem de erro
@@ -116,8 +120,9 @@ export class CriaConsultaComponent implements OnInit {
       this.PacientesService.buscarListaPacientesPor_RG(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
+           this.dadosPaciente =dados
             // Se houver dados, exibe a tabela
-
+            this.showResultadoPaciente = true;
             console.log(dados, 'dados');
           } else {
             // Se não houver dados, exibe a mensagem de erro
@@ -134,8 +139,9 @@ export class CriaConsultaComponent implements OnInit {
           console.log(dados);
 
           if (dados && dados.length > 0) {
+           this.dadosPaciente =dados
             // Se houver dados, exibe a tabela
-
+            this.showResultadoPaciente = true;
             console.log(dados, 'dados');
           } else {
             // Se não houver dados, exibe a mensagem de erro
@@ -236,4 +242,9 @@ export class CriaConsultaComponent implements OnInit {
   voltarParaPesquisaMedicos() {
     this.router.navigate(['pesquisar']);
   }
+
+  fecharTabela() {
+    this.showResultadoPaciente = false;
+  }
+
 }

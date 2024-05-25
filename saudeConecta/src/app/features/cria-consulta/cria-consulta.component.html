@@ -7,6 +7,7 @@
     <div>
 
 
+
       <form class="fomulario" [formGroup]="FormGroupConsulta">
         <div style="margin-left: 10px; margin-top: 10px; ">
           <button (click)="voltarParaPesquisaMedicos()">
@@ -46,6 +47,8 @@
             <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required
               formControlName="PesquisaPaciente">
             <button class="btnPesquisar" (click)="PesquisarPacientes()">Pesquisar</button>
+
+            <app-tabela-de-pacientes *ngIf="showResultadoPaciente" (fechar)="fecharTabela()" [dadosPaciente]="dadosPaciente"></app-tabela-de-pacientes>
 
             <br>
             <div style="display: flex ; margin-top: -20px;;">

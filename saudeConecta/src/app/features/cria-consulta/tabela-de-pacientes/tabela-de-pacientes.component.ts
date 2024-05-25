@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 
@@ -9,7 +9,8 @@ import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 })
 export class TabelaDePacientesComponent implements OnInit {
 
-
+  @Input() dadosPaciente: any;
+  @Output() fechar = new EventEmitter<void>();
   dataSource: Paciente[] = [];
   highValue: number = 5;
   lowValue!: number;
@@ -17,9 +18,22 @@ export class TabelaDePacientesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+
+
+
+this.dataSource = this.dadosPaciente
+    console.log(this.dadosPaciente, 'dadosPaciente');
+
   }
 
-  displayedColumns: string[] = ['position' ,'MarcaConsulta'];
+
+
+  fecharTabela() {
+    this.fechar.emit();
+  }
+
+  displayedColumns: string[] = ['paciCodigo','paciNome' ,'paciCpf', 'paciDataNacimento','seleciona'];
 
   getPaginatorData(event: PageEvent): PageEvent {
     this.lowValue = event.pageIndex * event.pageSize;
