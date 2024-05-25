@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { tokenService } from 'src/app/util/Token/token.service';
+import type { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
@@ -23,16 +24,9 @@ export class UsuariosService {
 
 
 cadastraEndereco(Endereco: Endereco): Observable<Endereco> {
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-  };
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
   const options = { headers, withCredentials: true };
-  return this.http.post<Endereco>(
-    `${this.apiUrl}/endereco/post`,
-    Endereco,
-    options
-  );
+  return this.http.post<Endereco>( `${this.apiUrl}/endereco/post`, Endereco, options);
 }
 
 cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
@@ -50,6 +44,10 @@ cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
         }
       })
     );
+}
+
+cadastrarUsuarioADM(codigo: string): Observable<Adiministrador> {
+  return this.http.get<Adiministrador>( `${this.apiUrl}/adm/buscarPorCoigoAutorizacao/${codigo}` );
 }
 
 

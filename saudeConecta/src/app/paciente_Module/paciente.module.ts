@@ -30,6 +30,7 @@ import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/ta
 import { CriaConsultaComponent } from '../features/cria-consulta/cria-consulta.component';
 import { TabelaDePacientesComponent } from '../features/cria-consulta/tabela-de-pacientes/tabela-de-pacientes.component';
 import { TrocaSenhaComponent } from '../features/troca-senha/troca-senha.component';
+import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro-adm.component';
 
 
 
@@ -48,7 +49,8 @@ import { TrocaSenhaComponent } from '../features/troca-senha/troca-senha.compone
     TabelasPesquisasMedicosComponent,
     CriaConsultaComponent,
     TabelaDePacientesComponent,
-    TrocaSenhaComponent
+    TrocaSenhaComponent,
+    CadastroAdmComponent
 
   ],
   exports: [],

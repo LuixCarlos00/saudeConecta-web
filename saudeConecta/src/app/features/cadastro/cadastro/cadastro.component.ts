@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class CadastroComponent {
 
+
   constructor(private router: Router){}
 
   cadastraMedico() {
@@ -19,5 +20,8 @@ export class CadastroComponent {
       this.router.navigate(['cadastroPaciente'])
     }
 
+    cadastraAdmin() {
+      this.router.navigate(['cadastroadmin'])    
+      }
 
 }

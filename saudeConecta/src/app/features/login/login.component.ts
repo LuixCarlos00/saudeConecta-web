@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { tokenService } from 'src/app/util/Token/token.service';
-import { ModelService } from 'src/app/service/Model_service/Model.service';
+ import { ModelService } from 'src/app/service/Model_service/Model.service';
+import   { tokenService } from 'src/app/util/Token/token.service';
 
 @Component({
   selector: 'app-login',

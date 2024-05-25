@@ -18,6 +18,7 @@ import { CriaConsultaComponent } from './features/cria-consulta/cria-consulta.co
 import { AgendaComponent } from './features/agenda/agenda.component';
 import { HistoricoComponent } from './features/historico/historico.component';
 import { TrocaSenhaComponent } from './features/troca-senha/troca-senha.component';
+import { CadastroAdmComponent } from './features/cadastro/cadastro-adm/cadastro-adm.component';
 
 const routes: Routes = [
 
@@ -26,6 +27,9 @@ const routes: Routes = [
   {path:'',component:LoginComponent, canActivate: [GuardaRotasLogin]},//1
 
   {path:'cadastroUsuario',component:CadastroUsuarioComponent, canActivate:[GuardaRotasCadastraUsuario]},//2
+
+  {path:'cadastroadmin',component:CadastroAdmComponent,  },//2
+
 
   {path:'cadastro',component:CadastroComponent,canActivate:[GuardaRotasCadastra]},//3
 

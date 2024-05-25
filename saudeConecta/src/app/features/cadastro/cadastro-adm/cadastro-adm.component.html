@@ -1,0 +1,32 @@
+<div style="  display: flex;">
+  <div class="container">
+    <h2>Cadastro de Administracao</h2>
+    <form id="cadastroForm" class="responsivo" [formGroup]="FormularioADM">
+      <div class="form-group">
+        <label for="nome">
+          <font color="#FF0000"><b>* </b></font> Nome :
+        </label>
+        <input [(ngModel)]="Administracao.AdmNome" formControlName="nome" type="text" id="nome" name="nome" required>
+      </div>
+
+      <div class="form-group">
+        <label for="Email">
+          <font color="#FF0000"><b>* </b></font> Email :
+        </label>
+        <input [(ngModel)]="Administracao.AdmEmail" formControlName="Email" type="text" id="Email" name="Email" required>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="codAutorizacao">
+          <font color="#FF0000"><b>* </b></font> Por favor, insira o codigo de autorização:
+        </label>
+        <input [(ngModel)]="Administracao.AdmDataCriacao" formControlName="codAutorizacao" type="password" id="codAutorizacao"
+          name="codAutorizacao" required>
+      </div>
+    </form>
+    <button (click)="cadastra()" type="submit">Cadastrar</button>
+    <br>
+ 
+  </div>
+</div>
+<br><br>
