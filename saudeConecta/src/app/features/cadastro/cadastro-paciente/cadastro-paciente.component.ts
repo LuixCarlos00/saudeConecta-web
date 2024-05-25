@@ -1,16 +1,16 @@
-import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-
 import Swal from 'sweetalert2';
-
 import {   Router } from '@angular/router';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
-import { PacienteService } from '../../../service/paciente_service/paciente.service';
+import { ModelService } from '../../../service/Model_service/Model.service';
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { ufOptions } from 'src/app/util/variados/options/options';
+import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
+import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 
 @Component({
   selector: 'app-cadastro-paciente',
@@ -63,14 +63,16 @@ export class CadastroPacienteComponent implements OnInit {
 
   constructor(
     private form: FormBuilder,
-    private CadastroPaciete_Medico: PacienteService,
-    private route : Router
+    private usuariosService: UsuariosService,
+    private ModelService :ModelService,
+    private route : Router,
+    private PacienteService :PacientesService
   ) {
-    this.CadastroPaciete_Medico.iniciarObservacaoDadosUsuario();
+    this.ModelService.iniciarObservacaoDadosUsuario();
   }
 
   ngOnInit(): void {
-    this.CadastroPaciete_Medico.getDadosUsuario().subscribe((dadosUsuario) => {
+    this.ModelService.getDadosUsuario().subscribe((dadosUsuario) => {
       if(dadosUsuario){
         this.Usuario = dadosUsuario;
         console.log(dadosUsuario, '22222222222');
@@ -128,14 +130,14 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
 
     if (this.FormularioEndereco.valid && this.FormularioPaciente.valid) {
 
-      this.CadastroPaciete_Medico.cadastraEndereco(this.Endereco).subscribe(
+      this.usuariosService.cadastraEndereco(this.Endereco).subscribe(
         (endereco: Endereco) => {
           const EnderecoID = endereco.EndCodigo as number;
           this.Paciente.endereco = EnderecoID;
           this.Paciente.usuario = this.Usuario.id;
           console.log('dados ', this.Paciente);
 
-          this.CadastroPaciete_Medico.cadastrarPaciente(this.Paciente)
+          this.PacienteService.cadastrarPaciente(this.Paciente)
           .subscribe(
             (dados) => {
               Swal.fire({
@@ -144,7 +146,7 @@ console.log(this.FormularioEndereco.valid && this.FormularioPaciente.valid)
                 text: 'Cadastro realizado com sucesso.',
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.CadastroPaciete_Medico.deslogar()
+                  this.ModelService.deslogar()
                   this.route.navigate(['']);
                 }
               })

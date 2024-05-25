@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -28,6 +28,8 @@ import { RecuperaCadastroComponent } from '../features/recupera-Cadastro/recuper
 import { PesquisaMedicosComponent } from '../features/pesquisaMedicos/pesquisaMedicos.component';
 import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
 import { CriaConsultaComponent } from '../features/cria-consulta/cria-consulta.component';
+import { TabelaDePacientesComponent } from '../features/cria-consulta/tabela-de-pacientes/tabela-de-pacientes.component';
+import { TrocaSenhaComponent } from '../features/troca-senha/troca-senha.component';
 
 
 
@@ -44,7 +46,9 @@ import { CriaConsultaComponent } from '../features/cria-consulta/cria-consulta.c
     RecuperaCadastroComponent,
     HomeComponent,
     TabelasPesquisasMedicosComponent,
-    CriaConsultaComponent
+    CriaConsultaComponent,
+    TabelaDePacientesComponent,
+    TrocaSenhaComponent
 
   ],
   exports: [],
@@ -66,6 +70,7 @@ import { CriaConsultaComponent } from '../features/cria-consulta/cria-consulta.c
     MatTableModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatDialogModule
 
 
   ],

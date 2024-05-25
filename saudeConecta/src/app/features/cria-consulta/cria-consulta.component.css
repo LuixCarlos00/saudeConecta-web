@@ -1,7 +1,7 @@
 @media screen and (min-width: 750px) {
 
   .desktop {
-    display: flex;
+
     flex-direction: column;
     position: relative;
     /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
@@ -21,11 +21,72 @@
     padding: 10px;
   }
 
-
-  .label_filtro {
-    margin-top: 0;
-    margin: 10px;
+  .input_DATA{
+    display: flex;
+    border-radius: 5px;
+    margin-left: 10px;
     padding: 10px;
+    width: 105px;
+    border-color: #000000;
+
+  }
+
+
+  .label_filtro_DATA {
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .label_filtro_Hora{
+    font-family: 'Times New Roman', Times, serif;
+    padding: 10px;
+    margin-left: 50%;
+    display: flex;
+    margin-top: -110px;
+  }
+
+  .input_HORA{
+    border-color: #000000;
+    margin-top: -10px;
+    display: flex;
+    border-radius: 5px;
+    margin-left: 155px;
+    padding: 10px;
+    width: 105px;
+  }
+
+  .label_filtro_PESQUISA{
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .input_search{
+
+    display: flex;
+    border-radius: 5px;
+    margin-left: 10px;
+    padding: 10px;
+    width: 400px;
+    border-color: #000000;
+  }
+
+  .btnPesquisar{
+    display: flex;
+    margin-left: 450px;
+    margin-top: -40px;
+    padding: 10px;
+    width: 80px;
+    cursor: pointer;
+    background-color: rgb(49, 168, 59);
+    border-radius: 5px;
+    color: white;
+  }
+
+  .label_filtro{
+    padding: 10px;
+    margin-left: 10px;
+    margin: 5px;
+    font-size: 12px;
   }
 
   .mat-select-Descktop {
@@ -37,9 +98,30 @@
     border-radius: 4px;
   }
 
+  .label_filtro_Observacao{
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .textarea_observacao{
+    margin-left: 10px;
+    width: 550px; height: 100px;
+  }
+
+  .blur-background {
+    filter: blur(5px);
+  }
+
+  /* Estilo personalizado para o modal */
+  .custom-modal .mat-dialog-container {
+    backdrop-filter: blur(0px); /* Remove desfoque do modal */
+    background: rgba(255, 255, 255, 0.9);
+  }
+
 
   .rectangle {
-    height: 450px;
+    background-color: rgb(206, 214, 219);
+    height: 690px;
     display: flex;
     justify-content: center;
   }
@@ -54,7 +136,7 @@
   .fomulario {
 
     background-color: white;
-    height: 400px;
+    height: 480px;
     border: 1px solid;
     width: 650px;
     border-radius: 10px;

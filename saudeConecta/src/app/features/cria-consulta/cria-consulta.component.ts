@@ -6,13 +6,15 @@ import { LoginService } from 'src/app/service/service-login/login.service';
 import { Paciente } from './../../util/variados/interfaces/paciente/paciente';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PacienteService } from './../../service/paciente_service/paciente.service';
+
 import { Component, OnInit } from '@angular/core';
-import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import Swal from 'sweetalert2';
-import { el } from 'date-fns/locale';
+
+import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
+
+import { MedicosService } from 'src/app/service/medicos/medicos.service';
 
 @Component({
   selector: 'app-cria-consulta',
@@ -43,12 +45,13 @@ export class CriaConsultaComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private router: Router,
-    private PacienteService: PacienteService,
+    private medicosService: MedicosService,
     private tokenService: tokenService,
     private ServiceConsultaMedicosService: ServiceConsultaMedicosService,
-    private DialogService: DialogService
+    private DialogService: DialogService,
+    private PacientesService: PacientesService
   ) {
-    this.PacienteService.MedicoValue$.subscribe((medico) => {
+    this.medicosService.MedicoValue$.subscribe((medico) => {
       if (medico) this.Medico = medico;
     });
 
@@ -66,21 +69,103 @@ export class CriaConsultaComponent implements OnInit {
       time: ['', Validators.required],
       observacao: ['', Validators.required],
       Pagamento: ['', Validators.required],
+      PesquisaPaciente: ['', Validators.required],
+      FiltroPesquisaPaciente: ['', Validators.required],
     });
+  }
+  PesquisarPacientes() {
+    const pesquisa: string =
+      this.FormGroupConsulta.get('PesquisaPaciente')?.value;
+    const FiltroPesquisaPaciente: number = this.FormGroupConsulta.get(
+      'FiltroPesquisaPaciente'
+    )?.value;
+
+    if (FiltroPesquisaPaciente === 1) {
+      this.PacientesService.buscarListaPacientesPorNome(pesquisa).subscribe(
+        (dados) => {
+          if (dados && dados.length > 0) {
+            // Se houver dados, exibe a tabela
+
+            console.log(dados, 'dados');
+          } else {
+            // Se não houver dados, exibe a mensagem de erro
+            this.exibirMensagemErro();
+          }
+        },
+        (erros) => {
+          this.exibirMensagemErro();
+        }
+      );
+    } else if (FiltroPesquisaPaciente === 2) {
+      this.PacientesService.buscarListaPacientesPorCPF(pesquisa).subscribe(
+        (dados) => {
+          if (dados && dados.length > 0) {
+            // Se houver dados, exibe a tabela
+
+            console.log(dados, 'dados');
+          } else {
+            // Se não houver dados, exibe a mensagem de erro
+            this.exibirMensagemErro();
+          }
+        },
+        (erros) => {
+          this.exibirMensagemErro();
+        }
+      );
+    } else if (FiltroPesquisaPaciente === 3) {
+      this.PacientesService.buscarListaPacientesPor_RG(pesquisa).subscribe(
+        (dados) => {
+          if (dados && dados.length > 0) {
+            // Se houver dados, exibe a tabela
+
+            console.log(dados, 'dados');
+          } else {
+            // Se não houver dados, exibe a mensagem de erro
+            this.exibirMensagemErro();
+          }
+        },
+        (erros) => {
+          this.exibirMensagemErro();
+        }
+      );
+    } else if (FiltroPesquisaPaciente === 4) {
+      this.PacientesService.buscarListaPacientesPorTelefone(pesquisa).subscribe(
+        (dados) => {
+          console.log(dados);
+
+          if (dados && dados.length > 0) {
+            // Se houver dados, exibe a tabela
+
+            console.log(dados, 'dados');
+          } else {
+            // Se não houver dados, exibe a mensagem de erro
+            this.exibirMensagemErro();
+          }
+        },
+        (erros) => {
+          this.exibirMensagemErro();
+        }
+      );
+    }
+
+    console.log(pesquisa, FiltroPesquisaPaciente);
+  }
+
+  exibirMensagemErro() {
+    this.DialogService.exibirMensagemErro();
   }
 
   marcarConsulta() {
     let time = this.FormGroupConsulta.get('time')?.value;
-      const data = this.FormGroupConsulta.get('date')?.value;
-      const observacao = this.FormGroupConsulta.get('observacao')?.value;
-      const FornaPAgamento = this.FormGroupConsulta.get('Pagamento')?.value;
+    const data = this.FormGroupConsulta.get('date')?.value;
+    const observacao = this.FormGroupConsulta.get('observacao')?.value;
+    const FornaPAgamento = this.FormGroupConsulta.get('Pagamento')?.value;
 
     if (data && time && FornaPAgamento) {
       const date = new Date();
       const dataAtual = date.toISOString().split('T')[0];
 
       const diaDaSemana = this.DiaDaSemana;
-
 
       const medico = this.Medico.medCodigo;
       const paciente = this.Paciente.PaciCodigo;
@@ -106,7 +191,9 @@ export class CriaConsultaComponent implements OnInit {
             this.DialogService.JaexisteDadosCAdastradosComEssesParamentros();
             this.FormGroupConsulta.reset();
           } else if (!data) {
-            this.ServiceConsultaMedicosService.CriarConsulata(consult).subscribe(
+            this.ServiceConsultaMedicosService.CriarConsulata(
+              consult
+            ).subscribe(
               () => {
                 Swal.fire({
                   icon: 'success',
@@ -130,10 +217,9 @@ export class CriaConsultaComponent implements OnInit {
           console.log(data, 'error');
         }
       );
-    }else{
-      this.DialogService.exibirMensagemParaCamposNaoInformadosDeConsulta ();
+    } else {
+      this.DialogService.exibirMensagemParaCamposNaoInformadosDeConsulta();
     }
-
   }
 
   onDateChange(event: Event) {

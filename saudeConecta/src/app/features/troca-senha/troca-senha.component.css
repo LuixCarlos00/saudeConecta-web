@@ -1,0 +1,27 @@
+@media screen and (min-width: 750px) {
+
+  .desktop {
+
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+  }
+
+  .rectangle {
+    background-color: rgb(206, 214, 219);
+    height: 690px;
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .fomulario {
+    background-color: white;
+    height: 480px;
+    border: 1px solid;
+    width: 650px;
+    border-radius: 10px;
+    margin: 35px;
+  }
+
+}

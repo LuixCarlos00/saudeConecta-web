@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { tokenService } from 'src/app/util/Token/token.service';
-import { PacienteService } from '../../../service/paciente_service/paciente.service';
+
+import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -29,7 +30,7 @@ export class CadastroUsuarioComponent {
   constructor(
     private form: FormBuilder,
     private router : Router ,
-    private CadastroPaciete_Medico :PacienteService,
+    private usuariosService :UsuariosService,
     private TokenService :tokenService) {}
 
   ngOnInit(): void {
@@ -45,7 +46,7 @@ export class CadastroUsuarioComponent {
 
   cadatraUsuario() {
     if (this.FormularioUsuario.valid) {
-      this.CadastroPaciete_Medico.cadastrarUsuario(this.Usuario).subscribe(
+      this.usuariosService.cadastrarUsuario(this.Usuario).subscribe(
         (dados) => {
          this.router.navigate(['cadastro']);
 

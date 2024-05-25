@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PacienteService } from '../../service/paciente_service/paciente.service';
+
 import { tokenService } from 'src/app/util/Token/token.service';
+import { ModelService } from 'src/app/service/Model_service/Model.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private form: FormBuilder,
-    private pacienteService: PacienteService,
+    private modelService: ModelService,
     private tokenService: tokenService
   ) {}
 
@@ -50,18 +51,17 @@ export class LoginComponent implements OnInit {
     const password = this.FormularioUsuario.get('password')?.value;
     const username = this.FormularioUsuario.get('username')?.value;
 
-
     this.Usuario.login = username;
     this.Usuario.senha = password;
 
     // No componente onde você chama fazerLogin
-    this.pacienteService.fazerLogin(this.Usuario).subscribe(
+    this.modelService.fazerLogin(this.Usuario).subscribe(
       (response) => {
         console.log('Resposta recebida:', response);
         if (response.body && response.body.token) {
           const token = response.body.token;
           console.log('Token de acesso:', token);
-          this.tokenService.token();
+          // this.tokenService.token();
           this.router.navigate(['/home']);
         }
       },

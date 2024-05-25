@@ -4,7 +4,8 @@ import { Medico } from './../../../util/variados/interfaces/medico/medico';
 import { PesquisaMedicosComponent } from './../pesquisaMedicos.component';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { PacienteService } from 'src/app/service/paciente_service/paciente.service';
+import { ModelService } from 'src/app/service/Model_service/Model.service';
+import { MedicosService } from 'src/app/service/medicos/medicos.service';
 
 
 
@@ -35,17 +36,17 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
 
 
   constructor(
-    private pacienteService: PacienteService ,
+    private medicosService: MedicosService ,
     private PesquisaMedicosComponent:PesquisaMedicosComponent,
     private route :Router
    ) {
 
 
 
-    this.MedicoCidade = pacienteService.MedicoCidade;
-    this.MedicoCRM = pacienteService.MedicoCRM;
-    this.MedicoNome = pacienteService.MedicoNome;
-    this.MedicoEspecialidade = pacienteService.MedicoEspecialidade;
+    this.MedicoCidade = medicosService.MedicoCidade;
+    this.MedicoCRM = medicosService.MedicoCRM;
+    this.MedicoNome = medicosService.MedicoNome;
+    this.MedicoEspecialidade = medicosService.MedicoEspecialidade;
 
 
 
@@ -80,7 +81,7 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
 
   marcarConsulta(elemento: Medico,index: number) {
     this.route.navigate(['addconsulta']);
-    this.pacienteService.changeMedicoData(elemento);
+    this.medicosService.changeMedicoData(elemento);
 
     }
 
@@ -91,14 +92,14 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
       this.MedicoNome=[];
       this.MedicoEspecialidade=[];
       this.dataSource = [];
-      this.pacienteService.LimparDadosPesquisa();
+      this.medicosService.LimparDadosPesquisa();
     }
 
 
     clicked(Medico: Medico) {
 console.log(Medico);
 
-      this.pacienteService.changeMedicoData(Medico);
+      this.medicosService.changeMedicoData(Medico);
       this.PesquisaMedicosComponent.MostraDadosMedicos = true;
       this.PesquisaMedicosComponent.Medico = Medico;
     }

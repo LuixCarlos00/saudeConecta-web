@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PacienteService } from 'src/app/service/paciente_service/paciente.service';
+import { ModelService } from 'src/app/service/Model_service/Model.service';
+
 
 
 @Component({
@@ -9,7 +10,7 @@ import { PacienteService } from 'src/app/service/paciente_service/paciente.servi
 })
 export class RodapeComponent implements OnInit {
 
-  constructor(public pacienteService: PacienteService) { }
+  constructor(public modelService: ModelService) { }
 
   ngOnInit() {
   }
@@ -17,7 +18,7 @@ export class RodapeComponent implements OnInit {
 
 
   estaLogado(): Boolean {
-    if (this.pacienteService.verificarLogin() ) {
+    if (this.modelService.verificarLogin() ) {
       return true;
     }else{
       return false;

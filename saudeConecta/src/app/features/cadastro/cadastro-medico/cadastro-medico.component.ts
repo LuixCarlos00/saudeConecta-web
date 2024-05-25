@@ -1,13 +1,16 @@
+import { MedicosService } from 'src/app/service/medicos/medicos.service';
+import { Usuario } from './../../../util/variados/interfaces/usuario/usuario';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
-import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+
 import { ufOptions } from 'src/app/util/variados/options/options';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { PacienteService } from '../../../service/paciente_service/paciente.service';
+import { ModelService } from '../../../service/Model_service/Model.service';
+import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -62,14 +65,16 @@ export class CadastroMedicoComponent {
 
   constructor(
     private form: FormBuilder,
-    private CadastroPaciete_Medico: PacienteService,
+    private modelService: ModelService,
+    private usuarioService : UsuariosService,
+    private MedicosService : MedicosService,
     private route: Router
   ) {
-    this.CadastroPaciete_Medico.iniciarObservacaoDadosUsuario();
+    this.modelService.iniciarObservacaoDadosUsuario();
   }
 
   ngOnInit(): void {
-    this.CadastroPaciete_Medico.getDadosUsuario().subscribe((dadosUsuario) => {
+    this.modelService.getDadosUsuario().subscribe((dadosUsuario) => {
       if (dadosUsuario) {
         this.Usuario = dadosUsuario;
 
@@ -133,14 +138,14 @@ export class CadastroMedicoComponent {
 
 
     if (this.FormularioEndereco.valid && this.FormularioMedico.valid) {
-      this.CadastroPaciete_Medico.cadastraEndereco(this.Endereco).subscribe(
+      this.usuarioService.cadastraEndereco(this.Endereco).subscribe(
         (endereco: Endereco) => {
           const EnderecoID = endereco.EndCodigo as number;
           this.Medico.endereco = EnderecoID;
           this.Medico.usuario = this.Usuario.id;
 
 
-          this.CadastroPaciete_Medico.cadastrarMedico(
+          this.MedicosService.cadastrarMedico(
             this.Medico
           ).subscribe(
             (dados) => {
@@ -150,7 +155,7 @@ export class CadastroMedicoComponent {
                 text: 'Cadastro realizado com sucesso.',
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.CadastroPaciete_Medico.deslogar();
+                  this.modelService.deslogar();
                   this.route.navigate(['']);
                 }
               });

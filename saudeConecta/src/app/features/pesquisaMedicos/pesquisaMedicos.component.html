@@ -27,18 +27,20 @@
               <div>
 
                 <label class="label_filtro">Nome</label>
-                <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="1" required>
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="1" required>
 
                 <label class="label_filtro">CRM</label>
-                <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="2" required>
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="2" required>
 
                 <label class="label_filtro">Cidade</label>
-                <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="3" required>
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="3" required>
 
                 <label class="label_filtro">Especialidade</label>
-                <input formControlName="FiltroPesquisa" class="input_filtro" type="radio" [value]="4" required>
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="4" required>
 
               </div>
+              <br>
+              <hr>
             </div>
             <br>
 
@@ -68,34 +70,34 @@
                 <label>Nome : {{Medico.medNome}}</label><br>
               </div>
 
-              <div class="informacoesMedicos" *ngIf="Medico.medEspecialidade" >
+              <div class="informacoesMedicos" *ngIf="Medico.medEspecialidade">
                 <hr>
-                <label>Especialidade :   {{Medico.medEspecialidade}}</label><br>
+                <label>Especialidade : {{Medico.medEspecialidade}}</label><br>
               </div>
 
               <div class="informacoesMedicos" *ngIf="Medico.medTelefone">
                 <hr>
-                <label>Telefone  :   {{Medico.medTelefone}}</label><br>
+                <label>Telefone : {{Medico.medTelefone}}</label><br>
               </div>
 
               <div class="informacoesMedicos" *ngIf="Medico.medEmpresa">
                 <hr>
-                <label>Empresa/Clinica :  {{Medico.medEmpresa}}   </label>  <br>
+                <label>Empresa/Clinica : {{Medico.medEmpresa}} </label> <br>
               </div>
 
               <div class="informacoesMedicos" *ngIf="Medico.medCrm">
                 <hr>
-                <label>CRM :  {{Medico.medCrm}} </label> <br>
+                <label>CRM : {{Medico.medCrm}} </label> <br>
               </div>
 
               <div class="informacoesMedicos" *ngIf="Medico.medFormacoes">
                 <hr>
-                <label>Formações : {{Medico.medFormacoes}}   </label>
+                <label>Formações : {{Medico.medFormacoes}} </label>
               </div>
 
               <div class="informacoesMedicos" *ngIf="Medico.medGraduacao">
                 <hr>
-                <label>Graduacao : {{Medico.medGraduacao}}   </label>
+                <label>Graduacao : {{Medico.medGraduacao}} </label>
               </div>
 
             </div>

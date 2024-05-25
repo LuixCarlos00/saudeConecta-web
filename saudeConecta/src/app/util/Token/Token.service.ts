@@ -18,7 +18,7 @@ export class tokenService {
 
 
   constructor( private http: HttpClient,) {
-   this.token();
+    //this.token();
   }
 
 
@@ -103,13 +103,13 @@ export class tokenService {
     }
   }
 
-token (){
-  const token = this.retornaToken();
-  this.Usuario = jwtDecode(token);
-  this.Usuario.id
-  this.buscarPorUsuario(this.Usuario.id)
-//caso venha dar errado tente comentar a linha e descomentar , tbm tente fexha o VS e abrir novamente
-}
+// token (){
+//   const token = this.retornaToken();
+//   this.Usuario = jwtDecode(token);
+//   this.Usuario.id
+//   this.buscarPorUsuario(this.Usuario.id)
+// //caso venha dar errado tente comentar a linha e descomentar , tbm tente fexha o VS e abrir novamente
+// }
 
 
 

@@ -17,6 +17,7 @@ import { PesquisaMedicosComponent } from './features/pesquisaMedicos/pesquisaMed
 import { CriaConsultaComponent } from './features/cria-consulta/cria-consulta.component';
 import { AgendaComponent } from './features/agenda/agenda.component';
 import { HistoricoComponent } from './features/historico/historico.component';
+import { TrocaSenhaComponent } from './features/troca-senha/troca-senha.component';
 
 const routes: Routes = [
 
@@ -45,6 +46,7 @@ const routes: Routes = [
 
   {path:'historico',component:HistoricoComponent,  },//9
 
+  {path:'trocaSenha',component:TrocaSenhaComponent},
 
   { path: '**', pathMatch: 'full', component: NotFoudComponent },
 

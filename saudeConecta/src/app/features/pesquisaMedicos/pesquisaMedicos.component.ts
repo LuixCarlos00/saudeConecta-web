@@ -1,9 +1,9 @@
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { PacienteService } from 'src/app/service/paciente_service/paciente.service';
-import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
+
+import { MedicosService } from 'src/app/service/medicos/medicos.service';
+
 
 @Component({
   selector: 'app-pesquisaMedicos',
@@ -11,11 +11,16 @@ import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
   styleUrls: ['./pesquisaMedicos.component.css'],
 })
 export class PesquisaMedicosComponent implements OnInit {
+PesquisarPacientes() {
+throw new Error('Method not implemented.');
+}
 
 
 
 
   FormularioPesquisa!: FormGroup;
+
+
   mostraTabela: boolean = false;
   @Input() MostraCamposDePEsquisa: boolean = true;
   @Input() MostraDadosMedicos : boolean = false;
@@ -30,14 +35,15 @@ export class PesquisaMedicosComponent implements OnInit {
 
   constructor(
     private form: FormBuilder,
-    private pacienteService: PacienteService,
+    private medicosService: MedicosService,
     private DialogService: DialogService
+
   ) {
 
   }
 
   ngOnInit() {
-    this.pacienteService.MedicoValue$.subscribe(medico => {
+    this.medicosService.MedicoValue$.subscribe(medico => {
       if (medico) {
       this.Medico = medico;
       }
@@ -48,19 +54,23 @@ export class PesquisaMedicosComponent implements OnInit {
 
     this.FormularioPesquisa = this.form.group({
       Pesquisa: ['', Validators.required],
-      FiltroPesquisa: ['', Validators.required],
+      FiltroPesquisaMedico: ['', Validators.required],
     });
-    this.mostraTabela = this.pacienteService.MostraCamposDePEsquisa;
+
+
+
+
+    this.mostraTabela = this.medicosService.MostraCamposDePEsquisa;
   }
 
   PesquisarMedicosFiltro() {
 
 
     const pesquisa: string = this.FormularioPesquisa.get('Pesquisa')?.value;
-    const FiltroPesquisa: number = this.FormularioPesquisa.get('FiltroPesquisa')?.value;
+    const FiltroPesquisa: number = this.FormularioPesquisa.get('FiltroPesquisaMedico')?.value;
 
     if (FiltroPesquisa === 1) {
-      this.pacienteService.buscarListaMedicosPorNome(pesquisa).subscribe(
+      this.medicosService.buscarListaMedicosPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
             // Se houver dados, exibe a tabela
@@ -76,7 +86,7 @@ export class PesquisaMedicosComponent implements OnInit {
         }
       );
     } else if (FiltroPesquisa === 2) {
-      this.pacienteService.buscarListaMedicosPorCRM(pesquisa).subscribe(
+      this.medicosService.buscarListaMedicosPorCRM (pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
             // Se houver dados, exibe a tabela
@@ -92,7 +102,7 @@ export class PesquisaMedicosComponent implements OnInit {
         }
       );
     } else if (FiltroPesquisa === 3) {
-      this.pacienteService.buscarListaMedicosPorCidade(pesquisa).subscribe(
+      this.medicosService.buscarListaMedicosPorCidade(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
             // Se houver dados, exibe a tabela
@@ -108,7 +118,7 @@ export class PesquisaMedicosComponent implements OnInit {
         }
       );
     } else if (FiltroPesquisa === 4) {
-      this.pacienteService
+      this.medicosService
         .buscarListaMedicosPorEspecialidade(pesquisa)
         .subscribe(
           (dados) => {
