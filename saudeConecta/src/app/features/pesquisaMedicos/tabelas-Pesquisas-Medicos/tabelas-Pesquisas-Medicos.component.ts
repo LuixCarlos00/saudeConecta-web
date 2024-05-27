@@ -7,65 +7,43 @@ import { PageEvent } from '@angular/material/paginator';
 import { ModelService } from 'src/app/service/Model_service/Model.service';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 
-
-
 @Component({
   selector: 'app-tabelas-Pesquisas-Medicos',
   templateUrl: './tabelas-Pesquisas-Medicos.component.html',
-  styleUrls: ['./tabelas-Pesquisas-Medicos.component.css']
+  styleUrls: ['./tabelas-Pesquisas-Medicos.component.css'],
 })
 export class TabelasPesquisasMedicosComponent implements OnInit {
-
-
-
-
   private MedicoCidade: Medico[] | undefined;
-  private MedicoCRM :Medico[]|undefined;
-  private MedicoNome:Medico[]|undefined;
-  private MedicoEspecialidade : Medico[]|undefined
-  clickedRows = new Set<any>();;
+  private MedicoCRM: Medico[] | undefined;
+  private MedicoNome: Medico[] | undefined;
+  private MedicoEspecialidade: Medico[] | undefined;
+  clickedRows = new Set<any>();
 
   dataSource: Medico[] = [];
   highValue: number = 5;
   lowValue!: number;
 
-
-
-
-
-
-
   constructor(
-    private medicosService: MedicosService ,
-    private PesquisaMedicosComponent:PesquisaMedicosComponent,
-    private route :Router
-   ) {
-
-
-
+    private medicosService: MedicosService,
+    private PesquisaMedicosComponent: PesquisaMedicosComponent,
+    private route: Router
+  ) {
     this.MedicoCidade = medicosService.MedicoCidade;
     this.MedicoCRM = medicosService.MedicoCRM;
     this.MedicoNome = medicosService.MedicoNome;
     this.MedicoEspecialidade = medicosService.MedicoEspecialidade;
 
-
-
     this.dataSource = [];
-
 
     this.dataSource = [
       ...(this.MedicoCidade ?? []),
       ...(this.MedicoCRM ?? []),
       ...(this.MedicoNome ?? []),
-      ...(this.MedicoEspecialidade ?? [])
+      ...(this.MedicoEspecialidade ?? []),
     ];
-
-
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 
   getPaginatorData(event: PageEvent): PageEvent {
     this.lowValue = event.pageIndex * event.pageSize;
@@ -74,37 +52,28 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
     return event;
   }
 
+  displayedColumns: string[] = ['position', 'MarcaConsulta'];
 
-  displayedColumns: string[] = ['position' ,'MarcaConsulta'];
-
-
-
-  marcarConsulta(elemento: Medico,index: number) {
+  marcarConsulta(elemento: Medico, index: number) {
     this.route.navigate(['addconsulta']);
     this.medicosService.changeMedicoData(elemento);
-
-    }
-
-    pesquisarNovamente() {
-      this.PesquisaMedicosComponent.mostrarCamposPesquisa(true);
-      this.MedicoCidade=[];
-      this.MedicoCRM=[];
-      this.MedicoNome=[];
-      this.MedicoEspecialidade=[];
-      this.dataSource = [];
-      this.medicosService.LimparDadosPesquisa();
-    }
-
-
-    clicked(Medico: Medico) {
-console.log(Medico);
-
-      this.medicosService.changeMedicoData(Medico);
-      this.PesquisaMedicosComponent.MostraDadosMedicos = true;
-      this.PesquisaMedicosComponent.Medico = Medico;
-    }
-
-
   }
 
+  pesquisarNovamente() {
+    this.PesquisaMedicosComponent.mostrarCamposPesquisa(true);
+    this.MedicoCidade = [];
+    this.MedicoCRM = [];
+    this.MedicoNome = [];
+    this.MedicoEspecialidade = [];
+    this.dataSource = [];
+    this.medicosService.LimparDadosPesquisa();
+  }
 
+  clicked(Medico: Medico) {
+
+
+    this.medicosService.changeMedicoData(Medico);
+    this.PesquisaMedicosComponent.MostraDadosMedicos = true;
+    this.PesquisaMedicosComponent.Medico = Medico;
+  }
+}

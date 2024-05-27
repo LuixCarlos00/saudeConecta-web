@@ -31,8 +31,8 @@
         <th style="font-size: 12px;" mat-header-cell *matHeaderCellDef> Marca Consulta </th>
         <td mat-cell *matCellDef="let element;let i = index ">
           <div style="display: flex; align-items: center;">
-            <button mat-icon-button color="primary"  style="border-radius: 100px;" >
-              <mat-icon style="color: #38b71f;" aria-hidden="false" aria-label="Marca Consulta" >library_add</mat-icon>
+            <button mat-icon-button style="background-color: rgb(255, 255, 255); border-radius: 15px; border: hidden;" (click)="SelecionaPaciente(element)" >
+              <i style="color: red; " class="fa-solid fa-plus fa-lg"></i>
             </button>
           </div>
         </td>

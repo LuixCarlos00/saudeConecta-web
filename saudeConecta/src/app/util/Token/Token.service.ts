@@ -6,6 +6,7 @@ import { BehaviorSubject, map } from 'rxjs';
 import { jwtDecode } from "jwt-decode";
 import { HttpClient } from '@angular/common/http';
 import { Paciente } from '../variados/interfaces/paciente/paciente';
+import { Adiministrador } from '../variados/interfaces/administrado/adiministrador';
 
 const KEY: string = 'authToken';
 const authTwof: string = 'authTwof';
@@ -18,14 +19,14 @@ export class tokenService {
 
 
   constructor( private http: HttpClient,) {
-    //this.token();
+    this.token();
   }
 
 
   private apiUrl = 'http://localhost:8080';
 
-  private SubjectPaciente = new BehaviorSubject<Paciente | null>(null);
-  PacienteValue$ = this.SubjectPaciente.asObservable();
+  private UsuarioLogadoSubject = new BehaviorSubject<Adiministrador | null>(null);
+  UsuarioLogadoValue$ = this.UsuarioLogadoSubject.asObservable();
 
   private Usuario = {
     id: 0,
@@ -103,13 +104,16 @@ export class tokenService {
     }
   }
 
-// token (){
-//   const token = this.retornaToken();
-//   this.Usuario = jwtDecode(token);
-//   this.Usuario.id
-//   this.buscarPorUsuario(this.Usuario.id)
-// //caso venha dar errado tente comentar a linha e descomentar , tbm tente fexha o VS e abrir novamente
-// }
+token (){
+  const token = this.retornaToken();
+  this.Usuario = jwtDecode(token);
+  this.Usuario.id
+  console.log(this.Usuario);
+
+  this.buscarPorUsuario(this.Usuario.id)
+
+//caso venha dar errado tente comentar a linha e descomentar , tbm tente fexha o VS e abrir novamente
+}
 
 
 
@@ -118,10 +122,10 @@ buscarPorUsuario(id: number) {
   const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.retornaToken()}` };
   const options = { headers, withCredentials: true };
 
-  this.http.get<Paciente>(`${this.apiUrl}/paciente/buscarIdDeUsusario/${id}`, options)
+  this.http.get<Adiministrador>(`${this.apiUrl}/administrador/buscarIdDeUsusario/${id}`, options)
     .subscribe(
-      (Paciente: Paciente) => {
-        this.SubjectPaciente.next(Paciente);
+      (Paciente: Adiministrador) => {
+        this.UsuarioLogadoSubject.next(Paciente);
       },
       (error) => {
         console.error('Erro ao buscar usuário:', error);

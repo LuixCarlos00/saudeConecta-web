@@ -12,6 +12,8 @@ export class UsuarioAdmService {
 
 
 
+
+
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();
 
@@ -38,6 +40,37 @@ cadastrarAdministrador(Administracao: Adiministrador) {
 
 }
 
+
+ObeterCodigoParaRecuperacaoDeSenhaPassandoOEmail(Administracao: Adiministrador) {
+
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
+  const options = { headers, withCredentials: true };
+  return this.http.get<Adiministrador>( `${this.apiUrl}/administrador/buscarPorEmail/${Administracao}`, options);
+
+}
+
+ConfirmaCodigoDeSeguraca(codigo: any) {
+
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
+  const options = { headers, withCredentials: true };
+  return this.http.get<Adiministrador>( `${this.apiUrl}/administrador/InserirCodigo/${codigo}`, options);
+
+}
+
+esqueciMinhaSenha(Administrador: any) {
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
+  const options = { headers, withCredentials: true };
+  return this.http.put<any>( `${this.apiUrl}/administrador/esqueciMinhaSenhaADM`,Administrador, options);
+
+}
+
+
+TrocaSenha(Administrador: any) {
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
+  const options = { headers, withCredentials: true };
+  return this.http.put<any>( `${this.apiUrl}/administrador/TrocaSenhaADM`,Administrador, options);
+
+}
 
 
 }

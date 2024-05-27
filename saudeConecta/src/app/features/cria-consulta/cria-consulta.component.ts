@@ -1,9 +1,10 @@
+import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
+import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
 import { ServiceConsultaMedicosService } from './../../service/service-consultaMedico/service-consultaMedicos.service';
 import { HoradaConsulta } from './../../util/variados/options/options';
 import { tokenService } from 'src/app/util/Token/token.service';
-import { LoginService } from 'src/app/service/service-login/login.service';
-import { Paciente } from './../../util/variados/interfaces/paciente/paciente';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -35,7 +36,8 @@ export class CriaConsultaComponent implements OnInit {
   ];
 
   Medico!: any;
-  private Paciente!: Paciente;
+  private Adiministrador!: Adiministrador;
+  PacienteEscolhido!: any;
   Consulta!: Consulta;
   FormGroupConsulta!: FormGroup;
   observacao: string = 'Tem alguma observação? Quais:';
@@ -57,10 +59,10 @@ export class CriaConsultaComponent implements OnInit {
       if (medico) this.Medico = medico;
     });
 
-    this.tokenService.PacienteValue$.subscribe((paciente) => {
+    this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
       if (paciente) {
-        this.Paciente = paciente;
-        console.log(this.Paciente);
+        this.Adiministrador = paciente;
+        console.log(this.Adiministrador);
       }
     });
   }
@@ -86,12 +88,9 @@ export class CriaConsultaComponent implements OnInit {
       this.PacientesService.buscarListaPacientesPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-           this.dadosPaciente =dados
-            // Se houver dados, exibe a tabela
+            this.dadosPaciente = dados;
             this.showResultadoPaciente = true;
-            console.log(dados, 'dados');
           } else {
-            // Se não houver dados, exibe a mensagem de erro
             this.exibirMensagemErro();
           }
         },
@@ -103,12 +102,9 @@ export class CriaConsultaComponent implements OnInit {
       this.PacientesService.buscarListaPacientesPorCPF(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-           this.dadosPaciente =dados
-            // Se houver dados, exibe a tabela
+            this.dadosPaciente = dados;
             this.showResultadoPaciente = true;
-            console.log(dados, 'dados');
           } else {
-            // Se não houver dados, exibe a mensagem de erro
             this.exibirMensagemErro();
           }
         },
@@ -120,12 +116,9 @@ export class CriaConsultaComponent implements OnInit {
       this.PacientesService.buscarListaPacientesPor_RG(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-           this.dadosPaciente =dados
-            // Se houver dados, exibe a tabela
+            this.dadosPaciente = dados;
             this.showResultadoPaciente = true;
-            console.log(dados, 'dados');
           } else {
-            // Se não houver dados, exibe a mensagem de erro
             this.exibirMensagemErro();
           }
         },
@@ -139,12 +132,9 @@ export class CriaConsultaComponent implements OnInit {
           console.log(dados);
 
           if (dados && dados.length > 0) {
-           this.dadosPaciente =dados
-            // Se houver dados, exibe a tabela
+            this.dadosPaciente = dados;
             this.showResultadoPaciente = true;
-            console.log(dados, 'dados');
           } else {
-            // Se não houver dados, exibe a mensagem de erro
             this.exibirMensagemErro();
           }
         },
@@ -157,9 +147,13 @@ export class CriaConsultaComponent implements OnInit {
     console.log(pesquisa, FiltroPesquisaPaciente);
   }
 
-  exibirMensagemErro() {
-    this.DialogService.exibirMensagemErro();
-  }
+
+
+
+
+
+
+
 
   marcarConsulta() {
     let time = this.FormGroupConsulta.get('time')?.value;
@@ -170,11 +164,9 @@ export class CriaConsultaComponent implements OnInit {
     if (data && time && FornaPAgamento) {
       const date = new Date();
       const dataAtual = date.toISOString().split('T')[0];
-
       const diaDaSemana = this.DiaDaSemana;
-
       const medico = this.Medico.medCodigo;
-      const paciente = this.Paciente.PaciCodigo;
+      const paciente = this.PacienteEscolhido.paciCodigo;
 
       const consult: Consulta = {
         ConData: data,
@@ -186,6 +178,7 @@ export class CriaConsultaComponent implements OnInit {
         ConObservacoes: observacao,
         ConDadaCriacao: dataAtual, // Corrige o nome do campo para ConDataCriacao
         ConFormaPagamento: FornaPAgamento,
+        ConAdm: this.Adiministrador.AdmCodigo
       };
       console.log(consult);
 
@@ -213,6 +206,11 @@ export class CriaConsultaComponent implements OnInit {
                 });
               },
               (error) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Algo deu errado. Tente novamente mais tarde.',
+                });
                 console.log(error);
               }
             );
@@ -220,13 +218,24 @@ export class CriaConsultaComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-          console.log(data, 'error');
         }
       );
     } else {
       this.DialogService.exibirMensagemParaCamposNaoInformadosDeConsulta();
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
   onDateChange(event: Event) {
     const selectedDate: string = (event.target as HTMLInputElement).value;
@@ -239,6 +248,25 @@ export class CriaConsultaComponent implements OnInit {
     console.log(this.DiaDaSemana);
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   voltarParaPesquisaMedicos() {
     this.router.navigate(['pesquisar']);
   }
@@ -247,4 +275,13 @@ export class CriaConsultaComponent implements OnInit {
     this.showResultadoPaciente = false;
   }
 
+  PacienteSelecionado(elemento: any) {
+    console.log(elemento, 'paciente selecionado');
+
+    this.PacienteEscolhido = elemento;
+  }
+
+  exibirMensagemErro() {
+    this.DialogService.exibirMensagemErro();
+  }
 }

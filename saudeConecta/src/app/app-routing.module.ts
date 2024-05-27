@@ -19,6 +19,7 @@ import { AgendaComponent } from './features/agenda/agenda.component';
 import { HistoricoComponent } from './features/historico/historico.component';
 import { TrocaSenhaComponent } from './features/troca-senha/troca-senha.component';
 import { CadastroAdmComponent } from './features/cadastro/cadastro-adm/cadastro-adm.component';
+import { GuardaRotasHome } from './features/home/guards/GuardaRotasHome';
 
 const routes: Routes = [
 
@@ -40,7 +41,7 @@ const routes: Routes = [
 
   {path:'recuperaCadastro',component:RecuperaCadastroComponent,  },//4
 
-  {path:'home',component:HomeComponent,  },//5
+  {path:'home',component:HomeComponent, canActivate: [GuardaRotasHome] },//5
 
   {path:'pesquisar',component:PesquisaMedicosComponent,  },//6
 

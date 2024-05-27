@@ -18,20 +18,28 @@
     <mat-icon class="icons">menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Quem Somos <mat-icon><i class="fa-solid fa-circle-question fa-xs"></i></mat-icon></button>
-    <button mat-menu-item>Atendimento ao Cliente <mat-icon><i
-          class="fa-solid fa-circle-info fa-xs"></i></mat-icon></button>
+    <button mat-menu-item (click)="cadastraPaciente()">Cadastrar Paciente <mat-icon><i
+          style="color: rgb(126, 231, 143);" class="fa-solid fa-user fa-xs"></i></mat-icon>
+    </button>
+
+    <button mat-menu-item (click)="cadastraMedico()">Cadastra Medico <mat-icon><i style="color: rgb(98, 156, 211);"
+          class="fa-solid fa-user-doctor fa-xs"></i></mat-icon>
+    </button>
+
+    <button mat-menu-item>Quem Somos <mat-icon><i class="fa-solid fa-circle-question fa-xs"></i></mat-icon>
+    </button>
+
+    <button mat-menu-item>Atendimento ao Cliente <mat-icon><i class="fa-solid fa-circle-info fa-xs"></i></mat-icon>
+    </button>
   </mat-menu>
 
 
 
   <button class="ButonCabecalho buttonMenu" (click)="Menu()">
     <i class="fa-solid fa-house fa-2xl">
-  </i></button>
+    </i></button>
 
-  <button class="ButonCabecalho buttonMenu" (click)="Menu()">
-    <i class="fa-solid fa-house fa-2xl">
-  </i></button>
+
 
 
   <label style="margin-left: 25px;" (click)="Menu()">Bem Vindo {{user}}</label>

@@ -24,4 +24,38 @@
     margin: 35px;
   }
 
+  .fomularioTrocarSenha{
+    background-color: white;
+    height: 280px;
+    border: 1px solid;
+    width: 590px;
+    border-radius: 10px;
+    margin: 35px;
+  }
+
+
+  button {
+    margin: 10px;
+    border: hidden;
+    background-color: rgb(128, 158, 223);
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+   cursor: pointer;
+  }
+
+  label{
+    font-weight: bold;
+    margin: 10px;
+    display: flex;
+  }
+  input{
+    margin: 10px;
+    display: flex;
+    width: 300px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid;
+  }
+
 }

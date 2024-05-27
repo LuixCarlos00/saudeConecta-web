@@ -37,6 +37,11 @@ export class GuardaRotasLogin {
         return this.router.parseUrl('/home');
       }
 
+      if(isUsuarioLogado ) {
+        return this.router.parseUrl('/home');
+      }
+
+
       if (isUsuarioLogado && this.lastUrl==='/cadastroadmin') {
         console.log('3');
         // Se o usuário estiver logado e tentar acessar a rota de cadastro, redirecione-o para a página inicial

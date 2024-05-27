@@ -123,6 +123,7 @@ export class ModelService {
 
   logout(): void {
     this.tokenService.excluirToken();
+    this.tokenService.setAuthTwof(false);
     this.router.navigate(['']);
   }
 

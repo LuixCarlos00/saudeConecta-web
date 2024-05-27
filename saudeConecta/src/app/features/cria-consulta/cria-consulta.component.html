@@ -8,7 +8,7 @@
 
 
 
-      <form class="fomulario" [formGroup]="FormGroupConsulta">
+      <form class="fomulario"  [ngClass]="{'aumentar-altura': PacienteEscolhido}" [formGroup]="FormGroupConsulta">
         <div style="margin-left: 10px; margin-top: 10px; ">
           <button (click)="voltarParaPesquisaMedicos()">
             <i class="fa-solid fa-arrow-left fa-xl"></i>
@@ -48,8 +48,6 @@
               formControlName="PesquisaPaciente">
             <button class="btnPesquisar" (click)="PesquisarPacientes()">Pesquisar</button>
 
-            <app-tabela-de-pacientes *ngIf="showResultadoPaciente" (fechar)="fecharTabela()" [dadosPaciente]="dadosPaciente"></app-tabela-de-pacientes>
-
             <br>
             <div style="display: flex ; margin-top: -20px;;">
 
@@ -65,6 +63,23 @@
               <label class="label_filtro">Telefone</label>
               <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="4" required>
 
+            </div>
+
+
+            <app-tabela-de-pacientes *ngIf="showResultadoPaciente" [dadosPaciente]="dadosPaciente" (fechar)="fecharTabela()" (selecionaPaciente)="PacienteSelecionado($event)"></app-tabela-de-pacientes>
+
+            <div *ngIf="PacienteEscolhido" style="   width: 600px;">
+              <div style="border: 1px solid ; border: hidden;">
+                 - <i class="fa-solid fa-user fa-xs" style="color: #63E6BE;"></i>
+                <label style="font-size: 12px;margin-left: 10px;"  >{{PacienteEscolhido.paciNome}} ,
+                  {{PacienteEscolhido.paciCpf}},
+                  {{PacienteEscolhido.paciDataNacimento}},
+                  {{PacienteEscolhido.paciEmail}},
+                  {{PacienteEscolhido.paciRg}}
+                </label>
+              </div>
+              <hr>
+              <br>
             </div>
 
             <div>
@@ -113,7 +128,7 @@
 
 
 
-      <form *ngIf="pagamento" class="fomularioPagamneto" [formGroup]="FormGroupConsulta">
+      <form *ngIf="pagamento"   [ngClass]="{'aumentar-pagamento': pagamento}"   class="fomularioPagamneto" [formGroup]="FormGroupConsulta">
         <ul>Como deseja pagar no local de consulta?</ul>
         <div>
 

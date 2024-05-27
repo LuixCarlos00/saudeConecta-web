@@ -10,4 +10,5 @@ export interface Consulta {
   ConObservacoes: string;
   ConDadaCriacao: string;
   ConFormaPagamento: number;
+  ConAdm: number;
 }
