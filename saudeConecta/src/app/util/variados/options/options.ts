@@ -1,5 +1,3 @@
-
-  //!==============================================================================================================
 // ufoptions
 export const ufOptions: { value: string; label: string }[] = [
   { value: '', label: 'Selecione' },
@@ -33,8 +31,6 @@ export const ufOptions: { value: string; label: string }[] = [
   { value: 'ND', label: 'ND' },
 ];
 
-  //!==============================================================================================================
-
 // parentesco
 export const parentescoOptions: { value: string; label: string }[] = [
   { value: '', label: 'Selecione' },
@@ -51,11 +47,10 @@ export const parentescoOptions: { value: string; label: string }[] = [
   { value: '11', label: 'Enteado(a)' },
   { value: '12', label: 'Outros' },
 ];
-  //!==============================================================================================================
 
 // escolaridade
 export const escolaridadeOptions: { value: string; label: string }[] = [
-  { value:  '', label: 'Não definido' },
+  { value: '', label: 'Não definido' },
   { value: '1', label: 'Analfabeto' },
   { value: '2', label: 'Até à 4º série incompleta' },
   { value: '3', label: '4º série completa do ensino fundamental' },
@@ -72,7 +67,6 @@ export const escolaridadeOptions: { value: string; label: string }[] = [
   { value: '14', label: 'Mestrado' },
 ];
 
-  //!==============================================================================================================
 // estadocivil
 export const estadoCivilOptions: { value: string; label: string }[] = [
   { value: '0', label: 'Solteiro' },
@@ -82,23 +76,20 @@ export const estadoCivilOptions: { value: string; label: string }[] = [
   { value: '4', label: 'Viúvo' },
 ];
 
-
-
 // Tipo oções do formulario Plano-Ensino parte C
 export const tipoCivilOptions: { value: string; label: string }[] = [
   { value: '0', label: 'ARTIGO DE PERÍODICO (ARTIGO)' },
   { value: '1', label: 'DOCUMENTOS ELETRÔNICOS' },
-  { value: '2', label: 'MONOGRAFIA NO TODO (LIVROS, TRABALHOS ACADÉMICOS, ETC.)' },
+  {
+    value: '2',
+    label: 'MONOGRAFIA NO TODO (LIVROS, TRABALHOS ACADÉMICOS, ETC.)',
+  },
   { value: '3', label: 'MATERIAIS ESPECIAIS (FITA, CD, DVD, MAPA)' },
   { value: '4', label: 'PERIÓDICO (REVISTAS, JORNAIS)' },
-  { value: '5', label: 'PAGINAS WEB (SITES)'}
+  { value: '5', label: 'PAGINAS WEB (SITES)' },
 ];
 
-
-
-
-
-export const HoradaConsulta : { value: string; label: string }[] = [
+export const HoradaConsulta: { value: string; label: string }[] = [
   { value: '0', label: '08:00' },
   { value: '1', label: '08:30' },
   { value: '2', label: '09:00' },
@@ -117,6 +108,27 @@ export const HoradaConsulta : { value: string; label: string }[] = [
   { value: '15', label: '15:30' },
   { value: '16', label: '16:00' },
   { value: '17', label: '16:30' },
-
 ];
+
+export const EspecialidadeMedicas: { value: string; label: string }[] = [
+  { value: '0', label: 'Cardiologia' },
+  { value: '1', label: 'Dermatologia' },
+  { value: '2', label: 'Endocrinologia' },
+  { value: '3', label: 'Gastroenterologia' },
+  { value: '4', label: 'Geriatria' },
+  { value: '5', label: 'Ginecologia' },
+  { value: '6', label: 'Hematologia' },
+  { value: '7', label: 'Infectologia' },
+  { value: '8', label: 'Nefrologia' },
+  { value: '9', label: 'Neurologia' },
+  { value: '10', label: 'Oftalmologia' },
+  { value: '11', label: 'Oncologia' },
+  { value: '12', label: 'Ortopedia' },
+  { value: '13', label: 'Otorrinolaringologia' },
+  { value: '14', label: 'Pediatria' },
+  { value: '15', label: 'Psiquiatria' },
+  { value: '16', label: 'Reumatologia' },
+  { value: '17', label: 'Urologia' }
+];
+
 

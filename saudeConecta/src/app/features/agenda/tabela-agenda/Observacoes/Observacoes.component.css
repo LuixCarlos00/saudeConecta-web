@@ -1,0 +1,8 @@
+.close-button {
+  margin-top: -265px;
+  margin-left: 480px;
+  border: hidden;
+  background-color: rgb(204, 17, 17);
+  border-radius: 5px;
+  color: white
+}

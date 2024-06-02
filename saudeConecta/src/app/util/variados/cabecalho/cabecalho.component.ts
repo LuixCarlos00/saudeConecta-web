@@ -2,6 +2,7 @@ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModelService } from 'src/app/service/Model_service/Model.service';
+import { tokenService } from '../../Token/token.service';
 
 @Component({
   selector: 'app-cabecalho',
@@ -9,21 +10,19 @@ import { ModelService } from 'src/app/service/Model_service/Model.service';
   styleUrls: ['./cabecalho.component.css'],
 })
 export class CabecalhoComponent implements OnInit {
-  Usuario: Usuario | undefined;
+  Usuario: any;
 
-  user = 'usuario';
   constructor(
     public pacienteService: ModelService,
     private router: Router,
-    private tokenService: ModelService
+    private tokenService: tokenService
   ) {}
 
   ngOnInit() {
-    this.tokenService.PacienteValue$.subscribe((paciente) => {
-      console.log(paciente, 'paciente');
-
+    this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
       if (paciente) this.Usuario = paciente;
     });
+
     this.estaLogado();
   }
 
@@ -45,12 +44,12 @@ export class CabecalhoComponent implements OnInit {
   }
 
   cadastraMedico() {
-    this.router.navigate(['cadastroMedico']);
+    this.router.navigate(['cadastroUsuario']);
   }
 
   cadastraPaciente() {
-    this.router.navigate(['cadastroPaciente']);
+    this.router.navigate(['cadastroUsuario']);
   }
 
-  colocar o cadastro de usuario antes de cadastra medico
+  /// colocar o cadastro de usuario antes de cadastra medico
 }

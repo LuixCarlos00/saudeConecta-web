@@ -6,9 +6,10 @@ export interface Consulta {
   ConPaciente: number;
   ConDia_semana: string;
   ConHorario: string;
-  ConData: Time;
+  ConData: string;
   ConObservacoes: string;
   ConDadaCriacao: string;
   ConFormaPagamento: number;
+  ConStatus: number;
   ConAdm: number;
 }

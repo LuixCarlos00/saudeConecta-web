@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { tokenService } from 'src/app/util/Token/token.service';
 import type { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
@@ -14,6 +14,9 @@ export class UsuariosService {
 
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();
+
+  private NovoUsuariocadastradoSubject = new BehaviorSubject<any | null>(null);
+  NovoUsuariocadastradoValue$ = this.NovoUsuariocadastradoSubject.asObservable();
 
 
   constructor(
@@ -29,6 +32,9 @@ cadastraEndereco(Endereco: Endereco): Observable<Endereco> {
   return this.http.post<Endereco>( `${this.apiUrl}/endereco/post`, Endereco, options);
 }
 
+changeNovoUsuariocadastrado(value: any) {
+  this.NovoUsuariocadastradoSubject.next(value);
+}
 cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
   return this.http
     .post<Usuario>(`${this.apiUrl}/Home/cadastralogin`, usuario, {

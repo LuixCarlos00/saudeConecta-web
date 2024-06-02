@@ -36,7 +36,10 @@ export class GuardaRotasCadastraUsuario {
     // Se não houver token, redireciona para a tela de login
     if (!this.tokeService.possuiToken()) {
       console.log('Redirecionar para a tela de login.');
+      return true;
+    }
 
+    if (this.tokeService.possuiToken()) {
       return true;
     }
 

@@ -16,6 +16,7 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
   private MedicoCidade: Medico[] | undefined;
   private MedicoCRM: Medico[] | undefined;
   private MedicoNome: Medico[] | undefined;
+  private TodosMedicos: Medico[];
   private MedicoEspecialidade: Medico[] | undefined;
   clickedRows = new Set<any>();
 
@@ -32,15 +33,25 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
     this.MedicoCRM = medicosService.MedicoCRM;
     this.MedicoNome = medicosService.MedicoNome;
     this.MedicoEspecialidade = medicosService.MedicoEspecialidade;
+    this.TodosMedicos = medicosService.TodosMedicos;
 
-    this.dataSource = [];
+
+    this.dataSource = []
+
+
+    this.MedicoCidade ||
+      this.MedicoCRM ||
+      this.MedicoNome ||
+      this.MedicoEspecialidade;
 
     this.dataSource = [
       ...(this.MedicoCidade ?? []),
       ...(this.MedicoCRM ?? []),
       ...(this.MedicoNome ?? []),
       ...(this.MedicoEspecialidade ?? []),
+      ...(this.TodosMedicos ?? []),
     ];
+
   }
 
   ngOnInit() {}
@@ -52,7 +63,7 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
     return event;
   }
 
-  displayedColumns: string[] = ['position', 'MarcaConsulta'];
+  displayedColumns: string[] = ['position', 'Especialidade', 'MarcaConsulta'];
 
   marcarConsulta(elemento: Medico, index: number) {
     this.route.navigate(['addconsulta']);
@@ -60,18 +71,20 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
   }
 
   pesquisarNovamente() {
+    const vazia: any[] = [];
     this.PesquisaMedicosComponent.mostrarCamposPesquisa(true);
-    this.MedicoCidade = [];
-    this.MedicoCRM = [];
-    this.MedicoNome = [];
-    this.MedicoEspecialidade = [];
+    this.MedicoCidade= [];
+    this.MedicoCRM= [];
+    this.MedicoNome= [];
+    this.MedicoEspecialidade= [];
+    this.TodosMedicos= [];
     this.dataSource = [];
     this.medicosService.LimparDadosPesquisa();
+
+
   }
 
   clicked(Medico: Medico) {
-
-
     this.medicosService.changeMedicoData(Medico);
     this.PesquisaMedicosComponent.MostraDadosMedicos = true;
     this.PesquisaMedicosComponent.Medico = Medico;

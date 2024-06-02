@@ -9,6 +9,7 @@
 
       <div style="display: flex; justify-content: center;" *ngIf="EsqueciMinhaSenha"
         [formGroup]="FormularioEsqueciMinhaSenha">
+
         <div class="fomularioTrocarSenha">
           <div *ngIf="!emailValido" style="margin-left: 50px; justify-content: center; margin-top: 30px;">
             <label for="email">Email</label>
@@ -16,8 +17,12 @@
 
             <button style="display: flex; width: 100px; justify-content: center;" type="submit"
               (click)="enviar()">Enviar</button>
-
+               <div *ngIf="PesquisandoEmail">
+                <mat-spinner  class="custom-spinner"></mat-spinner>
+               </div>
           </div>
+
+
           <div *ngIf="emailValido" style="margin-left: 50px; justify-content: center; margin-top: 30px;">
             <label for="codigo">Insira o codigo que foi enviado ao seu codigo </label>
             <input type="text" maxlength="6" id="codigo" name="codigo" formControlName="codigo">

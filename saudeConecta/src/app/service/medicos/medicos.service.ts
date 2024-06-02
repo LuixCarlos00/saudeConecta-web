@@ -17,7 +17,7 @@ export class MedicosService {
   public MedicoCRM: Medico[] | undefined;
   public MedicoNome: Medico[] | undefined;
   public MedicoEspecialidade: Medico[] | undefined;
-
+  public TodosMedicos: Medico[] = [];
 
   private medicoData = new BehaviorSubject<Medico | null>(null);
   MedicoValue$ = this.medicoData.asObservable();
@@ -31,17 +31,18 @@ export class MedicosService {
   ) {}
 
   LimparDadosPesquisa(): void {
-    this.MedicoCRM = [];
-    this.MedicoCidade = [];
-    this.MedicoNome = [];
-    this.MedicoEspecialidade = [];
-  }
 
+    this.MedicoCidade= [];
+    this.MedicoCRM= [];
+    this.MedicoNome= [];
+    this.MedicoEspecialidade= [];
+    this.TodosMedicos= [];
+
+  }
 
   changeMedicoData(medico: Medico): void {
     this.medicoData.next(medico);
   }
-
 
   cadastrarMedico(Paciente: Medico): Observable<Medico> {
     const headers = {
@@ -118,6 +119,27 @@ export class MedicosService {
       .pipe(
         tap((medicos: Medico[]) => {
           this.MedicoNome = medicos;
+        })
+      );
+  }
+
+  // BuscarTodosRegistrosDeConsulta(): Observable<{content: Consulta[]}> {
+  //   const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
+  //   const options = { headers, withCredentials: true };
+  //   return this.http.get<{content: Consulta[]}>(`${this.apiUrl}/consulta/Consultapagina`, options);
+  // }
+
+  buscarPorTodosOsMedicos(): Observable<  Medico[]  > {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
+    };
+    const options = { headers, withCredentials: true };
+    return this.http
+      .get<  Medico[]  >(`${this.apiUrl}/medico/listatodosmedicos`, options)
+      .pipe(
+        tap((medicos: Medico[]) => {
+          this.TodosMedicos= medicos;
         })
       );
   }

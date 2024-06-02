@@ -16,7 +16,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -31,6 +31,11 @@ import { CriaConsultaComponent } from '../features/cria-consulta/cria-consulta.c
 import { TabelaDePacientesComponent } from '../features/cria-consulta/tabela-de-pacientes/tabela-de-pacientes.component';
 import { TrocaSenhaComponent } from '../features/troca-senha/troca-senha.component';
 import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro-adm.component';
+import { TabelaAgendaComponent } from '../features/agenda/tabela-agenda/tabela-agenda.component';
+import { AgendaComponent } from '../features/agenda/agenda.component';
+import { ObservacoesComponent } from '../features/agenda/tabela-agenda/Observacoes/Observacoes.component';
+import { EditarConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/Editar-Consultas.component';
+import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
 
 
 
@@ -50,10 +55,16 @@ import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro
     CriaConsultaComponent,
     TabelaDePacientesComponent,
     TrocaSenhaComponent,
-    CadastroAdmComponent
+    CadastroAdmComponent,
+    TabelaAgendaComponent,
+    AgendaComponent,
+    ObservacoesComponent,
+    EditarConsultasComponent,
+    TabelaEditarMedicosConsultasComponent
 
   ],
   exports: [],
+
   imports: [
     CommonModule,
     FormsModule,
@@ -72,7 +83,8 @@ import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro
     MatTableModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
 
 
   ],

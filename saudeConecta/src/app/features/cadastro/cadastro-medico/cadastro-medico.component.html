@@ -29,33 +29,35 @@
           <font color="#FF0000"><b>* </b></font>CPF:
         </label>
         <input formControlName="cpf" [(ngModel)]="Medico.MedCpf" type="text" id="cpf" name="cpf"
-          placeholder="___.___.___-__" (input)="placeholderCPF($event)" maxlength="14" required>
+          placeholder="12345678900"   maxlength="11" required>
       </div>
       <div class="form-group">
         <label for="CRM">
           <font color="#FF0000"><b>* </b></font> CRM:
         </label>
         <input formControlName="crm" [(ngModel)]="Medico.MedCrm" type="text" id="CRM" name="CRM" placeholder="CRM/SP123456" required
-        (input)="placeholderCRM($event)" >
+          >
       </div>
       <div class="form-group">
         <label for="rg">
           <font color="#FF0000"><b>* </b></font> RG:
         </label>
         <input formControlName="rg" [(ngModel)]="Medico.MedRg" type="text" id="rg" name="rg" placeholder="XX__-___-___"
-          (input)="placeholderRG($event)" maxlength="15" required>
+           maxlength="15" required>
       </div>
       <div class="form-group">
         <label for="rg">
           <font color="#FF0000"><b>* </b></font> Especialidade:
         </label>
-        <input formControlName="Especialidade" [(ngModel)]="Medico.MedEspecialidade" type="text" id="Especialidade" name="Especialidade"
-            maxlength="30" required>
+        <select formControlName="Especialidade" [(ngModel)]="Medico.MedEspecialidade" type="text"   name="Especialidade" required>
+          <option *ngFor="let especialidade of EspecialidadeMedicas " [value]="especialidade.label">{{especialidade.label}}</option>
+        </select>
+
       </div>
       <div class="form-group">
         <label for="telefone">Telefone:</label>
         <input formControlName="telefone" [(ngModel)]="Medico.MedTelefone" type="text" id="telefone" name="telefone"
-          (input)="placeholderTelefone($event)" maxlength="17" placeholder="55(__) _____-____">
+            maxlength="17" placeholder="55(__) _____-____">
       </div>
       <div class="form-group">
         <label for="Email">
@@ -105,7 +107,7 @@
           <label for="cep">
             <font color="#FF0000"><b>* </b></font> CEP:
           </label>
-          <input formControlName="cep" [(ngModel)]="Endereco.EndCep" (input)="placeholderCEP($event)"
+          <input formControlName="cep" [(ngModel)]="Endereco.EndCep"
             placeholder="_____-___" maxlength="9" type="text" id="cep" name="cep" required>
         </div>
         <div class="form-group">

@@ -1,3 +1,15 @@
+.BotaoFechar {
+
+  margin-left: 730px;
+  margin-top: -20px;
+  border-radius: 10px;
+  border: hidden;
+  color: white;
+  background-color: red;
+
+}
+
+
 @media screen and (min-width: 750px) {
 
   .desktop {
@@ -21,7 +33,7 @@
     padding: 10px;
   }
 
-  .input_DATA{
+  .input_DATA {
     display: flex;
     border-radius: 5px;
     margin-left: 10px;
@@ -31,21 +43,27 @@
 
   }
 
+  .label_filtro {
+    margin-top: 0;
+    margin: 10px;
+    padding: 10px;
+  }
+
 
   .label_filtro_DATA {
     padding: 10px;
     font-family: 'Times New Roman', Times, serif;
   }
 
-  .label_filtro_Hora{
+  .label_filtro_Hora {
     font-family: 'Times New Roman', Times, serif;
     padding: 10px;
-    margin-left: 50%;
+    margin-left: 145px;
     display: flex;
     margin-top: -110px;
   }
 
-  .input_HORA{
+  .input_HORA {
     border-color: #000000;
     margin-top: -10px;
     display: flex;
@@ -55,12 +73,12 @@
     width: 105px;
   }
 
-  .label_filtro_PESQUISA{
+  .label_filtro_PESQUISA {
     padding: 10px;
     font-family: 'Times New Roman', Times, serif;
   }
 
-  .input_search{
+  .input_search {
 
     display: flex;
     border-radius: 5px;
@@ -70,7 +88,7 @@
     border-color: #000000;
   }
 
-  .btnPesquisar{
+  .btnPesquisar {
     display: flex;
     margin-left: 450px;
     margin-top: -40px;
@@ -82,7 +100,19 @@
     color: white;
   }
 
-  .label_filtro{
+  .BotaoSalvar {
+
+
+    margin-top: -40px;
+    padding: 10px;
+    width: 120px;
+    cursor: pointer;
+    background-color: rgb(49, 168, 59);
+    border-radius: 5px;
+    color: white;
+  }
+
+  .label_filtro {
     padding: 10px;
     margin-left: 30px;
     margin: 5px;
@@ -99,14 +129,15 @@
     border-radius: 4px;
   }
 
-  .label_filtro_Observacao{
+  .label_filtro_Observacao {
     padding: 10px;
     font-family: 'Times New Roman', Times, serif;
   }
 
-  .textarea_observacao{
+  .textarea_observacao {
     margin-left: 10px;
-    width: 550px; height: 100px;
+    width: 550px;
+    height: 100px;
   }
 
   .blur-background {
@@ -115,7 +146,8 @@
 
   /* Estilo personalizado para o modal */
   .custom-modal .mat-dialog-container {
-    backdrop-filter: blur(0px); /* Remove desfoque do modal */
+    backdrop-filter: blur(0px);
+    /* Remove desfoque do modal */
     background: rgba(255, 255, 255, 0.9);
   }
 
@@ -137,14 +169,16 @@
   .fomulario {
 
     background-color: white;
-    height: 480px;
+
     border: 1px solid;
     width: 650px;
     border-radius: 10px;
     margin: 35px;
   }
+
   .aumentar-altura {
-    height: 540px !important; /* Aumenta a altura em 20px */
+    height: 540px !important;
+    /* Aumenta a altura em 20px */
   }
 
   .fomularioPagamneto {

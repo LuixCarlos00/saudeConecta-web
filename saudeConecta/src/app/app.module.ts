@@ -15,6 +15,7 @@ import { LoginComponent } from './features/login/login.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
+import { ObservacoesComponent } from './features/agenda/tabela-agenda/Observacoes/Observacoes.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {MatMenuModule} from '@angular/material/menu';
 
 
   ],
+
   providers: [ provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })

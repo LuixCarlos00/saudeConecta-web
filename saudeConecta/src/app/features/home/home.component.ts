@@ -13,8 +13,6 @@ export class HomeComponent {
   PesquisarMedicos() {
   this.router.navigate(['pesquisar'])
   }
-
-
   VerificarAgenda() {
     this.router.navigate(['agenda'])
   }

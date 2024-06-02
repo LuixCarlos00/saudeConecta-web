@@ -2,13 +2,18 @@
 
   <div>
 
-    <div class="rectangle">
+    <div class="rectangle" >
 
       <div class="grid-container">
         <div>
           <br>
 
           <form class="fomulario" [formGroup]="FormularioPesquisa">
+            <div style="margin-left: 10px; margin-top: 10px; ">
+              <button  style=" border: hidden; background-color: white;" (click)="voltarParaHome()">
+                <i class="fa-solid fa-arrow-left fa-xl"></i>
+              </button>
+            </div>
             <br>
             <div *ngIf="MostraCamposDePEsquisa">
               <label class="label_search">
@@ -20,10 +25,11 @@
                 <label class="label_search">Pesquisar Medicos </label>
                 <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required
                   formControlName="Pesquisa">
-                <button *ngIf="FormularioPesquisa.valid" class="btnPesquisar"
+                <button *ngIf="FormularioPesquisa.valid || FormularioPesquisa.get('FiltroPesquisaMedico')?.value==5" class="btnPesquisar"
                   (click)="PesquisarMedicosFiltro()">Pesquisar</button>
               </div>
-              <br>
+
+              <br><br>
               <div>
 
                 <label class="label_filtro">Nome</label>
@@ -38,21 +44,27 @@
                 <label class="label_filtro">Especialidade</label>
                 <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="4" required>
 
+                <label class="label_filtro">Buscar todos</label>
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="5" required>
+
+
               </div>
-              <br>
+
               <hr>
             </div>
-            <br>
 
-            <div *ngIf="mostraTabela">
+
+            <div *ngIf="mostraTabela" class="tabela">
               <app-tabelas-Pesquisas-Medicos></app-tabelas-Pesquisas-Medicos>
             </div>
 
+            <br>
+            <br>
           </form>
 
         </div>
 
-        <div *ngIf="MostraDadosMedicos">
+        <div *ngIf="  mostraTabela">
           <form class="fomularioMedico">
 
             <div style="justify-content: center; display: flex; margin-top: 50px;">

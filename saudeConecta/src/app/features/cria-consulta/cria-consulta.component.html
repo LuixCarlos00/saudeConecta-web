@@ -10,7 +10,7 @@
 
       <form class="fomulario"  [ngClass]="{'aumentar-altura': PacienteEscolhido}" [formGroup]="FormGroupConsulta">
         <div style="margin-left: 10px; margin-top: 10px; ">
-          <button (click)="voltarParaPesquisaMedicos()">
+          <button  style=" border: hidden; background-color: white;" (click)="voltarParaPesquisaMedicos()">
             <i class="fa-solid fa-arrow-left fa-xl"></i>
           </button>
         </div>
@@ -49,7 +49,7 @@
             <button class="btnPesquisar" (click)="PesquisarPacientes()">Pesquisar</button>
 
             <br>
-            <div style="display: flex ; margin-top: -20px;;">
+            <div style=" display: flex; margin-top: -20px;   width: 450px;">
 
               <label class="label_filtro">Nome</label>
               <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="1" required>
@@ -62,6 +62,9 @@
 
               <label class="label_filtro">Telefone</label>
               <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="4" required>
+
+              <label class="label_filtro">Buscar Todos</label>
+              <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="5" required>
 
             </div>
 

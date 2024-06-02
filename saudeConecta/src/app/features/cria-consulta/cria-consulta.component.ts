@@ -1,7 +1,7 @@
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
-import { ServiceConsultaMedicosService } from './../../service/service-consultaMedico/service-consultaMedicos.service';
+import { ConsultaService } from '../../service/service-consulta/consulta.service';
 import { HoradaConsulta } from './../../util/variados/options/options';
 import { tokenService } from 'src/app/util/Token/token.service';
 
@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-cria-consulta',
@@ -51,7 +52,7 @@ export class CriaConsultaComponent implements OnInit {
     private router: Router,
     private medicosService: MedicosService,
     private tokenService: tokenService,
-    private ServiceConsultaMedicosService: ServiceConsultaMedicosService,
+    private ServiceConsultaMedicosService: ConsultaService,
     private DialogService: DialogService,
     private PacientesService: PacientesService
   ) {
@@ -77,6 +78,8 @@ export class CriaConsultaComponent implements OnInit {
       FiltroPesquisaPaciente: ['', Validators.required],
     });
   }
+
+
   PesquisarPacientes() {
     const pesquisa: string =
       this.FormGroupConsulta.get('PesquisaPaciente')?.value;
@@ -142,9 +145,25 @@ export class CriaConsultaComponent implements OnInit {
           this.exibirMensagemErro();
         }
       );
+    }else if (FiltroPesquisaPaciente === 5) {
+      this.PacientesService.buscarTodosPacientes().subscribe(
+        (dados) => {
+          console.log(dados);
+
+          if (dados && dados.length > 0) {
+            this.dadosPaciente = dados;
+            this.showResultadoPaciente = true;
+          } else {
+            this.exibirMensagemErro();
+          }
+        },
+        (erros) => {
+          this.exibirMensagemErro();
+        }
+      );
     }
 
-    console.log(pesquisa, FiltroPesquisaPaciente);
+
   }
 
 
@@ -178,7 +197,8 @@ export class CriaConsultaComponent implements OnInit {
         ConObservacoes: observacao,
         ConDadaCriacao: dataAtual, // Corrige o nome do campo para ConDataCriacao
         ConFormaPagamento: FornaPAgamento,
-        ConAdm: this.Adiministrador.AdmCodigo
+        ConAdm: this.Adiministrador.AdmCodigo,
+        ConStatus: 0
       };
       console.log(consult);
 
@@ -193,11 +213,15 @@ export class CriaConsultaComponent implements OnInit {
             this.ServiceConsultaMedicosService.CriarConsulata(
               consult
             ).subscribe(
-              () => {
+              (response) => {
+                console.log(response);
+                const texto :string =`O cadastro da consulta foi realizado com sucesso.\n   `+`Codigo de consulta: ${response.ConCodigoConsulta} `
+
                 Swal.fire({
                   icon: 'success',
                   title: 'OK',
-                  text: 'Consulta  realizado com sucesso.',
+                  text: texto,
+
                 }).then((result) => {
                   if (result.isConfirmed) {
                     this.router.navigate(['home']);

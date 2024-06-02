@@ -41,7 +41,7 @@ cadastrarAdministrador(Administracao: Adiministrador) {
 }
 
 
-ObeterCodigoParaRecuperacaoDeSenhaPassandoOEmail(Administracao: Adiministrador) {
+ObeterCodigoParaRecuperacaoDeSenhaPassandoOEmail(Administracao: Adiministrador): Observable<any> {
 
   const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
   const options = { headers, withCredentials: true };

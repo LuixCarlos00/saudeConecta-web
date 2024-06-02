@@ -1,3 +1,4 @@
+import { Route, Router } from '@angular/router';
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,9 +12,8 @@ import { MedicosService } from 'src/app/service/medicos/medicos.service';
   styleUrls: ['./pesquisaMedicos.component.css'],
 })
 export class PesquisaMedicosComponent implements OnInit {
-PesquisarPacientes() {
-throw new Error('Method not implemented.');
-}
+
+
 
 
 
@@ -36,7 +36,9 @@ throw new Error('Method not implemented.');
   constructor(
     private form: FormBuilder,
     private medicosService: MedicosService,
-    private DialogService: DialogService
+    private DialogService: DialogService,
+
+    private router: Router
 
   ) {
 
@@ -73,11 +75,9 @@ throw new Error('Method not implemented.');
       this.medicosService.buscarListaMedicosPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-            // Se houver dados, exibe a tabela
             this.mostraTabela = true;
             this.MostraCamposDePEsquisa = false;
           } else {
-            // Se não houver dados, exibe a mensagem de erro
             this.exibirMensagemErro();
           }
         },
@@ -89,11 +89,9 @@ throw new Error('Method not implemented.');
       this.medicosService.buscarListaMedicosPorCRM (pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-            // Se houver dados, exibe a tabela
             this.mostraTabela = true;
             this.MostraCamposDePEsquisa = false;
           } else {
-            // Se não houver dados, exibe a mensagem de erro
             this.exibirMensagemErro();
           }
         },
@@ -105,11 +103,9 @@ throw new Error('Method not implemented.');
       this.medicosService.buscarListaMedicosPorCidade(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-            // Se houver dados, exibe a tabela
             this.mostraTabela = true;
             this.MostraCamposDePEsquisa = false;
           } else {
-            // Se não houver dados, exibe a mensagem de erro
             this.exibirMensagemErro();
           }
         },
@@ -125,11 +121,11 @@ throw new Error('Method not implemented.');
             console.log(dados);
 
             if (dados && dados.length > 0) {
-              // Se houver dados, exibe a tabela
+
               this.mostraTabela = true;
               this.MostraCamposDePEsquisa = false;
             } else {
-              // Se não houver dados, exibe a mensagem de erro
+
               this.exibirMensagemErro();
             }
           },
@@ -137,12 +133,38 @@ throw new Error('Method not implemented.');
             this.exibirMensagemErro();
           }
         );
-    }
+      } else if (FiltroPesquisa === 5) {
+        this.medicosService
+          .buscarPorTodosOsMedicos()
+          .subscribe(
+            (dados) => {
 
-    console.log(pesquisa, FiltroPesquisa);
+              if (dados && dados.length > 0) {
+
+                this.mostraTabela = true;
+                this.MostraCamposDePEsquisa = false;
+              } else {
+
+                this.exibirMensagemErro();
+              }
+            },
+            (erros) => {
+              this.exibirMensagemErro();
+            }
+          );
+      }
+
   }
+
+
+
+
 
   exibirMensagemErro() {
     this.DialogService.exibirMensagemErro( )
   }
+
+  voltarParaHome() {
+    this.router.navigate(['/home'])
+    }
 }

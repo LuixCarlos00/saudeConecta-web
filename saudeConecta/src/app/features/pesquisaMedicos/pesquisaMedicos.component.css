@@ -75,7 +75,12 @@
   }
 
 
+  .tabela {
+    height: 50%;
+    margin: 25px;
+    margin-top: 15px;
 
+  }
   .grid-container {
     display: grid;
     grid-template-columns: 70% 30%;

@@ -1,3 +1,66 @@
-<p>
-  agenda works!
-</p>
+<div class="desktop">
+
+  <div>
+
+    <form class="fomulario" [formGroup]="FormularioAgenda">
+      <div style="margin-left: 10px; margin-top: 10px;">
+        <button style="border: hidden; background-color: white;" (click)="voltarParaHome()">
+          <i class="fa-solid fa-arrow-left fa-xl"></i>
+        </button>
+      </div>
+
+      <div class="divPesquisar">
+        <label for="busca" class="label_search">Filtra dados</label>
+        <input type="text" id="busca" class="input_search" name="busca" formControlName="busca">
+        <button class="btnPesquisar" type="submit" (click)="Pesquisar()">
+          Pesquisar
+        </button>
+      </div>
+
+
+      <div class="grid">
+
+
+        <div class="divRecarregar">
+          <button title="Recarregar Tabela " class="btnRecarregar" (click)="Recarregar()">
+            <i  style="color: blue;" class="fa-solid fa-rotate-right fa-xl"></i>
+          </button>
+        </div>
+
+        <div class="divDeletar">
+          <button title="Deletar Consulta" class="btnRecarregar" (click)="Deletar()">
+            <i style="color: red;" class="fa-regular fa-trash-can fa-xl"></i>
+          </button>
+        </div>
+
+        <div class="divEditar">
+          <button title="Editar Consulta" class="btnRecarregar" (click)="Editar()">
+            <i style="color:blue" class="fa-regular fa-pen-to-square fa-xl"></i>
+          </button>
+        </div>
+
+        <div class="divConcluido">
+          <button title="Editar Consulta" class="btnRecarregar" (click)="Concluido()">
+            <i style="color: green" class="fa-solid fa-square-check fa-xl"></i>
+          </button>
+        </div>
+
+        <div class="divPDF">
+          <button title="Editar Consulta" class="btnRecarregar" (click)="GerarPDF()">
+
+            <i style="color:blue" class="fa-solid fa-file-pdf  fa-xl"></i>
+          </button>
+        </div>
+
+
+      </div>
+
+
+      <div class="tabela">
+        <app-tabela-agenda ></app-tabela-agenda>
+      </div>
+    </form>
+
+  </div>
+
+</div>

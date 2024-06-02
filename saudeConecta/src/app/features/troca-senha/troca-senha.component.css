@@ -58,4 +58,37 @@
     border: 1px solid;
   }
 
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .custom-spinner {
+    width: 100px;  /* Defina o tamanho desejado */
+    height: 100px; /* Defina o tamanho desejado */
+    background: url('../../../assets/imagens/cruz.png') no-repeat center center;
+    background-size: contain;
+    position: relative;
+    animation: rotate 5s linear infinite;
+    background-size: 30px 30px; /* Diminuir a imagem para 50x50 pixels */
+    margin-top: -80px;
+    margin-left: 110px;
+  }
+
+  .custom-spinner::before {
+    content: "";
+    display: block;
+    padding-top: 100%; /* Manter a proporção da imagem */
+  }
+
+  .mat-spinner circle {
+    stroke: none; /* Remove a cor de fundo do círculo */
+  }
+
+
+
 }

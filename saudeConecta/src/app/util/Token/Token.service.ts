@@ -19,7 +19,7 @@ export class tokenService {
 
 
   constructor( private http: HttpClient,) {
-    this.token();
+     this.token();
   }
 
 
@@ -108,7 +108,7 @@ token (){
   const token = this.retornaToken();
   this.Usuario = jwtDecode(token);
   this.Usuario.id
-  console.log(this.Usuario);
+
 
   this.buscarPorUsuario(this.Usuario.id)
 

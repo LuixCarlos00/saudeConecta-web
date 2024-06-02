@@ -34,4 +34,11 @@ exibirMensagemParaCamposNaoInformadosDeConsulta() {
     duration: 50000,
   });
 }
+
+NaoFoiEncontradoConsultasComEssesParametros() {
+  this._snackBar.open('Não foi encontrado consultas com esses parametros .Tente Novamente.', 'Fechar', {
+    duration: 50000,
+  });
+}
+
 }
