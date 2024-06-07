@@ -25,8 +25,8 @@ export class ModelService {
   //
   //
 
-  private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
-  PacienteValue$ = this.usuarioSubject.asObservable();
+  private usuarioLogadoSubject = new BehaviorSubject<Usuario | null>(null);
+  UsuarioLogadoValue$ = this.usuarioLogadoSubject.asObservable();
 
 
 
@@ -69,12 +69,12 @@ export class ModelService {
     const token = this.tokenService.retornaToken();
     if (token) {
       const Usuario = jwt_decode.jwtDecode(token) as Usuario;
-      this.usuarioSubject.next(Usuario);
+      this.usuarioLogadoSubject.next(Usuario);
     }
   }
 
   getDadosUsuario(): Observable<Usuario | null> {
-    return this.usuarioSubject.asObservable();
+    return this.usuarioLogadoSubject.asObservable();
   }
 
   salvarToken(token: string) {
@@ -84,7 +84,7 @@ export class ModelService {
 
   deslogar(): void {
     this.tokenService.excluirToken();
-    this.usuarioSubject.next(null);
+    this.usuarioLogadoSubject.next(null);
   }
 
   estaLogado(): boolean {

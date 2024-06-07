@@ -1,8 +1,11 @@
+import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
 import { TabelaAgendaComponent } from './tabela-agenda/tabela-agenda.component';
+import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/consultaStatus';
+import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
 
 @Component({
   selector: 'app-agenda',
@@ -10,55 +13,84 @@ import { TabelaAgendaComponent } from './tabela-agenda/tabela-agenda.component';
   styleUrls: ['./agenda.component.css'],
 })
 export class AgendaComponent implements OnInit {
-
   //
   //
   //
-
+Consulta:boolean = false
+ConsultaStatus:boolean = false
   FormularioAgenda!: FormGroup;
 
   constructor(
     private router: Router,
     private form: FormBuilder,
-    private consultaService: ConsultaService
+    private consultaService: ConsultaService,
+    private consultastatusService: ConsultaStatusService
   ) {}
 
   ngOnInit() {
 
+    this.Consulta = true
+    this.ConsultaStatus = false
     this.FormularioAgenda = this.form.group({
       busca: [''],
     });
   }
 
   Pesquisar() {
+
+
+
     const busca = this.FormularioAgenda.get('busca')?.value;
-
-
     this.consultaService.FiltraDadosSubject(busca);
+    this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);
   }
 
   Recarregar() {
+
+    this.Consulta = true
+    this.ConsultaStatus = false
+
     this.FormularioAgenda.reset();
     this.consultaService.RecarregarDadosTabelaSubject(true);
   }
 
   Concluido() {
-    throw new Error('Method not implemented.');
+
+    this.Consulta = true
+    this.ConsultaStatus = false
+
+    this.consultaService.ConcluidoTabelaSubject(true);
   }
 
   Editar() {
+
+    this.Consulta = true
+    this.ConsultaStatus = false
+
+    this.consultaService.EditarDadosDaTabelaSubject(true);
     this.consultaService.EditarDadosDaTabelaSubject(true);
   }
 
-
   Deletar() {
-    //observa se ha algo para ser excluido e pergunta se dejesa deletar
+
+    this.Consulta = true
+    this.ConsultaStatus = false
+
     this.consultaService.ExcluirDadosDaTabelaSubject(true);
   }
 
   GerarPDF() {
     throw new Error('Method not implemented.');
+  }
+
+  Concludo() {
+
+    this.Consulta = false
+    this.ConsultaStatus = true
+
     }
+
+
   voltarParaHome() {
     this.router.navigate(['home']);
   }

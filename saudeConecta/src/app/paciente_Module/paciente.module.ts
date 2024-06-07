@@ -36,6 +36,7 @@ import { AgendaComponent } from '../features/agenda/agenda.component';
 import { ObservacoesComponent } from '../features/agenda/tabela-agenda/Observacoes/Observacoes.component';
 import { EditarConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/Editar-Consultas.component';
 import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
+import { TabelaAgendaStatusComponent } from '../features/agenda/tabela-agenda-status/tabela-agenda-status.component';
 
 
 
@@ -60,7 +61,8 @@ import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/tabela
     AgendaComponent,
     ObservacoesComponent,
     EditarConsultasComponent,
-    TabelaEditarMedicosConsultasComponent
+    TabelaEditarMedicosConsultasComponent,
+    TabelaAgendaStatusComponent
 
   ],
   exports: [],

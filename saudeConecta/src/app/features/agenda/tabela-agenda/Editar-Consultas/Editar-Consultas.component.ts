@@ -1,12 +1,25 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ModelService } from 'src/app/service/Model_service/Model.service';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { HoradaConsulta } from 'src/app/util/variados/options/options';
+import Swal from 'sweetalert2';
+import { tokenService } from 'src/app/util/Token/token.service';
+import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 
 @Component({
   selector: 'app-Editar-Consultas',
@@ -17,6 +30,7 @@ export class EditarConsultasComponent implements OnInit {
   //
   //
   //
+
   DiaDaSemana: string = '';
   Hora = HoradaConsulta;
 
@@ -33,6 +47,16 @@ export class EditarConsultasComponent implements OnInit {
 
   DadosPaciente!: any;
   DadosMedico!: any;
+
+  Usuario: Adiministrador = {
+    AdmCodigo: 0,
+    AdmNome: '',
+    AdmUsuario: 0,
+    AdmStatus: 0,
+    AdmEmail: '',
+    AdmCodigoAtorizacao: '',
+    AdmDataCriacao: '',
+  };
 
   DadosDeEdicaoConsulta: Consulta = {
     ConCodigoConsulta: 0,
@@ -54,21 +78,32 @@ export class EditarConsultasComponent implements OnInit {
     private DialogService: DialogService,
     private PacientesService: PacientesService,
     private form: FormBuilder,
+    private ConsultaService: ConsultaService,
+    private tokenService: tokenService,
     private medicosService: MedicosService
   ) {
+    this.tokenService.UsuarioLogadoValue$.subscribe((Usuario) => {
+      if (Usuario) this.Usuario = Usuario;
+      console.log(Usuario, 'paciente');
+    });
+
     this.DadosDeEdicaoConsulta = this.data.DadoSelecionadoParaEdicao[0];
     this.DadosPaciente = this.data.DadoSelecionadoParaEdicao[0].ConPaciente;
     this.DadosMedico = this.data.DadoSelecionadoParaEdicao[0].ConMedico;
-    console.log(this.DadosDeEdicaoConsulta);
+
+    console.log(this.DadosDeEdicaoConsulta, 'dados');
+
     this.PacienteEscolhido = this.DadosPaciente;
     this.MedicoEscolhido = this.DadosMedico;
   }
 
   onNoClick(): void {
+
     this.dialogRef.close();
   }
 
   ngOnInit() {
+    this.DadosDeEdicaoConsulta.ConHorario = this.DadosDeEdicaoConsulta.ConHorario.slice(0, 5);
     this.FormGroupConsulta = this.form.group({
       date: ['', Validators.required],
       time: ['', Validators.required],
@@ -90,8 +125,6 @@ export class EditarConsultasComponent implements OnInit {
   }
 
   PacienteSelecionado(elemento: any) {
-
-
     this.PacienteEscolhido = elemento;
   }
 
@@ -282,5 +315,60 @@ export class EditarConsultasComponent implements OnInit {
 
   exibirMensagemErro() {
     this.DialogService.exibirMensagemErro();
+  }
+
+  Salvar() {
+    this.DadosDeEdicaoConsulta.ConPaciente = this.PacienteEscolhido.paciCodigo;
+    this.DadosDeEdicaoConsulta.ConMedico = this.MedicoEscolhido.medCodigo;
+    this.DadosDeEdicaoConsulta.ConAdm = this.Usuario.AdmCodigo;
+
+    if (this.DadosDeEdicaoConsulta) {
+      this.ConsultaService.VericarSeExetemConsultasMarcadas(
+        this.DadosDeEdicaoConsulta
+      ).subscribe(
+        (dados) => {
+          if (dados) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Ja existe uma consulta marcada para este horário. Tente outro horário. Ou altere o dia.',
+            });
+          } else if (!dados) {
+            console.log(dados, 'dados');
+
+            this.ConsultaService.EditarConsulas(
+              this.DadosDeEdicaoConsulta.ConCodigoConsulta,
+              this.DadosDeEdicaoConsulta
+            ).subscribe(
+              (dados) => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'OK',
+                  text: 'Consulta editada com sucesso .',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.reload();
+                  }
+                });
+              },
+              (erros) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Algo deu errado !',
+                });
+              }
+            );
+          }
+        },
+        (erros) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo deu errado !',
+          });
+        }
+      );
+    }
   }
 }

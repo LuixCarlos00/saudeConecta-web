@@ -1,24 +1,25 @@
+import { Component, OnInit } from '@angular/core';
 import { map, take } from 'rxjs';
 import { Paciente } from './../../../util/variados/interfaces/paciente/paciente';
 import { Medico } from './../../../util/variados/interfaces/medico/medico';
-import { Component, Input, OnInit } from '@angular/core';
-import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { MatDialog } from '@angular/material/dialog';
-import { ObservacoesComponent } from './Observacoes/Observacoes.component';
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
 import { el } from 'date-fns/locale';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import Swal from 'sweetalert2';
 import { lastDayOfDecade } from 'date-fns';
-import { EditarConsultasComponent } from './Editar-Consultas/Editar-Consultas.component';
+import { ObservacoesComponent } from '../tabela-agenda/Observacoes/Observacoes.component';
+import { EditarConsultasComponent } from '../tabela-agenda/Editar-Consultas/Editar-Consultas.component';
+import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/consultaStatus';
+import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
+
 
 @Component({
-  selector: 'app-tabela-agenda',
-  templateUrl: './tabela-agenda.component.html',
-  styleUrls: ['./tabela-agenda.component.css'],
+  selector: 'app-tabela-agenda-status',
+  templateUrl: './tabela-agenda-status.component.html',
+  styleUrls: ['./tabela-agenda-status.component.css']
 })
-export class TabelaAgendaComponent implements OnInit {
-  //
+export class TabelaAgendaStatusComponent implements OnInit {
+ //
   //
   //
   Medicos: Medico = {
@@ -63,12 +64,12 @@ export class TabelaAgendaComponent implements OnInit {
   DadoSelecionadoParaEdicao: any = [];
   DadoSelecionadoParaConclusao: any = [];
   ParametroDeFiltragem: any;
-  dataSource: Consulta[] = [];
+  dataSource: ConsultaStatus[] = [];
   DadosDeConsulta: any[] = [];
   BuscarUmaVez: boolean = false;
 
   constructor(
-    private consultaService: ConsultaService,
+    private consultaStatusService: ConsultaStatusService,
     public dialog: MatDialog,
     protected DialogService: DialogService
   ) {}
@@ -78,21 +79,21 @@ export class TabelaAgendaComponent implements OnInit {
       this.BuscarTodosRegistrosDeConsulta();
     }
 
-    this.consultaService.DeletarDadosDaTabela$.subscribe((dados) => {
+    this.consultaStatusService.DeletarDadosDaTabelaStatus$.subscribe((dados) => {
       //deletar Itens
       if (dados === true && this.DadoSelecionaParaExclusao.length > 0) {
         this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao, dados);
       }
     });
 
-    this.consultaService.RecarregarTabela$.subscribe((dados) => {
+    this.consultaStatusService.RecarregarStatusTabela$.subscribe((dados) => {
       // Recarregar Tabela
       if (dados) {
         this.RecaregarTabela();
       }
     });
 
-    this.consultaService.EditarDadosDaTabela$.subscribe((dados) => {
+    this.consultaStatusService.EditarDadosDaTabelaStatus$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionadoParaEdicao.length === 1) {
         this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao); //Edita dado selecionado
       } else if (dados === true && this.DadoSelecionadoParaEdicao.length > 1) {
@@ -104,22 +105,29 @@ export class TabelaAgendaComponent implements OnInit {
       }
     });
 
-    this.consultaService.ConcluidoRegistroTabela$.subscribe((dados) => {
+    this.consultaStatusService.ConcluidoRegistroTabelaStatus$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionadoParaConclusao.length > 0) {
         this.ConcluirDadosDaTabela();
       }
     });
 
-    this.consultaService.dadosFiltrados$.subscribe((dados) => {
+    this.consultaStatusService.dadosStatusFiltrados$.subscribe((dados) => {
+      console.log(dados,'chagou no  dados');
+
       if (!dados.toString()) {
+        console.log('entrou no if');
+
         //Filtra e pesquisar Tabela
-        this.consultaService
-          .BuscarTodosRegistrosDeConsulta()
+        this.consultaStatusService
+          .BuscarTodosRegistrosDeConsultaStatus()
           .subscribe((response) => {
+            console.log(response.content);
 
             this.dataSource = response.content;
           });
       } else if (dados.toString()) {
+        console.log('entrou no else');
+
         // pesquisa por dado filtrado
         this.filtrandoDadosDoBancoPassadoParametros(dados);
       }
@@ -130,14 +138,14 @@ export class TabelaAgendaComponent implements OnInit {
 
   ConcluirDadosDaTabela() {
     for (let i = 0; i < this.DadoSelecionadoParaConclusao.length; i++) {
-        this.consultaService.ConcluirDadosDaTabela(this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta).pipe(take(1))
+        this.consultaStatusService.ConcluirDadosDaTabelaStatus(this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta).pipe(take(1))
         .subscribe(
             (dados) => { console.log(dados); },
             (error) => { console.error('Erro ao concluir dados:', error); }
         );
     }
     for (let i = 0; i < this.DadoSelecionadoParaConclusao.length; i++) {
-        this.consultaService.DeletarConsulas(this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta).pipe(take(1))
+        this.consultaStatusService.DeletarConsulasStatus(this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta).pipe(take(1))
         .subscribe(
             (dados) => { this.RecaregarTabela(); },
             (error) => { console.error('Erro ao concluir dados:', error); }
@@ -149,11 +157,10 @@ export class TabelaAgendaComponent implements OnInit {
 
 
   BuscarTodosRegistrosDeConsulta() {
-    this.consultaService
-      .BuscarTodosRegistrosDeConsulta()
+    this.consultaStatusService
+      .BuscarTodosRegistrosDeConsultaStatus()
       .pipe(take(1))
       .subscribe((response) => {
-        this.DadosDeConsulta = [];
         this.DadosDeConsulta.push(...response.content);
         this.dataSource = response.content;
       });
@@ -172,15 +179,15 @@ export class TabelaAgendaComponent implements OnInit {
     // Filtrar os dados da consulta, comparando as strings normalizadas
     let resultadoFiltrado = this.DadosDeConsulta.filter(
       (item) =>
-        normalizeString(item.ConCodigoConsulta.toString()).includes(
+        normalizeString(item.ConSttCodigoConsulata.toString()).includes(
           dadosUpper
         ) ||
-        normalizeString(item.ConMedico.medNome).includes(dadosUpper) ||
-        normalizeString(item.ConPaciente.paciNome).includes(dadosUpper) ||
-        normalizeString(item.ConDia_semana).includes(dadosUpper) ||
-        normalizeString(item.ConData).includes(dadosUpper) ||
-        normalizeString(item.ConHorario).includes(dadosUpper) ||
-        normalizeString(item.ConObservacoes).includes(dadosUpper)
+        normalizeString(item.ConSttMedico.medNome).includes(dadosUpper) ||
+        normalizeString(item.ConSttPaciente.paciNome).includes(dadosUpper) ||
+        normalizeString(item.ConSttDia_semana).includes(dadosUpper) ||
+        normalizeString(item.ConSttData).includes(dadosUpper) ||
+        normalizeString(item.ConSttHorario).includes(dadosUpper) ||
+        normalizeString(item.ConSttObservacao).includes(dadosUpper)
     );
 
     if (resultadoFiltrado.length > 0) {
@@ -189,8 +196,8 @@ export class TabelaAgendaComponent implements OnInit {
     } else {
       this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
       this.LimparTabela();
-      this.consultaService
-        .BuscarTodosRegistrosDeConsulta()
+      this.consultaStatusService
+        .BuscarTodosRegistrosDeConsultaStatus()
         .pipe(take(1))
         .subscribe((response) => {
           this.DadosDeConsulta.push(...response.content);
@@ -239,13 +246,13 @@ export class TabelaAgendaComponent implements OnInit {
 
   RecaregarTabela() {
     this.LimparTabela();
-    this.consultaService
-      .BuscarTodosRegistrosDeConsulta()
+    this.consultaStatusService
+      .BuscarTodosRegistrosDeConsultaStatus()
       .subscribe((response) => {
         this.DadosDeConsulta.push(...response.content);
         this.dataSource = response.content;
       });
-    this.consultaService.ExcluirDadosDaTabelaSubject(false);
+    this.consultaStatusService.ExcluirDadosDaTabelaStatusSubject(false);
   }
 
   DeletarDadoDaTabela(DadoSelecionaParaExclusao: any, dados: Boolean) {
@@ -259,8 +266,8 @@ export class TabelaAgendaComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         for (let i = 0; i < this.DadoSelecionaParaExclusao.length; i++) {
-          this.consultaService
-            .DeletarConsulas(
+          this.consultaStatusService
+            .DeletarConsulasStatus(
               this.DadoSelecionaParaExclusao[i].ConCodigoConsulta
             )
             .pipe(take(1))
@@ -269,8 +276,8 @@ export class TabelaAgendaComponent implements OnInit {
               if (i === this.DadoSelecionaParaExclusao.length - 1) {
                 this.DadoSelecionaParaExclusao = [];
                 this.LimparTabela();
-                this.consultaService
-                  .BuscarTodosRegistrosDeConsulta()
+                this.consultaStatusService
+                  .BuscarTodosRegistrosDeConsultaStatus()
                   .subscribe((response) => {
                     this.DadosDeConsulta = response.content;
                     this.dataSource = response.content;
@@ -279,7 +286,7 @@ export class TabelaAgendaComponent implements OnInit {
             });
         }
       } else {
-        this.consultaService.ExcluirDadosDaTabelaSubject(false);
+        this.consultaStatusService.ExcluirDadosDaTabelaStatusSubject(false);
       }
     });
   }

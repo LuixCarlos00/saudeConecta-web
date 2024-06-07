@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -9,8 +9,6 @@ import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
   providedIn: 'root'
 })
 export class ConsultaService {
-
-
 
   //
   //
@@ -33,6 +31,8 @@ export class ConsultaService {
   private EditarTabelaSubject = new BehaviorSubject<Boolean>(false);
   EditarDadosDaTabela$ = this.EditarTabelaSubject.asObservable();
 
+  private ConcluidoRegistroTabelaSubject = new BehaviorSubject<Boolean>(false);
+  ConcluidoRegistroTabela$ = this.ConcluidoRegistroTabelaSubject.asObservable();
 
   constructor(
     private router : Router ,
@@ -55,6 +55,11 @@ export class ConsultaService {
     EditarDadosDaTabelaSubject(dados: boolean) {
      this.EditarTabelaSubject.next(dados);
     }
+
+    ConcluidoTabelaSubject(dados: boolean) {
+       this.ConcluidoRegistroTabelaSubject.next(dados);
+    }
+
 
 
     CriarConsulata(Consulta: Consulta): Observable<Consulta> {
@@ -91,5 +96,27 @@ export class ConsultaService {
         const options = { headers, withCredentials: true };
         return this.http.delete<{content: Consulta[]}>(`${this.apiUrl}/consulta/${consultaId}`, options);
       }
+
+
+
+      EditarConsulas(consultaId: any, NovaConsulta: Consulta): Observable<Consulta> {
+        console.log(consultaId, NovaConsulta);
+
+        const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
+        const options = { headers, withCredentials: true };
+        return this.http.put<Consulta>(`${this.apiUrl}/consulta/editar/${consultaId}`,NovaConsulta, options);
+      }
+
+
+      ConcluirDadosDaTabela(IdConclusao: number): Observable<Consulta> {
+        console.log(IdConclusao, 'IdConclusao', this.Token.toString());
+
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.Token}`
+        });
+
+        return this.http.put<Consulta>(`${this.apiUrl}/consulta/concluido/${IdConclusao}`, {}, { headers });
+    }
 
 }

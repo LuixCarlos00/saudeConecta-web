@@ -3,19 +3,26 @@
   <div>
 
     <form class="fomulario" [formGroup]="FormularioAgenda">
+
       <div style="margin-left: 10px; margin-top: 10px;">
         <button style="border: hidden; background-color: white;" (click)="voltarParaHome()">
           <i class="fa-solid fa-arrow-left fa-xl"></i>
         </button>
       </div>
 
-      <div class="divPesquisar">
-        <label for="busca" class="label_search">Filtra dados</label>
+      <div class="divPesquisar"  >
+        <label for="busca" class="label_search">Pesquisar </label>
         <input type="text" id="busca" class="input_search" name="busca" formControlName="busca">
         <button class="btnPesquisar" type="submit" (click)="Pesquisar()">
           Pesquisar
         </button>
+        <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit" (click)="Concludo()">
+          Concluído
+        </button>
       </div>
+
+
+
 
 
       <div class="grid">
@@ -40,13 +47,13 @@
         </div>
 
         <div class="divConcluido">
-          <button title="Editar Consulta" class="btnRecarregar" (click)="Concluido()">
+          <button title="Concluir Consulta" class="btnRecarregar" (click)="Concluido()">
             <i style="color: green" class="fa-solid fa-square-check fa-xl"></i>
           </button>
         </div>
 
         <div class="divPDF">
-          <button title="Editar Consulta" class="btnRecarregar" (click)="GerarPDF()">
+          <button title="Gerar Arquivo de Consulta" class="btnRecarregar" (click)="GerarPDF()">
 
             <i style="color:blue" class="fa-solid fa-file-pdf  fa-xl"></i>
           </button>
@@ -56,9 +63,16 @@
       </div>
 
 
-      <div class="tabela">
+      <div class="tabela" *ngIf="Consulta && !ConsultaStatus">
         <app-tabela-agenda ></app-tabela-agenda>
       </div>
+
+      <div class="tabela" *ngIf="!Consulta && ConsultaStatus">
+        <app-tabela-agenda-status></app-tabela-agenda-status>
+      </div>
+
+
+
     </form>
 
   </div>

@@ -63,6 +63,15 @@
     margin-top: -110px;
   }
 
+  .label_filtro_Identificador{
+    font-family: 'Times New Roman', Times, serif;
+    padding: 10px;
+    margin-left: 520px;
+
+    margin-top: -110px;
+
+  }
+
   .input_HORA {
     border-color: #000000;
     margin-top: -10px;

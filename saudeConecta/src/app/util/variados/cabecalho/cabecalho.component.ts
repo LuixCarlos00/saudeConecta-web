@@ -13,26 +13,32 @@ export class CabecalhoComponent implements OnInit {
   Usuario: any;
 
   constructor(
-    public pacienteService: ModelService,
+    public ModelService: ModelService,
     private router: Router,
     private tokenService: tokenService
   ) {}
 
   ngOnInit() {
+
+
+
     this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
-      if (paciente) this.Usuario = paciente;
+      if (paciente)
+        this.Usuario = paciente;
+      console.log(paciente,'paciente');
+
     });
 
     this.estaLogado();
   }
 
   estaLogado(): Boolean {
-    return this.pacienteService.verificarLogin();
+    return this.ModelService.verificarLogin();
   }
 
   logout() {
     console.log('Logout clicked');
-    this.pacienteService.logout();
+    this.ModelService.logout();
   }
 
   Menu() {
