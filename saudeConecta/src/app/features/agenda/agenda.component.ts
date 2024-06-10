@@ -68,7 +68,7 @@ ConsultaStatus:boolean = false
     this.ConsultaStatus = false
 
     this.consultaService.EditarDadosDaTabelaSubject(true);
-    this.consultaService.EditarDadosDaTabelaSubject(true);
+
   }
 
   Deletar() {
@@ -80,7 +80,11 @@ ConsultaStatus:boolean = false
   }
 
   GerarPDF() {
-    throw new Error('Method not implemented.');
+
+    this.Consulta = true
+    this.ConsultaStatus = false
+
+    this.consultaService.Gera_PDF_DeRegistroDaTabelaSubject(true);
   }
 
   Concludo() {

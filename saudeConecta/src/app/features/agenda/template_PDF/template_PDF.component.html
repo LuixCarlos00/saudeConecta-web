@@ -1,0 +1,153 @@
+<form class="fomulario">
+  <div id="pdfContent">
+    <div style="display: flex; justify-content: center;  align-items: center;margin-top: 20px;">
+      <h2>Detalhes da Consulta</h2>
+    </div>
+    <hr>
+    <div style=" margin-left: 20px;display: grid ; grid-template-columns: 50% 50%   ">
+
+      <div style="margin: 10px;">
+        <div style="display: flex; justify-content: left;  align-items: left; ">
+          <h3>Médico</h3>
+
+          <p><strong>Codigo Médico:</strong> {{ DadosPDFConsulta.ConMedico.medCodigo }}</p>
+        </div>
+
+        <p><strong>Nome:</strong> {{ DadosPDFConsulta.ConMedico.medNome }}</p>
+        <p><strong>Sexo:</strong> {{ DadosPDFConsulta.ConMedico.medSexo }}</p>
+        <p><strong>Idade:</strong> {{ DadosPDFConsulta.ConMedico.medDataNacimento }}</p>
+        <p><strong>CRM:</strong> {{ DadosPDFConsulta.ConMedico.medCrm }}</p>
+        <p><strong>Email:</strong> {{ DadosPDFConsulta.ConMedico.medEmail }}</p>
+        <p><strong>Especialidade:</strong> {{ DadosPDFConsulta.ConMedico.medEspecialidade }}</p>
+        <p><strong>CPF:</strong> {{ DadosPDFConsulta.ConMedico.medCpf }}</p>
+        <p><strong>RG:</strong> {{ DadosPDFConsulta.ConMedico.medRg }}</p>
+        <p><strong>Telefone:</strong> {{ DadosPDFConsulta.ConMedico.medTelefone }}</p>
+        <p><strong>Formacao:</strong> {{ DadosPDFConsulta.ConMedico.medFormacoes }}</p>
+        <p><strong>Graduacao:</strong> {{ DadosPDFConsulta.ConMedico.medGraduacao }}</p>
+      </div>
+
+
+      <div style="margin: 10px;">
+        <div>
+          <h3>Paciente</h3>
+          <p><strong>Codigo Paciente:</strong> {{ DadosPDFConsulta.ConPaciente.paciCodigo }}</p>
+        </div>
+
+        <p><strong>Nome:</strong> {{ DadosPDFConsulta.ConPaciente.paciNome }}</p>
+        <p><strong>Sexo:</strong> {{ DadosPDFConsulta.ConPaciente.paciSexo }}</p>
+        <p><strong>Idade:</strong> {{ DadosPDFConsulta.ConPaciente.paciDataNacimento }}</p>
+        <p><strong>CPF:</strong> {{ DadosPDFConsulta.ConPaciente.paciCpf }}</p>
+        <p><strong>RG:</strong> {{ DadosPDFConsulta.ConPaciente.paciRg }}</p>
+        <p><strong>Email:</strong> {{ DadosPDFConsulta.ConPaciente.paciEmail }}</p>
+        <p><strong>Telefone:</strong> {{ DadosPDFConsulta.ConPaciente.paciTelefone }}</p>
+
+      </div>
+
+
+
+    </div>
+
+    <hr>
+
+
+    <div style="  margin-left: 20px;">
+      <div>
+        <h3><strong>Nº Registro:</strong> {{ DadosPDFConsulta.ConCodigoConsulta }}</h3>
+      </div>
+
+      <div *ngIf="DadosPDFConsulta.ConStatus">
+
+        <div *ngIf="DadosPDFConsulta.ConStatus === 0">
+          <p><strong>Status:</strong> Aberta </p>
+        </div>
+
+        <div *ngIf="DadosPDFConsulta.ConStatus === 1">
+          <p><strong>Status:</strong> Concluido </p>
+        </div>
+
+        <div *ngIf="DadosPDFConsulta.ConStatus === 2">
+          <p><strong>Status:</strong> Fechada </p>
+        </div>
+
+      </div>
+
+
+
+      <div style=" display: grid ; grid-template-columns: 50% 50% ">
+        <div>
+          <p><strong>Data da Consulta:</strong> {{ DadosPDFConsulta.ConDia_semana.toUpperCase() }} - {{ dataPadraoBR }}
+          </p>
+          <hr>
+          <p><strong>Hora:</strong> {{ DadosPDFConsulta.ConHorario }}</p>
+          <hr>
+          <p><strong>Data de Criação:</strong> {{ dataCriacaoPadraoBr }}</p>
+          <hr>
+          <div *ngIf="DadosPDFConsulta.ConFormaPagamento">
+            <div *ngIf="DadosPDFConsulta.ConFormaPagamento === 1">
+              <p style="margin-top: 20px;"><strong>Forma de Pagamento:</strong> Dinheiro </p>
+              <img style="margin-left: 200px; margin-top: -100px"  src="../../../../assets/imagens/logoDinheiro.png" alt="Dinheiro">
+            </div>
+
+            <div *ngIf="DadosPDFConsulta.ConFormaPagamento === 2">
+              <p style="margin-top: 20px;"><strong>Forma de Pagamento:</strong> Cartao </p>
+              <img style="margin-left: 200px; margin-top: -100px" src="../../../../assets/imagens/logoCartao.png" alt="Cartao">
+            </div>
+
+            <div *ngIf="DadosPDFConsulta.ConFormaPagamento === 3 ">
+              <p style="margin-top: 20px;"><strong>Forma de Pagamento:</strong> Pix </p>
+              <img style="margin-left: 200px; margin-top: -100px" src="../../../../assets/imagens/logoPix.png" alt="Pix">
+            </div>
+
+
+          </div>
+
+        </div>
+        <div style="margin: 10px; margin-top: -40px; pointer-events: none;">
+
+          <mat-card class="demo-inline-calendar-card">
+
+            <mat-calendar #calendar [(selected)]="selected">
+            </mat-calendar>
+
+          </mat-card>
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+
+    <br>
+
+    <hr>
+
+
+    <div>
+      <div style="margin-left: 45px;">
+        <p><strong>Observações:</strong> </p>
+      </div>
+
+      <div style=" margin-top:-25px ; display: flex ; justify-content: center;">
+        <textarea style="width: 550px;height: 100px; margin: 10px; border-radius: 10px; border: 1px solid black;"
+          disabled>
+      {{ DadosPDFConsulta.ConObservacoes }}
+     </textarea>
+      </div>
+
+    </div>
+
+
+    <br>
+    <br>
+
+  </div>
+
+
+
+
+</form>
+
+<button (click)="GerarPDF()">Gerar PDF</button>

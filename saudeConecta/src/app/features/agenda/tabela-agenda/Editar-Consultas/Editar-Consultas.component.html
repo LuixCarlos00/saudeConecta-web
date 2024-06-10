@@ -17,8 +17,7 @@
       <label class="label_filtro_DATA">
         <font style="color: red; font-size: 12px;">* </font>Data
       </label>
-      <input class="input_DATA" formControlName="date" type="date" id="date" name="date"
-        [(ngModel)]="DadosDeEdicaoConsulta.ConData" (change)="onDateChange($event)">
+      <input class="input_DATA" formControlName="date"  [(ngModel)]="DadosDeEdicaoConsulta.ConData"  type="date" id="date" name="date">
 
 
       <br><br>
@@ -90,7 +89,7 @@
 
     <div>
       <label class="label_filtro_PESQUISA">Pesquisar Medicos </label>
-      <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required formControlName="Pesquisa">
+      <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaMedico">
       <button class="btnPesquisar" (click)="PesquisarMedicosFiltro()">Pesquisar</button>
     </div>
 

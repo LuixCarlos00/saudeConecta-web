@@ -17,7 +17,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 
 import { CadastroPacienteComponent } from '../features/cadastro/cadastro-paciente/cadastro-paciente.component';
@@ -37,6 +39,7 @@ import { ObservacoesComponent } from '../features/agenda/tabela-agenda/Observaco
 import { EditarConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/Editar-Consultas.component';
 import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
 import { TabelaAgendaStatusComponent } from '../features/agenda/tabela-agenda-status/tabela-agenda-status.component';
+import { Template_PDFComponent } from '../features/agenda/template_PDF/template_PDF.component';
 
 
 
@@ -62,7 +65,8 @@ import { TabelaAgendaStatusComponent } from '../features/agenda/tabela-agenda-st
     ObservacoesComponent,
     EditarConsultasComponent,
     TabelaEditarMedicosConsultasComponent,
-    TabelaAgendaStatusComponent
+    TabelaAgendaStatusComponent,
+    Template_PDFComponent
 
   ],
   exports: [],
@@ -86,7 +90,10 @@ import { TabelaAgendaStatusComponent } from '../features/agenda/tabela-agenda-st
     MatPaginatorModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule
 
 
   ],

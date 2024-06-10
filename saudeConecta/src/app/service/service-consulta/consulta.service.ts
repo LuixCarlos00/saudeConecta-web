@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { tokenService } from 'src/app/util/Token/token.service';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 
@@ -34,6 +34,14 @@ export class ConsultaService {
   private ConcluidoRegistroTabelaSubject = new BehaviorSubject<Boolean>(false);
   ConcluidoRegistroTabela$ = this.ConcluidoRegistroTabelaSubject.asObservable();
 
+  private GeraPDFRegistroTabelaSubject = new BehaviorSubject<Boolean>(false);
+  GeraPDFRegistroTabela$ = this.GeraPDFRegistroTabelaSubject.asObservable();
+
+
+  private dadosPDFSubject = new BehaviorSubject<any[]>([]);
+  dadosPDF$ = this.dadosPDFSubject.asObservable();
+
+
   constructor(
     private router : Router ,
     private http: HttpClient,
@@ -60,6 +68,16 @@ export class ConsultaService {
        this.ConcluidoRegistroTabelaSubject.next(dados);
     }
 
+    Gera_PDF_DeRegistroDaTabelaSubject(dados: boolean) {
+      this.GeraPDFRegistroTabelaSubject.next(dados);
+   }
+
+   setDadosParaPDF(dados: any[]) {
+    this.dadosPDFSubject.next(dados);
+  }
+
+
+
 
 
     CriarConsulata(Consulta: Consulta): Observable<Consulta> {
@@ -67,8 +85,6 @@ export class ConsultaService {
       const options = { headers, withCredentials: true };
       return this.http.post<Consulta>(`${this.apiUrl}/consulta/post`,Consulta,options );
       }
-
-
 
 
       VericarSeExetemConsultasMarcadas(consult: Consulta) {
@@ -99,17 +115,25 @@ export class ConsultaService {
 
 
 
-      EditarConsulas(consultaId: any, NovaConsulta: Consulta): Observable<Consulta> {
-        console.log(consultaId, NovaConsulta);
+      EditarConsultas(consultaId: any, novaConsulta: Consulta): Observable<Consulta> {
+        console.log(consultaId, novaConsulta);
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.Token}`
+        });
 
-        const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
-        const options = { headers, withCredentials: true };
-        return this.http.put<Consulta>(`${this.apiUrl}/consulta/editar/${consultaId}`,NovaConsulta, options);
-      }
+        return this.http.put<Consulta>(`${this.apiUrl}/consulta/editar/${consultaId}`, novaConsulta, { headers })
+            .pipe(
+                catchError(error => {
+                    console.error('Erro ao editar consulta:', error);
+                    return throwError(error);
+                })
+            );
+    }
 
 
       ConcluirDadosDaTabela(IdConclusao: number): Observable<Consulta> {
-        console.log(IdConclusao, 'IdConclusao', this.Token.toString());
+
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',

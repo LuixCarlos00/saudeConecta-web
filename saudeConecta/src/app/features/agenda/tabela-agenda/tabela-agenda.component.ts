@@ -11,6 +11,7 @@ import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialo
 import Swal from 'sweetalert2';
 import { lastDayOfDecade } from 'date-fns';
 import { EditarConsultasComponent } from './Editar-Consultas/Editar-Consultas.component';
+import { Template_PDFComponent } from '../template_PDF/template_PDF.component';
 
 @Component({
   selector: 'app-tabela-agenda',
@@ -62,6 +63,8 @@ export class TabelaAgendaComponent implements OnInit {
   DadoSelecionaParaExclusao: any = [];
   DadoSelecionadoParaEdicao: any = [];
   DadoSelecionadoParaConclusao: any = [];
+  DadoSelecionadoParaGerarPDF: any = [];
+
   ParametroDeFiltragem: any;
   dataSource: Consulta[] = [];
   DadosDeConsulta: any[] = [];
@@ -78,12 +81,18 @@ export class TabelaAgendaComponent implements OnInit {
       this.BuscarTodosRegistrosDeConsulta();
     }
 
+
+
+
     this.consultaService.DeletarDadosDaTabela$.subscribe((dados) => {
       //deletar Itens
       if (dados === true && this.DadoSelecionaParaExclusao.length > 0) {
         this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao, dados);
       }
     });
+
+
+
 
     this.consultaService.RecarregarTabela$.subscribe((dados) => {
       // Recarregar Tabela
@@ -92,23 +101,37 @@ export class TabelaAgendaComponent implements OnInit {
       }
     });
 
+
+
+
     this.consultaService.EditarDadosDaTabela$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionadoParaEdicao.length === 1) {
         this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao); //Edita dado selecionado
       } else if (dados === true && this.DadoSelecionadoParaEdicao.length > 1) {
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
-          text: 'Selecione apenas um item para editar!',
+          title: 'Selecione apenas um item para editar!...',
+          confirmButtonText: 'Ok',
+        }).then((result) => {
+          if (result.isConfirmed) {
+        this.consultaService.EditarDadosDaTabelaSubject(false);
+        window.location.reload();
+          }
         });
       }
     });
 
+
+
+
     this.consultaService.ConcluidoRegistroTabela$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionadoParaConclusao.length > 0) {
-        this.ConcluirDadosDaTabela();
+        this.ConcluirDadosDaTabela();// concluir dados
       }
     });
+
+
+
 
     this.consultaService.dadosFiltrados$.subscribe((dados) => {
       if (!dados.toString()) {
@@ -116,7 +139,6 @@ export class TabelaAgendaComponent implements OnInit {
         this.consultaService
           .BuscarTodosRegistrosDeConsulta()
           .subscribe((response) => {
-
             this.dataSource = response.content;
           });
       } else if (dados.toString()) {
@@ -124,29 +146,67 @@ export class TabelaAgendaComponent implements OnInit {
         this.filtrandoDadosDoBancoPassadoParametros(dados);
       }
     });
+
+
+    this.consultaService.GeraPDFRegistroTabela$.subscribe((dados) => {
+      if (dados === true && this.DadoSelecionadoParaGerarPDF.length > 0) {
+        this.GerarPDF(this.DadoSelecionadoParaGerarPDF);
+      }
+    });
+
+
+
   }
 
 
-
   ConcluirDadosDaTabela() {
-    for (let i = 0; i < this.DadoSelecionadoParaConclusao.length; i++) {
-        this.consultaService.ConcluirDadosDaTabela(this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta).pipe(take(1))
-        .subscribe(
-            (dados) => { console.log(dados); },
-            (error) => { console.error('Erro ao concluir dados:', error); }
-        );
-    }
-    for (let i = 0; i < this.DadoSelecionadoParaConclusao.length; i++) {
-        this.consultaService.DeletarConsulas(this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta).pipe(take(1))
-        .subscribe(
-            (dados) => { this.RecaregarTabela(); },
-            (error) => { console.error('Erro ao concluir dados:', error); }
-        );
-    }
-}
+    Swal.fire({
+      title: 'Tem certeza que deseja concluir esses registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#5ccf6c',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, Concluir!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        for (let i = 0; i < this.DadoSelecionadoParaConclusao.length; i++) {
+          this.consultaService
+            .ConcluirDadosDaTabela(
+              this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta
+            )
+            .pipe(take(1))
+            .subscribe(
+              (dados) => {
+                console.log(dados);
+              },
+              (error) => {
+                console.error('Erro ao concluir dados:', error);
+              }
+            );
+        }
+        for (let i = 0; i < this.DadoSelecionadoParaConclusao.length; i++) {
+          this.consultaService
+            .DeletarConsulas(
+              this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta
+            )
+            .pipe(take(1))
+            .subscribe(
+              (dados) => {
+                this.RecaregarTabela();
+              },
+              (error) => {
+                console.error('Erro ao concluir dados:', error);
+              }
+            );
+        }
+      }
+      else  if (result.dismiss === Swal.DismissReason.cancel) {
+        this.consultaService.ConcluidoTabelaSubject(false);
+        window.location.reload();
+        }
 
-
-
+    });
+  }
 
   BuscarTodosRegistrosDeConsulta() {
     this.consultaService
@@ -215,25 +275,40 @@ export class TabelaAgendaComponent implements OnInit {
     if (event.checked) {
       this.DadoSelecionaParaExclusao.push(dados);
       this.DadoSelecionadoParaConclusao.push(dados);
-      console.log(this.DadoSelecionadoParaEdicao);
+
 
       if (this.DadoSelecionadoParaEdicao.length >= 1) {
         this.DadoSelecionadoParaEdicao.push(dados);
       } else {
         this.DadoSelecionadoParaEdicao.push(dados);
       }
+
+
+      if (this.DadoSelecionadoParaGerarPDF.length >= 1) {
+        this.DadoSelecionadoParaGerarPDF.push(dados);
+      } else {
+        this.DadoSelecionadoParaGerarPDF.push(dados);
+      }
+
+
+
     } else {
-      this.DadoSelecionadoParaConclusao =
-        this.DadoSelecionadoParaConclusao.filter(
+      this.DadoSelecionadoParaConclusao = this.DadoSelecionadoParaConclusao.filter(
           (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
         );
 
       this.DadoSelecionaParaExclusao = this.DadoSelecionaParaExclusao.filter(
         (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
       );
+
+      this.DadoSelecionadoParaGerarPDF = this.DadoSelecionadoParaGerarPDF.filter(
+        (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
+      );
+
       this.DadoSelecionadoParaEdicao = this.DadoSelecionadoParaEdicao.filter(
         (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
       );
+
     }
   }
 
@@ -250,10 +325,10 @@ export class TabelaAgendaComponent implements OnInit {
 
   DeletarDadoDaTabela(DadoSelecionaParaExclusao: any, dados: Boolean) {
     Swal.fire({
-      title: 'Tem certeza que deseja excluir esses dados?',
+      title: 'Tem certeza que deseja excluir esses registro?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#5ccf6c',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sim, excluir!',
     }).then((result) => {
@@ -280,17 +355,30 @@ export class TabelaAgendaComponent implements OnInit {
         }
       } else {
         this.consultaService.ExcluirDadosDaTabelaSubject(false);
+        window.location.reload();
       }
     });
   }
+
+
+
+  GerarPDF(DadoSelecionadoParaGerarPDF: any) {
+    this.dialog.open(Template_PDFComponent, {
+      width: '800px',
+      height: '550px',
+      data: { DadoSelecionadoParaGerarPDF: DadoSelecionadoParaGerarPDF },
+    });
+  }
+
+
+
+
 
   EditarDadoDaTabela(DadoSelecionadoParaEdicao: any) {
     this.dialog.open(EditarConsultasComponent, {
       width: '800px',
       height: '550px',
-      data: {
-        DadoSelecionadoParaEdicao: DadoSelecionadoParaEdicao,
-      },
+      data: { DadoSelecionadoParaEdicao: DadoSelecionadoParaEdicao },
     });
   }
 }
