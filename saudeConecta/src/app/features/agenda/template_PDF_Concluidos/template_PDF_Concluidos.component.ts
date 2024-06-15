@@ -13,11 +13,11 @@ import * as html2pdf from 'html2pdf.js';
 import { MatCalendar } from '@angular/material/datepicker';
 
 @Component({
-  selector: 'app-template_PDF',
-  templateUrl: './template_PDF.component.html',
-  styleUrls: ['./template_PDF.component.css'],
+  selector: 'app-template_PDF_Concluidos',
+  templateUrl: './template_PDF_Concluidos.component.html',
+  styleUrls: ['./template_PDF_Concluidos.component.css']
 })
-export class Template_PDFComponent implements OnInit, AfterViewInit {
+export class Template_PDF_ConcluidosComponent implements OnInit {
   @ViewChild('calendar') calendar!: MatCalendar<Date>;
 
   dataPadraoBR: string = '';
@@ -28,17 +28,17 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
   activeDate: Date = new Date();
 
   DadosPDFConsulta: any = {
-    ConCodigoConsulta: 0,
-    ConMedico: { medNome: '', medCrm: '', medEmail: '', medEspecialidade: '' },
-    ConPaciente: { paciNome: '', paciCpf: '', paciRg: '', paciEmail: '' },
-    ConDia_semana: '',
-    ConHorario: '',
-    ConData: '',
-    ConObservacoes: '',
-    ConDadaCriacao: '',
-    ConFormaPagamento: 0,
-    ConStatus: 0,
-    ConAdm: 0,
+    ConSttCodigoConsulata: 0,
+    ConSttMedico: { medNome: '', medCrm: '', medEmail: '', medEspecialidade: '' },
+    ConSttPaciente: { paciNome: '', paciCpf: '', paciRg: '', paciEmail: '' },
+    ConSttDia_semana: '',
+    ConSttHorario: '',
+    ConSttData: '',
+    ConSttObservacao: '',
+    ConSttDataCriacao: '',
+    ConSttFormaPagamento: 0,
+    ConSttStatus: 0,
+    ConSttAdm: 0
   };
 
   IdadeMedico: any;
@@ -46,29 +46,29 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
   SexoMedico: any;
   SexoPaciente: any;
 
+
   constructor(
-    public dialogRef: MatDialogRef<Template_PDFComponent>,
+    public dialogRef: MatDialogRef<Template_PDF_ConcluidosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { DadoSelecionadoParaGerarPDF: any },
     private DialogService: DialogService,
     private consultaService: ConsultaService,
     private cdr: ChangeDetectorRef
   ) {
     this.DadosPDFConsulta = this.data.DadoSelecionadoParaGerarPDF[0];
-    console.log(this.DadosPDFConsulta);
-
     this.dataAtual();
-    this.dataISO = this.criarDataComTimeZone(this.DadosPDFConsulta.ConData);
-    this.activeDate = this.criarDataComTimeZone(this.DadosPDFConsulta.ConData); // Set the initial active date
-
-    this.converteValorParaSexo(this.DadosPDFConsulta.ConMedico.medSexo,this.DadosPDFConsulta.ConPaciente.paciSexo);
-
+    this.dataISO = this.criarDataComTimeZone(this.DadosPDFConsulta.ConSttData);
+    this.activeDate = this.criarDataComTimeZone(this.DadosPDFConsulta.ConSttData);
+    this.converteValorParaSexo(this.DadosPDFConsulta.ConSttMedico.medSexo, this.DadosPDFConsulta.ConSttPaciente.paciSexo);
     this.converteDatadeNacimentoParaIdade(
-      this.DadosPDFConsulta.ConMedico.medDataNacimento,
-      this.DadosPDFConsulta.ConPaciente.paciDataNacimento
+      this.DadosPDFConsulta.ConSttMedico.medDataNacimento,
+      this.DadosPDFConsulta.ConSttPaciente.paciDataNacimento
     );
+
+
   }
 
-  ngOnInit() {}
+
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.updateCalendar();
@@ -83,10 +83,6 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
     });
   }
 
-
-
-
-
   GerarPDF() {
     const data = new Date();
     const dataAtual = data.toISOString().split('T')[0];
@@ -94,7 +90,7 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
     if (element) {
       const opt = {
         margin: 0,
-        filename: `Relatório_${this.DadosPDFConsulta.ConCodigoConsulta}_${dataAtual}.pdf`,
+        filename: `Relatório_${this.DadosPDFConsulta.ConSttCodigoConsulata}_${dataAtual}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
@@ -105,22 +101,15 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-
-
-
-
-
-
   dataAtual() {
-    const data = new Date(this.DadosPDFConsulta.ConData + 'T00:00:00');
+    const data = new Date(this.DadosPDFConsulta.ConSttData + 'T00:00:00');
     this.dataPadraoBR = data.toLocaleDateString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
     });
     const dataCriacao = new Date(
-      this.DadosPDFConsulta.ConDadaCriacao + 'T00:00:00'
+      this.DadosPDFConsulta.ConSttDataCriacao + 'T00:00:00'
     );
     this.dataCriacaoPadraoBr = dataCriacao.toLocaleDateString('pt-BR', {
       day: '2-digit',
@@ -180,4 +169,7 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
       this.SexoPaciente = 'Feminino';
     }
   }
+
+
+
 }

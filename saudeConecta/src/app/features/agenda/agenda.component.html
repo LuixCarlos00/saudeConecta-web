@@ -16,8 +16,8 @@
         <button class="btnPesquisar" type="submit" (click)="Pesquisar()">
           Pesquisar
         </button>
-        <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit" (click)="Concludo()">
-          Concluído
+        <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit" (click)="MostraTabelaDeConcluidos()">
+          Finalizandas
         </button>
       </div>
 
@@ -27,35 +27,53 @@
 
       <div class="grid">
 
-
         <div class="divRecarregar">
-          <button title="Recarregar Tabela " class="btnRecarregar" (click)="Recarregar()">
-            <i  style="color: blue;" class="fa-solid fa-rotate-right fa-xl"></i>
+          <button title="Recarregar Tabela" class="btnRecarregar" (click)="Recarregar()">
+            <i style="color: blue;" class="fa-solid fa-rotate-right fa-xl"></i>
           </button>
         </div>
 
         <div class="divDeletar">
-          <button title="Deletar Consulta" class="btnRecarregar" (click)="Deletar()">
+          <button
+            [ngClass]="{ 'disabled-button': !Consulta }"
+            title="Deletar Consulta"
+            class="btnRecarregar"
+            (click)="Deletar()"
+          >
             <i style="color: red;" class="fa-regular fa-trash-can fa-xl"></i>
           </button>
         </div>
 
         <div class="divEditar">
-          <button title="Editar Consulta" class="btnRecarregar" (click)="Editar()">
+          <button
+            [ngClass]="{ 'disabled-button': !Consulta }"
+            title="Editar Consulta"
+            class="btnRecarregar"
+            (click)="Editar()"
+          >
             <i style="color:blue" class="fa-regular fa-pen-to-square fa-xl"></i>
           </button>
         </div>
 
         <div class="divConcluido">
-          <button title="Concluir Consulta" class="btnRecarregar" (click)="Concluido()">
+          <button
+            [ngClass]="{ 'disabled-button': !Consulta }"
+            title="Concluir Consulta"
+            class="btnRecarregar"
+            (click)="Concluido()"
+          >
             <i style="color: green" class="fa-solid fa-square-check fa-xl"></i>
           </button>
         </div>
 
         <div class="divPDF">
-          <button title="Gerar Arquivo de Consulta" class="btnRecarregar" (click)="GerarPDF()">
-
-            <i style="color:blue" class="fa-solid fa-file-pdf  fa-xl"></i>
+          <button
+            [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }"
+            title="Gerar Arquivo de Consulta"
+            class="btnRecarregar"
+            (click)="GerarPDF()"
+          >
+            <i style="color:blue" class="fa-solid fa-file-pdf fa-xl"></i>
           </button>
         </div>
 

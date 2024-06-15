@@ -16,8 +16,8 @@ export class AgendaComponent implements OnInit {
   //
   //
   //
-Consulta:boolean = false
-ConsultaStatus:boolean = false
+  Consulta: boolean = false;
+  ConsultaStatus: boolean = false;
   FormularioAgenda!: FormGroup;
 
   constructor(
@@ -28,71 +28,71 @@ ConsultaStatus:boolean = false
   ) {}
 
   ngOnInit() {
-
-    this.Consulta = true
-    this.ConsultaStatus = false
+    this.Consulta = true;
+    this.ConsultaStatus = false;
     this.FormularioAgenda = this.form.group({
       busca: [''],
     });
+
+
   }
 
   Pesquisar() {
-
-
-
     const busca = this.FormularioAgenda.get('busca')?.value;
-    this.consultaService.FiltraDadosSubject(busca);
-    this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);
+
+    if (this.ConsultaStatus) {
+      this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);
+      this.FormularioAgenda.reset();
+    } else if (this.Consulta) {
+      this.consultaService.FiltraDadosSubject(busca);
+      this.FormularioAgenda.reset();
+    }
   }
 
   Recarregar() {
-
-    this.Consulta = true
-    this.ConsultaStatus = false
-
+    this.Consulta = true;
+    this.ConsultaStatus = false;
     this.FormularioAgenda.reset();
     this.consultaService.RecarregarDadosTabelaSubject(true);
+    this.consultastatusService.RecarregarDadosTabelaStatusSubject(true);
+    window.location.reload();
   }
 
   Concluido() {
-
-    this.Consulta = true
-    this.ConsultaStatus = false
-
+    this.Consulta = true;
+    this.ConsultaStatus = false;
     this.consultaService.ConcluidoTabelaSubject(true);
   }
 
   Editar() {
-
-    this.Consulta = true
-    this.ConsultaStatus = false
-
+    this.Consulta = true;
+    this.ConsultaStatus = false;
     this.consultaService.EditarDadosDaTabelaSubject(true);
-
   }
 
   Deletar() {
-
-    this.Consulta = true
-    this.ConsultaStatus = false
-
+    this.Consulta = true;
+    this.ConsultaStatus = false;
     this.consultaService.ExcluirDadosDaTabelaSubject(true);
   }
 
+
+
+
   GerarPDF() {
-
-    this.Consulta = true
-    this.ConsultaStatus = false
-
-    this.consultaService.Gera_PDF_DeRegistroDaTabelaSubject(true);
+    if (this.ConsultaStatus) {
+      this.consultastatusService.Gera_PDF_DeRegistroDaTabelaSubject(true);
+    } else if (this.Consulta) {
+      this.consultaService.Gera_PDF_DeRegistroDaTabelaSubject(true);
+    }
   }
 
-  Concludo() {
 
-    this.Consulta = false
-    this.ConsultaStatus = true
-
-    }
+  MostraTabelaDeConcluidos() {
+    this.Consulta = false;
+    this.ConsultaStatus = true;
+    this.FormularioAgenda.reset();
+  }
 
 
   voltarParaHome() {

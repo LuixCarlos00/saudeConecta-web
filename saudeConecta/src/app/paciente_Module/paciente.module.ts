@@ -40,6 +40,7 @@ import { EditarConsultasComponent } from '../features/agenda/tabela-agenda/Edita
 import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
 import { TabelaAgendaStatusComponent } from '../features/agenda/tabela-agenda-status/tabela-agenda-status.component';
 import { Template_PDFComponent } from '../features/agenda/template_PDF/template_PDF.component';
+import { Template_PDF_ConcluidosComponent } from '../features/agenda/template_PDF_Concluidos/template_PDF_Concluidos.component';
 
 
 
@@ -66,7 +67,8 @@ import { Template_PDFComponent } from '../features/agenda/template_PDF/template_
     EditarConsultasComponent,
     TabelaEditarMedicosConsultasComponent,
     TabelaAgendaStatusComponent,
-    Template_PDFComponent
+    Template_PDFComponent,
+    Template_PDF_ConcluidosComponent
 
   ],
   exports: [],

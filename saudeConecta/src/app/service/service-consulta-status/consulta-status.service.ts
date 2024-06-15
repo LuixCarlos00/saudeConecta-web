@@ -12,6 +12,7 @@ import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/
 })
 export class ConsultaStatusService {
 
+
   //
   //
   //
@@ -21,7 +22,7 @@ export class ConsultaStatusService {
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();
 
-  private dadosStatusFiltradosSubject = new BehaviorSubject<Consulta[]>([]);
+  private dadosStatusFiltradosSubject = new BehaviorSubject<string | undefined>('');
   dadosStatusFiltrados$ = this.dadosStatusFiltradosSubject.asObservable();
 
   private RecarregarStatusTabelaSubject = new BehaviorSubject<Boolean>(false);
@@ -36,13 +37,16 @@ export class ConsultaStatusService {
   private ConcluidoRegistroTabelaStatusSubject = new BehaviorSubject<Boolean>(false);
   ConcluidoRegistroTabelaStatus$ = this.ConcluidoRegistroTabelaStatusSubject.asObservable();
 
+  private GeraPdfStatusSubject = new BehaviorSubject<Boolean>(false);
+  GeraPDFRegistroTabela$ = this.GeraPdfStatusSubject.asObservable();
+
   constructor(
     private router : Router ,
     private http: HttpClient,
     private tokenService: tokenService) {}
 
 
-    FiltraDadosTabelaStatusSubject(dados: Consulta[]) {
+    FiltraDadosTabelaStatusSubject(dados: string) {
       this.dadosStatusFiltradosSubject.next(dados);
     }
 
@@ -62,6 +66,12 @@ export class ConsultaStatusService {
        this.ConcluidoRegistroTabelaStatusSubject.next(dados);
     }
 
+
+    Gera_PDF_DeRegistroDaTabelaSubject(dados: boolean) {
+     this.GeraPdfStatusSubject.next(dados);
+
+
+    }
 
 
     CriarConsulataStatus(Consulta: Consulta): Observable<Consulta> {

@@ -25,7 +25,9 @@ const routes: Routes = [
 
 
 
-  {path:'',component:LoginComponent, canActivate: [GuardaRotasLogin]},//1
+  {path:'',component:LoginComponent,
+     canActivate: [GuardaRotasLogin]
+    },//1
 
   {path:'cadastroUsuario',component:CadastroUsuarioComponent, canActivate:[GuardaRotasCadastraUsuario]},//2
 

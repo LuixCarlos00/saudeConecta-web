@@ -247,7 +247,8 @@ export class TabelaAgendaComponent implements OnInit {
       this.LimparTabela();
       this.dataSource = resultadoFiltrado;
     } else {
-      this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
+
+      //this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
       this.LimparTabela();
       this.consultaService
         .BuscarTodosRegistrosDeConsulta()
@@ -363,6 +364,7 @@ export class TabelaAgendaComponent implements OnInit {
 
 
   GerarPDF(DadoSelecionadoParaGerarPDF: any) {
+    console.log(DadoSelecionadoParaGerarPDF, 'DadoSelecionadoParaGerarPDF');
     this.dialog.open(Template_PDFComponent, {
       width: '800px',
       height: '550px',

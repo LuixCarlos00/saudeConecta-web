@@ -19,7 +19,7 @@ export class tokenService {
 
 
   constructor( private http: HttpClient,) {
-     this.token();
+
   }
 
 
