@@ -18,12 +18,13 @@
     <mat-icon class="icons">menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="cadastraPaciente()">Cadastrar Paciente <mat-icon><i
-          style="color: rgb(126, 231, 143);" class="fa-solid fa-user fa-xs"></i></mat-icon>
+    <button *ngIf="AcessoPermitido == 'Adiministrador'" mat-menu-item (click)="cadastraNovoUsuario()">Criar Novo Usuário <mat-icon>
+          <i  style="color: rgb(126, 231, 143);"  class="fa-solid fa-users fa-xs"></i>
+        </mat-icon>
     </button>
 
-    <button mat-menu-item (click)="cadastraMedico()">Cadastra Medico <mat-icon><i style="color: rgb(98, 156, 211);"
-          class="fa-solid fa-user-doctor fa-xs"></i></mat-icon>
+    <button *ngIf="AcessoPermitido == 'Adiministrador'"  mat-menu-item (click)="cadastraPaciente()">Cadastra Paciente <mat-icon><i style="color: rgb(98, 156, 211);"
+      class="fa-solid fa-user fa-xs"   ></i></mat-icon>
     </button>
 
     <button mat-menu-item>Quem Somos <mat-icon><i class="fa-solid fa-circle-question fa-xs"></i></mat-icon>

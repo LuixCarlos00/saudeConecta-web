@@ -64,7 +64,8 @@ export class LoginComponent implements OnInit {
           (response) => {
             if (response.body && response.body.token) {
               const token = response.body.token;
-              console.log('Token de acesso:', token);
+
+              this.tokenService.salvarToken(token);
               this.tokenService.token();
               this.router.navigate(['/home']);
             }

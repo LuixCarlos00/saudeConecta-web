@@ -16,12 +16,16 @@ export class CadastroComponent {
     }
 
 
-    cadastraPaciente() {
-      this.router.navigate(['cadastroPaciente'])
+    cadastraSecretaria() {
+      this.router.navigate(['cadastroSecretaria'])
     }
 
     cadastraAdmin() {
-      this.router.navigate(['cadastroadmin'])    
+      this.router.navigate(['cadastroadmin'])
       }
+
+      voltarParaHome() {
+        this.router.navigate(['home'])
+        }
 
 }

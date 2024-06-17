@@ -47,7 +47,7 @@ export class TabelaAgendaStatusComponent implements OnInit {
     PaciEmail: '',
     PaciTelefone: '',
     endereco: 0,
-    usuario: 0,
+
   };
 
   displayedColumns = [

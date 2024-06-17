@@ -10,6 +10,11 @@ import { tokenService } from '../../Token/token.service';
   styleUrls: ['./cabecalho.component.css'],
 })
 export class CabecalhoComponent implements OnInit {
+  //
+  //
+  //
+  AcessoPermitido: string = '';
+
   Usuario: any;
 
   constructor(
@@ -19,15 +24,12 @@ export class CabecalhoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
-
-
+    this.tokenService.token();
     this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
-      if (paciente)
-        this.Usuario = paciente;
-      console.log(paciente,'paciente');
-
+      if (paciente) this.Usuario = paciente;
+      console.log(paciente, 'paciente');
     });
+
 
     this.estaLogado();
   }
@@ -49,12 +51,16 @@ export class CabecalhoComponent implements OnInit {
     this.router.navigate(['trocaSenha']);
   }
 
-  cadastraMedico() {
+  cadastraPaciente() {
+    this.router.navigate(['cadastroPaciente']);
+  }
+
+  cadastraNovoUsuario() {
     this.router.navigate(['cadastroUsuario']);
   }
 
-  cadastraPaciente() {
-    this.router.navigate(['cadastroUsuario']);
+  TipoUsuario(): any {
+    //return this.ModelService.pegarTipoUsuario();
   }
 
   /// colocar o cadastro de usuario antes de cadastra medico

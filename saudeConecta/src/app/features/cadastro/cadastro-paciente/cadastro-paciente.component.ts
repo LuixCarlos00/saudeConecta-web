@@ -1,10 +1,9 @@
-
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
-import {   Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 import { ModelService } from '../../../service/Model_service/Model.service';
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
@@ -28,7 +27,7 @@ export class CadastroPacienteComponent implements OnInit {
   FormularioUsuario!: FormGroup;
   IdUsuario: number = 0;
 
-  ufOptions =  ufOptions;
+  ufOptions = ufOptions;
 
   NovoUsuario: any;
 
@@ -42,7 +41,6 @@ export class CadastroPacienteComponent implements OnInit {
     PaciEmail: '',
     PaciTelefone: '',
     endereco: 0,
-    usuario: 0,
   };
   Endereco: Endereco = {
     EndCodigo: 0,
@@ -60,10 +58,10 @@ export class CadastroPacienteComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private usuariosService: UsuariosService,
-    private ModelService :ModelService,
-    private route : Router,
-    private PacienteService :PacientesService,
-    private modelService: ModelService,
+    private ModelService: ModelService,
+    private route: Router,
+    private PacienteService: PacientesService,
+    private modelService: ModelService
   ) {
     this.ModelService.iniciarObservacaoDadosUsuario();
   }
@@ -74,7 +72,6 @@ export class CadastroPacienteComponent implements OnInit {
         this.NovoUsuario = value;
       }
     });
-
 
     this.FormularioPaciente = this.form.group({
       nome: ['', Validators.required],
@@ -89,15 +86,14 @@ export class CadastroPacienteComponent implements OnInit {
     this.FormularioEndereco = this.form.group({
       nacionalidade: ['', Validators.required],
       estado: ['', Validators.required],
-      uf: ['',Validators.maxLength(2)],
-      cep: ['',Validators.required],
+      uf: ['', Validators.maxLength(2)],
+      cep: ['', Validators.required],
       rua: ['', Validators.required],
       municipio: ['', Validators.required],
       bairro: ['', Validators.required],
       numero: ['', Validators.required],
       complemento: [''],
     });
-
   }
 
   ngOnDestroy(): void {
@@ -107,20 +103,14 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   cadastra() {
-
-
     if (this.FormularioEndereco.valid && this.FormularioPaciente.valid) {
-
       this.usuariosService.cadastraEndereco(this.Endereco).subscribe(
         (endereco: Endereco) => {
           const EnderecoID = endereco.EndCodigo as number;
           this.Paciente.endereco = EnderecoID;
-          this.Paciente.usuario = this.NovoUsuario.id;
-          console.log('dados ', this.Paciente);
 
-          this.PacienteService.cadastrarPaciente(this.Paciente)
-          .subscribe(
-            (dados) => {
+          this.PacienteService.cadastrarPaciente(this.Paciente).subscribe(
+            () => {
               Swal.fire({
                 icon: 'success',
                 title: 'OK',
@@ -135,44 +125,51 @@ export class CadastroPacienteComponent implements OnInit {
                   }
                 }
               });
-
             },
             (erro) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Erro ao cadastrar paciente',
-              });
-              console.error('Erro ao cadastrar paciente:', erro);
+              // Tratamento de erro ao cadastrar paciente
+              this.handleHttpError(erro);
             }
           );
-
         },
         (erro) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Erro ao cadastrar Endereco',
-          });
-          console.error('Erro ao cadastrar Endereco:', erro);
+          // Tratamento de erro ao cadastrar endereço
+          this.handleHttpError(erro);
         }
       );
-
     } else {
-      (errors: any)=>{
-        Swal.fire({
-          icon: 'warning',
-          title: 'Oops...',
-          text: 'Dados do formulario invalido \n Por favor verifique os dados informados.',
-        });
-        console.log('Erros', errors);
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'Dados do formulário inválido. Por favor, verifique os dados informados.',
+      });
+    }
+  }
+
+  private handleHttpError(error: any) {
+    console.log(error); // Exibir o erro completo no console para depuração
+
+    let errorMessage = 'Erro desconhecido ao realizar o cadastro.';
+
+    if (error.error) {
+      if (error.error.includes('Duplicate entry') && error.error.includes('paciente.PaciEmail_UNIQUE')) {
+        errorMessage = 'Já existe um paciente registrado com esse email.';
+      } else if (error.error.includes('Duplicate entry') && error.error.includes('paciente.PaciCpf_UNIQUE')) {
+        errorMessage = 'Já existe um paciente registrado com esse CPF.';
+      } else if (error.error.includes('Duplicate entry') && error.error.includes('paciente.PaciRg_UNIQUE')) {
+        errorMessage = 'Já existe um paciente registrado com esse RG.';
+      } else {
+        errorMessage = error.error; // Usar a mensagem de erro específica retornada pelo servidor
       }
     }
 
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: errorMessage,
+    });
+
+    console.error('Erro ao cadastrar:', error);
   }
 
-
-
-
 }
-

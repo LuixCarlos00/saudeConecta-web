@@ -28,14 +28,14 @@
         <label for="cpf">
           <font color="#FF0000"><b>* </b></font> CPF :
         </label>
-        <input [(ngModel)]="Paciente.PaciCpf" placeholder="12345678900" maxlength="14" formControlName="cpf" type="text"
+        <input [(ngModel)]="Paciente.PaciCpf" placeholder="12345678900" maxlength="11" formControlName="cpf" type="text"
           id="cpf" name="cpf" required>
       </div>
       <div class="form-group">
         <label for="rg">
           <font color="#FF0000"><b>* </b></font> RG :
         </label>
-        <input placeholder="XX__-___-___" maxlength="15" [(ngModel)]="Paciente.PaciRg" formControlName="rg" type="text"
+        <input placeholder="XX__-___-___" maxlength="12" [(ngModel)]="Paciente.PaciRg" formControlName="rg" type="text"
           id="rg" name="rg" required>
       </div>
       <div class="form-group">

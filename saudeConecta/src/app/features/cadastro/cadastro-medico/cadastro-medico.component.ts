@@ -21,6 +21,7 @@ import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
   styleUrl: './cadastro-medico.component.css',
 })
 export class CadastroMedicoComponent {
+
   //
   //
   //
@@ -63,7 +64,7 @@ export class CadastroMedicoComponent {
 
   constructor(
     private form: FormBuilder,
-    private modelService: ModelService,
+    public modelService: ModelService,
     private usuarioService: UsuariosService,
     private MedicosService: MedicosService,
 
@@ -83,7 +84,7 @@ export class CadastroMedicoComponent {
       nome: ['', Validators.required],
       sexo: ['', Validators.required],
       dataNascimento: ['', Validators.required],
-      cpf: ['', Validators.required],
+      cpf: ['', Validators.required ],
       crm: ['', Validators.required],
       rg: ['', Validators.required],
       Especialidade: ['', Validators.required],
@@ -141,22 +142,15 @@ export class CadastroMedicoComponent {
               });
             },
             (erro) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Erro ao se cadastrar ',
-              });
-              console.error('Erro ao cadastrar medico:', erro);
+              // Tratamento de erro ao cadastrar paciente
+              this.handleHttpError(erro);
+
             }
           );
         },
         (erro) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Erro ao cadastrar Endereco',
-          });
-          console.error('Erro ao cadastrar Endereco:', erro);
+          // Tratamento de erro ao cadastrar endereço
+          this.handleHttpError(erro);
         }
       );
     } else {
@@ -164,10 +158,42 @@ export class CadastroMedicoComponent {
         Swal.fire({
           icon: 'warning',
           title: 'Oops...',
-          text: 'Dados do formulario invalido \n Por favor verifique os dados informados.',
+          text: 'Dados do formulário inválido. Por favor, verifique os dados informados.',
         });
-        console.log('Erros', errors);
+
       };
     }
   }
+
+
+  private handleHttpError(error: any) {
+    console.log(error); // Exibir o erro completo no console para depuração
+
+    let errorMessage = 'Erro desconhecido ao realizar o cadastro.';
+
+    if (error.error) {
+      if (error.error.includes('Duplicate entry') && error.error.includes('medico.MedCpf_UNIQUE')) {
+        errorMessage = 'Já existe um Medico registrado com esse email.';
+      } else if (error.error.includes('Duplicate entry') && error.error.includes('medico.MedCpf_UNIQUE')) {
+        errorMessage = 'Já existe um Medico registrado com esse CPF.';
+      } else if (error.error.includes('Duplicate entry') && error.error.includes('medico.MedRg_UNIQUE')) {
+        errorMessage = 'Já existe um Medico registrado com esse RG.';
+      } else if (error.error.includes('Duplicate entry') && error.error.includes(' medico.MedCrm_UNIQUE')) {
+        errorMessage = 'Já existe um Medico registrado com esse CRM.';
+      } else {
+        errorMessage = error.error; // Usar a mensagem de erro específica retornada pelo servidor
+      }
+    }
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: errorMessage,
+    });
+  }
+
+
+  voltarParaHome() {
+    this.route.navigate(['cadastro']);
+    }
 }

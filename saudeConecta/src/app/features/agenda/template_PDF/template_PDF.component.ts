@@ -41,10 +41,11 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
     ConAdm: 0,
   };
 
-  IdadeMedico: any;
-  IdadePaciente: any;
-  SexoMedico: any;
-  SexoPaciente: any;
+  IdadeMedico:number = 0;
+  IdadePaciente:number = 0;
+  SexoMedico: string = '';
+  SexoPaciente: string = '';
+  NivelDeHierarquico: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<Template_PDFComponent>,
@@ -66,7 +67,10 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
       this.DadosPDFConsulta.ConMedico.medDataNacimento,
       this.DadosPDFConsulta.ConPaciente.paciDataNacimento
     );
+
+    this.formataNivelHierarquico(this.DadosPDFConsulta.ConAdm.admStatus);
   }
+
 
   ngOnInit() {}
 
@@ -180,4 +184,22 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
       this.SexoPaciente = 'Feminino';
     }
   }
+
+  formataNivelHierarquico(ConAdm: any) {
+
+   const adm = ConAdm;
+
+   console.log(adm,'adm');
+
+    if (adm == 1) {
+      this.NivelDeHierarquico = 'Administrador(a)';
+    } else if (adm == 2) {
+      this.NivelDeHierarquico = 'Secretário(a)';
+    } else if (adm == 3) {
+      this.NivelDeHierarquico = 'Paciente';
+    }
+  }
+
+
+
 }

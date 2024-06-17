@@ -43,6 +43,7 @@ export class CadastroUsuarioComponent {
           this.usuariosService.changeNovoUsuariocadastrado(
             dados.body.usuarioView
           );
+console.log(dados.body.usuarioView, 'o token');
 
           this.router.navigate(['cadastro']);
         },

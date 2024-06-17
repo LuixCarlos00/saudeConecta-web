@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cadastro-adm.component.css'],
 })
 export class CadastroAdmComponent implements OnInit {
+
   FormularioADM!: FormGroup;
   Administracao: Adiministrador = {
     AdmCodigo: 0,
@@ -73,7 +74,7 @@ export class CadastroAdmComponent implements OnInit {
     console.log(this.Administracao);
 
     const codigoAutorizacao = this.FormularioADM.get('codAutorizacao')?.value;
-    this.usuarioAdmService.cadastrarUsuarioADM(codigoAutorizacao).subscribe(
+    this.usuarioAdmService.VerificarCodicodeAutorizacaoParaCadastraAdm(codigoAutorizacao).subscribe(
       (dados) => {
         this.usuarioAdmService
           .cadastrarAdministrador(this.Administracao)
@@ -85,18 +86,13 @@ export class CadastroAdmComponent implements OnInit {
                 text: 'Cadastro realizado com sucesso.',
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.router.navigate(['']);
-                  this.tokenService.removeToken();
+                  this.router.navigate(['home']);
+
                 }
               });
-
             },
             (error) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: `Erro ao cadastrar.\n ${error}`,
-              });
+            this.handleHttpError(error); // Usando handleHttpError para lidar com erros
             }
           );
       },
@@ -109,4 +105,33 @@ export class CadastroAdmComponent implements OnInit {
       }
     );
   }
+
+
+
+
+  private handleHttpError(error: any) {
+    console.log(error); // Exibir o erro completo no console para depuração
+
+    let errorMessage = 'Erro desconhecido ao realizar o cadastro.';
+
+    if (error.error) {
+      if (error.error.includes('Duplicate entry') && error.error.includes('administrador.AdmEmail_UNIQUE')) {
+        errorMessage = 'Já existe um(a) administrador(a) registrado com esse email.';
+      }   else {
+        errorMessage = error.error;
+      }
+    }
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: errorMessage,
+    });
+
+    console.error('Erro ao cadastrar:', error);
+  }
+
+  voltarParaHome() {
+    this.router.navigate(['cadastro']);
+    }
 }

@@ -8,5 +8,5 @@ export interface Paciente {
   PaciEmail: string;
   PaciTelefone: string;
   endereco: number;
-  usuario: number;
+
 }

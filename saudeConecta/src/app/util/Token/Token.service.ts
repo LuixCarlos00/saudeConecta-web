@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { HttpClient } from '@angular/common/http';
 import { Paciente } from '../variados/interfaces/paciente/paciente';
 import { Adiministrador } from '../variados/interfaces/administrado/adiministrador';
+import { Medico } from '../variados/interfaces/medico/medico';
 
 const KEY: string = 'authToken';
 const authTwof: string = 'authTwof';
@@ -25,7 +26,7 @@ export class tokenService {
 
   private apiUrl = 'http://localhost:8080';
 
-  private UsuarioLogadoSubject = new BehaviorSubject<Adiministrador | null>(null);
+  private UsuarioLogadoSubject = new BehaviorSubject<any | null>(null);
   UsuarioLogadoValue$ = this.UsuarioLogadoSubject.asObservable();
 
   private Usuario = {
@@ -107,10 +108,13 @@ export class tokenService {
 token (){
   const token = this.retornaToken();
   this.Usuario = jwtDecode(token);
+  console.log(this.Usuario, 'token');
+
   this.Usuario.id
 
 
-  this.buscarPorUsuario(this.Usuario.id)
+  this.buscarPorUsuarioAdministrador(this.Usuario.id)
+  this.buscarPorUsuarioMedico(this.Usuario.id)
 
 //caso venha dar errado tente comentar a linha e descomentar , tbm tente fexha o VS e abrir novamente
 }
@@ -118,13 +122,28 @@ token (){
 
 
 
-buscarPorUsuario(id: number) {
+buscarPorUsuarioAdministrador(id: number) {
   const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.retornaToken()}` };
   const options = { headers, withCredentials: true };
 
   this.http.get<Adiministrador>(`${this.apiUrl}/administrador/buscarIdDeUsusario/${id}`, options)
     .subscribe(
       (Paciente: Adiministrador) => {
+        this.UsuarioLogadoSubject.next(Paciente);
+      },
+      (error) => {
+        console.error('Erro ao buscar usuário:', error);
+      }
+    );
+}
+
+buscarPorUsuarioMedico(id: number) {
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.retornaToken()}` };
+  const options = { headers, withCredentials: true };
+
+  this.http.get<Medico>(`${this.apiUrl}/medico/buscarIdDeUsusario/${id}`, options)
+    .subscribe(
+      (Paciente: Medico) => {
         this.UsuarioLogadoSubject.next(Paciente);
       },
       (error) => {

@@ -20,6 +20,7 @@ import { HistoricoComponent } from './features/historico/historico.component';
 import { TrocaSenhaComponent } from './features/troca-senha/troca-senha.component';
 import { CadastroAdmComponent } from './features/cadastro/cadastro-adm/cadastro-adm.component';
 import { GuardaRotasHome } from './features/home/guards/GuardaRotasHome';
+import { CadastroSecretariaComponent } from './features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
 
 const routes: Routes = [
 
@@ -39,6 +40,8 @@ const routes: Routes = [
   {path:'cadastroPaciente',component:CadastroPacienteComponent, canActivate:[GuardaRotasCadastroPaciente]},//4
 
   {path:'cadastroMedico',component:CadastroMedicoComponent, canActivate:[GuardaRotasCadastroPaciente]},//4
+
+  {path:'cadastroSecretaria',component:CadastroSecretariaComponent, canActivate:[GuardaRotasCadastroPaciente]},//4
 
 
   {path:'recuperaCadastro',component:RecuperaCadastroComponent,  },//4

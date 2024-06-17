@@ -46,7 +46,7 @@ export class TabelaAgendaComponent implements OnInit {
     PaciEmail: '',
     PaciTelefone: '',
     endereco: 0,
-    usuario: 0,
+
   };
 
   displayedColumns = [
@@ -213,6 +213,8 @@ export class TabelaAgendaComponent implements OnInit {
       .BuscarTodosRegistrosDeConsulta()
       .pipe(take(1))
       .subscribe((response) => {
+        console.log(response,'consulta');
+
         this.DadosDeConsulta = [];
         this.DadosDeConsulta.push(...response.content);
         this.dataSource = response.content;

@@ -41,6 +41,7 @@ import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/tabela
 import { TabelaAgendaStatusComponent } from '../features/agenda/tabela-agenda-status/tabela-agenda-status.component';
 import { Template_PDFComponent } from '../features/agenda/template_PDF/template_PDF.component';
 import { Template_PDF_ConcluidosComponent } from '../features/agenda/template_PDF_Concluidos/template_PDF_Concluidos.component';
+import { CadastroSecretariaComponent } from '../features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
 
 
 
@@ -53,6 +54,7 @@ import { Template_PDF_ConcluidosComponent } from '../features/agenda/template_PD
     CadastroMedicoComponent,
     CadastroComponent,
     CadastroUsuarioComponent,
+    CadastroSecretariaComponent,
     PesquisaMedicosComponent,
     RecuperaCadastroComponent,
     HomeComponent,
