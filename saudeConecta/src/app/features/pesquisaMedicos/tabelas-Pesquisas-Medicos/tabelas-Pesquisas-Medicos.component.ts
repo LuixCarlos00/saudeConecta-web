@@ -1,10 +1,9 @@
-import { Route, Router } from '@angular/router';
-import { MESSAGES_CONTAINER_ID } from '@angular/cdk/a11y';
-import { Medico } from './../../../util/variados/interfaces/medico/medico';
-import { PesquisaMedicosComponent } from './../pesquisaMedicos.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
-import { ModelService } from 'src/app/service/Model_service/Model.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Medico } from './../../../util/variados/interfaces/medico/medico';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 
 @Component({
@@ -12,49 +11,31 @@ import { MedicosService } from 'src/app/service/medicos/medicos.service';
   templateUrl: './tabelas-Pesquisas-Medicos.component.html',
   styleUrls: ['./tabelas-Pesquisas-Medicos.component.css'],
 })
-export class TabelasPesquisasMedicosComponent implements OnInit {
-  private MedicoCidade: Medico[] | undefined;
-  private MedicoCRM: Medico[] | undefined;
-  private MedicoNome: Medico[] | undefined;
-  private TodosMedicos: Medico[];
-  private MedicoEspecialidade: Medico[] | undefined;
-  clickedRows = new Set<any>();
+export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
+
+
 
   dataSource: Medico[] = [];
   highValue: number = 5;
-  lowValue!: number;
+  lowValue: number = 0;
+  private subscription: Subscription = new Subscription();
+  clickedRows = new Set<Medico>();
 
-  constructor(
-    private medicosService: MedicosService,
-    private PesquisaMedicosComponent: PesquisaMedicosComponent,
-    private route: Router
-  ) {
-    this.MedicoCidade = medicosService.MedicoCidade;
-    this.MedicoCRM = medicosService.MedicoCRM;
-    this.MedicoNome = medicosService.MedicoNome;
-    this.MedicoEspecialidade = medicosService.MedicoEspecialidade;
-    this.TodosMedicos = medicosService.TodosMedicos;
+  @Input() dadosMedico: any;
+  @Output() selecionaMedico = new EventEmitter<any>();
+  @Output() fechar = new EventEmitter<void>();
 
+  constructor(private medicosService: MedicosService, private router: Router) {}
 
-    this.dataSource = []
+  ngOnInit() {
 
-
-    this.MedicoCidade ||
-      this.MedicoCRM ||
-      this.MedicoNome ||
-      this.MedicoEspecialidade;
-
-    this.dataSource = [
-      ...(this.MedicoCidade ?? []),
-      ...(this.MedicoCRM ?? []),
-      ...(this.MedicoNome ?? []),
-      ...(this.MedicoEspecialidade ?? []),
-      ...(this.TodosMedicos ?? []),
-    ];
+    this.dataSource = this.dadosMedico;
 
   }
 
-  ngOnInit() {}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   getPaginatorData(event: PageEvent): PageEvent {
     this.lowValue = event.pageIndex * event.pageSize;
@@ -65,28 +46,17 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'Especialidade', 'MarcaConsulta'];
 
-  marcarConsulta(elemento: Medico, index: number) {
-    this.route.navigate(['addconsulta']);
-    this.medicosService.changeMedicoData(elemento);
+  marcarConsulta(elemento: Medico) {
+    this.fecharTabela()
+    this.selecionaMedico.emit(elemento )
   }
 
-  pesquisarNovamente() {
-    const vazia: any[] = [];
-    this.PesquisaMedicosComponent.mostrarCamposPesquisa(true);
-    this.MedicoCidade= [];
-    this.MedicoCRM= [];
-    this.MedicoNome= [];
-    this.MedicoEspecialidade= [];
-    this.TodosMedicos= [];
-    this.dataSource = [];
-    this.medicosService.LimparDadosPesquisa();
-
-
-  }
 
   clicked(Medico: Medico) {
-    this.medicosService.changeMedicoData(Medico);
-    this.PesquisaMedicosComponent.MostraDadosMedicos = true;
-    this.PesquisaMedicosComponent.Medico = Medico;
+    this.selecionaMedico.emit(Medico);
+  }
+
+  fecharTabela() {
+    this.fechar.emit();
   }
 }

@@ -1,5 +1,15 @@
-<app-cabecalho></app-cabecalho>
-<main >
+<main *ngIf="estaLogado(); else login">
+  <div class="content-container" (click)="closeSidebar($event)">
+    <app-barra-Latera *ngIf=" clicou"></app-barra-Latera>
+    <button
+      style="border: hidden; margin-left: 20px; margin-top: 20px; z-index:2;"
+      class="botao-mobileMenu"
+      (click)="toggleNav($event)">
+      <i style="font-size: xx-large" class="fa-solid fa-bars fa-2xl"></i>
+    </button>
+    <br>
     <router-outlet></router-outlet>
+    <br>
+  </div>
 </main>
-
+<ng-template #login><app-login></app-login></ng-template>

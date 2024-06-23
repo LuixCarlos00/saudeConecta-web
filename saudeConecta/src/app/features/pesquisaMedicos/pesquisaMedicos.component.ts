@@ -1,10 +1,11 @@
+import { Medico } from './../../util/variados/interfaces/medico/medico';
 import { Route, Router } from '@angular/router';
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
-
+import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciamento.service';
 
 @Component({
   selector: 'app-pesquisaMedicos',
@@ -14,157 +15,117 @@ import { MedicosService } from 'src/app/service/medicos/medicos.service';
 export class PesquisaMedicosComponent implements OnInit {
 
 
-
-
-
-
+  showResultadoMedico: boolean = false;
+  dadosMedico: any;
+  MedicoEscolhido!: any;
   FormularioPesquisa!: FormGroup;
 
-
-  mostraTabela: boolean = false;
-  @Input() MostraCamposDePEsquisa: boolean = true;
-  @Input() MostraDadosMedicos : boolean = false;
+  @Input() MostraDadosMedicos: boolean = false;
   @Input() Medico!: any;
-
-
-  mostrarCamposPesquisa(value: boolean) {
-    this.mostraTabela = false;
-    this.MostraCamposDePEsquisa = value;
-    this.MostraDadosMedicos = false;
-  }
 
   constructor(
     private form: FormBuilder,
     private medicosService: MedicosService,
     private DialogService: DialogService,
-
-    private router: Router
-
-  ) {
-
-  }
+    private router: Router,
+    private gerenciamentoService :GerenciamentoService
+  ) {}
 
   ngOnInit() {
-    this.medicosService.MedicoValue$.subscribe(medico => {
-      if (medico) {
-      this.Medico = medico;
-      }
-    });
-
-
-
-
     this.FormularioPesquisa = this.form.group({
       Pesquisa: ['', Validators.required],
       FiltroPesquisaMedico: ['', Validators.required],
     });
-
-
-
-
-    this.mostraTabela = this.medicosService.MostraCamposDePEsquisa;
   }
 
   PesquisarMedicosFiltro() {
-
-
     const pesquisa: string = this.FormularioPesquisa.get('Pesquisa')?.value;
-    const FiltroPesquisa: number = this.FormularioPesquisa.get('FiltroPesquisaMedico')?.value;
+    const FiltroPesquisa: number = this.FormularioPesquisa.get(
+      'FiltroPesquisaMedico'
+    )?.value;
 
     if (FiltroPesquisa === 1) {
       this.medicosService.buscarListaMedicosPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-            this.mostraTabela = true;
-            this.MostraCamposDePEsquisa = false;
+            this.showResultadoMedico = true;
+            this.dadosMedico = dados;
           } else {
             this.exibirMensagemErro();
           }
         },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
+        () => this.exibirMensagemErro()
       );
     } else if (FiltroPesquisa === 2) {
-      this.medicosService.buscarListaMedicosPorCRM (pesquisa).subscribe(
+      this.medicosService.buscarListaMedicosPorCRM(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-            this.mostraTabela = true;
-            this.MostraCamposDePEsquisa = false;
+            this.showResultadoMedico = true;
+            this.dadosMedico = dados;
           } else {
             this.exibirMensagemErro();
           }
         },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
+        () => this.exibirMensagemErro()
       );
     } else if (FiltroPesquisa === 3) {
       this.medicosService.buscarListaMedicosPorCidade(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
-            this.mostraTabela = true;
-            this.MostraCamposDePEsquisa = false;
+            this.showResultadoMedico = true;
+            this.dadosMedico = dados;
           } else {
             this.exibirMensagemErro();
           }
         },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
+        () => this.exibirMensagemErro()
       );
     } else if (FiltroPesquisa === 4) {
       this.medicosService
         .buscarListaMedicosPorEspecialidade(pesquisa)
         .subscribe(
           (dados) => {
-            console.log(dados);
-
             if (dados && dados.length > 0) {
-
-              this.mostraTabela = true;
-              this.MostraCamposDePEsquisa = false;
+              this.showResultadoMedico = true;
+              this.dadosMedico = dados;
             } else {
-
               this.exibirMensagemErro();
             }
           },
-          (erros) => {
+          () => this.exibirMensagemErro()
+        );
+    } else if (FiltroPesquisa === 5) {
+      this.medicosService.buscarPorTodosOsMedicos().subscribe(
+        (dados) => {
+          if (dados && dados.length > 0) {
+            this.showResultadoMedico = true;
+            this.dadosMedico = dados;
+          } else {
             this.exibirMensagemErro();
           }
-        );
-      } else if (FiltroPesquisa === 5) {
-        this.medicosService
-          .buscarPorTodosOsMedicos()
-          .subscribe(
-            (dados) => {
-
-              if (dados && dados.length > 0) {
-
-                this.mostraTabela = true;
-                this.MostraCamposDePEsquisa = false;
-              } else {
-
-                this.exibirMensagemErro();
-              }
-            },
-            (erros) => {
-              this.exibirMensagemErro();
-            }
-          );
-      }
-
+        },
+        () => this.exibirMensagemErro()
+      );
+    }
   }
 
-
-
-
-
   exibirMensagemErro() {
-    this.DialogService.exibirMensagemErro( )
+    this.DialogService.exibirMensagemErro();
   }
 
   voltarParaHome() {
-    this.router.navigate(['/home'])
-    }
+    this.router.navigate(['/home']);
+  }
+
+  fecharTabela() {
+    this.showResultadoMedico = false;
+  }
+
+  MedicoSelecionado(event: any) {
+    this.MedicoEscolhido = event;
+    this.gerenciamentoService.setMedicoEscolhido(event); // Adicionado
+  }
+  pesquisarNovamente() {
+    throw new Error('Method not implemented.');
+  }
 }

@@ -7,6 +7,11 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+Deslogar() {
+throw new Error('Method not implemented.');
+}
+
+
 
   constructor(private router :Router) {}
 
@@ -20,5 +25,9 @@ export class HomeComponent {
   VerificarHistorico() {
     this.router.navigate(['historico'])
     }
+
+    redirecionamentoDePaginas(arg0: string) {
+      throw new Error('Method not implemented.');
+      }
 
 }

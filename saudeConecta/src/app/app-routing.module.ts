@@ -14,13 +14,14 @@ import { RecuperaCadastroComponent } from './features/recupera-Cadastro/recupera
 
 import { HomeComponent } from './features/home/home.component';
 import { PesquisaMedicosComponent } from './features/pesquisaMedicos/pesquisaMedicos.component';
-import { CriaConsultaComponent } from './features/cria-consulta/cria-consulta.component';
+
 import { AgendaComponent } from './features/agenda/agenda.component';
 import { HistoricoComponent } from './features/historico/historico.component';
 import { TrocaSenhaComponent } from './features/troca-senha/troca-senha.component';
 import { CadastroAdmComponent } from './features/cadastro/cadastro-adm/cadastro-adm.component';
 import { GuardaRotasHome } from './features/home/guards/GuardaRotasHome';
 import { CadastroSecretariaComponent } from './features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
+import { GerenciamentoComponent } from './features/gerenciamento/gerenciamento.component';
 
 const routes: Routes = [
 
@@ -48,9 +49,11 @@ const routes: Routes = [
 
   {path:'home',component:HomeComponent, canActivate: [GuardaRotasHome] },//5
 
-  {path:'pesquisar',component:PesquisaMedicosComponent,  },//6
+  {path:'gerenciamento',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },//5
 
-  {path:'addconsulta',component:CriaConsultaComponent,  },//7
+  {path:'agenda',component:PesquisaMedicosComponent,  },//6
+
+  //{path:'addconsulta',component:CriaConsultaComponent,  },//7
 
   {path:'agenda',component:AgendaComponent,  },//8
 

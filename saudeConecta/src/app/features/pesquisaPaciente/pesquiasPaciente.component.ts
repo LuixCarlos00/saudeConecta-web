@@ -4,38 +4,22 @@ import { DialogService } from './../../util/variados/dialogo-confirmação/dialo
 import { ConsultaService } from '../../service/service-consulta/consulta.service';
 import { HoradaConsulta } from './../../util/variados/options/options';
 import { tokenService } from 'src/app/util/Token/token.service';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { Component, OnInit } from '@angular/core';
-
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import Swal from 'sweetalert2';
-
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
-
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
-import { style } from '@angular/animations';
+import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciamento.service';
 
 @Component({
-  selector: 'app-cria-consulta',
-  templateUrl: './cria-consulta.component.html',
-  styleUrls: ['./cria-consulta.component.css'],
+  selector: 'app-pesquias-Paciente',
+  templateUrl: './pesquiasPaciente.component.html',
+  styleUrls: ['./pesquiasPaciente.component.css'],
 })
-export class CriaConsultaComponent implements OnInit {
-  //
-  //
-  //
+export class PesquiasPacienteComponent implements OnInit {
   DiaDaSemana: string = '';
-  horario: string = 'Horario de Atendimento: 08:00 a 16:30';
-  DiasDeFunionamento = [
-    'Segundas ',
-    'Terças ',
-    'Quartas ',
-    'Quintas e  Sextas',
-  ];
-
   Medico!: any;
   private Adiministrador!: Adiministrador;
   PacienteEscolhido!: any;
@@ -54,16 +38,28 @@ export class CriaConsultaComponent implements OnInit {
     private tokenService: tokenService,
     private ServiceConsultaMedicosService: ConsultaService,
     private DialogService: DialogService,
-    private PacientesService: PacientesService
+    private PacientesService: PacientesService,
+    private gerenciamentoService: GerenciamentoService
   ) {
-    this.medicosService.MedicoValue$.subscribe((medico) => {
-      if (medico) this.Medico = medico;
-    });
-
+    this.tokenService.token();
     this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
       if (paciente) {
         this.Adiministrador = paciente;
-        console.log(this.Adiministrador);
+        console.log(this.Adiministrador, 'adm');
+      }
+    });
+
+    this.gerenciamentoService.medicoEscolhido$.subscribe((medico) => {
+      if (medico) {
+        this.Medico = medico;
+        console.log('Médico selecionado:', this.Medico);
+      }
+    });
+
+    this.gerenciamentoService.pacienteEscolhido$.subscribe((paciente) => {
+      if (paciente) {
+        this.PacienteEscolhido = paciente;
+        console.log('Paciente selecionado:', this.PacienteEscolhido);
       }
     });
   }
@@ -78,7 +74,6 @@ export class CriaConsultaComponent implements OnInit {
       FiltroPesquisaPaciente: ['', Validators.required],
     });
   }
-
 
   PesquisarPacientes() {
     const pesquisa: string =
@@ -97,9 +92,7 @@ export class CriaConsultaComponent implements OnInit {
             this.exibirMensagemErro();
           }
         },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
+        () => this.exibirMensagemErro()
       );
     } else if (FiltroPesquisaPaciente === 2) {
       this.PacientesService.buscarListaPacientesPorCPF(pesquisa).subscribe(
@@ -111,9 +104,7 @@ export class CriaConsultaComponent implements OnInit {
             this.exibirMensagemErro();
           }
         },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
+        () => this.exibirMensagemErro()
       );
     } else if (FiltroPesquisaPaciente === 3) {
       this.PacientesService.buscarListaPacientesPor_RG(pesquisa).subscribe(
@@ -125,15 +116,11 @@ export class CriaConsultaComponent implements OnInit {
             this.exibirMensagemErro();
           }
         },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
+        () => this.exibirMensagemErro()
       );
     } else if (FiltroPesquisaPaciente === 4) {
       this.PacientesService.buscarListaPacientesPorTelefone(pesquisa).subscribe(
         (dados) => {
-          console.log(dados);
-
           if (dados && dados.length > 0) {
             this.dadosPaciente = dados;
             this.showResultadoPaciente = true;
@@ -141,15 +128,11 @@ export class CriaConsultaComponent implements OnInit {
             this.exibirMensagemErro();
           }
         },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
+        () => this.exibirMensagemErro()
       );
-    }else if (FiltroPesquisaPaciente === 5) {
+    } else if (FiltroPesquisaPaciente === 5) {
       this.PacientesService.buscarTodosPacientes().subscribe(
         (dados) => {
-          console.log(dados);
-
           if (dados && dados.length > 0) {
             this.dadosPaciente = dados;
             this.showResultadoPaciente = true;
@@ -157,37 +140,43 @@ export class CriaConsultaComponent implements OnInit {
             this.exibirMensagemErro();
           }
         },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
+        () => this.exibirMensagemErro()
       );
     }
-
-
   }
 
-
-
-
-
-
-
-
-
   marcarConsulta() {
+    this.gerenciamentoService.medicoEscolhido$.subscribe((medico) => {
+      if (medico) {
+        this.Medico = medico;
+      }
+    });
+
+    this.gerenciamentoService.pacienteEscolhido$.subscribe((paciente) => {
+      if (paciente) {
+        this.PacienteEscolhido = paciente;
+      }
+    });
+
     let time = this.FormGroupConsulta.get('time')?.value;
     const data = this.FormGroupConsulta.get('date')?.value;
     const observacao = this.FormGroupConsulta.get('observacao')?.value;
-    const FornaPAgamento = this.FormGroupConsulta.get('Pagamento')?.value;
+    const FornaPAgamento = this.transformaFormaPagamento();
 
-    if (data && time && FornaPAgamento) {
+    if (
+      data &&
+      time &&
+      FornaPAgamento &&
+      this.Medico &&
+      this.PacienteEscolhido
+    ) {
       const date = new Date();
       const dataAtual = date.toISOString().split('T')[0];
       const diaDaSemana = this.DiaDaSemana;
       const medico = this.Medico.medCodigo;
       const paciente = this.PacienteEscolhido.paciCodigo;
 
-      const consult: Consulta = {
+      const consult: any = {
         ConData: data,
         ConHorario: time,
         ConMedico: medico,
@@ -195,12 +184,11 @@ export class CriaConsultaComponent implements OnInit {
         ConCodigoConsulta: 0,
         ConDia_semana: diaDaSemana,
         ConObservacoes: observacao,
-        ConDadaCriacao: dataAtual, // Corrige o nome do campo para ConDataCriacao
+        ConDadaCriacao: dataAtual,
         ConFormaPagamento: FornaPAgamento,
         ConAdm: this.Adiministrador.AdmCodigo,
-        ConStatus: 0
+        ConStatus: 0,
       };
-      console.log(consult);
 
       this.ServiceConsultaMedicosService.VericarSeExetemConsultasMarcadas(
         consult
@@ -215,16 +203,14 @@ export class CriaConsultaComponent implements OnInit {
             ).subscribe(
               (response) => {
                 console.log(response);
-                const texto :string =`O cadastro da consulta foi realizado com sucesso.\n   `+`Codigo de consulta: ${response.ConCodigoConsulta} `
+                const texto: string = `O cadastro da consulta foi realizado com sucesso.\nCodigo de consulta: ${response.ConCodigoConsulta} `;
 
                 Swal.fire({
                   icon: 'success',
                   title: 'OK',
                   text: texto,
-
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    this.router.navigate(['home']);
                     this.DialogService.exibirMensagemDeRetornoAposCriaConsultaDeMedico();
                   }
                 });
@@ -249,18 +235,6 @@ export class CriaConsultaComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
   onDateChange(event: Event) {
     const selectedDate: string = (event.target as HTMLInputElement).value;
     const date = new Date(selectedDate + 'T00:00:00'); // Adiciona a hora para evitar problemas com fuso horário
@@ -272,25 +246,6 @@ export class CriaConsultaComponent implements OnInit {
     console.log(this.DiaDaSemana);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   voltarParaPesquisaMedicos() {
     this.router.navigate(['pesquisar']);
   }
@@ -300,12 +255,30 @@ export class CriaConsultaComponent implements OnInit {
   }
 
   PacienteSelecionado(elemento: any) {
-    console.log(elemento, 'paciente selecionado');
-
     this.PacienteEscolhido = elemento;
+    this.gerenciamentoService.setPacienteEscolhido(elemento);
   }
 
   exibirMensagemErro() {
     this.DialogService.exibirMensagemErro();
+  }
+
+  transformaFormaPagamento() {
+    const pagamentoValue = this.FormGroupConsulta.get('Pagamento')?.value;
+    let FornaPAgamento: number;
+
+    switch (pagamentoValue) {
+      case 'Cartao':
+        return (FornaPAgamento = 1);
+        break;
+      case 'Dinheiro':
+        return (FornaPAgamento = 2);
+        break;
+      case 'Pix':
+        return (FornaPAgamento = 3);
+        break;
+      default:
+        return (FornaPAgamento = 0); // Valor padrão, caso nenhuma das opções seja selecionada
+    }
   }
 }

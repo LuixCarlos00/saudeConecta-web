@@ -1,44 +1,49 @@
+<div class="overlay" >
 
-    <section class="example-container mat-elevation-z8 custom-table" tabindex="0"
-      style="border: 1px solid black; border-radius: 10px;">
-
-      <table mat-table [dataSource]="dataSource">
-
-        <ng-container matColumnDef="position">
-          <th style="font-size: 12px;" mat-header-cell *matHeaderCellDef class="cabecalho-coluna Nome">Nome do Medico
-          </th>
-          <td style="font-size: 12px;" mat-cell *matCellDef="let element" class="colunas">
-            {{element.medNome.toUpperCase() || element.MedNome.toUpperCase()}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="Especialidade">
-          <th style="font-size: 12px;" mat-header-cell *matHeaderCellDef class="cabecalho-coluna Nome">Especialidade
-          </th>
-          <td style="font-size: 12px;" mat-cell *matCellDef="let element" class="colunas">
-            {{element.medEspecialidade.toUpperCase() || element.medEspecialidade.toUpperCase()}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="MarcaConsulta">
-          <th style="font-size: 12px;" mat-header-cell *matHeaderCellDef class="cabecalho-coluna Consulta">Marca
-            Consulta</th>
-          <td mat-cell *matCellDef="let element; let i = index" class="colunas consulta-coluna">
-            <button mat-icon-button class="consulta-botao" title="Marcar Consulta" (click)="marcarConsulta(element, i) " >
-              <i class="fa-solid fa-plus fa-lg"></i>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row (click)="clicked(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
-          *matRowDef="let row; columns: displayedColumns;"></tr>
-
-      </table>
-
-    </section>
-
-<br>
+  <div style="margin: 10px; width: 800px; height: 500px; ">
+    <button class="close-button" (click)="fecharTabela()">X</button>
 
 
-  <div style="justify-content: center;display: flex;">
-    <button   class="btnPesquisar" (click)="pesquisarNovamente()">Pesquisar Novamente</button>
-  </div>
+    <table style="height: 50%; font-size: 10px;" mat-table [dataSource]="(dataSource | slice :lowValue : highValue)" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef class="cabecalho-coluna Nome">Nome do Medico</th>
+      <td mat-cell *matCellDef="let element" class="colunas">
+        {{element.medNome.toUpperCase()}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Especialidade">
+      <th mat-header-cell *matHeaderCellDef class="cabecalho-coluna Nome">Especialidade</th>
+      <td mat-cell *matCellDef="let element" class="colunas">
+        {{element.medEspecialidade.toUpperCase()}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="MarcaConsulta">
+      <th mat-header-cell *matHeaderCellDef class="cabecalho-coluna Consulta">Marca Consulta</th>
+      <td mat-cell *matCellDef="let element" class="colunas consulta-coluna">
+        <button mat-icon-button class="consulta-botao" title="Marcar Consulta" (click)="marcarConsulta(element)">
+          <i class="fa-solid fa-plus fa-lg"></i>
+        </button>
+      </td>
+    </ng-container>
+  <!-- Apenas uma linha de cabeçalho -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <!-- Definição das linhas de dados -->
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+  </tr>
+
+</table>
+
+
+<mat-paginator [pageSizeOptions]="[5,10,20]" (page)="getPaginatorData($event)" [length]="dataSource.length" showFirstLastButtons></mat-paginator>
+</div>
+
+<br><br>
+
+<div style="display: flex; justify-content: center;">
+
+</div>
+</div>

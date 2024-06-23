@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -8,7 +9,7 @@ import { LoginModule } from './features/login/login_Module/login.module';
 import { PacienteModule } from './paciente_Module/paciente.module';
 import { UtilModule } from './util/util/util.module';
 import { RodapeComponent } from './util/variados/rodape/rodape.component';
-import { CabecalhoComponent } from './util/variados/cabecalho/cabecalho.component';
+//import { CabecalhoComponent } from './util/variados/cabecalho/cabecalho.component';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { LoginComponent } from './features/login/login.component';
@@ -19,14 +20,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { BarraLateraComponent } from './util/variados/barra-Latera/barra-Latera.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RodapeComponent,
-    CabecalhoComponent,
-    LoginComponent
+ //   CabecalhoComponent,
+    LoginComponent,
+    BarraLateraComponent
 
   ],
   imports: [

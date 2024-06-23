@@ -1,0 +1,37 @@
+<body class="overlay">
+  <div *ngIf="estaLogado()">
+    <div class="menu">
+      <ul class="side_items">
+        <button class="fetures" (click)="redirecionamentoDePaginas('Home')" title="Home">
+          <i class="fa-solid fa-house fa-lg" style="color: #faf9f4;"></i>
+          <span class="tooltip">Home</span>
+        </button>
+        <button class="fetures" (click)="redirecionamentoDePaginas('agenda')" title="Agenda">
+          <i  style="color: #e3e9f7;"class="fa-solid fa-book-medical"></i>
+          <span class="tooltip">Agenda</span>
+        </button>
+        <button class="fetures" (click)="redirecionamentoDePaginas('PlanoDeEnsino')" title="Cria Plano De Ensino">
+          <i style="color: #e3e9f7;" class="fa-solid fa-address-book"></i>
+          <span class="tooltip">Cria Plano De Ensino</span>
+        </button>
+
+        <button class="fetures" (click)="redirecionamentoDePaginas('Quadro_Disponibilidade')" title="Quadro de Disponibilidade">
+          <i style="color: #e3e9f7;" class="fa-solid fa-calendar-days"></i>
+          <span class="tooltip">Quadro de Disponibilidade</span>
+        </button>
+        <button class="fetures" (click)="redirecionamentoDePaginas('Arquivos_Diversos')" title="Arquivos Diversos">
+          <i style="color: #e3e9f7;" class="fa-solid fa-folder-open"></i>
+          <span class="tooltip">Arquivos Diversos</span>
+        </button>
+        <button class="fetures" title="Configurações">
+          <i style="color: #e3e9f7;" class="fa-solid fa-gear"></i>
+          <span class="tooltip">Configurações</span>
+        </button>
+        <button (click)="Deslogar()" class="logout_btn">
+          <i style="color: #e3e9f7;" class="fa-solid fa-right-from-bracket"></i>
+          <span class="tooltip">Sair</span>
+        </button>
+      </ul>
+    </div>
+  </div>
+</body>

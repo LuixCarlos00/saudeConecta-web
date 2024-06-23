@@ -1,67 +1,67 @@
-import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModelService } from 'src/app/service/Model_service/Model.service';
-import { tokenService } from '../../Token/token.service';
+// import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+// import { Component, OnInit } from '@angular/core';
+// import { Router } from '@angular/router';
+// import { ModelService } from 'src/app/service/Model_service/Model.service';
+// import { tokenService } from '../../Token/token.service';
 
-@Component({
-  selector: 'app-cabecalho',
-  templateUrl: './cabecalho.component.html',
-  styleUrls: ['./cabecalho.component.css'],
-})
-export class CabecalhoComponent implements OnInit {
-  //
-  //
-  //
-  AcessoPermitido: string = '';
+// @Component({
+//   selector: 'app-cabecalho',
+//   templateUrl: './cabecalho.component.html',
+//   styleUrls: ['./cabecalho.component.css'],
+// })
+// export class CabecalhoComponent implements OnInit {
+//   //
+//   //
+//   //
+//   AcessoPermitido: string = '';
 
-  Usuario: any;
+//   Usuario: any;
 
-  constructor(
-    public ModelService: ModelService,
-    private router: Router,
-    private tokenService: tokenService
-  ) {}
+//   constructor(
+//     public ModelService: ModelService,
+//     private router: Router,
+//     private tokenService: tokenService
+//   ) {}
 
-  ngOnInit() {
-    this.tokenService.token();
-    this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
-      if (paciente) this.Usuario = paciente;
-      console.log(paciente, 'paciente');
-    });
+//   ngOnInit() {
+//     this.tokenService.token();
+//     this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
+//       if (paciente) this.Usuario = paciente;
+//       console.log(paciente, 'paciente');
+//     });
 
 
-    this.estaLogado();
-  }
+//     this.estaLogado();
+//   }
 
-  estaLogado(): Boolean {
-    return this.ModelService.verificarLogin();
-  }
+//   estaLogado(): Boolean {
+//     return this.ModelService.verificarLogin();
+//   }
 
-  logout() {
-    console.log('Logout clicked');
-    this.ModelService.logout();
-  }
+//   logout() {
+//     console.log('Logout clicked');
+//     this.ModelService.logout();
+//   }
 
-  Menu() {
-    this.router.navigate(['home']);
-  }
+//   Menu() {
+//     this.router.navigate(['home']);
+//   }
 
-  TrocaSenha() {
-    this.router.navigate(['trocaSenha']);
-  }
+//   TrocaSenha() {
+//     this.router.navigate(['trocaSenha']);
+//   }
 
-  cadastraPaciente() {
-    this.router.navigate(['cadastroPaciente']);
-  }
+//   cadastraPaciente() {
+//     this.router.navigate(['cadastroPaciente']);
+//   }
 
-  cadastraNovoUsuario() {
-    this.router.navigate(['cadastroUsuario']);
-  }
+//   cadastraNovoUsuario() {
+//     this.router.navigate(['cadastroUsuario']);
+//   }
 
-  TipoUsuario(): any {
-    //return this.ModelService.pegarTipoUsuario();
-  }
+//   TipoUsuario(): any {
+//     //return this.ModelService.pegarTipoUsuario();
+//   }
 
-  /// colocar o cadastro de usuario antes de cadastra medico
-}
+//   /// colocar o cadastro de usuario antes de cadastra medico
+// }

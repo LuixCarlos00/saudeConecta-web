@@ -1,0 +1,97 @@
+/* Estilo para tooltips */
+.tooltip {
+  visibility: hidden;
+  background-color: #3f37e7;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 5%;
+  left: 100%;
+  margin-left: 10px;
+  opacity: 0;
+  transition : opacity 01.3s, visibility 0.3s;
+  width: 250px;
+  transition-delay: 0.5s;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #3f37e7 transparent transparent;
+}
+
+
+.fetures:hover .tooltip, .logout_btn:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.menu {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #111010;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.side_items {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fetures, .logout_btn {
+  border: none;
+  padding: 10px;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+}
+
+.fetures {
+  background-color: #3f37e7;
+}
+
+.logout_btn {
+  background-color: #8d8ca5;
+}
+
+.fetures:hover, .logout_btn:hover {
+  background-color: #7572b9;
+  transform: scale(1.1);
+}

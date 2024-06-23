@@ -1,12 +1,7 @@
 @media screen and (min-width: 750px) {
 
 
-  .desktop {
-    height: 110vh;
-    /* Ocupa 100% da altura da viewport */
-    display: flex;
-    justify-content: center;
-  }
+
 
 
   .input_filtro {
@@ -114,7 +109,7 @@
 
   .btnRecarregar {
     border: hidden;
-    background-color: white;
+    background-color: rgb(206, 212, 212)
   }
 
   .btnRecarregar:active  {
@@ -140,6 +135,7 @@
 
   .divRecarregar {
     margin-left: 30px;
+
   }
 
   .divDeletar {
@@ -165,13 +161,6 @@
 
   }
 
-  .fomulario {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid;
-    width: 1000px;
-    border-radius: 10px;
-    margin: 35px;
-  }
 
 
 

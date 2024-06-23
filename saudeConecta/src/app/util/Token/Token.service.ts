@@ -2,8 +2,7 @@ import { Usuario } from './../variados/interfaces/usuario/usuario';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 
-
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { Paciente } from '../variados/interfaces/paciente/paciente';
 import { Adiministrador } from '../variados/interfaces/administrado/adiministrador';
@@ -18,11 +17,7 @@ export class tokenService {
   //
   //
 
-
-  constructor( private http: HttpClient,) {
-
-  }
-
+  constructor(private http: HttpClient) {}
 
   private apiUrl = 'http://localhost:8080';
 
@@ -36,16 +31,13 @@ export class tokenService {
     roles: '',
   };
 
-
   salvarToken(token: string) {
     window.localStorage.setItem(KEY, token);
   }
 
-
   excluirToken() {
     localStorage.removeItem(KEY);
   }
-
 
   retornaToken() {
     return localStorage.getItem(KEY) ?? '';
@@ -60,29 +52,20 @@ export class tokenService {
     }
   }
 
-
-
-
   removeToken() {
     window.localStorage.removeItem(KEY);
     window.localStorage.removeItem(authTwof);
   }
 
-
-
   setAuthTwof(authTwof: boolean): void {
     window.localStorage.setItem('authTwof', authTwof.toString());
   }
-
-
 
   getAuthTwof(): boolean {
     if (!localStorage.getItem(authTwof)) {
       return false;
     } else return true;
   }
-
-
 
   oTokenEstavalido(token: any): boolean {
     if (!token) {
@@ -105,53 +88,57 @@ export class tokenService {
     }
   }
 
-token (){
-  const token = this.retornaToken();
-  this.Usuario = jwtDecode(token);
-  console.log(this.Usuario, 'token');
+  token() {
+    const token = this.retornaToken();
+    this.Usuario = jwtDecode(token);
+    console.log(this.Usuario, 'token');
 
-  this.Usuario.id
+    this.Usuario.id;
 
+    this.buscarPorUsuarioAdministrador(this.Usuario.id);
+    this.buscarPorUsuarioMedico(this.Usuario.id);
 
-  this.buscarPorUsuarioAdministrador(this.Usuario.id)
-  this.buscarPorUsuarioMedico(this.Usuario.id)
-
-//caso venha dar errado tente comentar a linha e descomentar , tbm tente fexha o VS e abrir novamente
-}
-
-
-
-
-buscarPorUsuarioAdministrador(id: number) {
-  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.retornaToken()}` };
-  const options = { headers, withCredentials: true };
-
-  this.http.get<Adiministrador>(`${this.apiUrl}/administrador/buscarIdDeUsusario/${id}`, options)
-    .subscribe(
-      (Paciente: Adiministrador) => {
-        this.UsuarioLogadoSubject.next(Paciente);
-      },
-      (error) => {
-        console.error('Erro ao buscar usuário:', error);
-      }
-    );
-}
-
-buscarPorUsuarioMedico(id: number) {
-  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.retornaToken()}` };
-  const options = { headers, withCredentials: true };
-
-  this.http.get<Medico>(`${this.apiUrl}/medico/buscarIdDeUsusario/${id}`, options)
-    .subscribe(
-      (Paciente: Medico) => {
-        this.UsuarioLogadoSubject.next(Paciente);
-      },
-      (error) => {
-        console.error('Erro ao buscar usuário:', error);
-      }
-    );
-}
-
-
-
+    //caso venha dar errado tente comentar a linha e descomentar , tbm tente fexha o VS e abrir novamente
   }
+
+  buscarPorUsuarioAdministrador(id: number) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.retornaToken()}`,
+    };
+    const options = { headers, withCredentials: true };
+
+    this.http
+      .get<Adiministrador>(
+        `${this.apiUrl}/administrador/buscarIdDeUsusario/${id}`,
+        options
+      )
+      .subscribe(
+        (Paciente: Adiministrador) => {
+          this.UsuarioLogadoSubject.next(Paciente);
+        },
+        (error) => {
+          console.error('Erro ao buscar usuário:', error);
+        }
+      );
+  }
+
+  buscarPorUsuarioMedico(id: number) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.retornaToken()}`,
+    };
+    const options = { headers, withCredentials: true };
+
+    this.http
+      .get<Medico>(`${this.apiUrl}/medico/buscarIdDeUsusario/${id}`, options)
+      .subscribe(
+        (Paciente: Medico) => {
+          this.UsuarioLogadoSubject.next(Paciente);
+        },
+        (error) => {
+          console.error('Erro ao buscar usuário:', error);
+        }
+      );
+  }
+}

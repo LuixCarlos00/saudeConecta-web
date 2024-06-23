@@ -13,10 +13,7 @@ export class PacientesService {
   private Token = this.tokenService.retornaToken();
 
   public UsuarioEstaLogado: boolean = false;
-  public PacienteCPF: Paciente[] | undefined;
-  public PacienteRG: Paciente[] | undefined;
-  public PacienteNome: Paciente[] | undefined;
-  public PacienteTelefone: Paciente[] | undefined;
+
   public TodosPacientes: Paciente[] = [];
   public MostraCamposDePEsquisa: boolean = false;
 
@@ -52,7 +49,7 @@ export class PacientesService {
       )
       .pipe(
         tap((Pacientes: Paciente[]) => {
-          this.PacienteTelefone = Pacientes;
+          this.TodosPacientes = Pacientes;
         })
       );
   }
@@ -70,7 +67,7 @@ export class PacientesService {
       )
       .pipe(
         tap((Pacientes: Paciente[]) => {
-          this.PacienteCPF = Pacientes;
+          this.TodosPacientes = Pacientes;
         })
       );
   }
@@ -88,25 +85,21 @@ export class PacientesService {
       )
       .pipe(
         tap((Pacientes: Paciente[]) => {
-          this.PacienteRG = Pacientes;
+          this.TodosPacientes = Pacientes;
         })
       );
   }
 
   buscarListaPacientesPorNome(pesquisa: string): Observable<Paciente[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
+    console.log(pesquisa,'nome');
+
+    const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
     const options = { headers, withCredentials: true };
-    return this.http
-      .get<Paciente[]>(
-        `${this.apiUrl}/paciente/buscarPorNome/${pesquisa}`,
-        options
-      )
+
+    return this.http.get<Paciente[]>(`${this.apiUrl}/paciente/buscarPorNome/${pesquisa}`,options)
       .pipe(
         tap((Pacientes: Paciente[]) => {
-          this.PacienteNome = Pacientes;
+          this.TodosPacientes = Pacientes;
         })
       );
   }

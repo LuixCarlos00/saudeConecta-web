@@ -81,6 +81,8 @@ export class ConsultaService {
 
 
     CriarConsulata(Consulta: Consulta): Observable<Consulta> {
+      console.log(Consulta,'entrou');
+
       const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.Token}`,};
       const options = { headers, withCredentials: true };
       return this.http.post<Consulta>(`${this.apiUrl}/consulta/post`,Consulta,options );

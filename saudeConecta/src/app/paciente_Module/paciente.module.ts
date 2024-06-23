@@ -29,8 +29,7 @@ import { CadastroUsuarioComponent } from '../features/cadastro/cadastro-usuario/
 import { RecuperaCadastroComponent } from '../features/recupera-Cadastro/recupera-cadastro/recupera-cadastro.component';
 import { PesquisaMedicosComponent } from '../features/pesquisaMedicos/pesquisaMedicos.component';
 import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
-import { CriaConsultaComponent } from '../features/cria-consulta/cria-consulta.component';
-import { TabelaDePacientesComponent } from '../features/cria-consulta/tabela-de-pacientes/tabela-de-pacientes.component';
+
 import { TrocaSenhaComponent } from '../features/troca-senha/troca-senha.component';
 import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro-adm.component';
 import { TabelaAgendaComponent } from '../features/agenda/tabela-agenda/tabela-agenda.component';
@@ -42,6 +41,9 @@ import { TabelaAgendaStatusComponent } from '../features/agenda/tabela-agenda-st
 import { Template_PDFComponent } from '../features/agenda/template_PDF/template_PDF.component';
 import { Template_PDF_ConcluidosComponent } from '../features/agenda/template_PDF_Concluidos/template_PDF_Concluidos.component';
 import { CadastroSecretariaComponent } from '../features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
+import { GerenciamentoComponent } from '../features/gerenciamento/gerenciamento.component';
+import { TabelaDePacientesComponent } from '../features/pesquisaPaciente/tabela-de-pacientes/tabela-de-pacientes.component';
+import { PesquiasPacienteComponent } from '../features/pesquisaPaciente/pesquiasPaciente.component';
 
 
 
@@ -59,8 +61,9 @@ import { CadastroSecretariaComponent } from '../features/cadastro/cadastro-secre
     RecuperaCadastroComponent,
     HomeComponent,
     TabelasPesquisasMedicosComponent,
-    CriaConsultaComponent,
     TabelaDePacientesComponent,
+    PesquiasPacienteComponent,
+
     TrocaSenhaComponent,
     CadastroAdmComponent,
     TabelaAgendaComponent,
@@ -70,7 +73,8 @@ import { CadastroSecretariaComponent } from '../features/cadastro/cadastro-secre
     TabelaEditarMedicosConsultasComponent,
     TabelaAgendaStatusComponent,
     Template_PDFComponent,
-    Template_PDF_ConcluidosComponent
+    Template_PDF_ConcluidosComponent,
+    GerenciamentoComponent
 
   ],
   exports: [],
