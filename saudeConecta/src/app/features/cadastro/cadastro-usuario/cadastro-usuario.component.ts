@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
 import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
 import { tokenService } from 'src/app/util/Token/Token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -15,37 +17,45 @@ import { tokenService } from 'src/app/util/Token/Token.service';
 export class CadastroUsuarioComponent {
   FormularioUsuario!: FormGroup;
 
+  @Input() RolesUsuario!: any;
+
   Usuario: Usuario = {
     id: 0,
     login: '',
     senha: '',
-    roles: '',
+    tipoUsuario: '',
   };
 
   constructor(
     private form: FormBuilder,
-    private router: Router,
     private usuariosService: UsuariosService,
-    private TokenService: tokenService
-  ) {}
+
+  ) {
+
+
+  }
 
   ngOnInit(): void {
+    console.log(this.RolesUsuario,"roles");
     this.FormularioUsuario = this.form.group({
       login: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
+
+
   }
 
   cadatraUsuario() {
     if (this.FormularioUsuario.valid) {
+      this.Usuario.login = this.FormularioUsuario.get('login')?.value;
+      this.Usuario.senha = this.FormularioUsuario.get('password')?.value;
+      this.Usuario.tipoUsuario = this.RolesUsuario;
+
       this.usuariosService.cadastrarUsuario(this.Usuario).subscribe(
         (dados) => {
-          this.usuariosService.changeNovoUsuariocadastrado(
-            dados.body.usuarioView
-          );
-          console.log(dados.body.usuarioView, 'o token');
 
-          this.router.navigate(['cadastro']);
+          console.log(dados.body.usuarioView, 'o token');
+          //this.router.navigate(['cadastro']);
         },
         (error) => {
           if (error.status === 400) {
@@ -59,4 +69,6 @@ export class CadastroUsuarioComponent {
       alert('Formulário inválido. Verifique os campos obrigatórios.');
     }
   }
+
+
 }

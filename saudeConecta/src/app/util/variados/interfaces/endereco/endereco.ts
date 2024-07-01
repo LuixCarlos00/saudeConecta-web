@@ -1,7 +1,6 @@
 export interface Endereco {
   EndCodigo: number;
   EndNacionalidade: string;
-  EndEstado: string;
   EndUF: string;
   EndMunicipio: string;
   EndBairro: string;

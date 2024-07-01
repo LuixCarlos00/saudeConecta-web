@@ -48,7 +48,7 @@ export class CadastroSecretariaComponent implements OnInit {
     id: 0,
     login: '',
     senha: '',
-    roles: '',
+    tipoUsuario: '',
   };
 
 

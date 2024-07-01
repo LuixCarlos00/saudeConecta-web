@@ -2,14 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
-import { tokenService } from "src/app/util/Token/Token.service";
+import { tokenService } from 'src/app/util/Token/Token.service';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConsultaService {
-
   //
   //
   //
@@ -38,14 +37,18 @@ export class ConsultaService {
   private dadosPDFSubject = new BehaviorSubject<any[]>([]);
   dadosPDF$ = this.dadosPDFSubject.asObservable();
 
-  private CadastroRealizadoComSucessoSubject = new BehaviorSubject<Consulta>( {} as Consulta );
-  CadastroRealizadoComSucesso$ = this.CadastroRealizadoComSucessoSubject.asObservable();
+  private CadastroRealizadoComSucessoSubject = new BehaviorSubject<Consulta>(
+    {} as Consulta
+  );
+  CadastroRealizadoComSucesso$ =
+    this.CadastroRealizadoComSucessoSubject.asObservable();
 
   private CriaCronologiaDoDiaSubject = new BehaviorSubject<Boolean>(false);
   CriaCronologiaDoDia$ = this.CriaCronologiaDoDiaSubject.asObservable();
 
-  private  DadosParaCronologiaDoDiaSubject = new BehaviorSubject<any>(null);
-  BuscarDadoParaCronologia$ = this.DadosParaCronologiaDoDiaSubject.asObservable();
+  private DadosParaCronologiaDoDiaSubject = new BehaviorSubject<any>(null);
+  BuscarDadoParaCronologia$ =
+    this.DadosParaCronologiaDoDiaSubject.asObservable();
 
 
   constructor(
@@ -82,11 +85,9 @@ export class ConsultaService {
     this.dadosPDFSubject.next(dados);
   }
 
-
   CronologiaDoDiaSubject(dados: boolean) {
     this.CriaCronologiaDoDiaSubject.next(dados);
   }
-
 
   PassarDadosParaCronologiaDoDia(dados: any) {
     this.DadosParaCronologiaDoDiaSubject.next(dados);
@@ -207,8 +208,14 @@ export class ConsultaService {
   }
 
   EnviarMensagem(EnviarMensagem: any): Observable<any> {
-    const headers = new HttpHeaders({'Content-Type': 'application/json',  Authorization: `Bearer ${this.Token}`,});
-    return this.http.post<any>( `${this.apiUrl}/consulta/EnviarMensagem `, EnviarMensagem ,{ headers } );
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.Token}`,
+    });
+    return this.http.post<any>(
+      `${this.apiUrl}/consulta/EnviarMensagem `,
+      EnviarMensagem,
+      { headers }
+    );
   }
-
 }

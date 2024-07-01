@@ -20,7 +20,7 @@ UsuarioLogado: Usuario = {
   id: 0,
   login: '',
   senha: '',
-  roles: '',
+  tipoUsuario: '',
 };
 
 constructor(

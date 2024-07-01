@@ -34,17 +34,20 @@ cadastraEndereco(Endereco: Endereco): Observable<Endereco> {
 }
 
 changeNovoUsuariocadastrado(value: any) {
+  console.log(value,'p0000000000');
+
   this.NovoUsuariocadastradoSubject.next(value);
 }
+
+
 cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
-  return this.http
-    .post<Usuario>(`${this.apiUrl}/Home/cadastralogin`, usuario, {
-      observe: 'response',
-    })
+  return this.http.post<Usuario>(`${this.apiUrl}/Home/cadastralogin`, usuario, { observe: 'response', })
     .pipe(
       tap((response: HttpResponse<any>) => {
         if (response.body && response.body.tokenJWT) {
-          this.tokenService.salvarToken(response.body.tokenJWT);
+         // this.tokenService.salvarToken(response.body.tokenJWT);
+          this.NovoUsuariocadastradoSubject.next(response.body.usuarioView);
+          //this.changeNovoUsuariocadastrado(response.body.usuarioView);
           console.log(this.tokenService.retornaToken(), 'o token ');
         } else {
           console.error('Token JWT não encontrado na resposta');

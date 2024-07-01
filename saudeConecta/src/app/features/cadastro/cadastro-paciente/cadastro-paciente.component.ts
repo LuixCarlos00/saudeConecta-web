@@ -45,7 +45,6 @@ export class CadastroPacienteComponent implements OnInit {
   Endereco: Endereco = {
     EndCodigo: 0,
     EndNacionalidade: '',
-    EndEstado: '',
     EndUF: '',
     EndMunicipio: '',
     EndBairro: '',

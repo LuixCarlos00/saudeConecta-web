@@ -1,7 +1,10 @@
 <div style="  display: flex;">
   <div class="container">
-    <h2>Crie seu login </h2>
-    <font color="#FF0000"><p>Esse login vai ser usado para entrar no sistema</p></font>
+<div style="justify-content: center; display: flex;">
+  <font color="#FF0000"><p> <u> Esse login vai ser usado para entrar no sistema</u></p></font>
+</div>
+<br>
+
     <form id="cadastroForm" class="responsivo" [formGroup]="FormularioUsuario">
       <div class="form-group">
         <label for="login">login:</label>
@@ -10,20 +13,19 @@
 
       <div class="form-group">
         <label for="novaSenha">
-          <font color="#FF0000"><b>* </b></font> Insira a nova Sernha
-          <font color="#FF0000">*</font> - Senhas com 8 caracteres
+          <font color="#FF0000"><b>* </b></font> Insira a  Sernha
         </label>
         <input [(ngModel)]="Usuario.senha" formControlName="password" type="password" id="password" name="password" placeholder="Senha deve conter mais de 8 caracteres"
           required>
       </div>
-
+      <label>
+        <font color="#FF0000">*</font>   Senhas com 8 caracteres
+      </label>
     </form>
-    <button type="submit" (click)="cadatraUsuario()" *ngIf="FormularioUsuario.valid ;  else elseBlock ">Cadastrar</button>
+    <button type="submit" (click)="cadatraUsuario()" *ngIf="FormularioUsuario.valid  ">Cadastrar</button>
     <br>
     <br>
-    <ng-template #elseBlock><i>
-      <font color="#FF0000"><b>*Dados não são validos. </b></font>
-    </i></ng-template>
+
 
 
   </div>

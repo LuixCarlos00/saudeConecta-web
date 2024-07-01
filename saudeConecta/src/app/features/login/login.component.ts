@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   //
   //
   Usuario: Usuario = {
-    roles: '',
+    tipoUsuario: '',
     id: 0,
     login: '',
     senha: '',

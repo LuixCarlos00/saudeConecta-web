@@ -1,9 +1,10 @@
 export interface Usuario {
-  roles: string;
+
 
   id:number ,
   login:string,
-  senha:string
+  senha:string,
+  tipoUsuario: string;
 
 }
 

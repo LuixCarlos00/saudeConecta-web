@@ -29,7 +29,7 @@ export class ModelService {
     id: 0,
     login: '',
     senha: '',
-    roles: '',
+    tipoUsuario: '',
   };
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();

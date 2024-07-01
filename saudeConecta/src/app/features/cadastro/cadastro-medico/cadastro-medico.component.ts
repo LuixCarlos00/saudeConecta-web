@@ -1,3 +1,4 @@
+import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
 import { EspecialidadeMedicas } from './../../../util/variados/options/options';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { Usuario } from './../../../util/variados/interfaces/usuario/usuario';
@@ -20,10 +21,11 @@ import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
   styleUrl: './cadastro-medico.component.css',
 })
 export class CadastroMedicoComponent {
-
   //
   //
   //
+  FormularioUsuaroValido = false;
+  RolesUsuarioMedico: any = 3;
   private usuarioSubscription: Subscription | undefined;
   FormularioMedico!: FormGroup;
   FormularioEndereco!: FormGroup;
@@ -33,7 +35,8 @@ export class CadastroMedicoComponent {
 
   ufOptions = ufOptions;
 
-  UsuarioLogado: any;
+  NovoUsuariocadastrado_Medico: any;
+
   Medico: Medico = {
     MedCodigo: 0,
     MedNome: '',
@@ -51,7 +54,6 @@ export class CadastroMedicoComponent {
   Endereco: Endereco = {
     EndCodigo: 0,
     EndNacionalidade: '',
-    EndEstado: '',
     EndUF: '',
     EndMunicipio: '',
     EndBairro: '',
@@ -66,30 +68,32 @@ export class CadastroMedicoComponent {
     public modelService: ModelService,
     private usuarioService: UsuariosService,
     private MedicosService: MedicosService,
-
+    private ConsultaService: ConsultaService,
     private route: Router
   ) {
-
     // É necessario cadastra e pega o id do usuario cadastrado  e associa ao medico
     this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
       if (value) {
-        this.UsuarioLogado = value;
+        this.NovoUsuariocadastrado_Medico = value;
+        console.log(this.NovoUsuariocadastrado_Medico, 'UsuarioLogado');
 
-
+        this.FormularioUsuaroValido = false;
+      } else {
+        this.FormularioUsuaroValido = true;
       }
     });
   }
 
   ngOnInit(): void {
-
+    this.RolesUsuarioMedico = 3;
 
     this.FormularioMedico = this.form.group({
       nome: ['', Validators.required],
       sexo: ['', Validators.required],
       dataNascimento: ['', Validators.required],
-      //cpf: ['', Validators.required ],
+      cpf: [''],
+      rg: [''],
       crm: ['', Validators.required],
-     // rg: ['', Validators.required],
       Especialidade: ['', Validators.required],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -97,8 +101,7 @@ export class CadastroMedicoComponent {
 
     this.FormularioEndereco = this.form.group({
       nacionalidade: ['', Validators.required],
-      estado: ['', Validators.required],
-      uf: ['',[Validators.required, Validators.maxLength(2) ] ],
+      uf: ['', [Validators.required, Validators.maxLength(2)]],
       cep: ['', Validators.required],
       rua: ['', Validators.required],
       municipio: ['', Validators.required],
@@ -119,17 +122,9 @@ export class CadastroMedicoComponent {
       console.log(this.Endereco);
       this.usuarioService.cadastraEndereco(this.Endereco).subscribe(
         (endereco: Endereco) => {
-          console.log(endereco);
-
-
-
           const EnderecoID = endereco.EndCodigo as number;
-          console.log(EnderecoID);
-
           this.Medico.endereco = EnderecoID;
-          console.log(this.Medico.endereco);
-  console.log(this.UsuarioLogado);
-          this.Medico.usuario = this.UsuarioLogado.id;
+          this.Medico.usuario = this.NovoUsuariocadastrado_Medico.id;
 
           console.log(this.Medico);
 
@@ -153,7 +148,6 @@ export class CadastroMedicoComponent {
             (erro) => {
               // Tratamento de erro ao cadastrar paciente
               this.handleHttpError(erro);
-
             }
           );
         },
@@ -169,11 +163,9 @@ export class CadastroMedicoComponent {
           title: 'Oops...',
           text: 'Dados do formulário inválido. Por favor, verifique os dados informados.',
         });
-
       };
     }
   }
-
 
   private handleHttpError(error: any) {
     console.log(error); // Exibir o erro completo no console para depuração
@@ -181,13 +173,25 @@ export class CadastroMedicoComponent {
     let errorMessage = 'Erro desconhecido ao realizar o cadastro.';
 
     if (error.error) {
-      if (error.error.includes('Duplicate entry') && error.error.includes('medico.MedCpf_UNIQUE')) {
+      if (
+        error.error.includes('Duplicate entry') &&
+        error.error.includes('medico.MedCpf_UNIQUE')
+      ) {
         errorMessage = 'Já existe um Medico registrado com esse email.';
-      } else if (error.error.includes('Duplicate entry') && error.error.includes('medico.MedCpf_UNIQUE')) {
+      } else if (
+        error.error.includes('Duplicate entry') &&
+        error.error.includes('medico.MedCpf_UNIQUE')
+      ) {
         errorMessage = 'Já existe um Medico registrado com esse CPF.';
-      } else if (error.error.includes('Duplicate entry') && error.error.includes('medico.MedRg_UNIQUE')) {
+      } else if (
+        error.error.includes('Duplicate entry') &&
+        error.error.includes('medico.MedRg_UNIQUE')
+      ) {
         errorMessage = 'Já existe um Medico registrado com esse RG.';
-      } else if (error.error.includes('Duplicate entry') && error.error.includes(' medico.MedCrm_UNIQUE')) {
+      } else if (
+        error.error.includes('Duplicate entry') &&
+        error.error.includes(' medico.MedCrm_UNIQUE')
+      ) {
         errorMessage = 'Já existe um Medico registrado com esse CRM.';
       } else {
         errorMessage = error.error; // Usar a mensagem de erro específica retornada pelo servidor
@@ -204,5 +208,5 @@ export class CadastroMedicoComponent {
 
   voltarParaHome() {
     this.route.navigate(['cadastro']);
-    }
+  }
 }

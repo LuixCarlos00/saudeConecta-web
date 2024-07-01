@@ -63,3 +63,8 @@ button[type="submit"]:hover {
   background-color: #f4f4f4;
   color: #000000;
 }
+
+.blurred {
+  pointer-events: none;
+  opacity: 0.5;
+}

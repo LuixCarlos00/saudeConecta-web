@@ -1,10 +1,9 @@
-<app-cadastro-usuario></app-cadastro-usuario>
-<div style="  display: flex;">
-  <div class="container">
+<app-cadastro-usuario [RolesUsuario]="RolesUsuarioMedico"></app-cadastro-usuario>
+
+<div style="  display: flex;" >
+  <div class="container" [ngClass]="{'blurred':  FormularioUsuaroValido}">
     <div *ngIf=" modelService.estaLogado()" style="  justify-content: left; display: flex; margin-top: -15px; margin-left: -20px;">
-      <!-- <button style="border: hidden; color: black;  background-color: #f4f4f4;" (click)="voltarParaHome()">
-        <i class="fa-solid fa-arrow-left fa-xl"></i>
-      </button> -->
+
     </div>
     <h2>Cadastro de Medico</h2>
     <form id="cadastroForm" class="responsivo" [formGroup]="FormularioMedico">
@@ -35,7 +34,7 @@
           CPF:
         </label>
         <input formControlName="cpf" [(ngModel)]="Medico.MedCpf" type="text" id="cpf" name="cpf"
-          placeholder="12345678900"   maxlength="11" required>
+          placeholder="12345678900"   maxlength="11"  >
       </div>
       <div class="form-group">
         <label for="CRM">
@@ -49,7 +48,7 @@
            RG:
         </label>
         <input formControlName="rg" [(ngModel)]="Medico.MedRg" type="text" id="rg" name="rg" placeholder="XX__-___-___"
-           maxlength="12" required>
+           maxlength="12"  >
       </div>
       <div class="form-group">
         <label for="rg">
@@ -75,7 +74,7 @@
     </form>
     <br>
 
-    <mat-expansion-panel hideToggle class="custom-panel">
+    <mat-expansion-panel hideToggle class="custom-panel" [ngClass]="{'blurred': FormularioUsuaroValido}">
       <mat-expansion-panel-header>
         <mat-panel-title class="custom-panel">
           <h3>Endereço</h3>
@@ -94,13 +93,7 @@
           <input formControlName="nacionalidade" [(ngModel)]="Endereco.EndNacionalidade" type="text" id="nacionalidade"
             name="nacionalidade" required>
         </div>
-        <div class="form-group">
-          <label for="estado">
-            <font color="#FF0000"><b>* </b></font> Estado:
-          </label>
-          <input formControlName="estado" [(ngModel)]="Endereco.EndEstado" type="text" id="estado" name="estado"
-            required>
-        </div>
+
         <div class="form-group">
           <label for="uf">
             <font color="#FF0000"><b>* </b></font> UF:
