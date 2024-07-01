@@ -130,29 +130,15 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 10% 10% 10% 10% 10% 50%;
-  }
-
-  .divRecarregar {
-    margin-left: 30px;
+    grid-template-columns: 10% 10% 10% 10% 10% 10%  10% 10% 10% 10%;
 
   }
 
-  .divDeletar {
-    margin-left: -30px;
-  }
 
-  .divEditar {
-    margin-left: -90px;
-  }
+.divOperacoes{
+  margin-left: 50px;
+}
 
-  .divConcluido {
-    margin-left: -150px;
-  }
-
-  .divPDF {
-    margin-left: -210px;
-  }
 
   .tabela {
     height: 50%;

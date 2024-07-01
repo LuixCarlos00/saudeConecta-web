@@ -11,4 +11,7 @@ export interface Medico {
   MedTelefone: string;
   endereco: number;
   usuario: number;
+
+  medTelefone ?: string;
+  medEmail ?: string;
 }

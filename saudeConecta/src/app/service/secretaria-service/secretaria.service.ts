@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from './../../util/Token/Token.service';
 import { Secretaria } from 'src/app/util/variados/interfaces/secretaria/secretaria';
 
 @Injectable({

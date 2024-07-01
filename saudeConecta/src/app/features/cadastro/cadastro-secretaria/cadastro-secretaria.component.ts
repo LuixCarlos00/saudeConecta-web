@@ -13,8 +13,9 @@ import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 import { Secretaria } from 'src/app/util/variados/interfaces/secretaria/secretaria';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
-import { tokenService } from 'src/app/util/Token/token.service';
+
 import { SecretariaService } from 'src/app/service/secretaria-service/secretaria.service';
+import { tokenService } from 'src/app/util/Token/Token.service';
 @Component({
   selector: 'app-cadastro-secretaria',
   templateUrl: './cadastro-secretaria.component.html',
@@ -43,12 +44,13 @@ export class CadastroSecretariaComponent implements OnInit {
     SecreDataCriacao: ''
   };
 
-  Usuario: Usuario = {
+  UsuarioLogado: Usuario = {
     id: 0,
     login: '',
     senha: '',
     roles: '',
   };
+
 
   constructor(
     private router: Router,
@@ -61,11 +63,11 @@ export class CadastroSecretariaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ModelService.getDadosUsuario().subscribe((dadosUsuario) => {
-      if (dadosUsuario) {
-        this.Usuario = dadosUsuario;
-      }
-    });
+    this.ModelService.iniciarObservacaoDadosUsuario();
+  this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
+    if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
+    console.log(UsuarioLogado, 'paciente');
+  });
 
     this.FormularioSecretaria = this.form.group({
       nome: ['', Validators.required],
@@ -93,7 +95,7 @@ export class CadastroSecretariaComponent implements OnInit {
     this.Secretaria.SecreEmail = email;
     this.Secretaria.SecreDataCriacao = dataAtual;
     this.Secretaria.SecreStatus = 1;
-    this.Secretaria.SecreUsuario = this.Usuario.id;
+    this.Secretaria.SecreUsuario = this.UsuarioLogado.id;
 
     console.log(this.Secretaria, 'Secretaria');
 

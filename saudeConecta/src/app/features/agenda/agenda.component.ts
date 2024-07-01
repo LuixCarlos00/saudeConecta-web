@@ -6,6 +6,9 @@ import { ConsultaService } from 'src/app/service/service-consulta/consulta.servi
 import { TabelaAgendaComponent } from './tabela-agenda/tabela-agenda.component';
 import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/consultaStatus';
 import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
+import { CadastroMedicoComponent } from '../cadastro/cadastro-medico/cadastro-medico.component';
 
 @Component({
   selector: 'app-agenda',
@@ -13,6 +16,7 @@ import { ConsultaStatusService } from 'src/app/service/service-consulta-status/c
   styleUrls: ['./agenda.component.css'],
 })
 export class AgendaComponent implements OnInit {
+
   //
   //
   //
@@ -24,7 +28,9 @@ export class AgendaComponent implements OnInit {
     private router: Router,
     private form: FormBuilder,
     private consultaService: ConsultaService,
-    private consultastatusService: ConsultaStatusService
+    private consultastatusService: ConsultaStatusService,
+    public dialog: MatDialog,
+    protected DialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -79,12 +85,17 @@ export class AgendaComponent implements OnInit {
 
 
 
+
   GerarPDF() {
     if (this.ConsultaStatus) {
       this.consultastatusService.Gera_PDF_DeRegistroDaTabelaSubject(true);
     } else if (this.Consulta) {
       this.consultaService.Gera_PDF_DeRegistroDaTabelaSubject(true);
     }
+  }
+
+  CronogramaDoDia() {
+    this.consultaService.CronologiaDoDiaSubject(true);
   }
 
 
@@ -98,4 +109,17 @@ export class AgendaComponent implements OnInit {
   voltarParaHome() {
     this.router.navigate(['home']);
   }
+
+  AdicionarMedico() {
+    this.dialog.open(CadastroMedicoComponent, {
+      width: '800px',
+      height: '700px',
+      //data: { Consulta: Consulta, Medico: medico, Paciente: paciente },
+    });
+    }
+    AdicionarPaciente() {
+    throw new Error('Method not implemented.');
+    }
+
+
 }

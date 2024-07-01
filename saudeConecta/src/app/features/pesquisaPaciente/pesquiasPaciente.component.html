@@ -63,10 +63,13 @@
           <label class="label_filtro_Hora">
             <font style="color: red; font-size: 12px;">* </font>Hora
           </label>
-          <select class="input_HORA" formControlName="time" name="time" id="time">
-            <option *ngFor="let time of Hora" [value]="time.label">{{time.label}}</option>
+          <select class="input_HORA" formControlName="time" name="time" id="time" [disabled]="!Medico || !DataSelecionada">
+            <option *ngFor="let time of Hora" [value]="time.value">{{time.label}}</option>
           </select>
         </div>
+
+
+
 
         <div style="margin: 3px; display: grid; grid-template-rows: 50% 50%;">
           <div >

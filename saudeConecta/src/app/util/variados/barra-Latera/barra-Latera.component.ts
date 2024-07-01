@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModelService } from 'src/app/service/Model_service/Model.service';
-import { tokenService } from '../../Token/token.service';
+import { tokenService } from "src/app/util/Token/Token.service";
+import { Usuario } from '../interfaces/usuario/usuario';
 
 @Component({
   selector: 'app-barra-Latera',
@@ -15,7 +16,12 @@ export class BarraLateraComponent implements OnInit {
 
 AcessoPermitido: string = '';
 
-Usuario: any;
+UsuarioLogado: Usuario = {
+  id: 0,
+  login: '',
+  senha: '',
+  roles: '',
+};
 
 constructor(
   public ModelService: ModelService,
@@ -24,10 +30,10 @@ constructor(
 ) {}
 
 ngOnInit() {
-  this.tokenService.token();
-  this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
-    if (paciente) this.Usuario = paciente;
-    console.log(paciente, 'paciente');
+  this.ModelService.iniciarObservacaoDadosUsuario();
+  this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
+    if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
+    console.log(UsuarioLogado, 'paciente');
   });
 
 
@@ -41,18 +47,18 @@ redirecionamentoDePaginas(rota: string) {
     this.router.navigate(['home']);
   }
 
- else if (rota === 'agenda') {
+ else if (rota === 'cadastroUsuario') {
 
-    this.router.navigate(['gerenciamento']);
+    this.router.navigate(['cadastroUsuario']);
   }
 
-  else if (rota === 'PlanoDeEnsino') {
+  else if (rota === 'cadastroPaciente') {
 
-    this.router.navigate(['plano_ensino']);
+    this.router.navigate(['cadastroPaciente']);
   }
 
-  else if (rota === 'Quadro_Disponibilidade') {
-    this.router.navigate(['Quadro_Disponibilidade']);
+  else if (rota === 'trocaSenha') {
+    this.router.navigate(['trocaSenha']);
   }
 
   else if (rota === 'Arquivos_Diversos') {
@@ -77,7 +83,6 @@ estaLogado(): Boolean {
 
 
 Deslogar() {
-  console.log('Logout clicked');
   this.ModelService.logout();
 }
 

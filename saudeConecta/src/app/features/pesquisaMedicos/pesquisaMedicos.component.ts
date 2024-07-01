@@ -1,3 +1,4 @@
+import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
 import { Medico } from './../../util/variados/interfaces/medico/medico';
 import { Route, Router } from '@angular/router';
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
@@ -28,8 +29,18 @@ export class PesquisaMedicosComponent implements OnInit {
     private medicosService: MedicosService,
     private DialogService: DialogService,
     private router: Router,
-    private gerenciamentoService :GerenciamentoService
-  ) {}
+    private gerenciamentoService :GerenciamentoService,
+    private consultaService  : ConsultaService
+  ) {
+
+    this.consultaService.CadastroRealizadoComSucesso$.subscribe((cadastro) => {
+      if (cadastro) {
+        this.LimparFormulario();
+      }
+    });
+
+
+  }
 
   ngOnInit() {
     this.FormularioPesquisa = this.form.group({
@@ -125,7 +136,9 @@ export class PesquisaMedicosComponent implements OnInit {
     this.MedicoEscolhido = event;
     this.gerenciamentoService.setMedicoEscolhido(event); // Adicionado
   }
-  pesquisarNovamente() {
-    throw new Error('Method not implemented.');
+
+  LimparFormulario(){
+    this.FormularioPesquisa.reset();
+    this.MedicoEscolhido = null;
   }
 }

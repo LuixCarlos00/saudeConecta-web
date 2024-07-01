@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from './../../util/Token/Token.service';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
 

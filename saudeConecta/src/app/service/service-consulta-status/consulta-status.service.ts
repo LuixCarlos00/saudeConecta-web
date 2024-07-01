@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from "src/app/util/Token/Token.service";
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/consultaStatus';
 
@@ -11,6 +11,7 @@ import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/
   providedIn: 'root'
 })
 export class ConsultaStatusService {
+
 
 
   //
@@ -39,6 +40,7 @@ export class ConsultaStatusService {
 
   private GeraPdfStatusSubject = new BehaviorSubject<Boolean>(false);
   GeraPDFRegistroTabela$ = this.GeraPdfStatusSubject.asObservable();
+
 
   constructor(
     private router : Router ,
@@ -69,9 +71,9 @@ export class ConsultaStatusService {
 
     Gera_PDF_DeRegistroDaTabelaSubject(dados: boolean) {
      this.GeraPdfStatusSubject.next(dados);
-
-
     }
+
+
 
 
     CriarConsulataStatus(Consulta: Consulta): Observable<Consulta> {

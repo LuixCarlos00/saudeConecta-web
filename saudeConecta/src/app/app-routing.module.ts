@@ -27,14 +27,12 @@ const routes: Routes = [
 
 
 
-  {path:'',component:LoginComponent,
-     canActivate: [GuardaRotasLogin]
-    },//1
+  {path:'',component:LoginComponent,canActivate: [GuardaRotasLogin] },//1
+
 
   {path:'cadastroUsuario',component:CadastroUsuarioComponent, canActivate:[GuardaRotasCadastraUsuario]},//2
 
   {path:'cadastroadmin',component:CadastroAdmComponent,  },//2
-
 
   {path:'cadastro',component:CadastroComponent,canActivate:[GuardaRotasCadastra]},//3
 
@@ -47,15 +45,19 @@ const routes: Routes = [
 
   {path:'recuperaCadastro',component:RecuperaCadastroComponent,  },//4
 
-  {path:'home',component:HomeComponent, canActivate: [GuardaRotasHome] },//5
 
-  {path:'gerenciamento',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },//5
+
+  {path:'home',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },//5
+
+
+
+  //{path:'gerenciamento',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },//5
 
   {path:'agenda',component:PesquisaMedicosComponent,  },//6
 
   //{path:'addconsulta',component:CriaConsultaComponent,  },//7
 
-  {path:'agenda',component:AgendaComponent,  },//8
+  //{path:'agenda',component:AgendaComponent,  },//8
 
   {path:'historico',component:HistoricoComponent,  },//9
 

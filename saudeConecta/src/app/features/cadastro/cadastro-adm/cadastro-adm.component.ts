@@ -1,12 +1,14 @@
-import { tokenService } from './../../../util/Token/token.service';
+import { Usuario } from './../../../util/variados/interfaces/usuario/usuario';
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModelService } from 'src/app/service/Model_service/Model.service';
 import { UsuarioAdmService } from 'src/app/service/service-usuario-adm/usuario-adm.service';
 import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
+import { tokenService } from 'src/app/util/Token/Token.service';
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
-import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -27,7 +29,7 @@ export class CadastroAdmComponent implements OnInit {
     AdmCodigoAtorizacao: '',
   };
 
-  Usuario: Usuario = {
+  UsuarioLogado: Usuario = {
     id: 0,
     login: '',
     senha: '',
@@ -45,10 +47,10 @@ export class CadastroAdmComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ModelService.getDadosUsuario().subscribe((dadosUsuario) => {
-      if (dadosUsuario) {
-        this.Usuario = dadosUsuario;
-      }
+    this.ModelService.iniciarObservacaoDadosUsuario();
+    this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
+      if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
+      console.log(UsuarioLogado, 'paciente');
     });
 
     this.FormularioADM = this.form.group({
@@ -69,7 +71,7 @@ export class CadastroAdmComponent implements OnInit {
     this.Administracao.AdmEmail = email;
     this.Administracao.AdmDataCriacao = dataAtual;
     this.Administracao.AdmStatus = 1;
-    this.Administracao.AdmUsuario = this.Usuario.id;
+    this.Administracao.AdmUsuario = this.UsuarioLogado.id;
 
     console.log(this.Administracao);
 

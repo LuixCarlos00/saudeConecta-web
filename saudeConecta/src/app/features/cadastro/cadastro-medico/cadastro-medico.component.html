@@ -1,9 +1,10 @@
+<app-cadastro-usuario></app-cadastro-usuario>
 <div style="  display: flex;">
   <div class="container">
     <div *ngIf=" modelService.estaLogado()" style="  justify-content: left; display: flex; margin-top: -15px; margin-left: -20px;">
-      <button style="border: hidden; color: black;  background-color: #f4f4f4;" (click)="voltarParaHome()">
+      <!-- <button style="border: hidden; color: black;  background-color: #f4f4f4;" (click)="voltarParaHome()">
         <i class="fa-solid fa-arrow-left fa-xl"></i>
-      </button>
+      </button> -->
     </div>
     <h2>Cadastro de Medico</h2>
     <form id="cadastroForm" class="responsivo" [formGroup]="FormularioMedico">
@@ -31,7 +32,7 @@
       </div>
       <div class="form-group">
         <label for="cpf">
-          <font color="#FF0000"><b>* </b></font>CPF:
+          CPF:
         </label>
         <input formControlName="cpf" [(ngModel)]="Medico.MedCpf" type="text" id="cpf" name="cpf"
           placeholder="12345678900"   maxlength="11" required>
@@ -45,7 +46,7 @@
       </div>
       <div class="form-group">
         <label for="rg">
-          <font color="#FF0000"><b>* </b></font> RG:
+           RG:
         </label>
         <input formControlName="rg" [(ngModel)]="Medico.MedRg" type="text" id="rg" name="rg" placeholder="XX__-___-___"
            maxlength="12" required>

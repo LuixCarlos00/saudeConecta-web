@@ -1,92 +1,98 @@
+<div>
+
+  <form class="fomulario" [formGroup]="FormularioAgenda">
 
 
-  <div>
-
-    <form class="fomulario" [formGroup]="FormularioAgenda">
-
-
-      <div class="divPesquisar"  >
-        <label for="busca" class="label_search">Pesquisar </label>
-        <input type="text" id="busca" class="input_search" name="busca" formControlName="busca">
-        <button class="btnPesquisar" type="submit" (click)="Pesquisar()">
-          Pesquisar
-        </button>
-        <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit" (click)="MostraTabelaDeConcluidos()">
-          Finalizandas
-        </button>
-      </div>
-
+    <div class="divPesquisar">
+      <label for="busca" class="label_search">Pesquisar </label>
+      <input type="text" id="busca" class="input_search" name="busca" formControlName="busca">
+      <button class="btnPesquisar" type="submit" (click)="Pesquisar()">
+        Pesquisar
+      </button>
+      <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit"
+        (click)="MostraTabelaDeConcluidos()">
+        Finalizandas
+      </button>
+    </div>
 
 
 
+    <div style="display: flex; justify-content: left;">
 
       <div class="grid">
 
-        <div class="divRecarregar">
+        <div class="divOperacoes">
           <button title="Recarregar Tabela" class="btnRecarregar" (click)="Recarregar()">
             <i style="color: blue; background-color: rgb(206, 212, 212) " class="fa-solid fa-rotate-right fa-xl"></i>
           </button>
         </div>
 
-        <div class="divDeletar">
-          <button
-            [ngClass]="{ 'disabled-button': !Consulta }"
-            title="Deletar Consulta"
-            class="btnRecarregar"
-            (click)="Deletar()"
-          >
+        <div class="divOperacoes">
+          <button [ngClass]="{ 'disabled-button': !Consulta }" title="Deletar Consulta" class="btnRecarregar"
+            (click)="Deletar()">
             <i style="color: red;" class="fa-regular fa-trash-can fa-xl"></i>
           </button>
         </div>
 
-        <div class="divEditar">
-          <button
-            [ngClass]="{ 'disabled-button': !Consulta }"
-            title="Editar Consulta"
-            class="btnRecarregar"
-            (click)="Editar()"
-          >
+        <div class="divOperacoes">
+          <button [ngClass]="{ 'disabled-button': !Consulta }" title="Editar Consulta" class="btnRecarregar"
+            (click)="Editar()">
             <i style="color:blue" class="fa-regular fa-pen-to-square fa-xl"></i>
           </button>
         </div>
 
-        <div class="divConcluido">
-          <button
-            [ngClass]="{ 'disabled-button': !Consulta }"
-            title="Concluir Consulta"
-            class="btnRecarregar"
-            (click)="Concluido()"
-          >
+        <div class="divOperacoes">
+          <button [ngClass]="{ 'disabled-button': !Consulta }" title="Concluir Consulta" class="btnRecarregar"
+            (click)="Concluido()">
             <i style="color: green" class="fa-solid fa-square-check fa-xl"></i>
           </button>
         </div>
 
-        <div class="divPDF">
-          <button
-            [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }"
-            title="Gerar Arquivo de Consulta"
-            class="btnRecarregar"
-            (click)="GerarPDF()"
-          >
+        <div class="divOperacoes">
+          <button [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }" title="Gerar Arquivo de Consulta"
+            class="btnRecarregar" (click)="GerarPDF()">
             <i style="color:blue" class="fa-solid fa-file-pdf fa-xl"></i>
           </button>
         </div>
 
+        <div class="divOperacoes">
+          <button [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }" title="Cronograma do dia "
+            class="btnRecarregar" (click)="CronogramaDoDia()">
+            <i class="fa-solid fa-clock fa-xl" style="color: #035e4c;  "></i>
+          </button>
+        </div>
+
+        <div class="divOperacoes">
+          <button class="btnRecarregar"  title="Adicionar Medico" (click)="AdicionarMedico() ">
+            <i style="color: #035e31;  " class="fa-solid fa-user-nurse fa-xl"></i>
+          </button>
+        </div>
+
+        <div class="divOperacoes">
+          <button class="btnRecarregar"  title="Adicionar Paciente" (click)="AdicionarPaciente() ">
+            <i style="color: #035e31;  " class="fa-solid fa-user-plus fa-xl "></i>
+          </button>
+        </div>
+
+
+
 
       </div>
-
-
-      <div class="tabela" *ngIf="Consulta && !ConsultaStatus">
-        <app-tabela-agenda ></app-tabela-agenda>
-      </div>
-
-      <div class="tabela" *ngIf="!Consulta && ConsultaStatus">
-        <app-tabela-agenda-status></app-tabela-agenda-status>
-      </div>
+    </div>
 
 
 
-    </form>
 
-  </div>
+    <div class="tabela" *ngIf="Consulta && !ConsultaStatus">
+      <app-tabela-agenda></app-tabela-agenda>
+    </div>
 
+    <div class="tabela" *ngIf="!Consulta && ConsultaStatus">
+      <app-tabela-agenda-status></app-tabela-agenda-status>
+    </div>
+
+
+
+  </form>
+
+</div>

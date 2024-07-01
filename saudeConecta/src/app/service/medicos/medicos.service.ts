@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from "src/app/util/Token/Token.service";
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 @Injectable({

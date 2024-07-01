@@ -3,7 +3,7 @@ import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
 import { ConsultaService } from '../../service/service-consulta/consulta.service';
 import { HoradaConsulta } from './../../util/variados/options/options';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from './../../util/Token/Token.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciamento.service';
+import { ModelService } from 'src/app/service/Model_service/Model.service';
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
 @Component({
   selector: 'app-pesquias-Paciente',
@@ -21,7 +23,7 @@ import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciament
 export class PesquiasPacienteComponent implements OnInit {
   DiaDaSemana: string = '';
   Medico!: any;
-  private Adiministrador!: Adiministrador;
+
   PacienteEscolhido!: any;
   Consulta!: Consulta;
   FormGroupConsulta!: FormGroup;
@@ -30,39 +32,49 @@ export class PesquiasPacienteComponent implements OnInit {
   pagamento: Boolean = false;
   dadosPaciente: any;
   showResultadoPaciente: boolean = false;
+  DataSelecionada:any
+  horariosDisponiveis: string[] = [];
+
+  UsuarioLogado: Usuario = {
+    id: 0,
+    login: '',
+    senha: '',
+    roles: '',
+  };
 
   constructor(
     private form: FormBuilder,
     private router: Router,
-    private medicosService: MedicosService,
+
     private tokenService: tokenService,
-    private ServiceConsultaMedicosService: ConsultaService,
+    private consultaService: ConsultaService,
     private DialogService: DialogService,
     private PacientesService: PacientesService,
-    private gerenciamentoService: GerenciamentoService
+    private gerenciamentoService: GerenciamentoService,
+    private ModelService: ModelService
   ) {
-    this.tokenService.token();
-    this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
-      if (paciente) {
-        this.Adiministrador = paciente;
-        console.log(this.Adiministrador, 'adm');
-      }
+    this.ModelService.iniciarObservacaoDadosUsuario();
+    this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
+      if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
+      console.log(UsuarioLogado, 'paciente');
     });
 
     this.gerenciamentoService.medicoEscolhido$.subscribe((medico) => {
       if (medico) {
         this.Medico = medico;
-        console.log('Médico selecionado:', this.Medico);
+
+        this.verificarCondicoesParaConsulta();
       }
     });
+
 
     this.gerenciamentoService.pacienteEscolhido$.subscribe((paciente) => {
       if (paciente) {
         this.PacienteEscolhido = paciente;
-        console.log('Paciente selecionado:', this.PacienteEscolhido);
       }
     });
   }
+
 
   ngOnInit() {
     this.FormGroupConsulta = this.form.group({
@@ -74,6 +86,8 @@ export class PesquiasPacienteComponent implements OnInit {
       FiltroPesquisaPaciente: ['', Validators.required],
     });
   }
+
+
 
   PesquisarPacientes() {
     const pesquisa: string =
@@ -186,11 +200,11 @@ export class PesquiasPacienteComponent implements OnInit {
         ConObservacoes: observacao,
         ConDadaCriacao: dataAtual,
         ConFormaPagamento: FornaPAgamento,
-        ConAdm: this.Adiministrador.AdmCodigo,
+        ConAdm: this.UsuarioLogado.id,
         ConStatus: 0,
       };
 
-      this.ServiceConsultaMedicosService.VericarSeExetemConsultasMarcadas(
+      this.consultaService.VericarSeExetemConsultasMarcadas(
         consult
       ).subscribe(
         (data) => {
@@ -198,13 +212,14 @@ export class PesquiasPacienteComponent implements OnInit {
             this.DialogService.JaexisteDadosCAdastradosComEssesParamentros();
             this.FormGroupConsulta.reset();
           } else if (!data) {
-            this.ServiceConsultaMedicosService.CriarConsulata(
+            this.consultaService.CriarConsulata(
               consult
             ).subscribe(
               (response) => {
-                console.log(response);
+                this.consultaService.ChangeCadastroRealizadoComSucesso(response);
+                this.PacienteEscolhido = null;
+                this.FormGroupConsulta.reset();
                 const texto: string = `O cadastro da consulta foi realizado com sucesso.\nCodigo de consulta: ${response.ConCodigoConsulta} `;
-
                 Swal.fire({
                   icon: 'success',
                   title: 'OK',
@@ -235,16 +250,48 @@ export class PesquiasPacienteComponent implements OnInit {
     }
   }
 
+
+
   onDateChange(event: Event) {
     const selectedDate: string = (event.target as HTMLInputElement).value;
-    const date = new Date(selectedDate + 'T00:00:00'); // Adiciona a hora para evitar problemas com fuso horário
-    const utcDate = new Date(date.toUTCString()); // Normaliza a data para UTC
+    const date = new Date(selectedDate + 'T00:00:00');
+    const utcDate = new Date(date.toUTCString());
     const options = { weekday: 'long' as const };
     const dayOfWeek = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
+    this.DataSelecionada = selectedDate;
     this.DiaDaSemana = dayOfWeek;
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log(this.DiaDaSemana);
+    this.verificarCondicoesParaConsulta(); // Chama a função ao mudar a data
   }
+
+  verificarCondicoesParaConsulta() {
+    this.horariosDisponiveis = []; // Limpa os horários disponíveis ao iniciar a consulta
+    if (this.Medico && this.DataSelecionada) {
+      this.consultaService.VerificarHorariosDisponiveisReferentesAoMedicoEData(this.Medico.medCodigo, this.DataSelecionada).subscribe(
+        (data) => {
+          console.log(data, 'data');
+          this.horariosDisponiveis = data;
+          this.atualizarHorarios(); // Atualiza os horários disponíveis ao receber os dados
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  atualizarHorarios() {
+    if (this.horariosDisponiveis) {
+      const horariosDisponiveisFormatados = this.horariosDisponiveis.map(horario => horario.substring(0, 5));
+      this.Hora = HoradaConsulta.filter(horario => {
+        const horarioFormatado = horario.value.substring(0, 5);
+        return !horariosDisponiveisFormatados.includes(horarioFormatado);
+      });
+    }else{
+      this.Hora = HoradaConsulta;
+    }
+
+  }
+
 
   voltarParaPesquisaMedicos() {
     this.router.navigate(['pesquisar']);
@@ -281,4 +328,5 @@ export class PesquiasPacienteComponent implements OnInit {
         return (FornaPAgamento = 0); // Valor padrão, caso nenhuma das opções seja selecionada
     }
   }
+
 }

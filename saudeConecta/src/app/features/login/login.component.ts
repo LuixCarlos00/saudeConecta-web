@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ModelService } from 'src/app/service/Model_service/Model.service';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from "src/app/util/Token/Token.service";
 import Swal from 'sweetalert2';
 import { Observable, map } from 'rxjs';
 
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
               const token = response.body.token;
 
               this.tokenService.salvarToken(token);
-              this.tokenService.token();
+              this.tokenService.decodificaToken();
               this.router.navigate(['/home']);
             }
           },

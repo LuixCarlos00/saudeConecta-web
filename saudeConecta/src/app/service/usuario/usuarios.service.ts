@@ -1,9 +1,10 @@
+import { tokenService } from './../../util/Token/Token.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { tokenService } from 'src/app/util/Token/token.service';
-import type { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
+
+
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 

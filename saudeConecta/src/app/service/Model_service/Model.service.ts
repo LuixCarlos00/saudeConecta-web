@@ -5,14 +5,11 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
-import { tokenService } from 'src/app/util/Token/token.service';
 
 
 
-
-import * as jwt_decode from 'jwt-decode';
-import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 import { Router } from '@angular/router';
+import { tokenService } from 'src/app/util/Token/Token.service';
 
 
 @Injectable({
@@ -25,8 +22,6 @@ export class ModelService {
   //
   //
 
-  private usuarioLogadoSubject = new BehaviorSubject<Usuario | null>(null);
-  UsuarioLogadoValue$ = this.usuarioLogadoSubject.asObservable();
 
 
 
@@ -58,33 +53,23 @@ export class ModelService {
 
   iniciarObservacaoDadosUsuario(): void {
     if (this.tokenService.possuiToken()) {
-      this.decodificaToken();
+      this.tokenService.decodificaToken();
     }
   }
 
 
 
 
-  public decodificaToken(): void {
-    const token = this.tokenService.retornaToken();
-    if (token) {
-      const Usuario = jwt_decode.jwtDecode(token) as Usuario;
-      this.usuarioLogadoSubject.next(Usuario);
-    }
-  }
 
-  getDadosUsuario(): Observable<Usuario | null> {
-    return this.usuarioLogadoSubject.asObservable();
-  }
 
   salvarToken(token: string) {
     this.tokenService.salvarToken(token);
-    this.decodificaToken();
+    this.tokenService.decodificaToken();
   }
 
   deslogar(): void {
     this.tokenService.excluirToken();
-    this.usuarioLogadoSubject.next(null);
+    this.tokenService.changeDadosUsuarioLogado(null);
   }
 
   estaLogado(): boolean {

@@ -1,5 +1,4 @@
 import { EspecialidadeMedicas } from './../../../util/variados/options/options';
-import { tokenService } from 'src/app/util/Token/token.service';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { Usuario } from './../../../util/variados/interfaces/usuario/usuario';
 import { Component } from '@angular/core';
@@ -34,7 +33,7 @@ export class CadastroMedicoComponent {
 
   ufOptions = ufOptions;
 
-  NovoUsuario: any;
+  UsuarioLogado: any;
   Medico: Medico = {
     MedCodigo: 0,
     MedNome: '',
@@ -70,23 +69,27 @@ export class CadastroMedicoComponent {
 
     private route: Router
   ) {
-    this.modelService.iniciarObservacaoDadosUsuario();
+
+    // É necessario cadastra e pega o id do usuario cadastrado  e associa ao medico
+    this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
+      if (value) {
+        this.UsuarioLogado = value;
+
+
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
-      if (value) {
-        this.NovoUsuario = value;
-      }
-    });
+
 
     this.FormularioMedico = this.form.group({
       nome: ['', Validators.required],
       sexo: ['', Validators.required],
       dataNascimento: ['', Validators.required],
-      cpf: ['', Validators.required ],
+      //cpf: ['', Validators.required ],
       crm: ['', Validators.required],
-      rg: ['', Validators.required],
+     // rg: ['', Validators.required],
       Especialidade: ['', Validators.required],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -118,9 +121,15 @@ export class CadastroMedicoComponent {
         (endereco: Endereco) => {
           console.log(endereco);
 
+
+
           const EnderecoID = endereco.EndCodigo as number;
+          console.log(EnderecoID);
+
           this.Medico.endereco = EnderecoID;
-          this.Medico.usuario = this.NovoUsuario.id;
+          console.log(this.Medico.endereco);
+  console.log(this.UsuarioLogado);
+          this.Medico.usuario = this.UsuarioLogado.id;
 
           console.log(this.Medico);
 

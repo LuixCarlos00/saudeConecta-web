@@ -1,0 +1,69 @@
+<h1 mat-dialog-title>Escrever Lembrete</h1>
+  <div mat-dialog-content style="width: 100%; height: 100%; border: 1px solid black; " [formGroup]="AvisoLembreteForm" >
+
+  <div style=" display: flex; justify-content: center;">
+
+    <div style="width:100%;  ">
+
+      <div>
+        <p>Medico</p>
+        <input  formControlName="destinatario"  type="radio"  [value]="1">
+        <label> Email :
+          <strong>
+            <p>{{ data.Medico.MedEmail || data.Medico.medEmail || 'Não informado' }}</p>
+          </strong>
+        </label>
+      </div>
+      <hr>
+      <div>
+        <input formControlName="destinatario"  type="radio" [value]="2">
+        <label> Telefone :
+          <strong>
+            <p>{{ data.Medico.MedTelefone || data.Medico.medTelefone || 'Não informado'}}</p>
+          </strong>
+        </label>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div style="width: 100%;">
+      <div style="margin-left: 10px;">
+        <p>Paciente</p>
+        <input formControlName="destinatario"  type="radio" [value]="3">
+        <label> Email :
+          <strong>
+            <p>{{ data.Paciente.PaciEmail || data.Paciente.paciEmail || 'Não informado' }}</p>
+          </strong>
+        </label>
+      </div>
+      <hr>
+      <div  style="margin-left: 10px;">
+        <input formControlName="destinatario"  type="radio" [value]="4">
+        <label> Telefone :
+          <strong>
+            <p>{{ data.Paciente.PaciTelefone || data.Paciente.paciTelefone || 'Não informado'}}</p>
+          </strong>
+        </label>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+  <hr>
+  <textarea formControlName="mensagem"  style="border: 1px solid black; width:100%;  height: 150px; background-color: rgb(185, 190, 190);">
+
+  </textarea>
+
+
+
+</div>
+
+<div mat-dialog-actions>
+  <button class="close-button" mat-button (click)="onNoClick()">Fechar</button>
+  <button class="close-button" mat-button  (click)="EnviarMensagem()"   >Envia</button>
+</div>

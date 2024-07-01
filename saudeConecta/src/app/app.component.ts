@@ -1,7 +1,7 @@
 import { LoginService } from 'src/app/service/service-login/login.service';
-import { tokenService } from 'src/app/util/Token/token.service';
-import { RouterLink } from '@angular/router';
+
 import { Component, HostListener } from '@angular/core';
+import { tokenService } from './util/Token/Token.service';
 
 @Component({
   selector: 'app-root',

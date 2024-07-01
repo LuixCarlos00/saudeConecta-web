@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
-import { tokenService } from 'src/app/util/Token/token.service';
 
 import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
+import { tokenService } from 'src/app/util/Token/Token.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -43,7 +43,7 @@ export class CadastroUsuarioComponent {
           this.usuariosService.changeNovoUsuariocadastrado(
             dados.body.usuarioView
           );
-console.log(dados.body.usuarioView, 'o token');
+          console.log(dados.body.usuarioView, 'o token');
 
           this.router.navigate(['cadastro']);
         },

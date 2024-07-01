@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from "src/app/util/Token/Token.service";
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 
 @Injectable({

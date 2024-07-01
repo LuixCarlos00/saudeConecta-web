@@ -44,6 +44,7 @@ import { CadastroSecretariaComponent } from '../features/cadastro/cadastro-secre
 import { GerenciamentoComponent } from '../features/gerenciamento/gerenciamento.component';
 import { TabelaDePacientesComponent } from '../features/pesquisaPaciente/tabela-de-pacientes/tabela-de-pacientes.component';
 import { PesquiasPacienteComponent } from '../features/pesquisaPaciente/pesquiasPaciente.component';
+import { AvisosLembretesComponent } from '../features/agenda/tabela-agenda/Avisos-Lembretes/Avisos-Lembretes.component';
 
 
 
@@ -69,6 +70,7 @@ import { PesquiasPacienteComponent } from '../features/pesquisaPaciente/pesquias
     TabelaAgendaComponent,
     AgendaComponent,
     ObservacoesComponent,
+    AvisosLembretesComponent,
     EditarConsultasComponent,
     TabelaEditarMedicosConsultasComponent,
     TabelaAgendaStatusComponent,

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from "src/app/util/Token/Token.service";
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 
 @Injectable({

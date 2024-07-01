@@ -3,7 +3,7 @@ import { Usuario } from '../../util/variados/interfaces/usuario/usuario';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from "src/app/util/Token/Token.service";
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 
 @Injectable({

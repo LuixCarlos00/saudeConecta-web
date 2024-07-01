@@ -18,8 +18,9 @@ import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { HoradaConsulta } from 'src/app/util/variados/options/options';
 import Swal from 'sweetalert2';
-import { tokenService } from 'src/app/util/Token/token.service';
+
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
+import { tokenService } from 'src/app/util/Token/Token.service';
 
 @Component({
   selector: 'app-Editar-Consultas',
@@ -387,7 +388,7 @@ export class EditarConsultasComponent implements OnInit {
                 text: 'Consulta editada com sucesso .',
               }).then((result) => {
                 if (result.isConfirmed) {
-                  window.location.reload();
+                 //window.location.reload();
                 }
               });
             },

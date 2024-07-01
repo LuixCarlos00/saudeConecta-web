@@ -9,7 +9,7 @@ import { UsuarioAdmService } from './../../service/service-usuario-adm/usuario-a
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { el } from 'date-fns/locale';
-import { tokenService } from 'src/app/util/Token/token.service';
+import { tokenService } from "src/app/util/Token/Token.service";
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 import Swal from 'sweetalert2';
 import { map, take } from 'rxjs';

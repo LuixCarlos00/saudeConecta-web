@@ -1,17 +1,18 @@
+import { Consulta } from './../../../util/variados/interfaces/consulta/consulta';
 import { map, take } from 'rxjs';
 import { Paciente } from './../../../util/variados/interfaces/paciente/paciente';
 import { Medico } from './../../../util/variados/interfaces/medico/medico';
 import { Component, Input, OnInit } from '@angular/core';
-import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { MatDialog } from '@angular/material/dialog';
 import { ObservacoesComponent } from './Observacoes/Observacoes.component';
 import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
-import { el } from 'date-fns/locale';
+import { da, el } from 'date-fns/locale';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import Swal from 'sweetalert2';
 import { lastDayOfDecade } from 'date-fns';
 import { EditarConsultasComponent } from './Editar-Consultas/Editar-Consultas.component';
 import { Template_PDFComponent } from '../template_PDF/template_PDF.component';
+import { AvisosLembretesComponent } from './Avisos-Lembretes/Avisos-Lembretes.component';
 
 @Component({
   selector: 'app-tabela-agenda',
@@ -46,7 +47,6 @@ export class TabelaAgendaComponent implements OnInit {
     PaciEmail: '',
     PaciTelefone: '',
     endereco: 0,
-
   };
 
   displayedColumns = [
@@ -57,6 +57,7 @@ export class TabelaAgendaComponent implements OnInit {
     'ConData',
     'ConHorario',
     'ConObservacoes',
+    'Observar',
     'Seleciona',
   ];
 
@@ -68,7 +69,6 @@ export class TabelaAgendaComponent implements OnInit {
   ParametroDeFiltragem: any;
   dataSource: Consulta[] = [];
   DadosDeConsulta: any[] = [];
-  BuscarUmaVez: boolean = false;
 
   constructor(
     private consultaService: ConsultaService,
@@ -77,36 +77,25 @@ export class TabelaAgendaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (!this.BuscarUmaVez) {
-      this.BuscarTodosRegistrosDeConsulta();
-    }
-
-
-
+    this.consultaService.CadastroRealizadoComSucesso$.subscribe((dados) => {
+      if (dados) this.BuscarTodosRegistrosDeConsulta();
+    });
 
     this.consultaService.DeletarDadosDaTabela$.subscribe((dados) => {
       //deletar Itens
-      if (dados === true && this.DadoSelecionaParaExclusao.length > 0) {
+      if (dados === true && this.DadoSelecionaParaExclusao.length > 0)
         this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao, dados);
-      }
     });
-
-
-
 
     this.consultaService.RecarregarTabela$.subscribe((dados) => {
       // Recarregar Tabela
-      if (dados) {
-        this.RecaregarTabela();
-      }
+      if (dados) this.RecaregarTabela();
     });
 
-
-
-
     this.consultaService.EditarDadosDaTabela$.subscribe((dados) => {
+      //Edita dado selecionado
       if (dados === true && this.DadoSelecionadoParaEdicao.length === 1) {
-        this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao); //Edita dado selecionado
+        this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao);
       } else if (dados === true && this.DadoSelecionadoParaEdicao.length > 1) {
         Swal.fire({
           icon: 'error',
@@ -114,24 +103,18 @@ export class TabelaAgendaComponent implements OnInit {
           confirmButtonText: 'Ok',
         }).then((result) => {
           if (result.isConfirmed) {
-        this.consultaService.EditarDadosDaTabelaSubject(false);
-        window.location.reload();
+            this.consultaService.EditarDadosDaTabelaSubject(false);
+            window.location.reload();
           }
         });
       }
     });
 
-
-
-
     this.consultaService.ConcluidoRegistroTabela$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionadoParaConclusao.length > 0) {
-        this.ConcluirDadosDaTabela();// concluir dados
+        this.ConcluirDadosDaTabela(); // concluir dados
       }
     });
-
-
-
 
     this.consultaService.dadosFiltrados$.subscribe((dados) => {
       if (!dados.toString()) {
@@ -147,17 +130,24 @@ export class TabelaAgendaComponent implements OnInit {
       }
     });
 
-
     this.consultaService.GeraPDFRegistroTabela$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionadoParaGerarPDF.length > 0) {
         this.GerarPDF(this.DadoSelecionadoParaGerarPDF);
       }
     });
 
+    this.consultaService.CriaCronologiaDoDia$.subscribe((dados) => {
+      if (dados === true) {
+        this.CriarCronologiaDoDia();
+      }
+    });
 
-
+    this.consultaService.BuscarDadoParaCronologia$.subscribe((dados) => {
+      if (dados) {
+        this.filtrandoDadosDoBancoPassadoParametros(dados);
+      }
+    });
   }
-
 
   ConcluirDadosDaTabela() {
     Swal.fire({
@@ -199,12 +189,10 @@ export class TabelaAgendaComponent implements OnInit {
               }
             );
         }
-      }
-      else  if (result.dismiss === Swal.DismissReason.cancel) {
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.consultaService.ConcluidoTabelaSubject(false);
         window.location.reload();
-        }
-
+      }
     });
   }
 
@@ -213,7 +201,7 @@ export class TabelaAgendaComponent implements OnInit {
       .BuscarTodosRegistrosDeConsulta()
       .pipe(take(1))
       .subscribe((response) => {
-        console.log(response,'consulta');
+        console.log(response, 'consulta');
 
         this.DadosDeConsulta = [];
         this.DadosDeConsulta.push(...response.content);
@@ -249,8 +237,7 @@ export class TabelaAgendaComponent implements OnInit {
       this.LimparTabela();
       this.dataSource = resultadoFiltrado;
     } else {
-
-      //this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
+      this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
       this.LimparTabela();
       this.consultaService
         .BuscarTodosRegistrosDeConsulta()
@@ -269,6 +256,16 @@ export class TabelaAgendaComponent implements OnInit {
     });
   }
 
+  openAvisosDialog(Consulta: any) {
+    const medico = Consulta.ConMedico;
+    const paciente = Consulta.ConPaciente;
+    this.dialog.open(AvisosLembretesComponent, {
+      width: '550px',
+      height: '500px',
+      data: { Consulta: Consulta, Medico: medico, Paciente: paciente },
+    });
+  }
+
   LimparTabela() {
     this.dataSource = [];
     this.DadosDeConsulta = [];
@@ -279,24 +276,20 @@ export class TabelaAgendaComponent implements OnInit {
       this.DadoSelecionaParaExclusao.push(dados);
       this.DadoSelecionadoParaConclusao.push(dados);
 
-
       if (this.DadoSelecionadoParaEdicao.length >= 1) {
         this.DadoSelecionadoParaEdicao.push(dados);
       } else {
         this.DadoSelecionadoParaEdicao.push(dados);
       }
 
-
       if (this.DadoSelecionadoParaGerarPDF.length >= 1) {
         this.DadoSelecionadoParaGerarPDF.push(dados);
       } else {
         this.DadoSelecionadoParaGerarPDF.push(dados);
       }
-
-
-
     } else {
-      this.DadoSelecionadoParaConclusao = this.DadoSelecionadoParaConclusao.filter(
+      this.DadoSelecionadoParaConclusao =
+        this.DadoSelecionadoParaConclusao.filter(
           (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
         );
 
@@ -304,14 +297,14 @@ export class TabelaAgendaComponent implements OnInit {
         (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
       );
 
-      this.DadoSelecionadoParaGerarPDF = this.DadoSelecionadoParaGerarPDF.filter(
-        (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
-      );
+      this.DadoSelecionadoParaGerarPDF =
+        this.DadoSelecionadoParaGerarPDF.filter(
+          (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
+        );
 
       this.DadoSelecionadoParaEdicao = this.DadoSelecionadoParaEdicao.filter(
         (item: any) => item.ConCodigoConsulta !== dados.ConCodigoConsulta
       );
-
     }
   }
 
@@ -363,8 +356,6 @@ export class TabelaAgendaComponent implements OnInit {
     });
   }
 
-
-
   GerarPDF(DadoSelecionadoParaGerarPDF: any) {
     console.log(DadoSelecionadoParaGerarPDF, 'DadoSelecionadoParaGerarPDF');
     this.dialog.open(Template_PDFComponent, {
@@ -374,15 +365,15 @@ export class TabelaAgendaComponent implements OnInit {
     });
   }
 
-
-
-
-
   EditarDadoDaTabela(DadoSelecionadoParaEdicao: any) {
     this.dialog.open(EditarConsultasComponent, {
       width: '800px',
       height: '550px',
       data: { DadoSelecionadoParaEdicao: DadoSelecionadoParaEdicao },
     });
+  }
+
+  CriarCronologiaDoDia() {
+    this.DialogService.FornecaDataParaCronologia();
   }
 }

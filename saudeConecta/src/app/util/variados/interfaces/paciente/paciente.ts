@@ -1,4 +1,5 @@
 export interface Paciente {
+
   PaciCodigo: number;
   PaciNome: string;
   PaciSexo: number;
@@ -8,5 +9,8 @@ export interface Paciente {
   PaciEmail: string;
   PaciTelefone: string;
   endereco: number;
+
+  paciTelefone?: number;
+  paciEmail?: number;
 
 }
