@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -19,20 +17,21 @@ import { tokenService } from 'src/app/util/Token/Token.service';
 @Component({
   selector: 'app-cadastro-secretaria',
   templateUrl: './cadastro-secretaria.component.html',
-  styleUrls: ['./cadastro-secretaria.component.css']
+  styleUrls: ['./cadastro-secretaria.component.css'],
 })
 export class CadastroSecretariaComponent implements OnInit {
-//
+
+  //
   //
   //
   private usuarioSubscription: Subscription | undefined;
   FormularioSecretaria!: FormGroup;
   FormularioUsuario!: FormGroup;
   IdUsuario: number = 0;
-
+  NovoUsuariocadastrado_Secretaria: any;
   ufOptions = ufOptions;
+  FormularioUsuaroValido = false;
 
-  NovoUsuario: any;
 
   Secretaria: Secretaria = {
     SecreCodigo: 0,
@@ -41,33 +40,35 @@ export class CadastroSecretariaComponent implements OnInit {
     SecreUsuario: 0,
     SecreStatus: 0,
     SecreCodigoAtorizacao: '',
-    SecreDataCriacao: ''
+    SecreDataCriacao: '',
   };
 
-  UsuarioLogado: Usuario = {
-    id: 0,
-    login: '',
-    senha: '',
-    tipoUsuario: '',
-  };
 
+  RolesUsuarioMedico: any = 2;
 
   constructor(
     private router: Router,
     private form: FormBuilder,
     private SecretariamService: SecretariaService,
     private tokenService: tokenService,
-    private ModelService: ModelService
+    private ModelService: ModelService,
+    private usuarioService :UsuariosService
   ) {
-    this.ModelService.iniciarObservacaoDadosUsuario();
+    this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
+      if (value) {
+        this.NovoUsuariocadastrado_Secretaria = value;
+        this.FormularioUsuaroValido = false;
+      } else {
+        this.FormularioUsuaroValido = true;
+      }
+    });
+
   }
 
   ngOnInit() {
-    this.ModelService.iniciarObservacaoDadosUsuario();
-  this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
-    if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
-    console.log(UsuarioLogado, 'paciente');
-  });
+    this.RolesUsuarioMedico = 2;
+
+
 
     this.FormularioSecretaria = this.form.group({
       nome: ['', Validators.required],
@@ -75,8 +76,6 @@ export class CadastroSecretariaComponent implements OnInit {
       Email: ['', Validators.required],
     });
   }
-
-
 
   ngOnDestroy(): void {
     if (this.usuarioSubscription) {
@@ -87,7 +86,6 @@ export class CadastroSecretariaComponent implements OnInit {
   cadastra() {
     const nome = this.FormularioSecretaria.get('nome')?.value;
     const email = this.FormularioSecretaria.get('Email')?.value;
-
     const data = new Date();
     const dataAtual = data.toISOString().split('T')[0];
 
@@ -95,12 +93,15 @@ export class CadastroSecretariaComponent implements OnInit {
     this.Secretaria.SecreEmail = email;
     this.Secretaria.SecreDataCriacao = dataAtual;
     this.Secretaria.SecreStatus = 1;
-    this.Secretaria.SecreUsuario = this.UsuarioLogado.id;
+    this.Secretaria.SecreUsuario = this.NovoUsuariocadastrado_Secretaria.id;
 
     console.log(this.Secretaria, 'Secretaria');
 
-    const codigoAutorizacao = this.FormularioSecretaria.get('codAutorizacao')?.value;
-    this.SecretariamService.VerificarCodicodeAutorizacaoParaCadastraSecretaria(codigoAutorizacao).subscribe(
+    const codigoAutorizacao =
+      this.FormularioSecretaria.get('codAutorizacao')?.value;
+    this.SecretariamService.VerificarCodicodeAutorizacaoParaCadastraSecretaria(
+      codigoAutorizacao
+    ).subscribe(
       (dados) => {
         this.SecretariamService.cadastrarSecretaria(this.Secretaria).subscribe(
           (dados) => {
@@ -110,7 +111,9 @@ export class CadastroSecretariaComponent implements OnInit {
               text: 'Cadastro realizado com sucesso.',
             }).then((result) => {
               if (result.isConfirmed) {
-                this.router.navigate(['home']);
+                this.FormularioSecretaria.reset();
+
+
               }
             });
           },
@@ -129,18 +132,19 @@ export class CadastroSecretariaComponent implements OnInit {
     );
   }
 
-
-
-
   private handleHttpError(error: any) {
     console.log(error); // Exibir o erro completo no console para depuração
 
     let errorMessage = 'Erro desconhecido ao realizar o cadastro.';
 
     if (error.error) {
-      if (error.error.includes('Duplicate entry') && error.error.includes('secretaria.SecreEmail_UNIQUE')) {
-        errorMessage = 'Já existe um(a) secretári(a) registrado com esse email.';
-      }   else {
+      if (
+        error.error.includes('Duplicate entry') &&
+        error.error.includes('secretaria.SecreEmail_UNIQUE')
+      ) {
+        errorMessage =
+          'Já existe um(a) secretári(a) registrado com esse email.';
+      } else {
         errorMessage = error.error;
       }
     }
@@ -150,15 +154,13 @@ export class CadastroSecretariaComponent implements OnInit {
       title: 'Oops...',
       text: errorMessage,
     });
-
-
   }
-
-
 
   voltarParaHome() {
     this.router.navigate(['cadastro']);
+  }
+
+  onUsuarioCadastrado($event: Event) {
+    this.FormularioUsuaroValido = false;
     }
-
-
 }

@@ -1,5 +1,7 @@
-<app-cadastro-usuario [RolesUsuario]="RolesUsuarioMedico"></app-cadastro-usuario>
-
+<app-cadastro-usuario
+  [RolesUsuario]="RolesUsuarioMedico"
+  (usuarioCadastrado)="onUsuarioCadastrado($event)">
+</app-cadastro-usuario>
 <div style="  display: flex;" >
   <div class="container" [ngClass]="{'blurred':  FormularioUsuaroValido}">
     <div *ngIf=" modelService.estaLogado()" style="  justify-content: left; display: flex; margin-top: -15px; margin-left: -20px;">
@@ -144,16 +146,13 @@
 
       </form>
     </mat-expansion-panel>
-    <br>
-    <br>
+
     <button *ngIf="FormularioEndereco.valid && FormularioMedico.valid" type="submit" (click)="cadastra()">Cadastrar</button>
-    <br>
-    <br>
+
     <i>
       <font color="#FF0000">*</font> - Campos Obrigatários
     </i>
   </div>
 </div>
 
-<br>
 <br>

@@ -54,6 +54,8 @@ export class CadastroPacienteComponent implements OnInit {
     EndComplemento: 0,
   };
 
+  RolesUsuarioMedico: any=0;
+
   constructor(
     private form: FormBuilder,
     private usuariosService: UsuariosService,
@@ -66,6 +68,7 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.RolesUsuarioMedico = 0;
     this.usuariosService.NovoUsuariocadastradoValue$.subscribe((value) => {
       if (value) {
         this.NovoUsuario = value;

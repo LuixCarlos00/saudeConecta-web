@@ -9,6 +9,8 @@ import { ConsultaStatusService } from 'src/app/service/service-consulta-status/c
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import { CadastroMedicoComponent } from '../cadastro/cadastro-medico/cadastro-medico.component';
+import { CadastroPacienteComponent } from '../cadastro/cadastro-paciente/cadastro-paciente.component';
+import { CadastroSecretariaComponent } from '../cadastro/cadastro-secretaria/cadastro-secretaria.component';
 
 @Component({
   selector: 'app-agenda',
@@ -16,6 +18,7 @@ import { CadastroMedicoComponent } from '../cadastro/cadastro-medico/cadastro-me
   styleUrls: ['./agenda.component.css'],
 })
 export class AgendaComponent implements OnInit {
+
 
   //
   //
@@ -114,12 +117,26 @@ export class AgendaComponent implements OnInit {
     this.dialog.open(CadastroMedicoComponent, {
       width: '800px',
       height: '700px',
-      //data: { Consulta: Consulta, Medico: medico, Paciente: paciente },
+
     });
     }
+
+
     AdicionarPaciente() {
-    throw new Error('Method not implemented.');
+    this.dialog.open(CadastroPacienteComponent, {
+      width: '800px',
+      height: '700px',
+
+    });
     }
+
+    AdicionarSecretaria() {
+      this.dialog.open(CadastroSecretariaComponent, {
+      width: '800px',
+      height: '600px',
+
+    });
+      }
 
 
 }

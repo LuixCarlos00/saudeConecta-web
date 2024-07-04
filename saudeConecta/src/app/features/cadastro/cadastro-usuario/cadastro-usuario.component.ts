@@ -1,23 +1,19 @@
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
-
 import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
-import { tokenService } from 'src/app/util/Token/Token.service';
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cadastro-usuario',
-
   templateUrl: './cadastro-usuario.component.html',
-  styleUrl: './cadastro-usuario.component.css',
+  styleUrls: ['./cadastro-usuario.component.css'],
 })
-export class CadastroUsuarioComponent {
+export class CadastroUsuarioComponent implements OnInit, OnChanges {
   FormularioUsuario!: FormGroup;
 
   @Input() RolesUsuario!: any;
+  @Output() usuarioCadastrado = new EventEmitter<Usuario>();
 
   Usuario: Usuario = {
     id: 0,
@@ -28,21 +24,20 @@ export class CadastroUsuarioComponent {
 
   constructor(
     private form: FormBuilder,
-    private usuariosService: UsuariosService,
+    private usuariosService: UsuariosService
+  ) { }
 
-  ) {
-
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['usuarioCadastrado']) {
+      this.FormularioUsuario.reset();
+    }
   }
 
   ngOnInit(): void {
-    console.log(this.RolesUsuario,"roles");
     this.FormularioUsuario = this.form.group({
       login: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
-
-
   }
 
   cadatraUsuario() {
@@ -53,22 +48,34 @@ export class CadastroUsuarioComponent {
 
       this.usuariosService.cadastrarUsuario(this.Usuario).subscribe(
         (dados) => {
-
-          console.log(dados.body.usuarioView, 'o token');
-          //this.router.navigate(['cadastro']);
+          Swal.fire({
+            icon: 'success',
+            title: 'Sucesso',
+            text: 'Usuário cadastrado com sucesso!',
+          });
+          this.usuarioCadastrado.emit(dados.body.usuarioView);
+          this.FormularioUsuario.reset();
         },
         (error) => {
+          let errorMessage = 'Erro ao cadastrar usuário';
           if (error.status === 400) {
-            alert('Erro ao cadastrar usuário: \n[Login Ja Existente]');
+            errorMessage = 'Erro ao cadastrar usuário: [Login já existente]';
           } else {
-            alert('Erro durante a requisição: ' + error);
+            errorMessage = `Erro durante a requisição: ${error.message}`;
           }
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: errorMessage,
+          });
         }
       );
     } else {
-      alert('Formulário inválido. Verifique os campos obrigatórios.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Formulário inválido',
+        text: 'Verifique os campos obrigatórios.',
+      });
     }
   }
-
-
 }

@@ -1,3 +1,4 @@
+<app-cadastro-usuario [RolesUsuario]="RolesUsuarioMedico"></app-cadastro-usuario>
 <div style="  display: flex;">
   <div class="container">
     <h2>Cadastro de Paciente</h2>
@@ -126,11 +127,9 @@
 
       </form>
     </mat-expansion-panel>
-    <br>
-    <br >
+
     <button type="submit" *ngIf="FormularioEndereco.valid && FormularioPaciente.valid" (click)="cadastra()">Cadastrar</button>
-    <br>
-    <br>
+
     <i>
       <font color="#FF0000">*</font> - Campos Obrigatários
     </i>
