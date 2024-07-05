@@ -172,6 +172,10 @@ export class PesquiasPacienteComponent implements OnInit {
       }
     });
 
+
+    console.log(this.Medico, this.PacienteEscolhido);
+
+
     let time = this.FormGroupConsulta.get('time')?.value;
     const data = this.FormGroupConsulta.get('date')?.value;
     const observacao = this.FormGroupConsulta.get('observacao')?.value;
@@ -216,6 +220,8 @@ export class PesquiasPacienteComponent implements OnInit {
               consult
             ).subscribe(
               (response) => {
+                console.log('response ', response);
+
                 this.consultaService.ChangeCadastroRealizadoComSucesso(response);
                 this.PacienteEscolhido = null;
                 this.FormGroupConsulta.reset();
@@ -231,6 +237,8 @@ export class PesquiasPacienteComponent implements OnInit {
                 });
               },
               (error) => {
+                console.log(error,'erros');
+
                 Swal.fire({
                   icon: 'error',
                   title: 'Oops...',

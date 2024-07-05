@@ -1,5 +1,5 @@
-<app-cadastro-usuario [RolesUsuario]="RolesUsuarioMedico"></app-cadastro-usuario>
-<div style="  display: flex;">
+
+<div style=" margin-top: 50px; display: flex;">
   <div class="container">
     <h2>Cadastro de Paciente</h2>
     <form id="cadastroForm" class="responsivo" [formGroup]="FormularioPaciente">
@@ -27,17 +27,17 @@
       </div>
       <div class="form-group">
         <label for="cpf">
-          <font color="#FF0000"><b>* </b></font> CPF :
+            CPF :
         </label>
         <input [(ngModel)]="Paciente.PaciCpf" placeholder="12345678900" maxlength="11" formControlName="cpf" type="text"
-          id="cpf" name="cpf" required>
+          id="cpf" name="cpf"  >
       </div>
       <div class="form-group">
         <label for="rg">
-          <font color="#FF0000"><b>* </b></font> RG :
+        RG :
         </label>
         <input placeholder="XX__-___-___" maxlength="12" [(ngModel)]="Paciente.PaciRg" formControlName="rg" type="text"
-          id="rg" name="rg" required>
+          id="rg" name="rg"  >
       </div>
       <div class="form-group">
         <label for="telefone">Telefone: :</label>

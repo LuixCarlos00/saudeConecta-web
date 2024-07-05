@@ -48,11 +48,7 @@ export class CadastroUsuarioComponent implements OnInit, OnChanges {
 
       this.usuariosService.cadastrarUsuario(this.Usuario).subscribe(
         (dados) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Sucesso',
-            text: 'Usuário cadastrado com sucesso!',
-          });
+
           this.usuarioCadastrado.emit(dados.body.usuarioView);
           this.FormularioUsuario.reset();
         },

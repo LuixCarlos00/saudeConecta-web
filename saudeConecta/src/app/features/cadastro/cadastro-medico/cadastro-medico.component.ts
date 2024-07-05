@@ -19,14 +19,15 @@ import { ModelService } from 'src/app/service/Model_service/Model.service';
   styleUrls: ['./cadastro-medico.component.css'],
 })
 export class CadastroMedicoComponent implements OnInit, OnDestroy {
-  FormularioUsuaroValido = false;
+
   RolesUsuarioMedico: any = 3;
   private usuarioSubscription: Subscription | undefined;
   FormularioMedico!: FormGroup;
   FormularioEndereco!: FormGroup;
   IdUsuario: number = 0;
   EspecialidadeMedicas = EspecialidadeMedicas;
-  CadastroValidoMedico = false;
+ // CadastroValidoMedico = false;
+  FormularioUsuaroValido = false;
   ufOptions = ufOptions;
 
   NovoUsuariocadastrado_Medico: any;
@@ -64,12 +65,19 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
     private route: Router,
     public modelService: ModelService,
   ) {
+    this. FormularioUsuaroValido = false;
+
+
     // É necessario cadastra e pega o id do usuario cadastrado  e associa ao medico
     this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
       if (value) {
         this.NovoUsuariocadastrado_Medico = value;
+
+        console.log('1');
+
         this.FormularioUsuaroValido = false;
       } else {
+        console.log('2');
         this.FormularioUsuaroValido = true;
       }
     });
@@ -86,7 +94,7 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
       rg: [''],
       crm: ['', Validators.required],
       Especialidade: ['', Validators.required],
-      telefone: ['', Validators.required],
+      telefone: [''],
       email: ['', [Validators.required, Validators.email]],
     });
 
@@ -124,11 +132,13 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
                 text: 'Cadastro realizado com sucesso.',
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.route.navigate(['']);
                   this.FormularioMedico.reset();
                   this.FormularioEndereco.reset();
-                  this.CadastroValidoMedico = true;
+
+              //    this.CadastroValidoMedico = true;
                   this.FormularioUsuaroValido = false;
+
+                  this.NovoUsuariocadastrado_Medico = null;
                 }
               });
             },

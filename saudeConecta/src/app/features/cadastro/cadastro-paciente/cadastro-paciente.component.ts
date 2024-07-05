@@ -79,15 +79,14 @@ export class CadastroPacienteComponent implements OnInit {
       nome: ['', Validators.required],
       sexo: ['', Validators.required],
       dataNascimento: ['', Validators.required],
-      cpf: ['', Validators.required],
-      rg: ['', Validators.required],
-      telefone: ['', Validators.required],
+      cpf: [''],
+      rg: [''],
+      telefone: [''],
       email: ['', [Validators.required, Validators.email]],
     });
 
     this.FormularioEndereco = this.form.group({
       nacionalidade: ['', Validators.required],
-      estado: ['', Validators.required],
       uf: ['', Validators.maxLength(2)],
       cep: ['', Validators.required],
       rua: ['', Validators.required],
@@ -105,6 +104,8 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   cadastra() {
+
+
     if (this.FormularioEndereco.valid && this.FormularioPaciente.valid) {
       this.usuariosService.cadastraEndereco(this.Endereco).subscribe(
         (endereco: Endereco) => {
@@ -119,12 +120,8 @@ export class CadastroPacienteComponent implements OnInit {
                 text: 'Cadastro realizado com sucesso.',
               }).then((result) => {
                 if (result.isConfirmed) {
-                  if (this.modelService.estaLogado()) {
-                    this.route.navigate(['home']);
-                  } else {
-                    this.modelService.deslogar();
-                    this.route.navigate(['']);
-                  }
+                 this.FormularioPaciente.reset();
+                 this.FormularioEndereco.reset();
                 }
               });
             },

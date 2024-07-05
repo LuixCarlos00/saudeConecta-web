@@ -20,7 +20,6 @@ import { tokenService } from 'src/app/util/Token/Token.service';
   styleUrls: ['./cadastro-secretaria.component.css'],
 })
 export class CadastroSecretariaComponent implements OnInit {
-
   //
   //
   //
@@ -31,7 +30,7 @@ export class CadastroSecretariaComponent implements OnInit {
   NovoUsuariocadastrado_Secretaria: any;
   ufOptions = ufOptions;
   FormularioUsuaroValido = false;
-
+  //CadastroValidoSecretaria = false
 
   Secretaria: Secretaria = {
     SecreCodigo: 0,
@@ -43,8 +42,7 @@ export class CadastroSecretariaComponent implements OnInit {
     SecreDataCriacao: '',
   };
 
-
-  RolesUsuarioMedico: any = 2;
+  RolesUsuarioSecretaria: any = 2;
 
   constructor(
     private router: Router,
@@ -52,8 +50,10 @@ export class CadastroSecretariaComponent implements OnInit {
     private SecretariamService: SecretariaService,
     private tokenService: tokenService,
     private ModelService: ModelService,
-    private usuarioService :UsuariosService
+    private usuarioService: UsuariosService
   ) {
+    this.FormularioUsuaroValido = false;
+
     this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
       if (value) {
         this.NovoUsuariocadastrado_Secretaria = value;
@@ -62,13 +62,10 @@ export class CadastroSecretariaComponent implements OnInit {
         this.FormularioUsuaroValido = true;
       }
     });
-
   }
 
   ngOnInit() {
-    this.RolesUsuarioMedico = 2;
-
-
+    this.RolesUsuarioSecretaria = 2;
 
     this.FormularioSecretaria = this.form.group({
       nome: ['', Validators.required],
@@ -113,7 +110,11 @@ export class CadastroSecretariaComponent implements OnInit {
               if (result.isConfirmed) {
                 this.FormularioSecretaria.reset();
 
+                //  this.CadastroValidoSecretaria = true;
 
+                this.FormularioUsuaroValido = false;
+
+                this.NovoUsuariocadastrado_Secretaria = null;
               }
             });
           },
@@ -160,7 +161,8 @@ export class CadastroSecretariaComponent implements OnInit {
     this.router.navigate(['cadastro']);
   }
 
-  onUsuarioCadastrado($event: Event) {
+  onUsuarioCadastrado(usuario: Usuario) {
+    this.NovoUsuariocadastrado_Secretaria = usuario;
     this.FormularioUsuaroValido = false;
-    }
+  }
 }

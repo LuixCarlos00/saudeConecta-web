@@ -2,7 +2,7 @@
   [RolesUsuario]="RolesUsuarioMedico"
   (usuarioCadastrado)="onUsuarioCadastrado($event)">
 </app-cadastro-usuario>
-<div style="  display: flex;" >
+<div style="  display: flex;" *ngIf="NovoUsuariocadastrado_Medico" >
   <div class="container" [ngClass]="{'blurred':  FormularioUsuaroValido}">
     <div *ngIf=" modelService.estaLogado()" style="  justify-content: left; display: flex; margin-top: -15px; margin-left: -20px;">
 
