@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
 
               this.tokenService.salvarToken(token);
               this.tokenService.decodificaToken();
-              this.router.navigate(['/home']);
+              this.router.navigate(['/Dashboard']);
             }
           },
           (error) => {
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Seu cadastro nao foi finalizado com sucesso.',
+          text: 'Nao foi encontrado seu cadastro',
         });
       }
     });

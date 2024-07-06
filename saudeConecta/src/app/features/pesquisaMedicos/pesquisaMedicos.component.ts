@@ -125,7 +125,7 @@ export class PesquisaMedicosComponent implements OnInit {
   }
 
   voltarParaHome() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/Dashboard']);
   }
 
   fecharTabela() {

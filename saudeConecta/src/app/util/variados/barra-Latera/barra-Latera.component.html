@@ -2,35 +2,72 @@
   <div *ngIf="estaLogado()">
     <div class="menu">
       <ul class="side_items">
-        <button class="fetures" (click)="redirecionamentoDePaginas('Home')" title="Home">
-          <i class="fa-solid fa-house fa-lg" style="color: #faf9f4;"></i>
-          <span class="tooltip">Home</span>
+
+        <button class="fetures" (click)="redirecionamentoDePaginas('Dashboard')" title="Dashboard">
+          <i style="color: #faf9f4;" class="fa-solid fa-chart-simple fa-xl "></i>
+
+          <span class="tooltip">Dashboard</span>
         </button>
-        <button class="fetures" (click)="redirecionamentoDePaginas('cadastroUsuario')" title="Cadastra Usuario">
-          <i  style="color: #e3e9f7;"class="fa-solid fa-book-medical"></i>
-          <span class="tooltip">Agenda</span>
+        <button class="fetures" (click)="redirecionamentoDePaginas('gerenciamento')" title="Gerenciamento">
+
+          <i  style="color: #e3e9f7;" class="fa-solid fa-notes-medical fa-xl"></i>
+          <span class="tooltip">Gerenciamento</span>
         </button>
-        <button class="fetures" (click)="redirecionamentoDePaginas('cadastroPaciente')" title="Cria Plano De Ensino">
-          <i style="color: #e3e9f7;" class="fa-solid fa-address-book"></i>
-          <span class="tooltip">Cria Plano De Ensino</span>
+        <button class="fetures" (click)="redirecionamentoDePaginas('cadastroPaciente')" title="Cadastra Paciente">
+
+          <i  style="color: #e3e9f7;" class="fa-solid fa-user-plus fa-xl "></i>
+          <span class="tooltip"> Cadastra Paciente</span>
         </button>
 
-        <button class="fetures" (click)="redirecionamentoDePaginas('trocaSenha')" title="Troca Senha">
-          <i style="color: #e3e9f7;" class="fa-solid fa-calendar-days"></i>
-          <span class="tooltip">Quadro de Disponibilidade</span>
+
+        <button class="fetures" (click)="redirecionamentoDePaginas('Usuarios')" title="Usuarios">
+
+          <i   style="color: #e3e9f7;" class="fa-solid fa-users-gear fa-xl "></i>
+          <span class="tooltip">Usuarios</span>
         </button>
-        <button class="fetures" (click)="redirecionamentoDePaginas('Arquivos_Diversos')" title="Arquivos Diversos">
-          <i style="color: #e3e9f7;" class="fa-solid fa-folder-open"></i>
-          <span class="tooltip">Arquivos Diversos</span>
-        </button>
-        <button class="fetures" title="Configurações">
+
+
+        <button class="fetures config-button" title="Configurações">
           <i style="color: #e3e9f7;" class="fa-solid fa-gear"></i>
-          <span class="tooltip">Configurações</span>
+          <div class="config-menu">
+            <button class="config-item"  (click)="redirecionamentoDePaginas('trocar_senha')">
+              <i title="Altera Senha" style="color: #FFD43B;" class="fa-solid fa-key">
+                <label style="margin-left: 10px;">Altera Senha </label>
+              </i>
+            </button>
+
+            <button class="config-item"  (click)="redirecionamentoDePaginas('suporte')" title="Suporte"><i style="color: #e3e9f7;"
+                class="fa-solid fa-headset">
+                <label style="margin-left: 10px;">Suporte</label>
+              </i>
+            </button>
+
+            <button class="config-item"  (click)="redirecionamentoDePaginas('sobre')" title="Sobre"><i style="color: #e3e9f7;"
+                class="fa-solid fa-circle-info">
+                <label style="margin-left: 10px;">Sobre</label>
+              </i>
+            </button>
+          </div>
         </button>
+
+
         <button (click)="Deslogar()" class="logout_btn">
           <i style="color: #e3e9f7;" class="fa-solid fa-right-from-bracket"></i>
           <span class="tooltip">Sair</span>
         </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
       </ul>
     </div>
   </div>

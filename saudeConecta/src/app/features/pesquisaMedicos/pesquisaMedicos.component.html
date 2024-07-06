@@ -9,8 +9,8 @@
         </button>
       </div>
 
-      <div style="display: grid; grid-template-columns: 50% 50%;">
-        <div style="display: grid; grid-template-columns:70% 20%;">
+      <div style="display: grid; grid-template-columns: 50% 50% ">
+        <div style="display: grid; grid-template-columns:70% 20%; "   >
           <div>
             <label class="label_filtro_PESQUISA">Pesquisar Medicos </label>
             <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required formControlName="Pesquisa">
@@ -20,9 +20,10 @@
           </div>
         </div>
 
-        <div *ngIf="MedicoEscolhido"  >
-          <div >
-            - <i class="fa-solid fa-user fa-xs" style="color: #63E6BE;"></i>
+        <div   >
+          - <i class="fa-solid fa-user fa-xl"  style="color: #2c3230;"></i>
+          <div *ngIf="MedicoEscolhido" >
+
             <label style="font-size: 12px; margin-left: 10px;">
               <strong>Codigo: </strong> {{MedicoEscolhido.medCodigo}},
               <strong>Nome: </strong> {{MedicoEscolhido.medNome}}
@@ -35,7 +36,7 @@
         </div>
       </div>
 
-      <div style="margin: 3px;">
+      <div style="margin: 3px; ">
         <label class="label_filtro">Nome</label>
         <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="1" required>
 

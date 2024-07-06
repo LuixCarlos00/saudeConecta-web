@@ -22,6 +22,7 @@ import { CadastroAdmComponent } from './features/cadastro/cadastro-adm/cadastro-
 import { GuardaRotasHome } from './features/home/guards/GuardaRotasHome';
 import { CadastroSecretariaComponent } from './features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { GerenciamentoComponent } from './features/gerenciamento/gerenciamento.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 const routes: Routes = [
 
@@ -47,11 +48,11 @@ const routes: Routes = [
 
 
 
-  {path:'home',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },//5
+  {path:'gerenciamento',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },//5
 
 
 
-  //{path:'gerenciamento',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },//5
+  {path:'Dashboard',component:DashboardComponent, canActivate: [GuardaRotasHome] },//5
 
   {path:'agenda',component:PesquisaMedicosComponent,  },//6
 

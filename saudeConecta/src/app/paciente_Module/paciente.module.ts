@@ -45,6 +45,11 @@ import { GerenciamentoComponent } from '../features/gerenciamento/gerenciamento.
 import { TabelaDePacientesComponent } from '../features/pesquisaPaciente/tabela-de-pacientes/tabela-de-pacientes.component';
 import { PesquiasPacienteComponent } from '../features/pesquisaPaciente/pesquiasPaciente.component';
 import { AvisosLembretesComponent } from '../features/agenda/tabela-agenda/Avisos-Lembretes/Avisos-Lembretes.component';
+import { DashboardComponent } from '../features/dashboard/dashboard.component';
+import { GraficoQntConsultasDiaAnteriorComponent } from '../features/dashboard/grafico-qnt-consultas-dia-anterior/grafico-qnt-consultas-dia-anterior.component';
+import { GraficoAgendamentosDiasSemanasMesComponent } from '../features/dashboard/grafico-agendamentos-dias-semanas-mes/grafico-agendamentos-dias-semanas-mes.component';
+import { GraficoSaldoComponent } from '../features/dashboard/grafico-saldo/grafico-saldo.component';
+import { GraficoCategoriaMedicosComponent } from '../features/dashboard/grafico-categoria-medicos/grafico-categoria-medicos.component';
 
 
 
@@ -64,7 +69,6 @@ import { AvisosLembretesComponent } from '../features/agenda/tabela-agenda/Aviso
     TabelasPesquisasMedicosComponent,
     TabelaDePacientesComponent,
     PesquiasPacienteComponent,
-
     TrocaSenhaComponent,
     CadastroAdmComponent,
     TabelaAgendaComponent,
@@ -76,7 +80,12 @@ import { AvisosLembretesComponent } from '../features/agenda/tabela-agenda/Aviso
     TabelaAgendaStatusComponent,
     Template_PDFComponent,
     Template_PDF_ConcluidosComponent,
-    GerenciamentoComponent
+    GerenciamentoComponent,
+    DashboardComponent,
+    GraficoAgendamentosDiasSemanasMesComponent,
+    GraficoQntConsultasDiaAnteriorComponent,
+    GraficoSaldoComponent,
+    GraficoCategoriaMedicosComponent
 
   ],
   exports: [],

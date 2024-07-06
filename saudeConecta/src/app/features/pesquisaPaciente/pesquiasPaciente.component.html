@@ -1,48 +1,61 @@
 <body>
+
+
+  <form class="fomulario"  [formGroup]="FormGroupConsulta">
+
+
+    <div style="display: grid; grid-template-columns: 50% 50%; ">
+      <div style="display: grid; grid-template-columns:70% 20%; "   >
+        <div>
+          <label class="label_filtro_PESQUISA">Pesquisar Medicos </label>
+          <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required formControlName="Pesquisa">
+        </div>
+        <div>
+          <button class="btnPesquisar" (click)="PesquisarPacientes()">Pesquisar</button>
+        </div>
+      </div>
+
+      <div    >
+        - <i class="fa-solid fa-user fa-xl" style="color: #2c3230;"></i>
+        <div *ngIf="PacienteEscolhido" >
+
+          <label style="font-size: 12px;margin-left: 10px;">
+            <strong>Codigo: </strong> {{PacienteEscolhido.paciCodigo}},
+            <strong>Nome: </strong> {{PacienteEscolhido.paciNome}}
+            <strong>Telefone: </strong> {{PacienteEscolhido.paciTelefone}},
+            <strong>CPF:</strong> {{PacienteEscolhido.paciCpf}},
+            <strong>Email:</strong> {{PacienteEscolhido.paciEmail}},
+            <strong>RG:</strong> {{PacienteEscolhido.paciRg}}
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div style="margin: 3px;  ">
+      <label class="label_filtro">Nome</label>
+      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="1" required>
+
+      <label class="label_filtro">CPF</label>
+      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="2" required>
+
+      <label class="label_filtro">RG</label>
+      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="3" required>
+
+      <label class="label_filtro">Telefone</label>
+      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="4" required>
+
+      <label class="label_filtro">Buscar Todos</label>
+      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="5" required>
+    </div>
+
+  </form>
+
+
+
   <form class="fomulario"  [formGroup]="FormGroupConsulta">
     <div>
-      <div style="display: grid; grid-template-columns: 45% 55%;">
-        <div style=" display: grid;  grid-template-columns:80% 20% ;">
-          <div>
-            <label class="label_filtro_PESQUISA">Pesquisar Paciente </label>
-            <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaPaciente">
-          </div>
-          <div>
-            <button class="btnPesquisar" (click)="PesquisarPacientes()">Pesquisar</button>
-          </div>
-        </div>
 
-        <div *ngIf="PacienteEscolhido"  >
-          <div >
-            - <i class="fa-solid fa-user fa-xs" style="color: #63E6BE;"></i>
-            <label style="font-size: 12px;margin-left: 10px;">
-              <strong>Codigo: </strong> {{PacienteEscolhido.paciCodigo}},
-              <strong>Nome: </strong> {{PacienteEscolhido.paciNome}}
-              <strong>Telefone: </strong> {{PacienteEscolhido.paciTelefone}},
-              <strong>CPF:</strong> {{PacienteEscolhido.paciCpf}},
-              <strong>Email:</strong> {{PacienteEscolhido.paciEmail}},
-              <strong>RG:</strong> {{PacienteEscolhido.paciRg}}
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin: 3px;">
-        <label class="label_filtro">Nome</label>
-        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="1" required>
-
-        <label class="label_filtro">CPF</label>
-        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="2" required>
-
-        <label class="label_filtro">RG</label>
-        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="3" required>
-
-        <label class="label_filtro">Telefone</label>
-        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="4" required>
-
-        <label class="label_filtro">Buscar Todos</label>
-        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="5" required>
-      </div>
 
       <br>
       <div style="display: grid; grid-template-columns: 50% 15% 10% 15%;">
