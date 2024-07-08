@@ -50,6 +50,8 @@ import { GraficoQntConsultasDiaAnteriorComponent } from '../features/dashboard/g
 import { GraficoAgendamentosDiasSemanasMesComponent } from '../features/dashboard/grafico-agendamentos-dias-semanas-mes/grafico-agendamentos-dias-semanas-mes.component';
 import { GraficoSaldoComponent } from '../features/dashboard/grafico-saldo/grafico-saldo.component';
 import { GraficoCategoriaMedicosComponent } from '../features/dashboard/grafico-categoria-medicos/grafico-categoria-medicos.component';
+import { GerenciamentoUsuarioComponent } from '../features/gerenciamento-usuario/gerenciamento-usuario.component';
+import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/tabela-todos-usuarios.component';
 
 
 
@@ -85,7 +87,9 @@ import { GraficoCategoriaMedicosComponent } from '../features/dashboard/grafico-
     GraficoAgendamentosDiasSemanasMesComponent,
     GraficoQntConsultasDiaAnteriorComponent,
     GraficoSaldoComponent,
-    GraficoCategoriaMedicosComponent
+    GraficoCategoriaMedicosComponent,
+    GerenciamentoUsuarioComponent,
+    TabelaTodosUsuariosComponent
 
   ],
   exports: [],

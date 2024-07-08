@@ -5,6 +5,9 @@ export interface Usuario {
   login:string,
   senha:string,
   tipoUsuario: string;
+  status : string,
+
+  aud?:string
 
 }
 

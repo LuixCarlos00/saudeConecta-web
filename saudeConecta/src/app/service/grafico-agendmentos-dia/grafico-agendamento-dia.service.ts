@@ -1,3 +1,4 @@
+import { parentescoOptions } from './../../util/variados/options/options';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -24,6 +25,12 @@ export class GraficoAgendamentoDiaService {
     const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
     const options = { headers, withCredentials: true };
     return this.http.get<Consulta[]>(`${this.apiUrl}/consulta/listatodasConsulta`, options);
+  }
+
+  BuscatodasAsConsultasPorDataSelecionada(paramentrosBusca : string): Observable<Consulta[]> {
+    const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
+    const options = { headers, withCredentials: true };
+    return this.http.get<Consulta[]>(`${this.apiUrl}/consulta/listatodasConsultaPorDataSelecionada/data=${paramentrosBusca}`, options);
   }
 
 

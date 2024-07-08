@@ -1,4 +1,13 @@
+<div>
+  <label style="margin-left: 20px;" for="radio">7 dias</label>
+  <input type="radio" name="radio" id="radio" [value]="1" [(ngModel)]="diaSelecionado" (change)="atualizarGrafico()">
 
-<div  >
-  <canvas #menuCanvas  ></canvas>
+  <label style="margin-left: 20px;" for="radio">30 dias</label>
+  <input type="radio" name="radio" id="radio" [value]="2" [(ngModel)]="diaSelecionado" (change)="atualizarGrafico()">
+
+  <label style="margin-left: 20px;" for="radio">60 dias</label>
+  <input type="radio" name="radio" id="radio" [value]="3" [(ngModel)]="diaSelecionado" (change)="atualizarGrafico()">
+</div>
+<div>
+  <canvas #menuCanvas></canvas>
 </div>

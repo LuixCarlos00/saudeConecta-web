@@ -33,20 +33,20 @@ export class GuardaRotasLogin {
 
       const isUsuarioLogado = this.tokenService.possuiToken();
 
-      if (isUsuarioLogado && this.lastUrl==='/home') {
-        return this.router.parseUrl('/home');
+      if (isUsuarioLogado && this.lastUrl==='/Dashboard') {
+        return this.router.parseUrl('/Dashboard');
       }
 
       if(isUsuarioLogado ) {
-        return this.router.parseUrl('/home');
+        return this.router.parseUrl('/Dashboard');
       }
 
 
-      if (isUsuarioLogado && this.lastUrl==='/cadastroadmin') {
-        console.log('3');
-        // Se o usuário estiver logado e tentar acessar a rota de cadastro, redirecione-o para a página inicial
-        return true
-      }
+      // if (isUsuarioLogado && this.lastUrl==='/cadastroadmin') {
+      //   console.log('3');
+      //   // Se o usuário estiver logado e tentar acessar a rota de cadastro, redirecione-o para a página inicial
+      //   return true
+      // }
 
       // if (!isUsuarioLogado && !state.url.includes('cadastroadmin')) {
       //   console.log('4');

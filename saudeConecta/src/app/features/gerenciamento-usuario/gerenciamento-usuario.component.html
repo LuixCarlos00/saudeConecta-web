@@ -1,0 +1,37 @@
+<div style="display: flex; justify-content: center;">
+  <div>
+    <h1>Gerenciamento de Usuários</h1>
+  </div>
+</div>
+<div class="dashboard-container">
+
+  <div class="grid"  >
+
+    <div class="divOperacoes">
+      <button class="btnRecarregar" title="Adicionar Medico" (click)="AdicionarMedico()">
+        <i class="fa-solid fa-user-nurse fa-xl" style="color: #035e31;"></i>
+      </button>
+      <span class="btn-label">Adicionar <br> Medico</span>
+    </div>
+
+    <div class="divOperacoes">
+      <button class="btnRecarregar" title="Adicionar Paciente" (click)="AdicionarPaciente()">
+        <i class="fa-solid fa-user-plus fa-xl" style="color: #f2a957;"></i>
+      </button>
+      <span class="btn-label">Adicionar <br> Paciente</span>
+    </div>
+
+    <div class="divOperacoes">
+      <button class="btnRecarregar" title="Adicionar Secretaria" (click)="AdicionarSecretaria()">
+        <i class="fa-solid fa-user-pen fa-xl" style="color: #8d0544;"></i>
+      </button>
+      <span class="btn-label">Adicionar <br> Secretaria</span>
+    </div>
+  </div>
+  <div  >
+
+<app-tabela-todos-usuarios></app-tabela-todos-usuarios>
+  </div>
+
+
+</div>

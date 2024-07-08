@@ -17,6 +17,7 @@ export class BarraLateraComponent implements OnInit {
     login: '',
     senha: '',
     tipoUsuario: '',
+    status: ''
   };
 
   constructor(
@@ -48,7 +49,7 @@ export class BarraLateraComponent implements OnInit {
 
     } else if (rota === 'Usuarios') {
 
-      this.router.navigate(['Usuarios']);
+      this.router.navigate(['Gerenciamento-Usuarios']);
 
     }
 

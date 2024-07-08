@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ModelService } from 'src/app/service/Model_service/Model.service';
-import { tokenService } from "src/app/util/Token/Token.service";
+import { tokenService } from 'src/app/util/Token/Token.service';
 import Swal from 'sweetalert2';
 import { Observable, map } from 'rxjs';
+import { el } from 'date-fns/locale';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +21,11 @@ export class LoginComponent implements OnInit {
   //
   //
   Usuario: Usuario = {
-    tipoUsuario: '',
     id: 0,
     login: '',
     senha: '',
+    tipoUsuario: '',
+    status: '',
   };
 
   FormularioUsuario!: FormGroup;
@@ -58,16 +60,45 @@ export class LoginComponent implements OnInit {
     this.Usuario.senha = password;
 
     this.ExisteUsuario(username).subscribe((existe) => {
-
       if (existe) {
         this.modelService.fazerLogin(this.Usuario).subscribe(
           (response) => {
+            console.log(response,'resposta');
+
             if (response.body && response.body.token) {
               const token = response.body.token;
-
               this.tokenService.salvarToken(token);
               this.tokenService.decodificaToken();
-              this.router.navigate(['/Dashboard']);
+
+              console.log(token);
+              this.tokenService.UsuarioLogadoValue$.subscribe(
+                (UsuarioLogado) => {
+                  this.Usuario = UsuarioLogado;
+                }
+              );
+
+              if (
+                this.Usuario.aud === '[ROLE_ADMIN]' ||
+                this.Usuario.aud === '[ROLE_Secretaria]' ||
+                this.Usuario.aud === '[ROLE_Medico]'
+              ) {
+                console.log('entrou');
+
+
+                this.tokenService.setAuthTwof(true);
+                this.router.navigate(['/Dashboard']);
+              }
+
+              else {
+
+                this.tokenService.removeToken();
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Parece que você não tem permissão para acessar esta página',
+                });
+                window.location.reload();
+              }
             }
           },
           (error) => {
@@ -86,8 +117,6 @@ export class LoginComponent implements OnInit {
         });
       }
     });
-
-
   }
   ExisteUsuario(username: any): Observable<boolean> {
     return this.modelService.buscarUsuarioExistente(username).pipe(

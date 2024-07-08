@@ -34,6 +34,7 @@ export class CadastroAdmComponent implements OnInit {
     login: '',
     senha: '',
     tipoUsuario: '',
+    status: ''
   };
 
   constructor(

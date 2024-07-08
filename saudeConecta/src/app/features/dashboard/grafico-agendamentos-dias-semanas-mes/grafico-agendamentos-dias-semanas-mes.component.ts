@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
+import { da } from 'date-fns/locale';
 import { GraficoAgendamentoDiaService } from 'src/app/service/grafico-agendmentos-dia/grafico-agendamento-dia.service';
 
 @Component({
@@ -8,21 +10,47 @@ import { GraficoAgendamentoDiaService } from 'src/app/service/grafico-agendmento
   styleUrls: ['./grafico-agendamentos-dias-semanas-mes.component.css'],
 })
 export class GraficoAgendamentosDiasSemanasMesComponent implements OnInit {
+
+
   DatasConsultas: string[] = [];
   TodasConsultas: any[] = [];
 
   @ViewChild('menuCanvas', { static: true }) elemento: ElementRef | undefined;
   chart: any;
+  diaSelecionado = 1;
 
   constructor(private graficoAgendamentoDiaService: GraficoAgendamentoDiaService) {}
 
   ngOnInit() {
-    this.graficoAgendamentoDiaService.BuscatodasAsConsultas().subscribe((dados) => {
+   this.fetchConsultas(this.diaSelecionado)
+  }
+
+
+  fetchConsultas(data:number) {
+   let paramentrosBusca : string =''
+   const date = new Date();
+    if (data == 1) {
+     date.setDate(date.getDate() - 7);
+     paramentrosBusca = date.toISOString().split('T')[0];
+    }
+    if (data == 2) {
+      date.setDate(date.getDate() - 30);
+      paramentrosBusca = date.toISOString().split('T')[0];
+    }
+    if (data == 3) {
+      date.setDate(date.getDate() - 60);
+      paramentrosBusca = date.toISOString().split('T')[0];
+    }
+    console.log(paramentrosBusca,'paramentrosBusca');
+    this.graficoAgendamentoDiaService.BuscatodasAsConsultasPorDataSelecionada(paramentrosBusca).subscribe((dados) => {
+      this.TodasConsultas= [];
       this.TodasConsultas = dados;
+      console.log(dados, 'dados');
       this.apurandoDados();
       this.criarGrafico();
     });
   }
+
 
   apurandoDados() {
     // Limpa o array de datas antes de adicionar novas
@@ -34,7 +62,12 @@ export class GraficoAgendamentosDiasSemanasMesComponent implements OnInit {
 
   criarGrafico() {
     if (this.elemento) {
-      const datasContadas = this.contarConsultasPorData();
+
+      if (this.chart) {
+        this.chart.destroy();
+      }
+
+       const datasContadas = this.contarConsultasPorData();
       const labels = datasContadas.map(data => data.data);
       const quantidadeConsultas = datasContadas.map(data => data.quantidade);
 
@@ -78,4 +111,15 @@ export class GraficoAgendamentosDiasSemanasMesComponent implements OnInit {
     });
     return Object.keys(counts).map(data => ({ data, quantidade: counts[data] }));
   }
+
+  atualizarGrafico() {
+
+
+    this.fetchConsultas(this.diaSelecionado)
+    }
+
+
+
 }
+
+

@@ -3,15 +3,20 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 
 
 import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
+import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
+import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
+import { Secretaria } from 'src/app/util/variados/interfaces/secretaria/secretaria';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
+
 
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();
@@ -34,8 +39,6 @@ cadastraEndereco(Endereco: Endereco): Observable<Endereco> {
 }
 
 changeNovoUsuariocadastrado(value: any) {
-  console.log(value,'p0000000000');
-
   this.NovoUsuariocadastradoSubject.next(value);
 }
 
@@ -45,10 +48,7 @@ cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
     .pipe(
       tap((response: HttpResponse<any>) => {
         if (response.body && response.body.tokenJWT) {
-         // this.tokenService.salvarToken(response.body.tokenJWT);
-          this.NovoUsuariocadastradoSubject.next(response.body.usuarioView);
-          //this.changeNovoUsuariocadastrado(response.body.usuarioView);
-          console.log(this.tokenService.retornaToken(), 'o token ');
+        this.NovoUsuariocadastradoSubject.next(response.body.usuarioView);
         } else {
           console.error('Token JWT não encontrado na resposta');
         }
@@ -57,5 +57,15 @@ cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
 }
 
 
+BuscarTodosUsuarios(): Observable<{ paciente: Paciente[], medico: Medico[], secretaria: Secretaria[], administrador: Adiministrador[] }> {
+
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
+  const options = { headers, withCredentials: true };
+  return this.http.get<{ paciente: Paciente[], medico: Medico[], secretaria: Secretaria[], administrador: Adiministrador[] }>( `${this.apiUrl}/Home/BuscarTodosUsuarios`, options);
+}
+
+
 
 }
+
+

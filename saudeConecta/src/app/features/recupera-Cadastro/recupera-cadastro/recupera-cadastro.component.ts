@@ -191,6 +191,7 @@ export class RecuperaCadastroComponent implements OnInit {
         login: login,
         senha: senha,
         tipoUsuario: '',
+        status: ''
       };
 
       console.log('usuario ', usuario);

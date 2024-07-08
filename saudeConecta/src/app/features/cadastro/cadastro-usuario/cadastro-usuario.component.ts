@@ -20,6 +20,7 @@ export class CadastroUsuarioComponent implements OnInit, OnChanges {
     login: '',
     senha: '',
     tipoUsuario: '',
+    status: ''
   };
 
   constructor(

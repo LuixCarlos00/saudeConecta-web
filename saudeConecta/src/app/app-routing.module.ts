@@ -1,3 +1,4 @@
+import { GerenciamentoUsuarioComponent } from './features/gerenciamento-usuario/gerenciamento-usuario.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/login/login.component';
@@ -28,39 +29,32 @@ const routes: Routes = [
 
 
 
-  {path:'',component:LoginComponent,canActivate: [GuardaRotasLogin] },//1
+  {path:'',component:LoginComponent,canActivate: [GuardaRotasLogin] },
 
 
-  {path:'cadastroUsuario',component:CadastroUsuarioComponent, canActivate:[GuardaRotasCadastraUsuario]},//2
+  {path:'cadastroUsuario',component:CadastroUsuarioComponent, canActivate:[GuardaRotasCadastraUsuario]},
 
-  {path:'cadastroadmin',component:CadastroAdmComponent,  },//2
+  {path:'cadastroadmin',component:CadastroAdmComponent,  },
 
-  {path:'cadastro',component:CadastroComponent,canActivate:[GuardaRotasCadastra]},//3
+  {path:'cadastro',component:CadastroComponent,canActivate:[GuardaRotasCadastra]},
 
-  {path:'cadastroPaciente',component:CadastroPacienteComponent, canActivate:[GuardaRotasCadastroPaciente]},//4
+  {path:'cadastroPaciente',component:CadastroPacienteComponent, canActivate:[GuardaRotasCadastroPaciente]},
 
-  {path:'cadastroMedico',component:CadastroMedicoComponent, canActivate:[GuardaRotasCadastroPaciente]},//4
+  {path:'cadastroMedico',component:CadastroMedicoComponent, canActivate:[GuardaRotasCadastroPaciente]},
 
-  {path:'cadastroSecretaria',component:CadastroSecretariaComponent, canActivate:[GuardaRotasCadastroPaciente]},//4
+  {path:'cadastroSecretaria',component:CadastroSecretariaComponent, canActivate:[GuardaRotasCadastroPaciente]},
 
+  {path:'recuperaCadastro',component:RecuperaCadastroComponent,  },
 
-  {path:'recuperaCadastro',component:RecuperaCadastroComponent,  },//4
+  {path:'gerenciamento',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },
 
+  {path:'Dashboard',component:DashboardComponent, canActivate: [GuardaRotasHome] },
 
+  {path:'agenda',component:PesquisaMedicosComponent,  },
 
-  {path:'gerenciamento',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },//5
+  {path:'Gerenciamento-Usuarios',component:GerenciamentoUsuarioComponent,  },
 
-
-
-  {path:'Dashboard',component:DashboardComponent, canActivate: [GuardaRotasHome] },//5
-
-  {path:'agenda',component:PesquisaMedicosComponent,  },//6
-
-  //{path:'addconsulta',component:CriaConsultaComponent,  },//7
-
-  //{path:'agenda',component:AgendaComponent,  },//8
-
-  {path:'historico',component:HistoricoComponent,  },//9
+  {path:'historico',component:HistoricoComponent,  },
 
   {path:'trocaSenha',component:TrocaSenhaComponent},
 

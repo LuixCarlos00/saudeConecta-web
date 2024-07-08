@@ -30,6 +30,7 @@ export class ModelService {
     login: '',
     senha: '',
     tipoUsuario: '',
+    status: ''
   };
   private apiUrl = 'http://localhost:8080';
   private Token = this.tokenService.retornaToken();
@@ -62,10 +63,7 @@ export class ModelService {
 
 
 
-  salvarToken(token: string) {
-    this.tokenService.salvarToken(token);
-    this.tokenService.decodificaToken();
-  }
+
 
   deslogar(): void {
     this.tokenService.excluirToken();
@@ -82,18 +80,9 @@ export class ModelService {
   }
 
 
-  fazerLogin(usuario: Usuario): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Home/login`, usuario, { observe: 'response' }).pipe(
-      tap((response: HttpResponse<any>) => {
-        const tokenJWT = response.body.token;
-        if (tokenJWT) {
-          this.tokenService.salvarToken(tokenJWT);
-          this.tokenService.setAuthTwof(true);
-        } else {
-          console.error('Token JWT não encontrado no cabeçalho de resposta');
-        }
-      })
-    );
+  fazerLogin(usuario: Usuario) {
+    return this.http.post<any>(`${this.apiUrl}/Home/login`, usuario, { observe: 'response' })
+
   }
 
 
