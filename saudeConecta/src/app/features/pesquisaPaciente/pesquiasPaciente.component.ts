@@ -1,7 +1,7 @@
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
-import { ConsultaService } from '../../service/service-consulta/consulta.service';
+import { ConsultaService } from '../../service/consulta/consulta.service';
 import { HoradaConsulta } from './../../util/variados/options/options';
 import { tokenService } from './../../util/Token/Token.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -37,10 +37,10 @@ export class PesquiasPacienteComponent implements OnInit {
 
   UsuarioLogado: Usuario = {
     id: 0,
-    login: '',
-    senha: '',
-    tipoUsuario: '',
-    status: ''
+    aud: '',
+    exp: '',
+    iss: '',
+    sub: ''
   };
 
   constructor(

@@ -5,16 +5,16 @@
 
     <ng-container matColumnDef="ConCodigoConsulta">
       <th mat-header-cell *matHeaderCellDef class="NomeCod ">Cod</th>
-      <td mat-cell *matCellDef="let element" class="colunascod">{{element.ConCodigoConsulta}}</td>
+      <td mat-cell *matCellDef="let element ;let i = index" class="colunascod">{{i+1}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="ConMedico.medNome">
+    <ng-container matColumnDef="NomeMedico">
       <th mat-header-cell *matHeaderCellDef class=" NomeMedico">Médico</th>
       <td mat-cell *matCellDef="let element" class="colunasMedico"> {{element.ConMedico.medNome || element.ConMedico}}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="ConPaciente.paciNome">
+    <ng-container matColumnDef="NomePaciente">
       <th mat-header-cell *matHeaderCellDef class=" NomePaciente">Paciente</th>
       <td mat-cell *matCellDef="let element" class="colunasPaciente">{{element.ConPaciente.paciNome ||
         element.ConPaciente}}</td>
@@ -49,9 +49,8 @@
     <ng-container matColumnDef="Observar">
       <th mat-header-cell *matHeaderCellDef class=" NomeObecervacao">Observar</th>
       <td mat-cell *matCellDef="let element" class="colunasObecervacao">
-        <button style="border: hidden;"
-          (click)="openAvisosDialog( element)">
-          <i style="color: cadetblue;"  class="fa-solid fa-eye fa-xl"></i>
+        <button style="border: hidden;" (click)="openAvisosDialog( element)">
+          <i style="color: cadetblue;" class="fa-solid fa-eye fa-xl"></i>
 
         </button>
       </td>
@@ -60,15 +59,16 @@
     <ng-container matColumnDef="Seleciona">
       <th mat-header-cell *matHeaderCellDef class=" NomeObecervacao">Seleciona</th>
       <td mat-cell *matCellDef="let element" class="colunasObecervacao">
-        <mat-checkbox  (change)="DadoSelecionadoParaAcao(element, $event)">
+        <mat-checkbox (change)="DadoSelecionadoParaAcao(element, $event)">
         </mat-checkbox>
       </td>
     </ng-container>
 
 
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+    <tr mat-row (click)="clickedRows.add(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
 </section>

@@ -31,10 +31,10 @@ export class CadastroAdmComponent implements OnInit {
 
   UsuarioLogado: Usuario = {
     id: 0,
-    login: '',
-    senha: '',
-    tipoUsuario: '',
-    status: ''
+    aud: '',
+    exp: '',
+    iss: '',
+    sub: ''
   };
 
   constructor(

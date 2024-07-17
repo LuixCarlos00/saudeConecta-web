@@ -93,9 +93,20 @@ table {
 .custom-table .colunasObecervacao{
   width: 85px;
   text-align: center;
-     background: #f3e5e5;
-
-
+  background: #f3e5e5;
 }
 
+.demo-table {
+  width: 100%;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
 

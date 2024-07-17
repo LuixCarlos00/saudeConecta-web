@@ -1,4 +1,4 @@
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import { Medico } from './../../util/variados/interfaces/medico/medico';
 import { Route, Router } from '@angular/router';
 import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';

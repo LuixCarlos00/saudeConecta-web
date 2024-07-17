@@ -1,4 +1,4 @@
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 import { Medico } from './../../../../util/variados/interfaces/medico/medico';
 import { Component, Inject, OnInit } from '@angular/core';

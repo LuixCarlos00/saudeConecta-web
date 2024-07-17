@@ -13,14 +13,14 @@ import { CadastroPacienteComponent } from './features/cadastro/cadastro-paciente
 import { CadastroMedicoComponent } from './features/cadastro/cadastro-medico/cadastro-medico.component';
 import { RecuperaCadastroComponent } from './features/recupera-Cadastro/recupera-cadastro/recupera-cadastro.component';
 
-import { HomeComponent } from './features/home/home.component';
+
 import { PesquisaMedicosComponent } from './features/pesquisaMedicos/pesquisaMedicos.component';
 
 import { AgendaComponent } from './features/agenda/agenda.component';
 import { HistoricoComponent } from './features/historico/historico.component';
 import { TrocaSenhaComponent } from './features/troca-senha/troca-senha.component';
 import { CadastroAdmComponent } from './features/cadastro/cadastro-adm/cadastro-adm.component';
-import { GuardaRotasHome } from './features/home/guards/GuardaRotasHome';
+import { GuardaRotasHome } from './features/dashboard/guards/GuardaRotasHome';
 import { CadastroSecretariaComponent } from './features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { GerenciamentoComponent } from './features/gerenciamento/gerenciamento.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';

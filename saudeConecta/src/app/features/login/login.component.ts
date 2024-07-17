@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
   //
   Usuario: Usuario = {
     id: 0,
-    login: '',
-    senha: '',
-    tipoUsuario: '',
-    status: '',
+    aud: '',
+    exp: '',
+    iss: '',
+    sub: ''
   };
 
   FormularioUsuario!: FormGroup;
@@ -56,12 +56,16 @@ export class LoginComponent implements OnInit {
     const password = this.FormularioUsuario.get('password')?.value;
     const username = this.FormularioUsuario.get('username')?.value;
 
-    this.Usuario.login = username;
-    this.Usuario.senha = password;
+    const Usuario = {
+      login: username,
+      senha: password,
+    };
+
+
 
     this.ExisteUsuario(username).subscribe((existe) => {
       if (existe) {
-        this.modelService.fazerLogin(this.Usuario).subscribe(
+        this.modelService.fazerLogin(Usuario).subscribe(
           (response) => {
             console.log(response,'resposta');
 

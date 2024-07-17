@@ -2,12 +2,10 @@ export interface Usuario {
 
 
   id:number ,
-  login:string,
-  senha:string,
-  tipoUsuario: string;
-  status : string,
-
-  aud?:string
+  aud :string,
+  exp :string,
+  iss :string,
+  sub :string
 
 }
 

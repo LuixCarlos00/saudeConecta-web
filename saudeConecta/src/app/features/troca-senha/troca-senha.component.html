@@ -24,7 +24,7 @@
 
 
           <div *ngIf="emailValido" style="margin-left: 50px; justify-content: center; margin-top: 30px;">
-            <label for="codigo">Insira o codigo que foi enviado ao seu codigo </label>
+            <label for="codigo">Insira o codigo que foi enviado ao seu email </label>
             <input type="text" maxlength="6" id="codigo" name="codigo" formControlName="codigo">
             <button style="display: flex; width: 100px; justify-content: center;" type="submit"
               (click)="ConfirmaCodigoDeSeguraca()">Enviar</button>
@@ -34,9 +34,9 @@
           <div *ngIf="codigoDeSegurancaValidao" style="margin-left: 50px; justify-content: center; margin-top: 30px;">
             <label for="NovaSenha">Nova senha</label>
             <input type="password" id="NovaSenha" name="NovaSenha" formControlName="NovaSenha">
-            <button *ngIf="this.FormularioEsqueciMinhaSenha.get('NovaSenha')?.value >=8"
+            <button
               style="display: flex; width: 100px; justify-content: center;" type="submit"
-              (click)="ConfirmaNovaSenha()">Enviar</button>
+              (click)="ConfirmaNovaSenha_ESQUECI_A_SENHA()">Enviar</button>
           </div>
 
 

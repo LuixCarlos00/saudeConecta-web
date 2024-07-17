@@ -13,6 +13,7 @@ import { tokenService } from "src/app/util/Token/Token.service";
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 import Swal from 'sweetalert2';
 import { map, take } from 'rxjs';
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
 @Component({
   selector: 'app-troca-senha',
@@ -23,7 +24,7 @@ export class TrocaSenhaComponent implements OnInit {
   trocaMinhaSenha: boolean = false;
   EsqueciMinhaSenha: boolean = false;
 
-  UsuarioLogado!: Adiministrador;
+  UsuarioLogado!: Usuario;
 
   FormularioEsqueciMinhaSenha!: FormGroup;
   FormularioTrocaSenha!: FormGroup;
@@ -36,8 +37,11 @@ export class TrocaSenhaComponent implements OnInit {
     private usuarioAdmService: UsuarioAdmService,
     private tokenService: tokenService
   ) {
+    this.tokenService.decodificaToken();
     this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
       if (paciente) {
+        console.log(paciente, 'paciente');
+
         this.UsuarioLogado = paciente;
       }
     });
@@ -72,7 +76,7 @@ export class TrocaSenhaComponent implements OnInit {
       const email = this.FormularioTrocaSenha.value.email;
       const SenhaAntiga = this.FormularioTrocaSenha.value.SenhaAntiga;
       const SenhaNova = this.FormularioTrocaSenha.value.SenhaNova;
-      const idUsuario = this.UsuarioLogado.AdmCodigo;
+      const idUsuario = this.UsuarioLogado.id;
 
       const administrador = {
         id: idUsuario,
@@ -84,21 +88,15 @@ export class TrocaSenhaComponent implements OnInit {
       if (email && SenhaAntiga && SenhaNova) {
         this.usuarioAdmService.TrocaSenha(administrador).subscribe(
           (response) => {
-            if (response === true) {
+            console.log(response);
+
               this.FormularioTrocaSenha.reset();
               Swal.fire({
                 icon: 'success',
                 title: ' OK...',
                 text: 'Senha alterada com sucesso',
               });
-            } else {
-              this.FormularioTrocaSenha.reset();
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Senha ou Email inválida',
-              });
-            }
+
           },
           (error) => {
             console.log(error);
@@ -132,7 +130,7 @@ export class TrocaSenhaComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               title: ' OK...',
-              text: 'Código enviado com sucesso',
+              text: 'Foi enviado um codigo para o seu email, verifique a sua caixa de entrada',
             });
             this.emailValido = true;
             this.PesquisandoEmail = false;
@@ -142,6 +140,21 @@ export class TrocaSenhaComponent implements OnInit {
 
     }
   }
+
+
+
+
+
+
+
+
+
+
+  // ============================= ESQUECI A SENHA ==================================
+
+
+
+
 
   ConfirmaCodigoDeSeguraca() {
     const codigo = this.FormularioEsqueciMinhaSenha.value.codigo;
@@ -172,9 +185,9 @@ export class TrocaSenhaComponent implements OnInit {
 
 
 
-  ConfirmaNovaSenha() {
+  ConfirmaNovaSenha_ESQUECI_A_SENHA() {
     const NovaSenha = this.FormularioEsqueciMinhaSenha.get('NovaSenha')?.value;
-    const idUsuario = this.UsuarioLogado.AdmCodigo;
+    const idUsuario = this.UsuarioLogado.id;
 
     const administrador = {
       id: idUsuario,
@@ -190,7 +203,13 @@ export class TrocaSenhaComponent implements OnInit {
           icon: 'success',
           title: ' OK...',
           text: 'Senha alterada com sucesso',
+          showCloseButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
         });
+
       },
       (error) => {
         console.log(error);

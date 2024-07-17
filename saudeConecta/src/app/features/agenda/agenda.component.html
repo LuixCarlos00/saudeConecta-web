@@ -4,11 +4,12 @@
       <label for="busca" class="label_search">Pesquisar </label>
       <input type="text" id="busca" class="input_search" name="busca" formControlName="busca">
       <button class="btnPesquisar" type="submit" (click)="Pesquisar()">Pesquisar</button>
-      <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit" (click)="MostraTabelaDeConcluidos()">Finalizadas</button>
+      <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit"
+        (click)="MostraTabelaDeConcluidos()">Finalizadas</button>
     </div>
 
-    <div class="grid"  >
-      <div class="divOperacoes" >
+    <div class="grid">
+      <div class="divOperacoes">
         <button title="Recarregar Tabela" class="btnRecarregar" (click)="Recarregar()">
           <i class="fa-solid fa-rotate-right fa-xl" style="color: blue;"></i>
         </button>
@@ -16,52 +17,57 @@
       </div>
 
       <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Deletar Consulta" class="btnRecarregar" (click)="Deletar()">
+        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Deletar Consulta" class="btnRecarregar"
+          (click)="Deletar()">
           <i class="fa-regular fa-trash-can fa-xl" style="color: red;"></i>
         </button>
-        <span class="btn-label">Deletar  <br> Consulta</span>
+        <span class="btn-label">Deletar <br> Consulta</span>
       </div>
 
       <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Editar Consulta" class="btnRecarregar" (click)="Editar()">
+        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Editar Consulta" class="btnRecarregar"
+          (click)="Editar()">
           <i class="fa-regular fa-pen-to-square fa-xl" style="color: blue;"></i>
         </button>
         <span class="btn-label">Editar <br> Consulta</span>
       </div>
 
       <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Concluir Consulta" class="btnRecarregar" (click)="Concluido()">
+        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Concluir Consulta" class="btnRecarregar"
+          (click)="Concluido()">
           <i class="fa-solid fa-square-check fa-xl" style="color: green;"></i>
         </button>
         <span class="btn-label">Concluir <br> Consulta</span>
       </div>
 
       <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }" title="Gerar Arquivo de Consulta" class="btnRecarregar" (click)="GerarPDF()">
+        <button [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }" title="Gerar Arquivo de Consulta"
+          class="btnRecarregar" (click)="GerarPDF()">
           <i class="fa-solid fa-file-pdf fa-xl" style="color: blue;"></i>
         </button>
         <span class="btn-label">Cria PDF</span>
       </div>
 
       <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }" title="Cronograma do dia" class="btnRecarregar" (click)="CronogramaDoDia()">
+        <button [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }" title="Cronograma do dia"
+          class="btnRecarregar" (click)="CronogramaDoDia()">
           <i class="fa-solid fa-clock fa-xl" style="color: #035e4c;"></i>
         </button>
-        <span class="btn-label">Cronograma <br>  do dia</span>
+        <span class="btn-label">Cronograma <br> do dia</span>
       </div>
 
       <div class="divOperacoes">
         <button class="btnRecarregar" title="Adicionar Medico" (click)="AdicionarMedico()">
           <i class="fa-solid fa-user-nurse fa-xl" style="color: #035e31;"></i>
         </button>
-        <span class="btn-label">Adicionar  <br> Medico</span>
+        <span class="btn-label">Adicionar <br> Medico</span>
       </div>
 
       <div class="divOperacoes">
         <button class="btnRecarregar" title="Adicionar Paciente" (click)="AdicionarPaciente()">
           <i class="fa-solid fa-user-plus fa-xl" style="color: #f2a957;"></i>
         </button>
-        <span class="btn-label">Adicionar  <br> Paciente</span>
+        <span class="btn-label">Adicionar <br> Paciente</span>
       </div>
 
       <div class="divOperacoes">

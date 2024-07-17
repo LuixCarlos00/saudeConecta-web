@@ -1,4 +1,4 @@
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import {
   Component,
   EventEmitter,
@@ -49,16 +49,13 @@ export class EditarConsultasComponent implements OnInit {
   DadosPaciente!: any;
   DadosMedico!: any;
 
-  Usuario: Adiministrador = {
-    AdmCodigo: 0,
-    AdmNome: '',
-    AdmUsuario: 0,
-    AdmStatus: 0,
-    AdmEmail: '',
-    AdmCodigoAtorizacao: '',
-    AdmDataCriacao: '',
+  UsuarioLogado: Usuario = {
+    id: 0,
+    aud: '',
+    exp: '',
+    iss: '',
+    sub: ''
   };
-
   DadosAntigosDeConsulta: any = {
     ConCodigoConsulta: 0,
     ConMedico: 0,
@@ -96,8 +93,9 @@ export class EditarConsultasComponent implements OnInit {
     private tokenService: tokenService,
     private medicosService: MedicosService
   ) {
+    this.tokenService.decodificaToken();
     this.tokenService.UsuarioLogadoValue$.subscribe((Usuario) => {
-      if (Usuario) this.Usuario = Usuario;
+      if (Usuario) this.UsuarioLogado = Usuario;
     });
 
     this.DadosAntigosDeConsulta = this.data.DadoSelecionadoParaEdicao[0];
@@ -110,9 +108,7 @@ export class EditarConsultasComponent implements OnInit {
     this.MedicoEscolhido = this.DadosMedico;
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+
 
   ngOnInit() {
     this.DadosDeEdicaoConsulta.ConHorario =
@@ -148,33 +144,120 @@ export class EditarConsultasComponent implements OnInit {
     };
   }
 
-  fecharTabela() {
-    this.showResultadoPaciente = false;
+
+
+
+
+  Salvar() {
+    Swal.fire({
+      title: 'Tem certeza que deseja editar esses registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#5ccf6c',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, Editar!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.onDateChange(this.FormGroupConsulta.get('Data')?.value);
+
+        this.DadosDeEdicaoConsulta.ConPaciente = this.PacienteEscolhido.paciCodigo;
+        this.DadosDeEdicaoConsulta.ConMedico = this.MedicoEscolhido.medCodigo;
+        this.DadosDeEdicaoConsulta.ConAdm = this.UsuarioLogado.id;
+        this.DadosDeEdicaoConsulta.ConDia_semana = this.DiaDaSemana;
+
+        console.log(this.DadosDeEdicaoConsulta,'Dados de edição');
+
+
+        if (this.DadosDeEdicaoConsulta.ConHorario ===  this.DadosAntigosDeConsulta.ConHorario &&
+          this.DadosDeEdicaoConsulta.ConData === this.DadosAntigosDeConsulta.ConData &&
+          this.DadosDeEdicaoConsulta.ConMedico === this.DadosAntigosDeConsulta.ConMedico.medCodigo ) {
+          console.log('Dados iguais');
+
+          this.ConsultaService.EditarConsultas(
+            this.DadosDeEdicaoConsulta.ConCodigoConsulta,
+            this.DadosDeEdicaoConsulta
+          ).subscribe(
+            (dados) => {
+              Swal.fire({
+                icon: 'success',
+                title: 'OK',
+                text: 'Consulta editada com sucesso .',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                 //window.location.reload();
+                }
+              });
+            },
+            (erros) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo deu errado !',
+              });
+            }
+          );
+        } else if (this.DadosDeEdicaoConsulta.ConHorario != this.DadosAntigosDeConsulta.ConHorario ||
+          this.DadosDeEdicaoConsulta.ConData != this.DadosAntigosDeConsulta.ConData ||
+          this.DadosDeEdicaoConsulta.ConMedico != this.DadosAntigosDeConsulta.ConMedico.medCodigo
+        ) {
+          console.log('Dados diferentes ');
+          if (this.DadosDeEdicaoConsulta) {
+            this.ConsultaService.VericarSeExetemConsultasMarcadas(
+              this.DadosDeEdicaoConsulta
+            ).subscribe(
+              (dados) => {
+                if (dados) {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ja existe uma consulta marcada para este horário. Tente outro horário. Ou altere o dia.',
+                  });
+                } else if (!dados) {
+                  console.log(dados, 'dados');
+
+                  this.ConsultaService.EditarConsultas(
+                    this.DadosDeEdicaoConsulta.ConCodigoConsulta,
+                    this.DadosDeEdicaoConsulta
+                  ).subscribe(
+                    (dados) => {
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'OK',
+                        text: 'Consulta editada com sucesso .',
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          window.location.reload();
+                        }
+                      });
+                    },
+                    (erros) => {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo deu errado !',
+                      });
+                    }
+                  );
+                }
+              },
+              (erros) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Algo deu errado !',
+                });
+              }
+            );
+          }
+        }
+      }
+    else  if (result.dismiss === Swal.DismissReason.cancel) {
+      this.ConsultaService.EditarDadosDaTabelaSubject(false);
+      window.location.reload();
+      }
+    });
   }
 
-  fecharTabelaMedicos() {
-    this.showResultadoMedico = false;
-  }
-
-  PacienteSelecionado(elemento: any) {
-    this.PacienteEscolhido = elemento;
-  }
-
-  MedicoSelecionado(elemento: Event) {
-    this.MedicoEscolhido = elemento;
-  }
-
-  onDateChange(selectedDate: string) {
-    if (!selectedDate) return; // Adiciona verificação para lidar com valores vazios
-
-    const date = new Date(selectedDate + 'T00:00:00'); // Adiciona a hora para evitar problemas com fuso horário
-    const utcDate = new Date(date.toUTCString()); // Normaliza a data para UTC
-    const options = { weekday: 'long' as const };
-    const dayOfWeek = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
-    this.DiaDaSemana = dayOfWeek;
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log(this.DiaDaSemana, 'dia da semana');
-  }
 
   PesquisarPacientes() {
     const pesquisa: string =
@@ -345,125 +428,40 @@ export class EditarConsultasComponent implements OnInit {
     }
   }
 
+  fecharTabela() {
+    this.showResultadoPaciente = false;
+  }
+
+  fecharTabelaMedicos() {
+    this.showResultadoMedico = false;
+  }
+
+  PacienteSelecionado(elemento: any) {
+    this.PacienteEscolhido = elemento;
+  }
+
+  MedicoSelecionado(elemento: Event) {
+    this.MedicoEscolhido = elemento;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   exibirMensagemErro() {
     this.DialogService.exibirMensagemErro();
   }
 
-  Salvar() {
-    Swal.fire({
-      title: 'Tem certeza que deseja editar esses registro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#5ccf6c',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, Editar!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.onDateChange(this.FormGroupConsulta.get('Data')?.value);
+  onDateChange(selectedDate: string) {
+    if (!selectedDate) return; // Adiciona verificação para lidar com valores vazios
 
-        this.DadosDeEdicaoConsulta.ConPaciente =
-          this.PacienteEscolhido.paciCodigo;
-        this.DadosDeEdicaoConsulta.ConMedico = this.MedicoEscolhido.medCodigo;
-        this.DadosDeEdicaoConsulta.ConAdm = this.Usuario.AdmCodigo;
-        this.DadosDeEdicaoConsulta.ConDia_semana = this.DiaDaSemana;
-
-        if (
-          this.DadosDeEdicaoConsulta.ConHorario ===
-            this.DadosAntigosDeConsulta.ConHorario &&
-          this.DadosDeEdicaoConsulta.ConData ===
-            this.DadosAntigosDeConsulta.ConData &&
-          this.DadosDeEdicaoConsulta.ConMedico ===
-            this.DadosAntigosDeConsulta.ConMedico.medCodigo
-        ) {
-          console.log('Dados iguais');
-
-          this.ConsultaService.EditarConsultas(
-            this.DadosDeEdicaoConsulta.ConCodigoConsulta,
-            this.DadosDeEdicaoConsulta
-          ).subscribe(
-            (dados) => {
-              Swal.fire({
-                icon: 'success',
-                title: 'OK',
-                text: 'Consulta editada com sucesso .',
-              }).then((result) => {
-                if (result.isConfirmed) {
-                 //window.location.reload();
-                }
-              });
-            },
-            (erros) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Algo deu errado !',
-              });
-            }
-          );
-        } else if (
-          this.DadosDeEdicaoConsulta.ConHorario !=
-            this.DadosAntigosDeConsulta.ConHorario ||
-          this.DadosDeEdicaoConsulta.ConData !=
-            this.DadosAntigosDeConsulta.ConData ||
-          this.DadosDeEdicaoConsulta.ConMedico !=
-            this.DadosAntigosDeConsulta.ConMedico.medCodigo
-        ) {
-          console.log('Dados diferentes ');
-          if (this.DadosDeEdicaoConsulta) {
-            this.ConsultaService.VericarSeExetemConsultasMarcadas(
-              this.DadosDeEdicaoConsulta
-            ).subscribe(
-              (dados) => {
-                if (dados) {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Ja existe uma consulta marcada para este horário. Tente outro horário. Ou altere o dia.',
-                  });
-                } else if (!dados) {
-                  console.log(dados, 'dados');
-
-                  this.ConsultaService.EditarConsultas(
-                    this.DadosDeEdicaoConsulta.ConCodigoConsulta,
-                    this.DadosDeEdicaoConsulta
-                  ).subscribe(
-                    (dados) => {
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'OK',
-                        text: 'Consulta editada com sucesso .',
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                          window.location.reload();
-                        }
-                      });
-                    },
-                    (erros) => {
-                      Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo deu errado !',
-                      });
-                    }
-                  );
-                }
-              },
-              (erros) => {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: 'Algo deu errado !',
-                });
-              }
-            );
-          }
-        }
-      }
-    else  if (result.dismiss === Swal.DismissReason.cancel) {
-      this.ConsultaService.EditarDadosDaTabelaSubject(false);
-      window.location.reload();
-      }
-    });
+    const date = new Date(selectedDate + 'T00:00:00'); // Adiciona a hora para evitar problemas com fuso horário
+    const utcDate = new Date(date.toUTCString()); // Normaliza a data para UTC
+    const options = { weekday: 'long' as const };
+    const dayOfWeek = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
+    this.DiaDaSemana = dayOfWeek;
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log(this.DiaDaSemana, 'dia da semana');
   }
 
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tokenService } from './../../util/Token/Token.service';
 import { Secretaria } from 'src/app/util/variados/interfaces/secretaria/secretaria';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,18 @@ export class SecretariaService {
 
 
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
   private Token = this.tokenService.retornaToken();
 
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private tokenService: tokenService
-  ) {}
+    private tokenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
+  }
 
 
 

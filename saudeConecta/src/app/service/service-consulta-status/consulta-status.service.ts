@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tokenService } from "src/app/util/Token/Token.service";
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/consultaStatus';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class ConsultaStatusService {
 
 
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
   private Token = this.tokenService.retornaToken();
 
   private dadosStatusFiltradosSubject = new BehaviorSubject<string | undefined>('');
@@ -29,14 +30,14 @@ export class ConsultaStatusService {
   private RecarregarStatusTabelaSubject = new BehaviorSubject<Boolean>(false);
   RecarregarStatusTabela$ = this.RecarregarStatusTabelaSubject.asObservable();
 
-  private DeletarDadosDaTabelaStatusSubject = new BehaviorSubject<Boolean>(false);
-  DeletarDadosDaTabelaStatus$ = this.DeletarDadosDaTabelaStatusSubject.asObservable();
+  // private DeletarDadosDaTabelaStatusSubject = new BehaviorSubject<Boolean>(false);
+  // DeletarDadosDaTabelaStatus$ = this.DeletarDadosDaTabelaStatusSubject.asObservable();
 
-  private EditarTabelaStatusSubject = new BehaviorSubject<Boolean>(false);
-  EditarDadosDaTabelaStatus$ = this.EditarTabelaStatusSubject.asObservable();
+  // private EditarTabelaStatusSubject = new BehaviorSubject<Boolean>(false);
+  // EditarDadosDaTabelaStatus$ = this.EditarTabelaStatusSubject.asObservable();
 
-  private ConcluidoRegistroTabelaStatusSubject = new BehaviorSubject<Boolean>(false);
-  ConcluidoRegistroTabelaStatus$ = this.ConcluidoRegistroTabelaStatusSubject.asObservable();
+  // private ConcluidoRegistroTabelaStatusSubject = new BehaviorSubject<Boolean>(false);
+  // ConcluidoRegistroTabelaStatus$ = this.ConcluidoRegistroTabelaStatusSubject.asObservable();
 
   private GeraPdfStatusSubject = new BehaviorSubject<Boolean>(false);
   GeraPDFRegistroTabela$ = this.GeraPdfStatusSubject.asObservable();
@@ -45,7 +46,11 @@ export class ConsultaStatusService {
   constructor(
     private router : Router ,
     private http: HttpClient,
-    private tokenService: tokenService) {}
+    private tokenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
+  }
 
 
     FiltraDadosTabelaStatusSubject(dados: string) {
@@ -56,17 +61,17 @@ export class ConsultaStatusService {
       this.RecarregarStatusTabelaSubject.next(dados);
     }
 
-    ExcluirDadosDaTabelaStatusSubject(dados: boolean) {
-       this.DeletarDadosDaTabelaStatusSubject.next(dados);
-    }
+    // ExcluirDadosDaTabelaStatusSubject(dados: boolean) {
+    //    this.DeletarDadosDaTabelaStatusSubject.next(dados);
+    // }
 
-    EditarDadosDaTabelaStatusSubject(dados: boolean) {
-     this.EditarTabelaStatusSubject.next(dados);
-    }
+    // EditarDadosDaTabelaStatusSubject(dados: boolean) {
+    //  this.EditarTabelaStatusSubject.next(dados);
+    // }
 
-    ConcluidoTabelaStatusSubject(dados: boolean) {
-       this.ConcluidoRegistroTabelaStatusSubject.next(dados);
-    }
+    // ConcluidoTabelaStatusSubject(dados: boolean) {
+    //    this.ConcluidoRegistroTabelaStatusSubject.next(dados);
+    // }
 
 
     Gera_PDF_DeRegistroDaTabelaSubject(dados: boolean) {

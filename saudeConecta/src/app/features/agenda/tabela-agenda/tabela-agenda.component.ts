@@ -5,7 +5,7 @@ import { Medico } from './../../../util/variados/interfaces/medico/medico';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ObservacoesComponent } from './Observacoes/Observacoes.component';
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import { da, el } from 'date-fns/locale';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import Swal from 'sweetalert2';
@@ -36,6 +36,7 @@ export class TabelaAgendaComponent implements OnInit {
     MedTelefone: '',
     endereco: 0,
     usuario: 0,
+    medNome: ''
   };
   Pacientes: Paciente = {
     PaciCodigo: 0,
@@ -51,8 +52,8 @@ export class TabelaAgendaComponent implements OnInit {
 
   displayedColumns = [
     'ConCodigoConsulta',
-    'ConMedico.medNome',
-    'ConPaciente.paciNome',
+    'NomeMedico',
+    'NomePaciente',
     'ConDia_semana',
     'ConData',
     'ConHorario',
@@ -69,7 +70,7 @@ export class TabelaAgendaComponent implements OnInit {
   ParametroDeFiltragem: any;
   dataSource: Consulta[] = [];
   DadosDeConsulta: any[] = [];
-
+  clickedRows = new Set<any>();
   constructor(
     private consultaService: ConsultaService,
     public dialog: MatDialog,
@@ -77,23 +78,24 @@ export class TabelaAgendaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    //buscar todos os registros
     this.consultaService.CadastroRealizadoComSucesso$.subscribe((dados) => {
       if (dados) this.BuscarTodosRegistrosDeConsulta();
     });
 
+    //deletar Itens
     this.consultaService.DeletarDadosDaTabela$.subscribe((dados) => {
-      //deletar Itens
       if (dados === true && this.DadoSelecionaParaExclusao.length > 0)
         this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao, dados);
     });
 
+    // Recarregar Tabela
     this.consultaService.RecarregarTabela$.subscribe((dados) => {
-      // Recarregar Tabela
       if (dados) this.RecaregarTabela();
     });
 
+    //Edita dado selecionado
     this.consultaService.EditarDadosDaTabela$.subscribe((dados) => {
-      //Edita dado selecionado
       if (dados === true && this.DadoSelecionadoParaEdicao.length === 1) {
         this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao);
       } else if (dados === true && this.DadoSelecionadoParaEdicao.length > 1) {
@@ -110,15 +112,16 @@ export class TabelaAgendaComponent implements OnInit {
       }
     });
 
+    // concluir dados
     this.consultaService.ConcluidoRegistroTabela$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionadoParaConclusao.length > 0) {
-        this.ConcluirDadosDaTabela(); // concluir dados
+        this.ConcluirDadosDaTabela();
       }
     });
 
+    //Filtra e pesquisar Tabela
     this.consultaService.dadosFiltrados$.subscribe((dados) => {
       if (!dados.toString()) {
-        //Filtra e pesquisar Tabela
         this.consultaService
           .BuscarTodosRegistrosDeConsulta()
           .subscribe((response) => {
@@ -130,18 +133,14 @@ export class TabelaAgendaComponent implements OnInit {
       }
     });
 
+    //Gerar PDF
     this.consultaService.GeraPDFRegistroTabela$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionadoParaGerarPDF.length > 0) {
         this.GerarPDF(this.DadoSelecionadoParaGerarPDF);
       }
     });
 
-    this.consultaService.CriaCronologiaDoDia$.subscribe((dados) => {
-      if (dados === true) {
-        this.CriarCronologiaDoDia();
-      }
-    });
-
+    //cronologia
     this.consultaService.BuscarDadoParaCronologia$.subscribe((dados) => {
       if (dados) {
         this.filtrandoDadosDoBancoPassadoParametros(dados);
@@ -210,32 +209,29 @@ export class TabelaAgendaComponent implements OnInit {
   }
 
   filtrandoDadosDoBancoPassadoParametros(dados: any) {
-    // Função para normalizar e remover acentos e caracteres especiais
-    const normalizeString = (str: string) => {
-      return str
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') // Remove diacríticos
-        .toUpperCase(); // Converte para maiúsculas
-    };
-    const dadosUpper = normalizeString(dados.toString());
 
-    // Filtrar os dados da consulta, comparando as strings normalizadas
-    let resultadoFiltrado = this.DadosDeConsulta.filter(
-      (item) =>
-        normalizeString(item.ConCodigoConsulta.toString()).includes(
-          dadosUpper
-        ) ||
-        normalizeString(item.ConMedico.medNome).includes(dadosUpper) ||
-        normalizeString(item.ConPaciente.paciNome).includes(dadosUpper) ||
-        normalizeString(item.ConDia_semana).includes(dadosUpper) ||
-        normalizeString(item.ConData).includes(dadosUpper) ||
-        normalizeString(item.ConHorario).includes(dadosUpper) ||
-        normalizeString(item.ConObservacoes).includes(dadosUpper)
-    );
+    let novaConsulta: Consulta[] = [];
+    for (let i = 0; i < dados.length; i++) {
+      novaConsulta[i] = {
+        ConCodigoConsulta: dados[i].conCodigoConsulta,
+        ConMedico: dados[i].conMedico,
+        ConPaciente: dados[i].conPaciente ,
+        ConDia_semana: dados[i].conDia_semana,
+        ConHorario: dados[i].conHorario,
+        ConData: dados[i].conData,
+        ConObservacoes: dados[i].conObservacoes,
+        ConDadaCriacao: dados[i].conDataCriacao,
+        ConFormaPagamento: dados[i].conFormaPagamento,
+        ConStatus: dados[i].conStatus,
+        ConAdm: dados[i].conAdm
+      };
+    }
 
-    if (resultadoFiltrado.length > 0) {
+
+
+    if (novaConsulta.length > 0) {
       this.LimparTabela();
-      this.dataSource = resultadoFiltrado;
+      this.dataSource = novaConsulta;
     } else {
       this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
       this.LimparTabela();
@@ -373,7 +369,5 @@ export class TabelaAgendaComponent implements OnInit {
     });
   }
 
-  CriarCronologiaDoDia() {
-    this.DialogService.FornecaDataParaCronologia();
-  }
+
 }

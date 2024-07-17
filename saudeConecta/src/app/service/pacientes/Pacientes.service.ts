@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { tokenService } from "src/app/util/Token/Token.service";
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PacientesService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
   private Token = this.tokenService.retornaToken();
 
   public UsuarioEstaLogado: boolean = false;
@@ -20,8 +21,11 @@ export class PacientesService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private tokenService: tokenService
-  ) {}
+    private tokenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
+  }
 
   cadastrarPaciente(Paciente: Paciente): Observable<Paciente> {
     const headers = {

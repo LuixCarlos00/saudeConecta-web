@@ -1,13 +1,27 @@
+<hr>
 <div>
-  <label style="margin-left: 20px;" for="radio">7 dias</label>
+  <label style="margin-left: 8px;" for="radio">Á 7 dias</label>
   <input type="radio" name="radio" id="radio" [value]="1" [(ngModel)]="diaSelecionado" (change)="atualizarGrafico()">
 
-  <label style="margin-left: 20px;" for="radio">30 dias</label>
+  <label style="margin-left: 8px;" for="radio">Á 30 dias</label>
   <input type="radio" name="radio" id="radio" [value]="2" [(ngModel)]="diaSelecionado" (change)="atualizarGrafico()">
 
-  <label style="margin-left: 20px;" for="radio">60 dias</label>
+  <label style="margin-left: 8px;" for="radio">Á 60 dias</label>
   <input type="radio" name="radio" id="radio" [value]="3" [(ngModel)]="diaSelecionado" (change)="atualizarGrafico()">
+
+  <mat-form-field style="width: 200px; height: 70px; margin-left: 10px;">
+    <mat-label style="font-size: 10px;">Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker" [formGroup]="IntervaloDeDatas">
+      <input style="font-size: 10px;" matStartDate formControlName="start" placeholder="Start date" (dateChange)="atualizarGraficoPersonalizado()">
+      <input style="font-size: 10px;" matEndDate formControlName="end" placeholder="End date" (dateChange)="atualizarGraficoPersonalizado()">
+    </mat-date-range-input>
+    <mat-hint style="font-size: 10px;">MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
 </div>
+<hr>
 <div>
   <canvas #menuCanvas></canvas>
 </div>
+<hr>

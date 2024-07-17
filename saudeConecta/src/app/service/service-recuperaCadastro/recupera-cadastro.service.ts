@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tokenService } from "src/app/util/Token/Token.service";
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,15 @@ export class RecuperaCadastroService {
   private Medico!: Medico;
   private Paciente!:Paciente;
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
 
 
-  constructor(private http: HttpClient, private TOkenService: tokenService) {
-
+  constructor(
+    private http: HttpClient,
+    private TOkenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
   }
 
 
@@ -37,7 +42,7 @@ export class RecuperaCadastroService {
     return this.http.get<number>(`${this.apiUrl}/paciente/InserirCodigo/${codigo}`   );
   }
 
-  trocaSenhaUsuario(id:number, user :Usuario ): Observable<Usuario> {
+  trocaSenhaUsuario(id:number, user :any ): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.apiUrl}/Home/trocaDeSenha/${id}`,user   );
   }
 

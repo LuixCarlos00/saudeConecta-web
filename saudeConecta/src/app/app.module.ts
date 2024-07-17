@@ -7,7 +7,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { LoginModule } from './features/login/login_Module/login.module';
 import { PacienteModule } from './paciente_Module/paciente.module';
 import { UtilModule } from './util/util/util.module';
-import { RodapeComponent } from './util/variados/rodape/rodape.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from './features/login/login.component';
 import { CommonModule } from '@angular/common';
@@ -23,7 +22,6 @@ import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
-   // RodapeComponent,
     LoginComponent,
     BarraLateraComponent,
 

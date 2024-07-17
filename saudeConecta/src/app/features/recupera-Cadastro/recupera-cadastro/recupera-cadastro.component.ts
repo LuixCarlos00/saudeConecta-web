@@ -186,7 +186,7 @@ export class RecuperaCadastroComponent implements OnInit {
       const senha2: string = this.FormularioNovaSenha.get('password2')?.value;
       const login: string = this.InstanciaUsuario.usuario.usuario.username;
 
-      const usuario: Usuario = {
+      const usuario = {
         id: id,
         login: login,
         senha: senha,
@@ -194,7 +194,7 @@ export class RecuperaCadastroComponent implements OnInit {
         status: ''
       };
 
-      console.log('usuario ', usuario);
+
 
       if (senha === senha2) {
         this.recuperaCadastroService.trocaSenhaUsuario(id, usuario).subscribe(

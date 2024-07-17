@@ -2,7 +2,7 @@ import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import { TabelaAgendaComponent } from './tabela-agenda/tabela-agenda.component';
 import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/consultaStatus';
 import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
@@ -11,6 +11,8 @@ import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialo
 import { CadastroMedicoComponent } from '../cadastro/cadastro-medico/cadastro-medico.component';
 import { CadastroPacienteComponent } from '../cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroSecretariaComponent } from '../cadastro/cadastro-secretaria/cadastro-secretaria.component';
+import { CalendarDialogComponent } from 'src/app/util/variados/Cronologia/cronologia.component';
+
 
 @Component({
   selector: 'app-agenda',
@@ -98,7 +100,12 @@ export class AgendaComponent implements OnInit {
   }
 
   CronogramaDoDia() {
-    this.consultaService.CronologiaDoDiaSubject(true);
+    this.dialog.open(CalendarDialogComponent, {
+      width: '300px',
+      height: '300px',
+
+    });
+    // this.consultaService.CronologiaDoDiaSubject(true);
   }
 
 

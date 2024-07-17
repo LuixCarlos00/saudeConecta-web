@@ -8,6 +8,7 @@ import { Paciente } from '../variados/interfaces/paciente/paciente';
 import { Adiministrador } from '../variados/interfaces/administrado/adiministrador';
 import { Medico } from '../variados/interfaces/medico/medico';
 import * as jwt_decode from 'jwt-decode';
+import { ApiUrlService } from 'src/app/service/_Url-Global/Api-Url.service';
 
 const KEY: string = 'authToken';
 const authTwof: string = 'authTwof';
@@ -18,9 +19,13 @@ export class tokenService {
   //
   //
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
+  }
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
 
   private UsuarioLogadoSubject = new BehaviorSubject<any | null>(null);
   UsuarioLogadoValue$ = this.UsuarioLogadoSubject.asObservable();

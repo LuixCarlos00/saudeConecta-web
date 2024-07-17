@@ -9,18 +9,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HomeComponent } from '../features/home/home.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
-
 
 import { CadastroPacienteComponent } from '../features/cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroComponent } from '../features/cadastro/cadastro/cadastro.component';
@@ -53,11 +51,6 @@ import { GraficoCategoriaMedicosComponent } from '../features/dashboard/grafico-
 import { GerenciamentoUsuarioComponent } from '../features/gerenciamento-usuario/gerenciamento-usuario.component';
 import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/tabela-todos-usuarios.component';
 
-
-
-
-
-
 @NgModule({
   declarations: [
     CadastroPacienteComponent,
@@ -67,7 +60,7 @@ import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/
     CadastroSecretariaComponent,
     PesquisaMedicosComponent,
     RecuperaCadastroComponent,
-    HomeComponent,
+
     TabelasPesquisasMedicosComponent,
     TabelaDePacientesComponent,
     PesquiasPacienteComponent,
@@ -89,13 +82,11 @@ import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/
     GraficoSaldoComponent,
     GraficoCategoriaMedicosComponent,
     GerenciamentoUsuarioComponent,
-    TabelaTodosUsuariosComponent
-
+    TabelaTodosUsuariosComponent,
   ],
   exports: [],
 
   imports: [
-    CommonModule,
     FormsModule,
     RouterLink,
     ReactiveFormsModule,
@@ -116,9 +107,7 @@ import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
-
-
+    MatCardModule,
   ],
 })
 export class PacienteModule {}

@@ -67,7 +67,7 @@ export class TabelaAgendaStatusComponent implements OnInit {
   ParametroDeFiltragem: any;
   dataSource: ConsultaStatus[] = [];
   DadosDeConsulta: any[] = [];
-  BuscarUmaVez: boolean = false;
+  clickedRows = new Set<any>();
   DadoSelecionadoParaGerarPDF: any = [];
 
   constructor(
@@ -77,38 +77,9 @@ export class TabelaAgendaStatusComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.consultaStatusService.DeletarDadosDaTabelaStatus$.subscribe((dados) => {
-    //   //deletar Itens
-    //   if (dados === true && this.DadoSelecionaParaExclusao.length > 0) {
-    //     this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao, dados);
-    //   }
-    // });
-    // this.consultaStatusService.EditarDadosDaTabelaStatus$.subscribe((dados) => {
-    //   if (dados === true && this.DadoSelecionadoParaEdicao.length === 1) {
-    //     this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao); //Edita dado selecionado
-    //   } else if (dados === true && this.DadoSelecionadoParaEdicao.length > 1) {
-    //      Swal.fire({
-    //     icon: 'error',
-    //     title: 'Selecione apenas um item para editar!...',
-    //     confirmButtonText: 'Ok',
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //   this.consultaService.EditarDadosDaTabelaSubject(false);
-    //   window.location.reload();
-    //     }
-    //   });
-    // }
-    // });
-    // this.consultaStatusService.ConcluidoRegistroTabelaStatus$.subscribe((dados) => {
-    //   if (dados === true && this.DadoSelecionadoParaConclusao.length > 0) {
-    //     this.ConcluirDadosDaTabela();
-    //   }
-    // });
 
-    if (!this.BuscarUmaVez) {
-      this.BuscarTodosRegistrosDeConsulta();
-      this.BuscarUmaVez = true;
-    }
+
+
 
     this.consultaStatusService.RecarregarStatusTabela$.subscribe((dados) => {
       if (dados) {
@@ -135,12 +106,13 @@ export class TabelaAgendaStatusComponent implements OnInit {
 
   }
  BuscarTodosRegistrosDeConsulta() {
-    this.consultaStatusService
-      .BuscarTodosRegistrosDeConsultaStatus()
-      .pipe(take(1))
-      .subscribe((response) => {
+    this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).subscribe((response) => {
+        console.log( response.content, ' response.content response.content');
+
         this.DadosDeConsulta = response.content;
         this.dataSource = response.content;
+        console.log(this.DadosDeConsulta, 'this.DadosDeConsulta');
+
       });
   }
 
@@ -226,85 +198,8 @@ export class TabelaAgendaStatusComponent implements OnInit {
   RecaregarTabela() {
     this.LimparTabela();
     this.BuscarTodosRegistrosDeConsulta();
-    this.consultaStatusService.ExcluirDadosDaTabelaStatusSubject(false);
+  //  this.consultaStatusService.ExcluirDadosDaTabelaStatusSubject(false);
   }
 
-  //   ConcluirDadosDaTabela() {
-    // Swal.fire({
-    //   title: 'Tem certeza que deseja concluir esses registro?',
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#5ccf6c',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Sim, Concluir!',
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-  //     for (let i = 0; i < this.DadoSelecionadoParaConclusao.length; i++) {
-  //         this.consultaStatusService.ConcluirDadosDaTabelaStatus(this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta).pipe(take(1))
-  //         .subscribe(
-  //             (dados) => { console.log(dados); },
-  //             (error) => { console.error('Erro ao concluir dados:', error); }
-  //         );
-  //     }
-  //     for (let i = 0; i < this.DadoSelecionadoParaConclusao.length; i++) {
-  //         this.consultaStatusService.DeletarConsulasStatus(this.DadoSelecionadoParaConclusao[i].ConCodigoConsulta).pipe(take(1))
-  //         .subscribe(
-  //             (dados) => { this.RecaregarTabela(); },
-  //             (error) => { console.error('Erro ao concluir dados:', error); }
-  //         );
-  //     } }
-  //     else  if (result.dismiss === Swal.DismissReason.cancel) {
-  //       this.consultaService.ConcluidoTabelaSubject(false);
-  //       window.location.reload();
-  //       }
 
-  //   });
-  // }
-
-  // DeletarDadoDaTabela(DadoSelecionaParaExclusao: any, dados: Boolean) {
-  //   Swal.fire({
-  //     title: 'Tem certeza que deseja excluir esses dados?',
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Sim, excluir!',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       for (let i = 0; i < this.DadoSelecionaParaExclusao.length; i++) {
-  //         this.consultaStatusService
-  //           .DeletarConsulasStatus(
-  //             this.DadoSelecionaParaExclusao[i].ConCodigoConsulta
-  //           )
-  //           .pipe(take(1))
-  //           .subscribe(() => {
-  //             // Limpe a seleção e atualize a tabela após a exclusão bem-sucedida
-  //             if (i === this.DadoSelecionaParaExclusao.length - 1) {
-  //               this.DadoSelecionaParaExclusao = [];
-  //               this.LimparTabela();
-  //               this.consultaStatusService
-  //                 .BuscarTodosRegistrosDeConsultaStatus()
-  //                 .subscribe((response) => {
-  //                   this.DadosDeConsulta = response.content;
-  //                   this.dataSource = response.content;
-  //                 });
-  //             }
-  //           });
-  //       }
-  //     } else {
-  //       this.consultaStatusService.ExcluirDadosDaTabelaStatusSubject(false);
-  //       window.location.reload();
-  //     }
-  //   });
-  // }
-
-  // EditarDadoDaTabela(DadoSelecionadoParaEdicao: any) {
-  //   this.dialog.open(EditarConsultasComponent, {
-  //     width: '800px',
-  //     height: '550px',
-  //     data: {
-  //       DadoSelecionadoParaEdicao: DadoSelecionadoParaEdicao,
-  //     },
-  //   });
-  // }
 }

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
@@ -13,20 +21,20 @@ export class CadastroUsuarioComponent implements OnInit, OnChanges {
   FormularioUsuario!: FormGroup;
 
   @Input() RolesUsuario!: any;
-  @Output() usuarioCadastrado = new EventEmitter<Usuario>();
+ // @Output() usuarioCadastrado = new EventEmitter<Usuario>();
 
   Usuario: Usuario = {
     id: 0,
-    login: '',
-    senha: '',
-    tipoUsuario: '',
-    status: ''
+    aud: '',
+    exp: '',
+    iss: '',
+    sub: '',
   };
 
   constructor(
     private form: FormBuilder,
     private usuariosService: UsuariosService
-  ) { }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['usuarioCadastrado']) {
@@ -43,15 +51,22 @@ export class CadastroUsuarioComponent implements OnInit, OnChanges {
 
   cadatraUsuario() {
     if (this.FormularioUsuario.valid) {
-      this.Usuario.login = this.FormularioUsuario.get('login')?.value;
-      this.Usuario.senha = this.FormularioUsuario.get('password')?.value;
-      this.Usuario.tipoUsuario = this.RolesUsuario;
+      const Usuario = {
+        login: this.FormularioUsuario.get('login')?.value,
+        senha: this.FormularioUsuario.get('password')?.value,
+        tipoUsuario: this.RolesUsuario,
+        Status: 1,
+      };
 
-      this.usuariosService.cadastrarUsuario(this.Usuario).subscribe(
+      this.usuariosService.cadastrarUsuario(Usuario).subscribe(
         (dados) => {
+       //   this.usuarioCadastrado.emit(dados.body.usuarioView);
 
-          this.usuarioCadastrado.emit(dados.body.usuarioView);
-          this.FormularioUsuario.reset();
+
+          this.FormularioUsuario.disable();
+          setTimeout(() => {
+            this.FormularioUsuario.reset();
+          }, 10000);
         },
         (error) => {
           let errorMessage = 'Erro ao cadastrar usuário';

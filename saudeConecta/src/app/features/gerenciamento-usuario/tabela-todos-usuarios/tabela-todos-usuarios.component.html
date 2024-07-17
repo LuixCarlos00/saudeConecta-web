@@ -1,17 +1,25 @@
-<section class="example-container mat-elevation-z8 custom-table" tabindex="0" style="border: 1px solid black; border-radius: 10px;">
-  <table mat-table [dataSource]="dataSource">
+<section class="example-container mat-elevation-z8 custom-table" tabindex="0"
+    style="border: 1px solid black; border-radius: 10px; width: auto; height: 500px;">
+    <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="Codigo">
-      <th mat-header-cell *matHeaderCellDef class="NomeCod">Cod</th>
-      <td mat-cell *matCellDef="let element" class="colunascod">
-        {{ element.paciCodigo || element.medCodigo || element.secreCodigo || element.admCodigo }}
+      <th mat-header-cell *matHeaderCellDef class="NomeCod">Index</th>
+      <td mat-cell *matCellDef="let element ; let i = index" class="colunascod">
+        {{ i + 1 }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Login">
-      <th mat-header-cell *matHeaderCellDef class="NomeMedico">Login</th>
+      <th mat-header-cell *matHeaderCellDef class="NomeMedico">Nome </th>
       <td mat-cell *matCellDef="let element" class="colunasMedico">
-        {{ element.paciCodigo ? '*' : (element.usuario?.login || element.secreUsuario?.login || element.admUsuario?.login) }}
+        {{
+          element.paciCodigo ? (element.paciCodigo + ' - ' + element.paciNome) :
+          element.medCodigo ? (element.medCodigo + ' - ' + element.medNome) :
+          element.secreCodigo ? (element.secreCodigo + ' - ' + element.secreNome) :
+          element.admCodigo ? (element.admCodigo + ' - ' + element.admNome) :
+          ''
+        }}
       </td>
     </ng-container>
 
@@ -19,11 +27,11 @@
       <th mat-header-cell *matHeaderCellDef class="NomePaciente">Categoria</th>
       <td mat-cell *matCellDef="let element" class="colunasPaciente">
         {{
-          element.medCodigo ? 'Médico' :
-          element.paciCodigo ? 'Paciente' :
-          element.secreCodigo ? 'Secretária' :
-          element.admCodigo ? 'Administrador' :
-          ''
+        element.medCodigo ? 'Médico' :
+        element.paciCodigo ? 'Paciente' :
+        element.secreCodigo ? 'Secretária' :
+        element.admCodigo ? 'Administrador' :
+        ''
         }}
       </td>
     </ng-container>
@@ -39,11 +47,14 @@
       <th mat-header-cell *matHeaderCellDef class="Nomedata">Status</th>
       <td mat-cell *matCellDef="let element" class="colunasData">
         {{
-          element.paciCodigo ? 'Ativo' :
-          ((element.usuario?.status === 0 ? 'Bloqueado' : 'Ativo') ||
-           (element.secreUsuario?.status === 0 ? 'Bloqueado' : 'Ativo') ||
-            (element.admUsuario?.status === 0 ? 'Bloqueado' : 'Ativo'))
-           }}
+        element.paciCodigo ? 'Ativo' :
+        element.medCodigo ? (element.usuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
+        element.secreCodigo ? (element.secreUsuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
+        element.admCodigo ? (element.admUsuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
+        ''
+
+
+        }}
       </td>
     </ng-container>
 
@@ -51,11 +62,11 @@
       <th mat-header-cell *matHeaderCellDef class="NomeHorario">Autorização</th>
       <td mat-cell *matCellDef="let element" class="colunasHorario">
         {{
-          element.medCodigo ? 'Sem Autorização' :
-          element.paciCodigo ? 'Sem Autorização' :
-          element.secreCodigoAtorizacao === 0 ? 'Sem Autorização' : 'Autorizado' ||
-          element.admCodigoAtorizacao !== null ? 'Autorizado' :
-          ''
+        element.medCodigo ? '*' :
+        element.paciCodigo ? '*' :
+        element.secreCodigo ? (element.secreCodigoAtorizacao === null ? '*' : 'Autorizado') :
+        element.admCodigo ? (element.admCodigoAtorizacao === null ? '*' : 'Autorizado') :
+        ''
         }}
       </td>
     </ng-container>
@@ -63,7 +74,10 @@
     <ng-container matColumnDef="Deletar">
       <th mat-header-cell *matHeaderCellDef class="NomeHorario">Deletar</th>
       <td mat-cell *matCellDef="let element" class="colunasHorario">
-        <i style="color: red;" class="fa-solid fa-trash fa-xl"></i>
+        <button (click)="deletar(element)" style="border: hidden; background-color: white;">
+          <i style="color: red;" class="fa-solid fa-trash fa-xl"></i>
+        </button>
+
       </td>
     </ng-container>
 
@@ -77,4 +91,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</div>
 </section>

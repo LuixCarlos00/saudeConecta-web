@@ -6,19 +6,23 @@ import { Observable } from 'rxjs/internal/Observable';
 import { tokenService } from "src/app/util/Token/Token.service";
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 @Injectable({
   providedIn: 'root',
 })
 export class MedicosService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
   private medicoSubject = new BehaviorSubject<Medico[]>([]);
   MedicoValue$ = this.medicoSubject.asObservable();
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private tokenService: tokenService
-  ) {}
+    private tokenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
+  }
 
   private emitMedicosChange(medicos: Medico[]): void {
     this.medicoSubject.next(medicos);

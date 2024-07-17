@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { tokenService } from 'src/app/util/Token/Token.service';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
+import { CronologiaService } from '../cronologia/Cronologia.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,7 @@ export class ConsultaService {
   //
   //
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
   private Token = this.tokenService.retornaToken();
 
   private dadosFiltradosSubject = new BehaviorSubject<Consulta[]>([]);
@@ -34,28 +36,21 @@ export class ConsultaService {
   private GeraPDFRegistroTabelaSubject = new BehaviorSubject<Boolean>(false);
   GeraPDFRegistroTabela$ = this.GeraPDFRegistroTabelaSubject.asObservable();
 
-  private dadosPDFSubject = new BehaviorSubject<any[]>([]);
-  dadosPDF$ = this.dadosPDFSubject.asObservable();
-
-  private CadastroRealizadoComSucessoSubject = new BehaviorSubject<Consulta>(
-    {} as Consulta
-  );
-  CadastroRealizadoComSucesso$ =
-    this.CadastroRealizadoComSucessoSubject.asObservable();
-
-  private CriaCronologiaDoDiaSubject = new BehaviorSubject<Boolean>(false);
-  CriaCronologiaDoDia$ = this.CriaCronologiaDoDiaSubject.asObservable();
+  private CadastroRealizadoComSucessoSubject = new BehaviorSubject<Consulta>({} as Consulta);
+  CadastroRealizadoComSucesso$ = this.CadastroRealizadoComSucessoSubject.asObservable();
 
   private DadosParaCronologiaDoDiaSubject = new BehaviorSubject<any>(null);
-  BuscarDadoParaCronologia$ =
-    this.DadosParaCronologiaDoDiaSubject.asObservable();
+  BuscarDadoParaCronologia$ =  this.DadosParaCronologiaDoDiaSubject.asObservable();
 
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private tokenService: tokenService
-  ) {}
+    private tokenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
+  }
 
   FiltraDadosSubject(dados: Consulta[]) {
     this.dadosFiltradosSubject.next(dados);
@@ -81,13 +76,6 @@ export class ConsultaService {
     this.GeraPDFRegistroTabelaSubject.next(dados);
   }
 
-  setDadosParaPDF(dados: any[]) {
-    this.dadosPDFSubject.next(dados);
-  }
-
-  CronologiaDoDiaSubject(dados: boolean) {
-    this.CriaCronologiaDoDiaSubject.next(dados);
-  }
 
   PassarDadosParaCronologiaDoDia(dados: any) {
     this.DadosParaCronologiaDoDiaSubject.next(dados);

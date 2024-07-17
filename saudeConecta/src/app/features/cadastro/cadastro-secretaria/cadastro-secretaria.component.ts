@@ -53,9 +53,11 @@ export class CadastroSecretariaComponent implements OnInit {
     private usuarioService: UsuariosService
   ) {
     this.FormularioUsuaroValido = false;
+    this.NovoUsuariocadastrado_Secretaria = false;
 
     this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
       if (value) {
+        this.NovoUsuariocadastrado_Secretaria = false;
         this.NovoUsuariocadastrado_Secretaria = value;
         this.FormularioUsuaroValido = false;
       } else {
@@ -108,13 +110,14 @@ export class CadastroSecretariaComponent implements OnInit {
               text: 'Cadastro realizado com sucesso.',
             }).then((result) => {
               if (result.isConfirmed) {
-                this.FormularioSecretaria.reset();
+                this.FormularioSecretaria.disable();
 
                 //  this.CadastroValidoSecretaria = true;
 
                 this.FormularioUsuaroValido = false;
 
                 this.NovoUsuariocadastrado_Secretaria = null;
+                this.NovoUsuariocadastrado_Secretaria= false
               }
             });
           },
@@ -162,7 +165,7 @@ export class CadastroSecretariaComponent implements OnInit {
   }
 
   onUsuarioCadastrado(usuario: Usuario) {
-    this.NovoUsuariocadastrado_Secretaria = usuario;
+  //this.NovoUsuariocadastrado_Secretaria = usuario;
     this.FormularioUsuaroValido = false;
   }
 }

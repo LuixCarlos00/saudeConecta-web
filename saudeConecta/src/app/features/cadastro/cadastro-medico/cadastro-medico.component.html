@@ -1,6 +1,5 @@
 <app-cadastro-usuario
-  [RolesUsuario]="RolesUsuarioMedico"
-  (usuarioCadastrado)="onUsuarioCadastrado($event)">
+  [RolesUsuario]="RolesUsuarioMedico">
 </app-cadastro-usuario>
 <div style="  display: flex;" *ngIf="NovoUsuariocadastrado_Medico" >
   <div class="container" [ngClass]="{'blurred':  FormularioUsuaroValido}">

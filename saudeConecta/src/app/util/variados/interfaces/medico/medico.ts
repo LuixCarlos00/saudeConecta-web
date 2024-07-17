@@ -14,4 +14,7 @@ export interface Medico {
 
   medTelefone ?: string;
   medEmail ?: string;
+
+  medNome?: string;
+
 }

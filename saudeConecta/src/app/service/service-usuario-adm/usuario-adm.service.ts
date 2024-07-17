@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tokenService } from "src/app/util/Token/Token.service";
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,19 @@ export class UsuarioAdmService {
 
 
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
   private Token = this.tokenService.retornaToken();
 
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private tokenService: tokenService
-  ) {}
+    private tokenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
+
+  }
 
 
 
@@ -60,7 +65,7 @@ ConfirmaCodigoDeSeguraca(codigo: any) {
 esqueciMinhaSenha(Administrador: any) {
   const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
   const options = { headers, withCredentials: true };
-  return this.http.put<any>( `${this.apiUrl}/administrador/esqueciMinhaSenhaADM`,Administrador, options);
+  return this.http.put<any>( `${this.apiUrl}/Home/esqueciMinhaSenha`,Administrador, options);
 
 }
 
@@ -68,7 +73,7 @@ esqueciMinhaSenha(Administrador: any) {
 TrocaSenha(Administrador: any) {
   const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
   const options = { headers, withCredentials: true };
-  return this.http.put<any>( `${this.apiUrl}/administrador/TrocaSenhaADM`,Administrador, options);
+  return this.http.put<any>( `${this.apiUrl}/Home/TrocaSenhaADM`,Administrador, options);
 
 }
 

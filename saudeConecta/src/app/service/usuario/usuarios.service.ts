@@ -11,6 +11,7 @@ import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 import { Secretaria } from 'src/app/util/variados/interfaces/secretaria/secretaria';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 export class UsuariosService {
 
 
-  private apiUrl = 'http://localhost:8080';
+
+  private apiUrl = '';
   private Token = this.tokenService.retornaToken();
 
   private NovoUsuariocadastradoSubject = new BehaviorSubject<any | null>(null);
@@ -28,8 +30,11 @@ export class UsuariosService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private tokenService: tokenService
-  ) {}
+    private tokenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()
+  }
 
 
 cadastraEndereco(Endereco: Endereco): Observable<Endereco> {
@@ -38,12 +43,9 @@ cadastraEndereco(Endereco: Endereco): Observable<Endereco> {
   return this.http.post<Endereco>( `${this.apiUrl}/endereco/post`, Endereco, options);
 }
 
-changeNovoUsuariocadastrado(value: any) {
-  this.NovoUsuariocadastradoSubject.next(value);
-}
 
 
-cadastrarUsuario(usuario: Usuario): Observable<HttpResponse<any>> {
+cadastrarUsuario(usuario: any): Observable<HttpResponse<any>> {
   return this.http.post<Usuario>(`${this.apiUrl}/Home/cadastralogin`, usuario, { observe: 'response', })
     .pipe(
       tap((response: HttpResponse<any>) => {
@@ -64,6 +66,12 @@ BuscarTodosUsuarios(): Observable<{ paciente: Paciente[], medico: Medico[], secr
   return this.http.get<{ paciente: Paciente[], medico: Medico[], secretaria: Secretaria[], administrador: Adiministrador[] }>( `${this.apiUrl}/Home/BuscarTodosUsuarios`, options);
 }
 
+
+deletarUsuario(codigo: number) {
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
+  const options = { headers, withCredentials: true };
+  return this.http.delete<Usuario>( `${this.apiUrl}/Home/deletarPorId/${codigo}`, options);
+}
 
 
 }

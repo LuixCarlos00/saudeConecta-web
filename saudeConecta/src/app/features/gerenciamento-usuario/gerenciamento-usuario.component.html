@@ -4,23 +4,19 @@
   </div>
 </div>
 <div class="dashboard-container">
-
-  <div class="grid"  >
-
+  <div class="grid">
     <div class="divOperacoes">
       <button class="btnRecarregar" title="Adicionar Medico" (click)="AdicionarMedico()">
         <i class="fa-solid fa-user-nurse fa-xl" style="color: #035e31;"></i>
       </button>
       <span class="btn-label">Adicionar <br> Medico</span>
     </div>
-
     <div class="divOperacoes">
       <button class="btnRecarregar" title="Adicionar Paciente" (click)="AdicionarPaciente()">
         <i class="fa-solid fa-user-plus fa-xl" style="color: #f2a957;"></i>
       </button>
       <span class="btn-label">Adicionar <br> Paciente</span>
     </div>
-
     <div class="divOperacoes">
       <button class="btnRecarregar" title="Adicionar Secretaria" (click)="AdicionarSecretaria()">
         <i class="fa-solid fa-user-pen fa-xl" style="color: #8d0544;"></i>
@@ -28,10 +24,43 @@
       <span class="btn-label">Adicionar <br> Secretaria</span>
     </div>
   </div>
-  <div  >
-
-<app-tabela-todos-usuarios></app-tabela-todos-usuarios>
+  <br>
+  <div>
+    <div class="divPesquisar">
+      <input type="text" class="Pesquisar" [(ngModel)]="searchText" placeholder="Pesquisar...">
+      <button class="btnPesquisar" type="submit" (click)="PesquisaDados()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+    <hr>
+    <div class="divPesquisar" style="margin-top: 5px;">
+      <div style="cursor: pointer; margin-left: 40px;">
+        <input type="radio" name="radio" id="radio1" [(ngModel)]="radioValue" value="1" (change)="PesquisaCategoria()">
+        <label for="radio1">Apenas Pacientes</label>
+      </div>
+      <div style="cursor: pointer; margin-left: 40px;">
+        <input type="radio" name="radio" id="radio2" [(ngModel)]="radioValue" value="2" (change)="PesquisaCategoria()">
+        <label for="radio2">Apenas Medicos</label>
+      </div>
+      <div style="cursor: pointer; margin-left: 40px;">
+        <input type="radio" name="radio" id="radio3" [(ngModel)]="radioValue" value="3" (change)="PesquisaCategoria()">
+        <label for="radio3">Apenas Secretarias</label>
+      </div>
+      <div style="cursor: pointer; margin-left: 40px;">
+        <input type="radio" name="radio" id="radio4" [(ngModel)]="radioValue" value="4" (change)="PesquisaCategoria()">
+        <label for="radio4">Apenas Administradores</label>
+      </div>
+      <div style="cursor: pointer; margin-left: 40px;">
+        <input type="radio" name="radio" id="radio5" [(ngModel)]="radioValue" value="5" (change)="PesquisaCategoria()">
+        <label for="radio5">Todos</label>
+      </div>
+    </div>
   </div>
-
-
+  <hr>
+  <br>
+  <div style="display: flex; justify-content: center; ">
+    <div>
+      <app-tabela-todos-usuarios   ></app-tabela-todos-usuarios>
+    </div>
+  </div>
 </div>

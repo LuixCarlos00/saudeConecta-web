@@ -4,20 +4,23 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tokenService } from 'src/app/util/Token/Token.service';
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
+import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GraficoCategoriaMedicoService {
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '';
 
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private tokenService: tokenService
-  ) {}
+    private tokenService: tokenService,
+    private apiUrl_Global : ApiUrlService
+  ) {
+   this.apiUrl = this.apiUrl_Global.getUrl()}
 
 
   BuscatodososMedicos(): Observable<Medico[]> {

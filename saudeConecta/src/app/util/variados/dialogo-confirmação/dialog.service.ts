@@ -1,13 +1,14 @@
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CalendarDialogComponent } from '../calendarDialog/calendarDialog.component';
+import { CalendarDialogComponent } from '../Cronologia/cronologia.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
+
 
 
 
@@ -49,21 +50,17 @@ NaoFoiEncontradoConsultasComEssesParametros() {
 }
 
 
-FornecaDataParaCronologia(): void {
-  const dialogRef = this.dialog.open(CalendarDialogComponent, {
-    width: '300px', // Largura do diálogo do calendário
-  });
-
-  dialogRef.afterClosed().subscribe((formattedDate: string | undefined) => {
-    if (formattedDate) {
-
-      this.consultaService.PassarDadosParaCronologiaDoDia(formattedDate);
-    }
-  });
-}
 
 NaoHaRegistroParaAsDatasSelecionada() {
   this._snackBar.open('Não ha registro para a data Selecionada', 'Fechar', {
+    duration: 50000,
+  });
+}
+
+
+
+DeletadoComSucesso() {
+  this._snackBar.open(' Deletado Com Sucesso', 'Fechar', {
     duration: 50000,
   });
 }

@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ConsultaService } from 'src/app/service/service-consulta/consulta.service';
+import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import * as html2pdf from 'html2pdf.js';
 import { MatCalendar } from '@angular/material/datepicker';
