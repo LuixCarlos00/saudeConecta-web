@@ -129,7 +129,7 @@ export class TabelaAgendaComponent implements OnInit {
           });
       } else if (dados.toString()) {
         // pesquisa por dado filtrado
-        this.filtrandoDadosDoBancoPassadoParametros(dados);
+        this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados);
       }
     });
 
@@ -143,7 +143,7 @@ export class TabelaAgendaComponent implements OnInit {
     //cronologia
     this.consultaService.BuscarDadoParaCronologia$.subscribe((dados) => {
       if (dados) {
-        this.filtrandoDadosDoBancoPassadoParametros(dados);
+        this.filtrandoDadosDoBancoPassadoParametros_Cronologia(dados);
       }
     });
   }
@@ -208,7 +208,7 @@ export class TabelaAgendaComponent implements OnInit {
       });
   }
 
-  filtrandoDadosDoBancoPassadoParametros(dados: any) {
+  filtrandoDadosDoBancoPassadoParametros_Cronologia(dados: any) {
 
     let novaConsulta: Consulta[] = [];
     for (let i = 0; i < dados.length; i++) {
@@ -244,6 +244,48 @@ export class TabelaAgendaComponent implements OnInit {
         });
     }
   }
+
+
+  filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados: any) {
+    // Função para normalizar e remover acentos e caracteres especiais
+    const normalizeString = (str: string) => {
+      return str
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove diacríticos
+        .toUpperCase(); // Converte para maiúsculas
+    };
+    const dadosUpper = normalizeString(dados.toString());
+
+    // Filtrar os dados da consulta, comparando as strings normalizadas
+    let resultadoFiltrado = this.DadosDeConsulta.filter(
+      (item) =>
+        normalizeString(item.ConCodigoConsulta.toString()).includes(
+          dadosUpper
+        ) ||
+        normalizeString(item.ConMedico.medNome).includes(dadosUpper) ||
+        normalizeString(item.ConPaciente.paciNome).includes(dadosUpper) ||
+        normalizeString(item.ConDia_semana).includes(dadosUpper) ||
+        normalizeString(item.ConData).includes(dadosUpper) ||
+        normalizeString(item.ConHorario).includes(dadosUpper) ||
+        normalizeString(item.ConObservacoes).includes(dadosUpper)
+    );
+
+    if (resultadoFiltrado.length > 0) {
+      this.LimparTabela();
+      this.dataSource = resultadoFiltrado;
+    } else {
+      this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
+      this.LimparTabela();
+      this.consultaService
+        .BuscarTodosRegistrosDeConsulta()
+        .pipe(take(1))
+        .subscribe((response) => {
+          this.DadosDeConsulta.push(...response.content);
+          this.dataSource = response.content;
+        });
+    }
+  }
+
 
   openObservacoesDialog(observacoes: string): void {
     this.dialog.open(ObservacoesComponent, {

@@ -112,6 +112,12 @@ export class tokenService {
     this.UsuarioLogadoSubject.next(Usuario);
   }
 
+  obterAutorizacao(): string {
+    this.decodificaToken();
+    const usuario = this.UsuarioLogadoSubject.getValue();
+    return usuario ? usuario.aud : '';
+  }
+
 
 
 

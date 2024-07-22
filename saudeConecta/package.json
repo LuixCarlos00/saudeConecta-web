@@ -29,6 +29,8 @@
     "html2pdf.js": "^0.10.1",
     "jwt-decode": "^4.0.0",
     "ng2-charts": "^5.0.4",
+    "ngx-quill": "^26.0.5",
+    "quill": "^2.0.2",
     "rxjs": "~7.5.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.10.7",

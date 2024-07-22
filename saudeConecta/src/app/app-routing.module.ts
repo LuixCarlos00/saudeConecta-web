@@ -2,7 +2,7 @@ import { GerenciamentoUsuarioComponent } from './features/gerenciamento-usuario/
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/login/login.component';
- import { NotFoudComponent } from './util/Erros/Erro404/not-foud.component';
+import { NotFoudComponent } from './util/Erros/Erro404/not-foud.component';
 import { GuardaRotasLogin } from './features/login/guards/GuardaRotasLogin';
 import { CadastroUsuarioComponent } from './features/cadastro/cadastro-usuario/cadastro-usuario.component';
 import { GuardaRotasCadastraUsuario } from './features/cadastro/cadastro-usuario/guard/GuardaRotasCadastraUsuario';
@@ -12,7 +12,6 @@ import { GuardaRotasCadastroPaciente } from './features/cadastro/cadastro-pacien
 import { CadastroPacienteComponent } from './features/cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroMedicoComponent } from './features/cadastro/cadastro-medico/cadastro-medico.component';
 import { RecuperaCadastroComponent } from './features/recupera-Cadastro/recupera-cadastro/recupera-cadastro.component';
-
 
 import { PesquisaMedicosComponent } from './features/pesquisaMedicos/pesquisaMedicos.component';
 
@@ -24,46 +23,113 @@ import { GuardaRotasHome } from './features/dashboard/guards/GuardaRotasHome';
 import { CadastroSecretariaComponent } from './features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { GerenciamentoComponent } from './features/gerenciamento/gerenciamento.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { ProntuarioComponent } from './features-Medico/prontuario/prontuario.component';
+import { TabelaAgendaMedicoComponent } from './features-Medico/tabela-agenda-medico/tabela-agenda-medico.component';
+
 
 const routes: Routes = [
+  { path: '', component: LoginComponent, canActivate: [GuardaRotasLogin] },
 
+  {
+    path: 'cadastroUsuario',
+    component: CadastroUsuarioComponent,
+    canActivate: [GuardaRotasCadastraUsuario],
+  },
 
+  {
+    path: 'cadastroadmin',
+    component: CadastroAdmComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'',component:LoginComponent,canActivate: [GuardaRotasLogin] },
+  {
+    path: 'cadastro',
+    component: CadastroComponent,
+    canActivate: [GuardaRotasCadastra],
+  },
 
+  {
+    path: 'cadastroPaciente',
+    component: CadastroPacienteComponent,
+    canActivate: [GuardaRotasCadastroPaciente],
+  },
 
-  {path:'cadastroUsuario',component:CadastroUsuarioComponent, canActivate:[GuardaRotasCadastraUsuario]},
+  {
+    path: 'cadastroMedico',
+    component: CadastroMedicoComponent,
+    canActivate: [GuardaRotasCadastroPaciente],
+  },
 
-  {path:'cadastroadmin',component:CadastroAdmComponent,  },
+  {
+    path: 'cadastroSecretaria',
+    component: CadastroSecretariaComponent,
+    canActivate: [GuardaRotasCadastroPaciente],
+  },
 
-  {path:'cadastro',component:CadastroComponent,canActivate:[GuardaRotasCadastra]},
+  {
+    path: 'recuperaCadastro',
+    component: RecuperaCadastroComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'cadastroPaciente',component:CadastroPacienteComponent, canActivate:[GuardaRotasCadastroPaciente]},
+  {
+    path: 'gerenciamento',
+    component: GerenciamentoComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'cadastroMedico',component:CadastroMedicoComponent, canActivate:[GuardaRotasCadastroPaciente]},
+  {
+    path: 'Dashboard',
+    component: DashboardComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'cadastroSecretaria',component:CadastroSecretariaComponent, canActivate:[GuardaRotasCadastroPaciente]},
+  {
+    path: 'agenda',
+    component: PesquisaMedicosComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'recuperaCadastro',component:RecuperaCadastroComponent,  },
+  {
+    path: 'Gerenciamento-Usuarios',
+    component: GerenciamentoUsuarioComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'gerenciamento',component:GerenciamentoComponent, canActivate: [GuardaRotasHome] },
+  {
+    path: 'historico',
+    component: HistoricoComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'Dashboard',component:DashboardComponent, canActivate: [GuardaRotasHome] },
+  {
+    path: 'trocaSenha',
+    component: TrocaSenhaComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'agenda',component:PesquisaMedicosComponent,  },
+  {
+    path: 'Agenda-Medico',
+    component: TabelaAgendaMedicoComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'Gerenciamento-Usuarios',component:GerenciamentoUsuarioComponent,  },
+  {
+    path: 'Prontuario',
+    component: ProntuarioComponent,
+    canActivate: [GuardaRotasHome],
+  },
 
-  {path:'historico',component:HistoricoComponent,  },
-
-  {path:'trocaSenha',component:TrocaSenhaComponent},
-
-  { path: '**', pathMatch: 'full', component: NotFoudComponent },
-
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: NotFoudComponent,
+    canActivate: [GuardaRotasHome],
+  },
 ];
 
 @NgModule({
-   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

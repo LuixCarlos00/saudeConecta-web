@@ -8,19 +8,32 @@
 
           <span class="tooltip">Dashboard</span>
         </button>
-        <button class="fetures" (click)="redirecionamentoDePaginas('gerenciamento')" title="Gerenciamento">
+
+
+
+        <button class="fetures" *ngIf="this.ControleAcessoService.AcessoMedico()" (click)="redirecionamentoDePaginas('prontuario')" title="Prontuario">
+          <i style="color: #e3e9f7;" class="fa-solid fa-file-medical fa-xl" ></i>
+          <span class="tooltip">Prontuario</span>
+        </button>
+
+        <button class="fetures" *ngIf="this.ControleAcessoService.AcessoMedico()" (click)="redirecionamentoDePaginas('DadosMedicos')" title="Dados Pessoais">
+          <i  style="color: #e3e9f7;" class="fa-solid fa-user-doctor fa-xl"></i>
+          <span class="tooltip">Dados Pessoais</span>
+        </button>
+
+        <button class="fetures" *ngIf="this.ControleAcessoService.AcessoAdministrador()" (click)="redirecionamentoDePaginas('gerenciamento')" title="Gerenciamento">
 
           <i  style="color: #e3e9f7;" class="fa-solid fa-notes-medical fa-xl"></i>
           <span class="tooltip">Gerenciamento</span>
         </button>
-        <button class="fetures" (click)="redirecionamentoDePaginas('cadastroPaciente')" title="Cadastra Paciente">
+        <button class="fetures"   *ngIf="this.ControleAcessoService.AcessoAdministrador()" (click)="redirecionamentoDePaginas('cadastroPaciente')" title="Cadastra Paciente">
 
           <i  style="color: #e3e9f7;" class="fa-solid fa-user-plus fa-xl "></i>
           <span class="tooltip"> Cadastra Paciente</span>
         </button>
 
 
-        <button class="fetures" (click)="redirecionamentoDePaginas('Usuarios')" title="Usuarios">
+        <button class="fetures"  *ngIf="this.ControleAcessoService.AcessoAdministrador()"  (click)="redirecionamentoDePaginas('Usuarios')" title="Usuarios">
 
           <i   style="color: #e3e9f7;" class="fa-solid fa-users-gear fa-xl "></i>
           <span class="tooltip">Usuarios</span>

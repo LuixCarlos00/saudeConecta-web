@@ -1,0 +1,65 @@
+label {
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+
+
+.inputFilter {
+  border: hidden;
+  margin-top: -auto;
+  width: 90%;
+  border-radius: 5px;
+  border: 1px solid black;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.divPediatria {
+  display: flex;
+  margin: 10px;
+  border-radius: 5px;
+  border: hidden;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.proximo {
+  background-color: chartreuse;
+  color: black;
+  width: 90%;
+  margin: 10px;
+  border: hidden;
+  border-radius: 5px;
+}
+
+.anterior {
+  background-color: rgb(221, 229, 240);
+  color: black;
+  width: 10%;
+  margin: 10px;
+  border: hidden;
+  border-radius: 5px;
+}
+
+
+
+
+.example-full-width {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 80%;
+}

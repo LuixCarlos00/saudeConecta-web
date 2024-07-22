@@ -78,6 +78,8 @@ export class LoginComponent implements OnInit {
               this.tokenService.UsuarioLogadoValue$.subscribe(
                 (UsuarioLogado) => {
                   this.Usuario = UsuarioLogado;
+                  console.log(this.Usuario, 'this.Usuario');
+
                 }
               );
 
@@ -101,7 +103,7 @@ export class LoginComponent implements OnInit {
                   title: 'Oops...',
                   text: 'Parece que você não tem permissão para acessar esta página',
                 });
-                window.location.reload();
+               // window.location.reload();
               }
             }
           },

@@ -1,3 +1,4 @@
+import { GerenciamentoProntuarioComponent } from './../features-Medico/gerenciamentoProntuario/gerenciamentoProntuario.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -6,7 +7,7 @@ import { RouterLink } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -19,6 +20,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
+
 
 import { CadastroPacienteComponent } from '../features/cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroComponent } from '../features/cadastro/cadastro/cadastro.component';
@@ -50,6 +58,16 @@ import { GraficoSaldoComponent } from '../features/dashboard/grafico-saldo/grafi
 import { GraficoCategoriaMedicosComponent } from '../features/dashboard/grafico-categoria-medicos/grafico-categoria-medicos.component';
 import { GerenciamentoUsuarioComponent } from '../features/gerenciamento-usuario/gerenciamento-usuario.component';
 import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/tabela-todos-usuarios.component';
+import { TabelaAgendaMedicoComponent } from '../features-Medico/tabela-agenda-medico/tabela-agenda-medico.component';
+import { ProntuarioComponent } from '../features-Medico/prontuario/prontuario.component';
+import { FinalizarComponent } from '../features-Medico/gerenciamentoProntuario/finalizar/finalizar.component';
+import { QueixaPrincipalComponent } from '../features-Medico/gerenciamentoProntuario/queixa-principal/queixa-principal.component';
+import { AtestadoComponent } from '../features-Medico/gerenciamentoProntuario/atestado/atestado.component';
+import { DiagnosticoComponent } from '../features-Medico/gerenciamentoProntuario/diagnostico/diagnostico.component';
+import { PediatriaExamesFisicosComponent } from '../features-Medico/gerenciamentoProntuario/pediatria-exames-fisicos/pediatria-exames-fisicos.component';
+import { PrescricaoComponent } from '../features-Medico/gerenciamentoProntuario/prescricao/prescricao.component';
+import { SolicitacaoDeExameComponent } from '../features-Medico/gerenciamentoProntuario/solicitacao-de-exame/solicitacao-de-exame.component';
+import { AnamneseCondutaComponent } from '../features-Medico/gerenciamentoProntuario/anamnese-conduta/anamnese-conduta.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +101,17 @@ import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/
     GraficoCategoriaMedicosComponent,
     GerenciamentoUsuarioComponent,
     TabelaTodosUsuariosComponent,
+    TabelaAgendaMedicoComponent,
+    ProntuarioComponent,
+    GerenciamentoProntuarioComponent,
+    FinalizarComponent,
+    QueixaPrincipalComponent,
+    AtestadoComponent,
+    AnamneseCondutaComponent,
+    DiagnosticoComponent,
+    PediatriaExamesFisicosComponent,
+    PrescricaoComponent,
+    SolicitacaoDeExameComponent,
   ],
   exports: [],
 
@@ -108,6 +137,12 @@ import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTabsModule,
+    MatAutocompleteModule,
+    MatRadioModule,
+
   ],
 })
 export class PacienteModule {}

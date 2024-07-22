@@ -1,4 +1,3 @@
-// app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,15 +16,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BarraLateraComponent } from './util/variados/barra-Latera/barra-Latera.component';
 import { NgChartsModule } from 'ng2-charts';
-
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    BarraLateraComponent,
-
-  ],
+  declarations: [AppComponent, LoginComponent, BarraLateraComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,11 +34,10 @@ import { NgChartsModule } from 'ng2-charts';
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgChartsModule
+    NgChartsModule,
 
   ],
-
-  providers: [ provideAnimationsAsync() ],
-  bootstrap: [AppComponent]
+  providers: [provideAnimationsAsync()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

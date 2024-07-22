@@ -1,3 +1,4 @@
+import { ControleAcessoService } from './../../../service/_controleAcesso/controle-acesso.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModelService } from 'src/app/service/Model_service/Model.service';
@@ -23,7 +24,8 @@ export class BarraLateraComponent implements OnInit {
   constructor(
     public ModelService: ModelService,
     private router: Router,
-    private tokenService: tokenService
+    private tokenService: tokenService,
+    public ControleAcessoService: ControleAcessoService
   ) {}
 
   ngOnInit() {
@@ -50,6 +52,10 @@ export class BarraLateraComponent implements OnInit {
     } else if (rota === 'Usuarios') {
 
       this.router.navigate(['Gerenciamento-Usuarios']);
+
+    } else if (rota === 'prontuario') {
+
+      this.router.navigate(['Prontuario']);
 
     }
 
