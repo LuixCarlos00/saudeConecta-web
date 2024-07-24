@@ -23,6 +23,15 @@
       </button>
       <span class="btn-label">Adicionar <br> Secretaria</span>
     </div>
+    <div class="divOperacoes">
+      <button class="btnRecarregar" title="Adicionar Administrador" (click)="AdicionarAdministrador()">
+        <i class="fa-solid fa-user-shield fa-xl" style="color: #10058d;"></i>
+      </button>
+      <span class="btn-label">Adicionar <br> Administrador</span>
+    </div>
+
+
+
   </div>
   <br>
   <div>
@@ -60,7 +69,7 @@
   <br>
   <div style="display: flex; justify-content: center; ">
     <div>
-      <app-tabela-todos-usuarios   ></app-tabela-todos-usuarios>
+      <app-tabela-todos-usuarios  (LimparCampos)="limparCampos()"  ></app-tabela-todos-usuarios>
     </div>
   </div>
 </div>

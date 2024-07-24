@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ModelService } from 'src/app/service/Model_service/Model.service';
-import { tokenService } from 'src/app/util/Token/Token.service';
+ import { tokenService } from 'src/app/util/Token/Token.service';
 import Swal from 'sweetalert2';
 import { Observable, map } from 'rxjs';
 import { el } from 'date-fns/locale';
+import { LoginService } from 'src/app/service/service-login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private form: FormBuilder,
-    private modelService: ModelService,
+    private LoginService: LoginService,
     private tokenService: tokenService
   ) {}
 
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 
     this.ExisteUsuario(username).subscribe((existe) => {
       if (existe) {
-        this.modelService.fazerLogin(Usuario).subscribe(
+        this.LoginService.fazerLogin(Usuario).subscribe(
           (response) => {
             console.log(response,'resposta');
 
@@ -125,7 +125,7 @@ export class LoginComponent implements OnInit {
     });
   }
   ExisteUsuario(username: any): Observable<boolean> {
-    return this.modelService.buscarUsuarioExistente(username).pipe(
+    return this.LoginService.buscarUsuarioExistente(username).pipe(
       map((dados) => !!dados) // Converts the result to a boolean
     );
   }

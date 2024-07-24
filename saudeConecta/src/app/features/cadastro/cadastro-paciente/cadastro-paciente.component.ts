@@ -5,11 +5,11 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
-import { ModelService } from '../../../service/Model_service/Model.service';
-import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
+ import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { ufOptions } from 'src/app/util/variados/options/options';
 import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
+import { LoginService } from 'src/app/service/service-login/login.service';
 
 @Component({
   selector: 'app-cadastro-paciente',
@@ -41,6 +41,7 @@ export class CadastroPacienteComponent implements OnInit {
     PaciEmail: '',
     PaciTelefone: '',
     endereco: 0,
+    PaciStatus: 0
   };
   Endereco: Endereco = {
     EndCodigo: 0,
@@ -59,12 +60,12 @@ export class CadastroPacienteComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private usuariosService: UsuariosService,
-    private ModelService: ModelService,
+    private LoginService: LoginService,
     private route: Router,
     private PacienteService: PacientesService,
-    private modelService: ModelService
+
   ) {
-    this.ModelService.iniciarObservacaoDadosUsuario();
+    this.LoginService.iniciarObservacaoDadosUsuario();
   }
 
   ngOnInit(): void {
@@ -111,6 +112,7 @@ export class CadastroPacienteComponent implements OnInit {
         (endereco: Endereco) => {
           const EnderecoID = endereco.EndCodigo as number;
           this.Paciente.endereco = EnderecoID;
+          this.Paciente.PaciStatus = 1;
 
           this.PacienteService.cadastrarPaciente(this.Paciente).subscribe(
             () => {

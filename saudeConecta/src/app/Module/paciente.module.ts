@@ -1,4 +1,4 @@
-import { GerenciamentoProntuarioComponent } from './../features-Medico/gerenciamentoProntuario/gerenciamentoProntuario.component';
+import { GerenciamentoProntuarioComponent } from '../features-Medico/gerenciamentoProntuario/gerenciamentoProntuario.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';

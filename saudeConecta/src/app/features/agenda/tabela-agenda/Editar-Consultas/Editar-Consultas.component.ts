@@ -9,8 +9,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ModelService } from 'src/app/service/Model_service/Model.service';
-import { MedicosService } from 'src/app/service/medicos/medicos.service';
+ import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
@@ -43,9 +42,9 @@ export class EditarConsultasComponent implements OnInit {
 
   MedicoEscolhido!: any;
   PacienteEscolhido!: any;
-
+  horariosDisponiveis: string[] = [];
   FormGroupConsulta!: FormGroup;
-
+  DataSelecionada:any
   DadosPaciente!: any;
   DadosMedico!: any;
 
@@ -126,7 +125,7 @@ export class EditarConsultasComponent implements OnInit {
     });
 
     this.FormGroupConsulta.get('date')?.valueChanges.subscribe((value) => {
-      this.onDateChange(value);
+      this.FormataçãoDeDatasParaDiasDaSemanas(value);
     });
 
     this.DadosAntigosDeConsulta = {
@@ -158,20 +157,15 @@ export class EditarConsultasComponent implements OnInit {
       confirmButtonText: 'Sim, Editar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.onDateChange(this.FormGroupConsulta.get('Data')?.value);
+        this.FormataçãoDeDatasParaDiasDaSemanas(this.FormGroupConsulta.get('Data')?.value);
 
         this.DadosDeEdicaoConsulta.ConPaciente = this.PacienteEscolhido.paciCodigo;
         this.DadosDeEdicaoConsulta.ConMedico = this.MedicoEscolhido.medCodigo;
         this.DadosDeEdicaoConsulta.ConAdm = this.UsuarioLogado.id;
         this.DadosDeEdicaoConsulta.ConDia_semana = this.DiaDaSemana;
-
-        console.log(this.DadosDeEdicaoConsulta,'Dados de edição');
-
-
         if (this.DadosDeEdicaoConsulta.ConHorario ===  this.DadosAntigosDeConsulta.ConHorario &&
           this.DadosDeEdicaoConsulta.ConData === this.DadosAntigosDeConsulta.ConData &&
           this.DadosDeEdicaoConsulta.ConMedico === this.DadosAntigosDeConsulta.ConMedico.medCodigo ) {
-          console.log('Dados iguais');
 
           this.ConsultaService.EditarConsultas(
             this.DadosDeEdicaoConsulta.ConCodigoConsulta,
@@ -452,18 +446,60 @@ export class EditarConsultasComponent implements OnInit {
     this.DialogService.exibirMensagemErro();
   }
 
-  onDateChange(selectedDate: string) {
+  FormataçãoDeDatasParaDiasDaSemanas(selectedDate: string):void {
     if (!selectedDate) return; // Adiciona verificação para lidar com valores vazios
-
     const date = new Date(selectedDate + 'T00:00:00'); // Adiciona a hora para evitar problemas com fuso horário
     const utcDate = new Date(date.toUTCString()); // Normaliza a data para UTC
     const options = { weekday: 'long' as const };
     const dayOfWeek = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
     this.DiaDaSemana = dayOfWeek;
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log(this.DiaDaSemana, 'dia da semana');
+
   }
 
+
+  onDateChange(event: Event) {
+    const selectedDate: string = (event.target as HTMLInputElement).value;
+    const date = new Date(selectedDate + 'T00:00:00');
+    const utcDate = new Date(date.toUTCString());
+    const options = { weekday: 'long' as const };
+    const dayOfWeek = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
+    this.DataSelecionada = selectedDate;
+    this.DiaDaSemana = dayOfWeek;
+    this.verificarCondicoesParaConsulta(); // Chama a função ao mudar a data
+  }
+
+
+  verificarCondicoesParaConsulta() {
+    this.horariosDisponiveis = []; // Limpa os horários disponíveis ao iniciar a consulta
+    if (this.MedicoEscolhido && this.DataSelecionada) {
+
+      this.ConsultaService.VerificarHorariosDisponiveisReferentesAoMedicoEData(this.MedicoEscolhido.medCodigo, this.DataSelecionada).subscribe(
+        (data) => {
+
+          this.horariosDisponiveis = data;
+          this.atualizarHorarios(); // Atualiza os horários disponíveis ao receber os dados
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+
+  atualizarHorarios() {
+    if (this.horariosDisponiveis) {
+      const horariosDisponiveisFormatados = this.horariosDisponiveis.map(horario => horario.substring(0, 5));
+      this.Hora = HoradaConsulta.filter(horario => {
+        const horarioFormatado = horario.value.substring(0, 5);
+        return !horariosDisponiveisFormatados.includes(horarioFormatado);
+      });
+    }else{
+      this.Hora = HoradaConsulta;
+    }
+
+  }
 
 
 }//fim da classe

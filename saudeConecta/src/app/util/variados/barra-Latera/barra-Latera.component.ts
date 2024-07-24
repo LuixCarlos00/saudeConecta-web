@@ -1,9 +1,9 @@
 import { ControleAcessoService } from './../../../service/_controleAcesso/controle-acesso.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModelService } from 'src/app/service/Model_service/Model.service';
-import { tokenService } from 'src/app/util/Token/Token.service';
+ import { tokenService } from 'src/app/util/Token/Token.service';
 import { Usuario } from '../interfaces/usuario/usuario';
+import { LoginService } from 'src/app/service/service-login/login.service';
 
 @Component({
   selector: 'app-barra-Latera',
@@ -22,14 +22,14 @@ export class BarraLateraComponent implements OnInit {
   };
 
   constructor(
-    public ModelService: ModelService,
+    public LoginService: LoginService,
     private router: Router,
     private tokenService: tokenService,
     public ControleAcessoService: ControleAcessoService
   ) {}
 
   ngOnInit() {
-    this.ModelService.iniciarObservacaoDadosUsuario();
+    this.LoginService.iniciarObservacaoDadosUsuario();
     this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
       if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
       console.log(UsuarioLogado, 'paciente');
@@ -71,10 +71,10 @@ export class BarraLateraComponent implements OnInit {
   }
 
   estaLogado(): Boolean {
-    return this.ModelService.verificarLogin();
+    return this.LoginService.verificarLogin();
   }
 
   Deslogar() {
-    this.ModelService.logout();
+    this.LoginService.logout();
   }
 }

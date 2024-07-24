@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CadastroMedicoComponent } from '../cadastro/cadastro-medico/cadastro-medico.component';
 import { CadastroPacienteComponent } from '../cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroSecretariaComponent } from '../cadastro/cadastro-secretaria/cadastro-secretaria.component';
+import { CadastroAdmComponent } from '../cadastro/cadastro-adm/cadastro-adm.component';
 
 @Component({
   selector: 'app-gerenciamento-usuario',
@@ -13,13 +14,12 @@ import { CadastroSecretariaComponent } from '../cadastro/cadastro-secretaria/cad
   styleUrls: ['./gerenciamento-usuario.component.css'],
 })
 export class GerenciamentoUsuarioComponent implements OnInit {
-
   radioValue: number = 0;
   searchText: string = '';
 
   constructor(
     private gerenciamentoUsuariosService: GerenciamentoUsuariosService,
-    private dialog : MatDialog
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {}
@@ -29,37 +29,47 @@ export class GerenciamentoUsuarioComponent implements OnInit {
     this.gerenciamentoUsuariosService.changeSearchTextSubject(this.searchText);
   }
 
-
-
   PesquisaCategoria() {
     this.searchText = '';
     this.gerenciamentoUsuariosService.changeRadioValueSubject(this.radioValue);
   }
 
+  limparCampos() {
+    if (this.radioValue) {
+      const valor = this.radioValue;
+      this.gerenciamentoUsuariosService.changeRadioValueSubject(valor);
+    } else {
+      this.searchText = '';
+      this.radioValue = 0;
+    }
+  }
 
   AdicionarMedico() {
     this.dialog.open(CadastroMedicoComponent, {
       width: '800px',
       height: '700px',
-
     });
-    }
+  }
 
-
-    AdicionarPaciente() {
+  AdicionarPaciente() {
     this.dialog.open(CadastroPacienteComponent, {
       width: '800px',
       height: '700px',
-
     });
-    }
+  }
 
-    AdicionarSecretaria() {
-      this.dialog.open(CadastroSecretariaComponent, {
+  AdicionarSecretaria() {
+    this.dialog.open(CadastroSecretariaComponent, {
       width: '800px',
       height: '600px',
-
     });
-      }
+  }
 
+
+  AdicionarAdministrador() {
+    this.dialog.open(CadastroAdmComponent, {
+      width: '800px',
+      height: '600px',
+    });
+  }
 }

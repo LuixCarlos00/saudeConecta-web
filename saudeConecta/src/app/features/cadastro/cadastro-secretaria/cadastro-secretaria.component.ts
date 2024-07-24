@@ -3,12 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
-import { ModelService } from '../../../service/Model_service/Model.service';
-import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { ufOptions } from 'src/app/util/variados/options/options';
 import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
-import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 import { Secretaria } from 'src/app/util/variados/interfaces/secretaria/secretaria';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 
@@ -30,7 +26,6 @@ export class CadastroSecretariaComponent implements OnInit {
   NovoUsuariocadastrado_Secretaria: any;
   ufOptions = ufOptions;
   FormularioUsuaroValido = false;
-  //CadastroValidoSecretaria = false
 
   Secretaria: Secretaria = {
     SecreCodigo: 0,
@@ -48,8 +43,6 @@ export class CadastroSecretariaComponent implements OnInit {
     private router: Router,
     private form: FormBuilder,
     private SecretariamService: SecretariaService,
-    private tokenService: tokenService,
-    private ModelService: ModelService,
     private usuarioService: UsuariosService
   ) {
     this.FormularioUsuaroValido = false;
@@ -71,7 +64,7 @@ export class CadastroSecretariaComponent implements OnInit {
 
     this.FormularioSecretaria = this.form.group({
       nome: ['', Validators.required],
-      codAutorizacao: ['', Validators.required],
+
       Email: ['', Validators.required],
     });
   }
@@ -94,43 +87,21 @@ export class CadastroSecretariaComponent implements OnInit {
     this.Secretaria.SecreStatus = 1;
     this.Secretaria.SecreUsuario = this.NovoUsuariocadastrado_Secretaria.id;
 
-    console.log(this.Secretaria, 'Secretaria');
-
-    const codigoAutorizacao =
-      this.FormularioSecretaria.get('codAutorizacao')?.value;
-    this.SecretariamService.VerificarCodicodeAutorizacaoParaCadastraSecretaria(
-      codigoAutorizacao
-    ).subscribe(
+    this.SecretariamService.cadastrarSecretaria(this.Secretaria).subscribe(
       (dados) => {
-        this.SecretariamService.cadastrarSecretaria(this.Secretaria).subscribe(
-          (dados) => {
-            Swal.fire({
-              icon: 'success',
-              title: 'OK',
-              text: 'Cadastro realizado com sucesso.',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.FormularioSecretaria.disable();
-
-                //  this.CadastroValidoSecretaria = true;
-
-                this.FormularioUsuaroValido = false;
-
-                this.NovoUsuariocadastrado_Secretaria = null;
-                this.NovoUsuariocadastrado_Secretaria= false
-              }
-            });
-          },
-          (error) => {
-            this.handleHttpError(error); // Usando handleHttpError para lidar com erros
-          }
-        );
-      },
-      (error) => {
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Código de autorização inválido',
+          icon: 'success',
+          title: 'OK',
+          text: 'Cadastro realizado com sucesso.',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.FormularioSecretaria.disable();
+
+            this.FormularioUsuaroValido = false;
+
+            this.NovoUsuariocadastrado_Secretaria = null;
+            this.NovoUsuariocadastrado_Secretaria = false;
+          }
         });
       }
     );
@@ -165,7 +136,7 @@ export class CadastroSecretariaComponent implements OnInit {
   }
 
   onUsuarioCadastrado(usuario: Usuario) {
-  //this.NovoUsuariocadastrado_Secretaria = usuario;
+    //this.NovoUsuariocadastrado_Secretaria = usuario;
     this.FormularioUsuaroValido = false;
   }
 }

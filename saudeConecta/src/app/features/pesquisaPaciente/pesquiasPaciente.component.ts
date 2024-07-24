@@ -12,8 +12,8 @@ import Swal from 'sweetalert2';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciamento.service';
-import { ModelService } from 'src/app/service/Model_service/Model.service';
-import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+import { LoginService } from 'src/app/service/service-login/login.service';
 
 @Component({
   selector: 'app-pesquias-Paciente',
@@ -27,7 +27,7 @@ export class PesquiasPacienteComponent implements OnInit {
   PacienteEscolhido!: any;
   Consulta!: Consulta;
   FormGroupConsulta!: FormGroup;
-  observacao: string = 'Tem alguma observação? Quais:';
+
   Hora = HoradaConsulta;
   pagamento: Boolean = false;
   dadosPaciente: any;
@@ -52,18 +52,16 @@ export class PesquiasPacienteComponent implements OnInit {
     private DialogService: DialogService,
     private PacientesService: PacientesService,
     private gerenciamentoService: GerenciamentoService,
-    private ModelService: ModelService
+    public LoginService: LoginService,
   ) {
-    this.ModelService.iniciarObservacaoDadosUsuario();
+    this.LoginService.iniciarObservacaoDadosUsuario();
     this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
       if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
-      console.log(UsuarioLogado, 'paciente');
     });
 
     this.gerenciamentoService.medicoEscolhido$.subscribe((medico) => {
       if (medico) {
         this.Medico = medico;
-
         this.verificarCondicoesParaConsulta();
       }
     });
@@ -174,7 +172,6 @@ export class PesquiasPacienteComponent implements OnInit {
     });
 
 
-    console.log(this.Medico, this.PacienteEscolhido);
 
 
     let time = this.FormGroupConsulta.get('time')?.value;

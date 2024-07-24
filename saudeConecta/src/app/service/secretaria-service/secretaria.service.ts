@@ -31,9 +31,7 @@ export class SecretariaService {
 
 
 
-VerificarCodicodeAutorizacaoParaCadastraSecretaria(codigoAutorizacao: any): Observable<Secretaria> {
-  return this.http.get<Secretaria>( `${this.apiUrl}/administrador/buscarPorCoigoAutorizacao/${codigoAutorizacao}` );
-}
+
 cadastrarSecretaria(Secretaria: Secretaria) {
   const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
   const options = { headers, withCredentials: true };

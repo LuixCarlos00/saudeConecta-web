@@ -3,7 +3,7 @@ import { Usuario } from './../../../util/variados/interfaces/usuario/usuario';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ModelService } from 'src/app/service/Model_service/Model.service';
+import { LoginService } from 'src/app/service/service-login/login.service';
 import { UsuarioAdmService } from 'src/app/service/service-usuario-adm/usuario-adm.service';
 import { UsuariosService } from 'src/app/service/usuario/usuarios.service';
 import { tokenService } from 'src/app/util/Token/Token.service';
@@ -17,8 +17,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cadastro-adm.component.css'],
 })
 export class CadastroAdmComponent implements OnInit {
-
   FormularioADM!: FormGroup;
+  RolesUsuarioAdministrador: any = 1;
+  NovoUsuariocadastrado_Administrador: any;
+  FormularioUsuaroValido = false;
   Administracao: Adiministrador = {
     AdmCodigo: 0,
     AdmNome: '',
@@ -34,7 +36,7 @@ export class CadastroAdmComponent implements OnInit {
     aud: '',
     exp: '',
     iss: '',
-    sub: ''
+    sub: '',
   };
 
   constructor(
@@ -42,21 +44,33 @@ export class CadastroAdmComponent implements OnInit {
     private form: FormBuilder,
     private usuarioAdmService: UsuarioAdmService,
     private tokenService: tokenService,
-    private ModelService: ModelService
+    private LoginService: LoginService,
+    private usuarioService: UsuariosService
   ) {
-    this.ModelService.iniciarObservacaoDadosUsuario();
+    this.FormularioUsuaroValido = false;
+    this.NovoUsuariocadastrado_Administrador = false;
+
+    this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
+      if (value) {
+        this.NovoUsuariocadastrado_Administrador = false;
+        this.NovoUsuariocadastrado_Administrador = value;
+        this.FormularioUsuaroValido = false;
+      } else {
+        this.FormularioUsuaroValido = true;
+      }
+    });
   }
 
   ngOnInit() {
-    this.ModelService.iniciarObservacaoDadosUsuario();
+    this.LoginService.iniciarObservacaoDadosUsuario();
     this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
       if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
-      console.log(UsuarioLogado, 'paciente');
     });
+
+    this.RolesUsuarioAdministrador = 1;
 
     this.FormularioADM = this.form.group({
       nome: ['', Validators.required],
-      codAutorizacao: ['', Validators.required],
       Email: ['', Validators.required],
     });
   }
@@ -72,45 +86,30 @@ export class CadastroAdmComponent implements OnInit {
     this.Administracao.AdmEmail = email;
     this.Administracao.AdmDataCriacao = dataAtual;
     this.Administracao.AdmStatus = 1;
-    this.Administracao.AdmUsuario = this.UsuarioLogado.id;
+    this.Administracao.AdmUsuario = this.NovoUsuariocadastrado_Administrador.id;
 
-    console.log(this.Administracao);
-
-    const codigoAutorizacao = this.FormularioADM.get('codAutorizacao')?.value;
-    this.usuarioAdmService.VerificarCodicodeAutorizacaoParaCadastraAdm(codigoAutorizacao).subscribe(
+    this.usuarioAdmService.cadastrarAdministrador(this.Administracao).subscribe(
       (dados) => {
-        this.usuarioAdmService
-          .cadastrarAdministrador(this.Administracao)
-          .subscribe(
-            (dados) => {
-              Swal.fire({
-                icon: 'success',
-                title: 'OK',
-                text: 'Cadastro realizado com sucesso.',
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  this.router.navigate(['home']);
+        Swal.fire({
+          icon: 'success',
+          title: 'OK',
+          text: 'Cadastro realizado com sucesso.',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.FormularioADM.disable();
 
-                }
-              });
-            },
-            (error) => {
-            this.handleHttpError(error); // Usando handleHttpError para lidar com erros
-            }
-          );
+            this.FormularioUsuaroValido = false;
+
+            this.NovoUsuariocadastrado_Administrador = null;
+            this.NovoUsuariocadastrado_Administrador = false;
+          }
+        });
       },
       (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Codigo de autorização inválido',
-        });
+        this.handleHttpError(error); // Usando handleHttpError para lidar com erros
       }
     );
   }
-
-
-
 
   private handleHttpError(error: any) {
     console.log(error); // Exibir o erro completo no console para depuração
@@ -118,9 +117,13 @@ export class CadastroAdmComponent implements OnInit {
     let errorMessage = 'Erro desconhecido ao realizar o cadastro.';
 
     if (error.error) {
-      if (error.error.includes('Duplicate entry') && error.error.includes('administrador.AdmEmail_UNIQUE')) {
-        errorMessage = 'Já existe um(a) administrador(a) registrado com esse email.';
-      }   else {
+      if (
+        error.error.includes('Duplicate entry') &&
+        error.error.includes('administrador.AdmEmail_UNIQUE')
+      ) {
+        errorMessage =
+          'Já existe um(a) administrador(a) registrado com esse email.';
+      } else {
         errorMessage = error.error;
       }
     }
@@ -136,5 +139,5 @@ export class CadastroAdmComponent implements OnInit {
 
   voltarParaHome() {
     this.router.navigate(['cadastro']);
-    }
+  }
 }

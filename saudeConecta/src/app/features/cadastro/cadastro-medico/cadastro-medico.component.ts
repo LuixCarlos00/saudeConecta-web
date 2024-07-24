@@ -11,7 +11,7 @@ import { Endereco } from 'src/app/util/variados/interfaces/endereco/endereco';
 import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 
 import { EspecialidadeMedicas, ufOptions } from 'src/app/util/variados/options/options';
-import { ModelService } from 'src/app/service/Model_service/Model.service';
+ import { LoginService } from 'src/app/service/service-login/login.service';
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -63,7 +63,7 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
     private usuarioService: UsuariosService,
     private MedicosService: MedicosService,
     private route: Router,
-    public modelService: ModelService,
+    public LoginService: LoginService,
   ) {
     this. FormularioUsuaroValido = false;
     this.NovoUsuariocadastrado_Medico = false;

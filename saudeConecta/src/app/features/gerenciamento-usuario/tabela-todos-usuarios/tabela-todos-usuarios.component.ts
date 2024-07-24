@@ -1,3 +1,5 @@
+import { take } from 'rxjs';
+import { elements } from 'chart.js';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UsuariosService } from './../../../service/usuario/usuarios.service';
 import { GerenciamentoUsuariosService } from './../../../service/gerenciamento-usuarios/GerenciamentoUsuarios.service';
@@ -10,6 +12,7 @@ import { el } from 'date-fns/locale';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import Swal from 'sweetalert2';
 import { OutletContext } from '@angular/router';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-tabela-todos-usuarios',
@@ -17,6 +20,7 @@ import { OutletContext } from '@angular/router';
   styleUrls: ['./tabela-todos-usuarios.component.css'],
 })
 export class TabelaTodosUsuariosComponent implements OnInit {
+  @Output() LimparCampos = new EventEmitter();
   dataSource: Usuario[] = [];
 
   radioValue: number = 0;
@@ -36,17 +40,28 @@ export class TabelaTodosUsuariosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.GerenciamentoUsuariosService.RadioValue$.subscribe((radioValue) => {
-      this.radioValue = radioValue;
-      this.filterCategoriras();
+      if (radioValue && radioValue!== 1) {
+       this.radioValue = radioValue;
+        this.filterCategoriras( this.radioValue);
+      }
     });
 
     this.GerenciamentoUsuariosService.searchText$.subscribe((searchText) => {
-      this.searchText = searchText;
-      this.dataSource = [];
-      this.PesquisaDados();
+      if (searchText) {
+        this.searchText = searchText;
+        this.dataSource = [];
+        this.PesquisaDados();
+      }
     });
 
+    this.BuscarTodosUsuarios();
+  }
+
+  BuscarTodosUsuarios() {
+    this.dataSource = [];
+    this.TodosUsuarios = [];
     this.UsuariosService.BuscarTodosUsuarios().subscribe(
       (data: {
         paciente: Paciente[];
@@ -64,7 +79,6 @@ export class TabelaTodosUsuariosComponent implements OnInit {
           ...this.Secretaria,
           ...this.Administrador,
         ];
-        console.log(this.dataSource);
 
         this.TodosUsuarios = this.dataSource;
       }
@@ -113,31 +127,32 @@ export class TabelaTodosUsuariosComponent implements OnInit {
     this.dataSource = filteredData;
   }
 
-  filterCategoriras() {
+  filterCategoriras(radioValue: number) {
+
     let filteredData: Usuario[] = [];
 
-    if (this.radioValue) {
-      if (this.radioValue == 1) {
+    if (radioValue!== null) {
+      if (radioValue == 1) {
         for (let i = 0; i < this.Paciente.length; i++) {
           filteredData.push(this.Paciente[i]);
           this.dataSource = [];
         }
-      } else if (this.radioValue == 2) {
+      } else if (radioValue == 2) {
         for (let i = 0; i < this.Medico.length; i++) {
           filteredData.push(this.Medico[i]);
           this.dataSource = [];
         }
-      } else if (this.radioValue == 3) {
+      } else if (radioValue == 3) {
         for (let i = 0; i < this.Secretaria.length; i++) {
           filteredData.push(this.Secretaria[i]);
           this.dataSource = [];
         }
-      } else if (this.radioValue == 4) {
+      } else if (radioValue == 4) {
         for (let i = 0; i < this.Administrador.length; i++) {
           filteredData.push(this.Administrador[i]);
           this.dataSource = [];
         }
-      } else if (this.radioValue == 5) {
+      } else if (radioValue == 5) {
         for (let i = 0; i < this.dataSource.length; i++) {
           filteredData = this.TodosUsuarios;
           this.dataSource = [];
@@ -178,7 +193,8 @@ export class TabelaTodosUsuariosComponent implements OnInit {
             showCloseButton: true,
           }).then((result) => {
             if (result.isConfirmed) {
-              window.location.reload();
+              this.BuscarTodosUsuarios();
+              this.LimparCampos.emit();
               this.DialogService.DeletadoComSucesso();
             }
           });
@@ -223,14 +239,104 @@ export class TabelaTodosUsuariosComponent implements OnInit {
     console.error('Erro ao cadastrar:', error);
   }
 
+  VerificarBloqueio(element: any) {
+    Swal.fire({
+      title: 'Oque deseja fazer?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Bloquear',
+      cancelButtonText: 'Desbloquear',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.gerenciarStatusDeUsuario(element, 0);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.gerenciarStatusDeUsuario(element, 1);
+      }
+    });
+  }
+
+  gerenciarStatusDeUsuario(element: any, status: number) {
+    if (element !== undefined || element !== null) {
+      if (element.medCodigo || element.secreCodigo || element.admCodigo) {
+        console.log('element', element);
+
+        let codigoSecretaria = null;
+        let codigoAdm = null;
+        let codigoMedico = null;
+
+        if (element.secreUsuario && element.secreUsuario.id) {
+          codigoSecretaria = element.secreUsuario.id;
+        }
+        if (element.admUsuario && element.admUsuario.id) {
+          codigoAdm = element.admUsuario.id;
+        }
+        if (element.usuario && element.usuario.id) {
+          codigoMedico = element.usuario.id;
+        }
+
+        let codigo = null;
+        if (codigoSecretaria) {
+          codigo = codigoSecretaria;
+        } else if (codigoAdm) {
+          codigo = codigoAdm;
+        } else if (codigoMedico) {
+          codigo = codigoMedico;
+        }
+
+        this.UsuariosService.bloquearUsuario(codigo, status).subscribe(
+          (dados) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Modificação realizada com sucesso',
+              showCloseButton: true,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.BuscarTodosUsuarios();
+                setTimeout(() => {
+                  this.filterCategoriras(this.radioValue);
+                },  500 );
+                this.LimparCampos.emit();
+              }
+            });
+          },
+          (error) => {
+            console.log('erro', error);
+          }
+        );
+      } else if (element.paciCodigo) {
+        this.UsuariosService.bloquearPaciente(element.paciCodigo,status).subscribe(
+          (dados) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Modificação realizada com sucesso',
+              showCloseButton: true,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.BuscarTodosUsuarios();
+                setTimeout(() => {
+                  this.filterCategoriras(this.radioValue);
+                },  500 );
+                this.LimparCampos.emit();
+              }
+            });
+          },
+          (error) => {
+            console.log('erro', error);
+          }
+        );
+      }
+    }
+  }
+
   displayedColumns = [
     'Codigo',
     'Login',
     'Categoria',
     'Email',
     'Status',
-    'Autorização',
     'Deletar',
-    'Seleciona',
+    'Bloquear',
   ];
 }

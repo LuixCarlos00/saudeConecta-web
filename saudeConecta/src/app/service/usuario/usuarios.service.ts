@@ -1,5 +1,5 @@
 import { tokenService } from './../../util/Token/Token.service';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
@@ -72,6 +72,25 @@ deletarUsuario(codigo: number) {
   const options = { headers, withCredentials: true };
   return this.http.delete<Usuario>( `${this.apiUrl}/Home/deletarPorId/${codigo}`, options);
 }
+
+
+
+bloquearUsuario(codigo: any, status: number) {
+  const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.Token}`,};
+  const options = { headers, withCredentials: true };
+  return this.http.put<Usuario>(`${this.apiUrl}/Home/bloquearUsuario/usuario/${codigo}/status/${status}`, null, options);
+}
+
+
+
+
+
+bloquearPaciente(codigo: any, status: number): Observable<any> {
+  const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.Token}`,};
+  const options = { headers, withCredentials: true };
+  return this.http.put<Usuario>(`${this.apiUrl}/Home/bloquearPaciente/usuario/${codigo}/status/${status}`, null, options);
+}
+
 
 
 }

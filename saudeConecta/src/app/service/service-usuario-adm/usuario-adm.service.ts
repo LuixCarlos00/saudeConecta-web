@@ -32,9 +32,6 @@ export class UsuarioAdmService {
 
 
 
-VerificarCodicodeAutorizacaoParaCadastraAdm(codigo: string): Observable<Adiministrador> {
-  return this.http.get<Adiministrador>( `${this.apiUrl}/administrador/buscarPorCoigoAutorizacao/${codigo}` );
-}
 
 
 cadastrarAdministrador(Administracao: Adiministrador) {

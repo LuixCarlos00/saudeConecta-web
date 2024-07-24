@@ -9,6 +9,7 @@ export interface Paciente {
   PaciEmail: string;
   PaciTelefone: string;
   endereco: number;
+  PaciStatus: number;
 
   paciTelefone?: number;
   paciEmail?: number;

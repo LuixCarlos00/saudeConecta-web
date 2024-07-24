@@ -47,46 +47,40 @@
       <th mat-header-cell *matHeaderCellDef class="Nomedata">Status</th>
       <td mat-cell *matCellDef="let element" class="colunasData">
         {{
-        element.paciCodigo ? 'Ativo' :
-        element.medCodigo ? (element.usuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
-        element.secreCodigo ? (element.secreUsuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
-        element.admCodigo ? (element.admUsuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
-        ''
-
-
+          element.paciCodigo ? (element.paciStatus === '0' ? 'Bloqueado' : 'Ativo') :
+          element.medCodigo ? (element.usuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
+          element.secreCodigo ? (element.secreUsuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
+          element.admCodigo ? (element.admUsuario?.status === 0 ? 'Bloqueado' : 'Ativo') :
+          ''
         }}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="Autorização">
-      <th mat-header-cell *matHeaderCellDef class="NomeHorario">Autorização</th>
-      <td mat-cell *matCellDef="let element" class="colunasHorario">
-        {{
-        element.medCodigo ? '*' :
-        element.paciCodigo ? '*' :
-        element.secreCodigo ? (element.secreCodigoAtorizacao === null ? '*' : 'Autorizado') :
-        element.admCodigo ? (element.admCodigoAtorizacao === null ? '*' : 'Autorizado') :
-        ''
-        }}
-      </td>
-    </ng-container>
+
+
 
     <ng-container matColumnDef="Deletar">
       <th mat-header-cell *matHeaderCellDef class="NomeHorario">Deletar</th>
       <td mat-cell *matCellDef="let element" class="colunasHorario">
-        <button (click)="deletar(element)" style="border: hidden; background-color: white;">
+        <button (click)="deletar(element)" style="border: hidden;   cursor: pointer; background-color: white;">
           <i style="color: red;" class="fa-solid fa-trash fa-xl"></i>
         </button>
 
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="Seleciona">
-      <th mat-header-cell *matHeaderCellDef class="NomeObecervacao">Seleciona</th>
-      <td mat-cell *matCellDef="let element" class="colunasObecervacao">
-        <mat-checkbox></mat-checkbox>
+
+    <ng-container matColumnDef="Bloquear">
+      <th mat-header-cell *matHeaderCellDef class="NomeHorario">Bloquear</th>
+      <td mat-cell *matCellDef="let element" class="colunasHorario">
+        <button (click)="VerificarBloqueio(element)" style="border: hidden ; cursor: pointer; background-color: white;">
+          <i style="color: rgb(0, 0, 0);"   class="fa-solid fa-ban fa-xl"></i>
+        </button>
+
       </td>
     </ng-container>
+
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

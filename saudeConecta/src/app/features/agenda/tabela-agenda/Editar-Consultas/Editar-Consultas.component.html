@@ -8,34 +8,10 @@
 
   <form [formGroup]="FormGroupConsulta" class="fomulario">
 
-    <br>
-    <div>
-      <label class="label_filtro_Identificador">
-        <font style="color: red; font-size: 12px;">* </font>Nº Registro {{DadosDeEdicaoConsulta.ConCodigoConsulta}}
-      </label>
 
-      <label class="label_filtro_DATA">
-        <font style="color: red; font-size: 12px;">* </font>Data
-      </label>
-      <input class="input_DATA" formControlName="date"  [(ngModel)]="DadosDeEdicaoConsulta.ConData"  type="date" id="date" name="date">
-
-      <br><br>
-      <label class="label_filtro_Hora">
-        <font style="color: red; font-size: 12px;">* </font>Hora
-      </label>
-      <select [(ngModel)]="DadosDeEdicaoConsulta.ConHorario" class="input_HORA" formControlName="time" name="time"
-        id="time">
-        @for (time of Hora; track time) {
-        <option [value]="time.value">{{time.label}}</option>
-        }
-      </select>
-      <br>
-
-
-    </div>
-
-
-    <hr>
+    <label class="label_filtro_Identificador">
+      <font style="color: red; font-size: 12px;">* </font>Nº Registro {{DadosDeEdicaoConsulta.ConCodigoConsulta}}
+    </label>
 
 
     <label class="label_filtro_PESQUISA">Pesquisar Paciente </label>
@@ -72,7 +48,7 @@
         <label style="font-size: 12px;margin-left: 10px;"> <br>
           <strong>Nome</strong> {{PacienteEscolhido.paciNome}} <br>
           <strong>CPF</strong> {{PacienteEscolhido.paciCpf}}<br>
-          <strong>Data Nac.</strong> {{PacienteEscolhido.paciDataNacimento}}<br>
+          <strong>Data Nac.</strong> {{PacienteEscolhido.paciDataNacimento ? PacienteEscolhido.paciDataNacimento : 'Não informado'}}<br>
           <strong>Email</strong> {{PacienteEscolhido.paciEmail}}<br>
           <strong>RG</strong> {{PacienteEscolhido.paciRg}}
         </label>
@@ -129,7 +105,7 @@
         <label style="font-size: 12px;margin-left: 10px;"> <br>
           <strong>Nome</strong> {{MedicoEscolhido.medNome}} <br>
           <strong>CPF</strong> {{MedicoEscolhido.medCpf}}<br>
-          <strong>Data Nac.</strong> {{MedicoEscolhido.medDataNacimento}}<br>
+          <strong>Data Nac.</strong> {{MedicoEscolhido.medDataNacimento ? MedicoEscolhido.medDataNacimento : 'Não informado'}}<br>
           <strong>Email</strong> {{MedicoEscolhido.medEmail}}<br>
           <strong>RG</strong> {{MedicoEscolhido.medRg}}<br>
           <strong>CRM</strong> {{MedicoEscolhido.medCrm}}<br>
@@ -138,6 +114,37 @@
       </div>
       <br>
     </div>
+
+
+
+    <hr>
+    <br>
+    <div>
+
+      <label class="label_filtro_DATA">
+        <font style="color: red; font-size: 12px;">* </font>Data
+      </label>
+      <input class="input_DATA" formControlName="date" [(ngModel)]="DadosDeEdicaoConsulta.ConData" type="date" id="date"
+        name="date" (change)="onDateChange($event)">
+
+      <br><br>
+      <label class="label_filtro_Hora">
+        <font style="color: red; font-size: 12px;">* </font>Hora
+      </label>
+      <select [(ngModel)]="DadosDeEdicaoConsulta.ConHorario" class="input_HORA" formControlName="time" name="time"
+        id="time">
+        @for (time of Hora; track time) {
+        <option [value]="time.value">{{time.label}}</option>
+        }
+      </select>
+      <br>
+
+
+    </div>
+
+
+
+
 
     <hr>
 
