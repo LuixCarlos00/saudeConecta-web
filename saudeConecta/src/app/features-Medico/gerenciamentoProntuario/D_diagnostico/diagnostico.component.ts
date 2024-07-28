@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
+import { ProntuarioService } from 'src/app/service/MEDICO-prontuario/prontuario.service';
+import { Prontuario } from 'src/app/util/variados/interfaces/Prontuario/Prontuario';
 import { Cid_codigo_internaciona_doecas } from 'src/app/util/variados/options/cid-codigo-internaciona-doecas';
 
 @Component({
@@ -9,7 +11,7 @@ import { Cid_codigo_internaciona_doecas } from 'src/app/util/variados/options/ci
   styleUrls: ['./diagnostico.component.css'],
 })
 export class DiagnosticoComponent implements OnInit {
-
+  @Output() mudarAba = new EventEmitter<number>();
   myControl = new FormControl('');
   options: Cid_codigo_internaciona_doecas[] = Cid_codigo_internaciona_doecas;
   filteredOptions: Cid_codigo_internaciona_doecas[] = [];
@@ -19,12 +21,14 @@ export class DiagnosticoComponent implements OnInit {
   currentPage = 1; // Página atual
   totalPages = 1; // Total de páginas
   paginatedOptions: Cid_codigo_internaciona_doecas[] = [];
+  selectedOptions: Cid_codigo_internaciona_doecas[] = [];
 
-  constructor() {}
+  constructor(private ProntuarioService: ProntuarioService) {}
 
   ngOnInit() {
     this.filtrandoDadosCid();
   }
+
   filtrandoDadosCid() {
     this.filteredOptions = this.options;
     this.totalPages = Math.ceil(this.filteredOptions.length / this.pageSize);
@@ -69,11 +73,19 @@ export class DiagnosticoComponent implements OnInit {
   }
 
   selectOption(option: Cid_codigo_internaciona_doecas) {
+    this.selectedOptions.push(option);
     console.log('Selecionado:', option);
   }
 
   Proximo() {
-    console.log('Selecionado:', this.myControl.value);
+    const prontDiagnostico = this.selectedOptions.map(option => option.label).join(', ');
+    const prontuario: Prontuario = {
+      prontDiagnostico: prontDiagnostico,
+    };
+    console.log(prontuario, 'aqui');
+
+    this.ProntuarioService.chageDiagnostico(prontuario);
+    this.mudarAba.emit(4);
   }
 
   resetarPesquisa() {
@@ -82,7 +94,6 @@ export class DiagnosticoComponent implements OnInit {
   }
 
   limparPesquisa() {
-
     this.resetarPesquisa();
     this.myControl = new FormControl('');
   }

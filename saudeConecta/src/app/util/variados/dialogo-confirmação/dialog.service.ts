@@ -64,5 +64,14 @@ DeletadoComSucesso() {
     duration: 50000,
   });
 }
+
+
+CliqueEmSalvarParaFinalizar() {
+  this._snackBar.open('Clique em salvar para finalizare salvar os dados do prontuario', 'Fechar', {
+    duration: 50000,
+  });
+
+}
+
 }
 

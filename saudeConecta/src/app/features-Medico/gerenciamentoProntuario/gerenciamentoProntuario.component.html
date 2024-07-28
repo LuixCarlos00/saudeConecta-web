@@ -1,11 +1,24 @@
-<mat-tab-group>
-  <mat-tab label="Pediatria & Exames Fisicos "> <app-pediatria-exames-fisicos></app-pediatria-exames-fisicos></mat-tab>
-  <mat-tab label="Condulta & Anamnese"> <app-anamnese-conduta></app-anamnese-conduta></mat-tab>
+<div class="header">
+  <div class="timer">
+    Tempo: {{ minutes }}m {{ seconds }}s
+  </div>
+</div>
 
-  <mat-tab label=" Queixa Principal"> <app-queixa-principal></app-queixa-principal></mat-tab>
-  <mat-tab label="Diagnóstico"> <app-diagnostico></app-diagnostico></mat-tab>
-  <mat-tab label="Soliciatação de Exames "> <app-solicitacao-de-exame></app-solicitacao-de-exame></mat-tab>
-  <mat-tab label="Prescrição"><app-prescricao></app-prescricao></mat-tab>
-  <mat-tab label="Atestado"><app-atestado></app-atestado></mat-tab>
-  <mat-tab label="Finalizar"><app-finalizar></app-finalizar></mat-tab>
+<mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onMudarAba($event)">
+  <mat-tab label="Pediatria & Exames Fisicos"> <app-pediatria-exames-fisicos></app-pediatria-exames-fisicos>
+  </mat-tab>
+  <mat-tab label="Condulta & Anamnese"> <app-anamnese-conduta></app-anamnese-conduta>
+  </mat-tab>
+  <mat-tab label="Queixa Principal"> <app-queixa-principal></app-queixa-principal>
+  </mat-tab>
+  <mat-tab label="Diagnóstico">  <app-diagnostico></app-diagnostico>
+  </mat-tab>
+  <mat-tab label="Prescrição & Soliciatação de Exames"> <app-prescricao></app-prescricao>
+  </mat-tab>
+  <mat-tab label="Atestado"> <app-atestado></app-atestado>
+  </mat-tab>
+  <mat-tab label="Finalizar"> <app-finalizar [selectedTabIndex]="selectedTabIndex" [tempo]="interval"
+      (mudarTempo)="ngOnDestroy()" (pausarTempo)="pausarTempo()">
+    </app-finalizar>
+  </mat-tab>
 </mat-tab-group>

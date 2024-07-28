@@ -61,13 +61,12 @@ import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/
 import { TabelaAgendaMedicoComponent } from '../features-Medico/tabela-agenda-medico/tabela-agenda-medico.component';
 import { ProntuarioComponent } from '../features-Medico/prontuario/prontuario.component';
 import { FinalizarComponent } from '../features-Medico/gerenciamentoProntuario/finalizar/finalizar.component';
-import { QueixaPrincipalComponent } from '../features-Medico/gerenciamentoProntuario/queixa-principal/queixa-principal.component';
-import { AtestadoComponent } from '../features-Medico/gerenciamentoProntuario/atestado/atestado.component';
-import { DiagnosticoComponent } from '../features-Medico/gerenciamentoProntuario/diagnostico/diagnostico.component';
-import { PediatriaExamesFisicosComponent } from '../features-Medico/gerenciamentoProntuario/pediatria-exames-fisicos/pediatria-exames-fisicos.component';
-import { PrescricaoComponent } from '../features-Medico/gerenciamentoProntuario/prescricao/prescricao.component';
-import { SolicitacaoDeExameComponent } from '../features-Medico/gerenciamentoProntuario/solicitacao-de-exame/solicitacao-de-exame.component';
-import { AnamneseCondutaComponent } from '../features-Medico/gerenciamentoProntuario/anamnese-conduta/anamnese-conduta.component';
+import { QueixaPrincipalComponent } from '../features-Medico/gerenciamentoProntuario/C_queixa-principal/queixa-principal.component';
+import { AtestadoComponent } from '../features-Medico/gerenciamentoProntuario/F_atestado/atestado.component';
+import { DiagnosticoComponent } from '../features-Medico/gerenciamentoProntuario/D_diagnostico/diagnostico.component';
+import { PediatriaExamesFisicosComponent } from '../features-Medico/gerenciamentoProntuario/A_pediatria-exames-fisicos/pediatria-exames-fisicos.component';
+import { PrescricaoComponent } from '../features-Medico/gerenciamentoProntuario/E_prescricao/prescricao.component';
+ import { AnamneseCondutaComponent } from '../features-Medico/gerenciamentoProntuario/B_anamnese-conduta/anamnese-conduta.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +110,7 @@ import { AnamneseCondutaComponent } from '../features-Medico/gerenciamentoProntu
     DiagnosticoComponent,
     PediatriaExamesFisicosComponent,
     PrescricaoComponent,
-    SolicitacaoDeExameComponent,
+
   ],
   exports: [],
 

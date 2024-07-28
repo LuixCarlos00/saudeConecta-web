@@ -18,7 +18,8 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <mat-label>Data de Nascimento</mat-label>
+
+          <mat-label>     <font color="red">* </font> Data de Nascimento</mat-label>
           <input matInput type="date" [(ngModel)]="DataNacimento" name="DataNacimento">
         </mat-form-field>
 
@@ -75,8 +76,10 @@
       </mat-form-field>
     </div>
 
-    <div style="display: flex; margin: 10px; justify-content: center;">
-      <button mat-raised-button color="primary" (click)="Proximo()">Proximo</button>
+    <div style="display: flex; justify-content: center;">
+      <div>
+        <button class="proximo" (click)="Proximo()">Próximo</button>
+      </div>
     </div>
   </div>
 </body>

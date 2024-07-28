@@ -10,12 +10,7 @@ export const Tuss_terminologia_Unificada_Saude_Suplementar : { codigo: string; d
 			"fabricante": "ELI LILLY DO BRASIL LTDA",
 			"tabela": 20
 		},
-		{
-			"codigo": "90403525",
-			"descricao": "REOPRO 2 MG/ML SOL INJ CT FA VD INC X 5 ML",
-			"fabricante": "JANSSEN-CILAG FARMACÊUTICA LTDA",
-			"tabela": 20
-		},
+
 		{
 			"codigo": "90398645",
 			"descricao": "ACETATO DE ABIRATERONA 250 MG COM REV CT FR PLAS OPC X 30",
@@ -6687,5 +6682,4879 @@ export const Tuss_terminologia_Unificada_Saude_Suplementar : { codigo: string; d
 			"descricao": "LENVIMA 4 MG CAP DURA CT BL AL AL X 30",
 			"fabricante": "EISAI LABORATÓRIOS LTDA",
 			"tabela": 20
-		}
+		},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "codigo": "40305015",
+      "descricao": "1,25-dihidroxi vitamina D",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305740",
+      "descricao": "11-desoxicorticosterona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712010",
+      "descricao": "17-alfa-hidroxiprogesterona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305040",
+      "descricao": "17-cetogênicos (17-CGS)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305058",
+      "descricao": "17-cetogênicos cromatografia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305066",
+      "descricao": "17-cetosteróides (17-CTS) - cromatografia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305074",
+      "descricao": "17-cetosteróides relação alfa/beta",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305082",
+      "descricao": "17-cetosteróides totais (17-CTS)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305090",
+      "descricao": "17-hidroxipregnenolona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311236",
+      "descricao": "2,5-hexanodiona, dosagem na urina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712028",
+      "descricao": "3 alfa androstonediol glucoronídeo (3ALFDADIOL)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301010",
+      "descricao": "3-metil histidina, dosagem no soro",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301028",
+      "descricao": "5-nucleotidase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310019",
+      "descricao": "A fresco, exame",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301036",
+      "descricao": "Acetaminofen",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301044",
+      "descricao": "Acetilcolinesterase, em eritrócitos",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301052",
+      "descricao": "Acetona, dosagem no soro",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311260",
+      "descricao": "Acidez titulável",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305112",
+      "descricao": "Ácido 5 hidróxi indol acético, dosagem na urina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313298",
+      "descricao": "Ácido acético",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301060",
+      "descricao": "Ácido ascórbico (vitamina C)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301079",
+      "descricao": "Ácido beta hidroxi butírico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311015",
+      "descricao": "Ácido cítrico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313018",
+      "descricao": "Ácido delta aminolevulínico (para chumbo inorgânico)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313026",
+      "descricao": "Ácido delta aminolevulínico desidratase (para chumbo inorgânico)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313034",
+      "descricao": "Ácido fenilglioxílico (para estireno)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301087",
+      "descricao": "Ácido fólico, dosagem nos eritrócitos",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301095",
+      "descricao": "Ácido glioxílico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313042",
+      "descricao": "Ácido hipúrico (para tolueno)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305120",
+      "descricao": "Ácido homo vanílico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311023",
+      "descricao": "Ácido homogentísico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301109",
+      "descricao": "Ácido láctico (lactato)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313050",
+      "descricao": "Ácido mandélico (para estireno)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313301",
+      "descricao": "Ácido metil malônico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313069",
+      "descricao": "Ácido metilhipúrico (para xilenos)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301117",
+      "descricao": "Ácido orótico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301125",
+      "descricao": "Ácido oxálico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301133",
+      "descricao": "Ácido pirúvico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313077",
+      "descricao": "Ácido salicílico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301141",
+      "descricao": "Ácido siálico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301150",
+      "descricao": "Ácido úrico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301168",
+      "descricao": "Ácido valpróico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712036",
+      "descricao": "Ácido vanilmandélico (VMA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301176",
+      "descricao": "Ácidos biliares",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301184",
+      "descricao": "Ácidos graxos livres",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301192",
+      "descricao": "Ácidos orgânicos (perfil quantitativo)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301206",
+      "descricao": "Acilcarnitinas (perfil qualitativo)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301214",
+      "descricao": "Acilcarnitinas (perfil quantitativo)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309010",
+      "descricao": "Adenosina de aminase (ADA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306011",
+      "descricao": "Adenovírus, IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306020",
+      "descricao": "Adenovírus, IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712044",
+      "descricao": "Adrenocorticotrófico, hormônio (ACTH)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301222",
+      "descricao": "Albumina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311031",
+      "descricao": "Alcaptonúria, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301230",
+      "descricao": "Aldolase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712052",
+      "descricao": "Aldosterona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307905",
+      "descricao": "Alérgenos - perfil antigênico (painel C/36 antígenos)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303012",
+      "descricao": "Alfa -1-antitripsina, (fezes)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301249",
+      "descricao": "Alfa-1-antitripsina, dosagem no soro",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301257",
+      "descricao": "Alfa-1-glicoproteína ácida",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304663",
+      "descricao": "Alfa-2antiplasmina, teste funcional",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301265",
+      "descricao": "Alfa-2-macroglobulina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712060",
+      "descricao": "Alfa-fetoproteína",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301273",
+      "descricao": "Alumínio, dosagem no soro",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306038",
+      "descricao": "Amebíase, sorologia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301281",
+      "descricao": "Amilase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302130",
+      "descricao": "Amilase ou alfa-amilase, isoenzimas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301290",
+      "descricao": "Aminoácidos, fracionamento e quantificação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301303",
+      "descricao": "Amiodarona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301311",
+      "descricao": "Amitriptilina, nortriptilina (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301320",
+      "descricao": "Amônia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305163",
+      "descricao": "AMP cíclico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314260",
+      "descricao": "Amplificação de material por biologia molecular (outros agentes)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303020",
+      "descricao": "Anal Swab, pesquisa de oxiúrus",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712079",
+      "descricao": "Androstenediona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301338",
+      "descricao": "Anfetaminas, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308219",
+      "descricao": "Anti corpo anti Saccharamyces - ASCA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306054",
+      "descricao": "Anti-actina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310027",
+      "descricao": "Antibiograma (teste sensibilidade a antibióticos e quimioterápicos), por bactéria",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310035",
+      "descricao": "Antibiograma p/ bacilos álcool-resistentes - drogas de 2 linhas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301346",
+      "descricao": "Antibióticos, dosagem no soro, cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306046",
+      "descricao": "Anticandida - IgG e IgM (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306135",
+      "descricao": "Anticardiolipina - IgA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306143",
+      "descricao": "Anticardiolipina - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306151",
+      "descricao": "Anticardiolipina - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306160",
+      "descricao": "Anticentrômero",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304019",
+      "descricao": "Anticoagulante lúpico, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304027",
+      "descricao": "Anticorpo anti A e B",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306178",
+      "descricao": "Anticorpo anti-DNAse B",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309304",
+      "descricao": "Anticorpo antiespermatozóide",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306186",
+      "descricao": "Anticorpo anti-hormônio do crescimento",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304671",
+      "descricao": "Anticorpo antimieloperoxidase, MPO",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712095",
+      "descricao": "Anticorpo anti-receptor de TSH (TRAB)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306194",
+      "descricao": "Anticorpo antivírus da hepatite E (total)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306259",
+      "descricao": "Anticorpos antiendomisio - IgG, IgM, IgA (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306208",
+      "descricao": "Anticorpos anti-ilhota de langherans",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306216",
+      "descricao": "Anticorpos anti-influenza A,  IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306224",
+      "descricao": "Anticorpos anti-influenza A,  IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306232",
+      "descricao": "Anticorpos anti-influenza B, IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306240",
+      "descricao": "Anticorpos anti-influenza B, IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712109",
+      "descricao": "Anticorpos antiinsulina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304035",
+      "descricao": "Anticorpos antiplaquetários, citometria de fluxo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712117",
+      "descricao": "Anticorpos antitireóide (tireoglobulina)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403025",
+      "descricao": "Anticorpos eritrocitários naturais e imunes - titulagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304043",
+      "descricao": "Anticorpos irregulares",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304051",
+      "descricao": "Anticorpos irregulares, pesquisa (meio salino a temperatura ambiente e 37º e teste\r\nindireto de coombs)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306267",
+      "descricao": "Anticorpos naturais - isoaglutininas, pesquisas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306275",
+      "descricao": "Anticorpos naturais - isoaglutininas, titulagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306283",
+      "descricao": "Anticortex supra-renal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307930",
+      "descricao": "Antidesoxiribonuclease B, neutralização quantitativa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307913",
+      "descricao": "Anti-DMP",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306062",
+      "descricao": "Anti-DNA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306291",
+      "descricao": "Antiescleroderma (SCL 70)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307948",
+      "descricao": "Antífigado (glomérulo, tub. Renal corte rim de rato),IFI",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712125",
+      "descricao": "Antígeno Austrália (HBSAG)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712133",
+      "descricao": "Antígeno carcinoembriogênico (CEA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712150",
+      "descricao": "Antígeno específico prostático livre (PSA livre)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712141",
+      "descricao": "Antígeno específico prostático total (PSA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310043",
+      "descricao": "Antígenos fúngicos, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307956",
+      "descricao": "Antígenos metílicos solúveis do BCG (1 aplicação)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306305",
+      "descricao": "Antigliadina (glúten) - IgA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306313",
+      "descricao": "Antigliadina (glúten) - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306321",
+      "descricao": "Antigliadina (glúten) - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307921",
+      "descricao": "Anti-hialuronidase, determinação da",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306070",
+      "descricao": "Anti-JO1",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306089",
+      "descricao": "Anti-LA/SSB",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306097",
+      "descricao": "Anti-LKM-1",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306330",
+      "descricao": "Antimembrana basal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306348",
+      "descricao": "Antimicrossomal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306356",
+      "descricao": "Antimitocondria",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306364",
+      "descricao": "Antimitocondria, M2",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306372",
+      "descricao": "Antimúsculo cardíaco",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306380",
+      "descricao": "Antimúsculo estriado",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306399",
+      "descricao": "Antimúsculo liso",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306402",
+      "descricao": "Antineutrófilos (anca)  C",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306410",
+      "descricao": "Antineutrófilos (anca)  P",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306429",
+      "descricao": "Antiparietal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306437",
+      "descricao": "Antiperoxidase tireoideana",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306100",
+      "descricao": "Anti-RNP",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306119",
+      "descricao": "Anti-Ro/SSA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306127",
+      "descricao": "Anti-Sm",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712087",
+      "descricao": "Anti-TPO",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304060",
+      "descricao": "Antitrombina III, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301354",
+      "descricao": "Apolipoproteína A (Apo A)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301362",
+      "descricao": "Apolipoproteína B (Apo B)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314014",
+      "descricao": "Apolipoproteína E, genotipagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306445",
+      "descricao": "Aslo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306453",
+      "descricao": "Aspergilus",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304078",
+      "descricao": "Ativador tissular de plasminogênio (TPA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306461",
+      "descricao": "Avidez de IgG para toxoplasmose, citomegalia, rubéloa, EB e outros, cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313085",
+      "descricao": "Azida sódica, teste da (para deissulfeto de carbono)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310051",
+      "descricao": "B.A.A.R. (Ziehl ou fluorescência, pesquisa direta e após homogeneização)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310060",
+      "descricao": "Bacterioscopia (Gram, Ziehl, Albert  etc), por lâmina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301370",
+      "descricao": "Barbitúricos, antidepressivos tricíclicos (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311279",
+      "descricao": "Bartituratos, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301745",
+      "descricao": "Benzodiazepínicos e similares (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311287",
+      "descricao": "Beta mercapto-lactato-disulfidúria, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306470",
+      "descricao": "Beta-2-microglobulina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301389",
+      "descricao": "Beta-glicuronidase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301397",
+      "descricao": "Bilirrubinas (direta, indireta e total)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309029",
+      "descricao": "Bioquímica ICR (proteínas + pandy + glicose + cloro)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306488",
+      "descricao": "Biotinidase atividade da, qualitativo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306496",
+      "descricao": "Blastomicose",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306500",
+      "descricao": "Brucela - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306518",
+      "descricao": "Brucela - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306526",
+      "descricao": "Brucela, prova rápida",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306534",
+      "descricao": "C1q",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306542",
+      "descricao": "C3 proativador",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306550",
+      "descricao": "C3A (fator B)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306569",
+      "descricao": "CA 50",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306577",
+      "descricao": "CA-242",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306585",
+      "descricao": "CA-27-29",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301400",
+      "descricao": "Cálcio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301419",
+      "descricao": "Cálcio iônico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712168",
+      "descricao": "Calcitonina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311040",
+      "descricao": "Cálculos urinários",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301427",
+      "descricao": "Capacidade de fixação de ferro",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301435",
+      "descricao": "Carbamazepina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313093",
+      "descricao": "Carboxihemoglobina (para monóxido de carbono  diclorometano)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301443",
+      "descricao": "Carnitina livre",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301451",
+      "descricao": "Carnitina total e frações",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301460",
+      "descricao": "Caroteno",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712176",
+      "descricao": "Catecolaminas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311058",
+      "descricao": "Catecolaminas fracionadas - dopamina, epinefrina, norepinefrina (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306593",
+      "descricao": "Caxumba, IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306607",
+      "descricao": "Caxumba, IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304086",
+      "descricao": "CD... (antígeno de dif. Celular, cada determinação)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304795",
+      "descricao": "Células LE",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309037",
+      "descricao": "Células, contagem total e específica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309045",
+      "descricao": "Células, pesquisa de células neoplásicas (citologia oncótica)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301478",
+      "descricao": "Ceruloplasmina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306615",
+      "descricao": "Chagas IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306623",
+      "descricao": "Chagas IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307964",
+      "descricao": "Chagas, hemoaglutinação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306631",
+      "descricao": "Chlamydia - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306640",
+      "descricao": "Chlamydia - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314243",
+      "descricao": "Chlamydia por biologia molecular",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310078",
+      "descricao": "Chlamydia, cultura",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313107",
+      "descricao": "Chumbo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301486",
+      "descricao": "Ciclosporina, methotrexate - cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306658",
+      "descricao": "Cisticercose, AC",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311244",
+      "descricao": "Cistina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311066",
+      "descricao": "Cistinúria, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314251",
+      "descricao": "Citogenética de medula óssea",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314022",
+      "descricao": "Citomegalovírus - qualitativo, por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314030",
+      "descricao": "Citomegalovírus - quantitativo, por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310361",
+      "descricao": "Citomegalovírus - shell vial",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306666",
+      "descricao": "Citomegalovírus IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306674",
+      "descricao": "Citomegalovírus IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304094",
+      "descricao": "Citoquímica para classificar leucemia: esterase, fosfatase leucocitária, PAS, peroxidase ou SB,  etc - cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301494",
+      "descricao": "Clearance de ácido úrico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301508",
+      "descricao": "Clearance de creatinina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301516",
+      "descricao": "Clearance de fosfato",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301524",
+      "descricao": "Clearance de uréia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301532",
+      "descricao": "Clearance osmolar",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309401",
+      "descricao": "Clements, teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301540",
+      "descricao": "Clomipramina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301559",
+      "descricao": "Cloro",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306682",
+      "descricao": "Clostridium difficile, toxina A",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304922",
+      "descricao": "Coagulograma (TS, TC, prova do laço, retração do coágulo, contagem de plaquetas, tempo de protombina, tempo de tromboplastina, parcial ativado)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301567",
+      "descricao": "Cobre",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301575",
+      "descricao": "Cocaína, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310086",
+      "descricao": "Cólera - identificação (sorotipagem incluída)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301583",
+      "descricao": "Colesterol (HDL)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301591",
+      "descricao": "Colesterol (LDL)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302695",
+      "descricao": "Colesterol (VLDL)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301605",
+      "descricao": "Colesterol total",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313115",
+      "descricao": "Colinesterase (para carbamatos  organofosforados)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306690",
+      "descricao": "Complemento C2",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306704",
+      "descricao": "Complemento C3",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307999",
+      "descricao": "Complemento C3 e C4 - turbid. ou nefolométrico C3A",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306712",
+      "descricao": "Complemento C4",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306720",
+      "descricao": "Complemento C5",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306739",
+      "descricao": "Complemento CH-100",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306747",
+      "descricao": "Complemento CH-50",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712184",
+      "descricao": "Composto S (11 - desoxicortisol)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304809",
+      "descricao": "Consumo de protrombina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311295",
+      "descricao": "Contagem sedimentar de Addis",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304108",
+      "descricao": "Coombs direto",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304884",
+      "descricao": "Coombs indireto",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303039",
+      "descricao": "Coprológico funcional (caracteres, pH, digestibilidade, amônia, ácidos orgânicos e interpretação)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311074",
+      "descricao": "Coproporfirina III",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313123",
+      "descricao": "Coproporfirinas (para chumbo inorgânico)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311082",
+      "descricao": "Corpos cetônicos, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310094",
+      "descricao": "Corpúsculos de Donovani, pesquisa direta de",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712192",
+      "descricao": "Cortisol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305210",
+      "descricao": "Cortisol livre",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301613",
+      "descricao": "Cotinina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301621",
+      "descricao": "Creatina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301630",
+      "descricao": "Creatinina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301664",
+      "descricao": "Creatino fosfoquinase - fração MB - atividade",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301656",
+      "descricao": "Creatino fosfoquinase - fração MB - massa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301648",
+      "descricao": "Creatino fosfoquinase total (CK)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712206",
+      "descricao": "Crescimento, hormônio do (HGH)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306755",
+      "descricao": "Crio-aglutinina, globulina, dosagem, cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306763",
+      "descricao": "Crio-aglutinina, globulina, pesquisa, cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308014",
+      "descricao": "Crioglobulinas, caracterização - imunoeletroforese",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310108",
+      "descricao": "Criptococo (tinta da China), pesquisa de",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309053",
+      "descricao": "Criptococose, cândida, aspérgilus (látex)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310116",
+      "descricao": "Criptosporidium, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309509",
+      "descricao": "Cristais com luz polarizada, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312011",
+      "descricao": "Cristalização do muco cervical, pequisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312020",
+      "descricao": "Cromatina sexual, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311090",
+      "descricao": "Cromatografia de açúcares",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301672",
+      "descricao": "Cromatografia de aminoácidos (perfil qualitatitivo)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313310",
+      "descricao": "Cromo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314049",
+      "descricao": "Cromossomo philadelfia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306771",
+      "descricao": "Cross match (prova cruzada de histocompatibilidade para transplante renal)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310124",
+      "descricao": "Cultura bacteriana (em diversos materiais biológicos)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306780",
+      "descricao": "Cultura ou estimulação dos linfócitos \"in vitro\" por concanavalina, PHA ou pokweed",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310132",
+      "descricao": "Cultura para bactérias anaeróbicas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310140",
+      "descricao": "Cultura para fungos",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310159",
+      "descricao": "Cultura para mycobacterium",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310167",
+      "descricao": "Cultura quantitativa de secreções pulmonares, quando necessitar tratamento prévio c/ N.C.A.",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310175",
+      "descricao": "Cultura, fezes: salmonela, shigellae e esc. Coli enteropatogênicas, enteroinvasora\r\n(sorol. Incluída) + campylobacter SP. + E. Coli entero-hemorrágica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310183",
+      "descricao": "Cultura, fezes: salmonella, shigella e escherichia coli enteropatogênicas (sorologia incluída)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310191",
+      "descricao": "Cultura, herpesvírus ou outro",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310205",
+      "descricao": "Cultura, micoplasma ou ureaplasma",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310213",
+      "descricao": "Cultura, urina com contagem de colônias",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301680",
+      "descricao": "Curva glicêmica (4 dosagens) via oral ou endovenosa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305228",
+      "descricao": "Curva glicêmica (6 dosagens)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305236",
+      "descricao": "Curva insulínica (6 dosagens)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712214",
+      "descricao": "Dehidroepiandrosterona (DHEA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712222",
+      "descricao": "Dehidrotestosterona (DHT)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306798",
+      "descricao": "Dengue - IgG e IgM (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301699",
+      "descricao": "Desidrogenase alfa-hidroxibutírica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301702",
+      "descricao": "Desidrogenase glutâmica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301710",
+      "descricao": "Desidrogenase isocítrica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301729",
+      "descricao": "Desidrogenase láctica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301737",
+      "descricao": "Desidrogenase láctica - isoenzimas fracionadas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403084",
+      "descricao": "Determinação de células CD34 CD 45 positivas - Citômetro de Fluxo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403092",
+      "descricao": "Determinação de conteúdo de DNA - Citômetro de Fluxo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313131",
+      "descricao": "Dialdeído malônico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301753",
+      "descricao": "Digitoxina ou digoxina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304906",
+      "descricao": "Dímero D",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311104",
+      "descricao": "Dismorfismo eritrocitário, pesquisa (contraste de fase)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308022",
+      "descricao": "DNCB - teste de contato",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305279",
+      "descricao": "Dosagem de receptor de progesterona ou de estrogênio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712230",
+      "descricao": "Drogas (imunossupressora, anticonvulsivante, digitálico, etc.) cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306801",
+      "descricao": "Echovírus (painel) sorologia para",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301761",
+      "descricao": "Eletroferese de proteínas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301770",
+      "descricao": "Eletroforese de glicoproteínas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403106",
+      "descricao": "Eletroforese de hemoglobina por componente hemoterápico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403114",
+      "descricao": "Eletroforese de hemoglobina por unidade de sangue total",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301788",
+      "descricao": "Eletroforese de lipoproteínas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302717",
+      "descricao": "Eletroforese de proteínas de alta resolução",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309061",
+      "descricao": "Eletroforese de proteínas no líquor, com concentração",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311309",
+      "descricao": "Eletroforese de proteínas urinárias, com concentração",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301796",
+      "descricao": "Enolase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305287",
+      "descricao": "Enzima conversora da angiotensina (ECA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304116",
+      "descricao": "Enzimas  eritrocitárias,  (adenilatoquinase,  desidrogenase láctica,\r\nfosfofructoquinase,  fosfoglicerato quinase, gliceraldeído, 3  - fosfato   desidrogenase, glicose  fosfato isomerase,  glicose 6 - fosfato desidrogenase, glutation peroxidase, glutation",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304817",
+      "descricao": "Enzimas eritrocitárias, rastreio para deficiência",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303047",
+      "descricao": "Eosinófilos, pesquisa nas fezes",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306828",
+      "descricao": "Equinococose, IDR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306810",
+      "descricao": "Equinococose, reação sorológica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305295",
+      "descricao": "Eritropoietina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311112",
+      "descricao": "Erros inatos do metabolismo baterias de testes químicos de triagem em urina (mínimo de 6 testes)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309410",
+      "descricao": "Espectrofotometria de líquido amniótico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309312",
+      "descricao": "Espermograma (caracteres físicos, pH, fludificação, motilidade, vitalidade, contagem\r\ne morfologia)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309320",
+      "descricao": "Espermograma e teste de penetração \"in vitro\", velocidade penetração vertical,\r\ncolocação  vital, teste de revitalização",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304825",
+      "descricao": "Esplenograma (citologia)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306836",
+      "descricao": "Esporotricose, reação sorológica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306844",
+      "descricao": "Esporotriquina, IDR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303179",
+      "descricao": "Esteatócrito, triagem para gordura fecal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303187",
+      "descricao": "Estercobilinogênio fecal, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712249",
+      "descricao": "Estradiol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310221",
+      "descricao": "Estreptococos - A, teste rápido",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304868",
+      "descricao": "Estreptozima",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712257",
+      "descricao": "Estriol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305597",
+      "descricao": "Estrogênios totais (fenolesteróides)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712265",
+      "descricao": "Estrona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313140",
+      "descricao": "Etanol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301800",
+      "descricao": "Etossuximida",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304132",
+      "descricao": "Falcização, teste de",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304140",
+      "descricao": "Fator 4 plaquetário, dosagens",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306852",
+      "descricao": "Fator antinúcleo, (FAN)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304159",
+      "descricao": "Fator II, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304167",
+      "descricao": "Fator IX, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306860",
+      "descricao": "Fator reumatóide",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308030",
+      "descricao": "Fator reumatóide, teste do látex",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314057",
+      "descricao": "Fator V de layden por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304175",
+      "descricao": "Fator V, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304680",
+      "descricao": "Fator VII",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304183",
+      "descricao": "Fator VIII, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304191",
+      "descricao": "Fator VIII, dosagem do antígeno (Von Willebrand)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304205",
+      "descricao": "Fator VIII, dosagem do inibidor",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304213",
+      "descricao": "Fator X, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304221",
+      "descricao": "Fator XI, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304230",
+      "descricao": "Fator XII, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304698",
+      "descricao": "Fator XIII, dosagem teste funcional",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304248",
+      "descricao": "Fator XIII, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301818",
+      "descricao": "Fenilalanina, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311317",
+      "descricao": "Fenilcetonúria, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301826",
+      "descricao": "Fenitoína",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301834",
+      "descricao": "Fenobarbital",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313158",
+      "descricao": "Fenol (para benzeno, fenol)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403130",
+      "descricao": "Fenotipagem de outros sistemas eritrocitários - por fenótipo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403149",
+      "descricao": "Fenotipagem de outros sistemas eritrocitários - por fenótipo - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304256",
+      "descricao": "Fenotipagem do sistema Rh-Hr (anti Rho(D) + anti Rh(C) + anti Rh(E)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403157",
+      "descricao": "Fenotipagem do sistema RH-HR (D, C, E, C E C) gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403165",
+      "descricao": "Fenotipagem do sistema RH-HR (D, C, E, C, E)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712273",
+      "descricao": "Ferritina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301842",
+      "descricao": "Ferro sérico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304264",
+      "descricao": "Fibrinogênio, teste funcional, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314065",
+      "descricao": "Fibrose cística, pesquisa de uma mutação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306879",
+      "descricao": "Filaria sorologia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304272",
+      "descricao": "Filária, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313166",
+      "descricao": "Flúor (para fluoretos)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712281",
+      "descricao": "Folículo estimulante, hormônio (FSH)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301850",
+      "descricao": "Formaldeído",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313174",
+      "descricao": "Formoldeído",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301869",
+      "descricao": "Fosfatase ácida fração prostática",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301877",
+      "descricao": "Fosfatase ácida total",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301885",
+      "descricao": "Fosfatase alcalina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301893",
+      "descricao": "Fosfatase alcalina com fracionamento de isoenzimas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301907",
+      "descricao": "Fosfatase alcalina fração óssea - Elisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301915",
+      "descricao": "Fosfatase alcalina termo-estável",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301923",
+      "descricao": "Fosfolipídios",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309428",
+      "descricao": "Fosfolipídios (relação lecitina/esfingomielina)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301931",
+      "descricao": "Fósforo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301940",
+      "descricao": "Fósforo, prova de reabsorção tubular",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308049",
+      "descricao": "Frei (linfogranuloma venéreo), IDeR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301958",
+      "descricao": "Frutosaminas (proteínas glicosiladas)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301966",
+      "descricao": "Frutose",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311120",
+      "descricao": "Frutosúria, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310230",
+      "descricao": "Fungos, pesquisa de (a fresco lactofenol, tinta da China)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305341",
+      "descricao": "Gad-Ab-antidescarboxilase do ácido",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301974",
+      "descricao": "Galactose",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301982",
+      "descricao": "Galactose 1-fosfatouridil transferase, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311139",
+      "descricao": "Galactosúria, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40301990",
+      "descricao": "Gama-glutamil transferase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302016",
+      "descricao": "Gasometria (pH, pCO2, SA, O2, excesso base)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302024",
+      "descricao": "Gasometria + Hb + Ht + Na +  K + Cl + Ca + glicose + lactato (quando efetuado no\r\ngasômetro)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712290",
+      "descricao": "Gastrina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312070",
+      "descricao": "Gastroacidograma - secreção basal para 60' e 4 amostras após o estímulo (fornecimento de material inclusive tubagem) teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306887",
+      "descricao": "Genotipagem do sistema HLA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306895",
+      "descricao": "Giardia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302032",
+      "descricao": "Glicemia após sobrecarga com dextrosol ou glicose",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302040",
+      "descricao": "Glicose",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302059",
+      "descricao": "Glicose-6-fosfato deidrogenase (G6FD)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712303",
+      "descricao": "Globulina de ligação de hormônios sexuais (SHBG)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712311",
+      "descricao": "Globulina transportadora da tiroxina (TBG)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305368",
+      "descricao": "Glucagon, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712320",
+      "descricao": "Gonadotrófico coriônico, hormônio (HCG)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308057",
+      "descricao": "Gonococo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308065",
+      "descricao": "Gonococo - hemaglutinação (HA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303055",
+      "descricao": "Gordura fecal, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304280",
+      "descricao": "Grupo ABO, classificação reversa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403173",
+      "descricao": "Grupo sanguíneo ABO e RH",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403181",
+      "descricao": "Grupo sanguíneo ABO e RH - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304299",
+      "descricao": "Grupo sanguíneo ABO, e fator Rho (inclui Du)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309070",
+      "descricao": "H. Influenzae, S. Pneumonieae, N. Meningitidis A, B e C W135 (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309088",
+      "descricao": "Haemophilus influenzae - pesquisa de anticorpos (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304302",
+      "descricao": "Ham, teste de (hemólise ácida)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310280",
+      "descricao": "Hansen, pesquisa de (por material)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302067",
+      "descricao": "Haptoglobina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304310",
+      "descricao": "Heinz, corpúsculos, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306909",
+      "descricao": "Helicobacter pylori - IgA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306917",
+      "descricao": "Helicobacter pylori - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306925",
+      "descricao": "Helicobacter pylori - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304329",
+      "descricao": "Hemácias fetais, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304337",
+      "descricao": "Hematócrito, determinação do",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303063",
+      "descricao": "Hematoxilina férrica, pesquisa de protozoários",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310248",
+      "descricao": "Hemocultura (por amostra)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310256",
+      "descricao": "Hemocultura automatizada (por amostra)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310264",
+      "descricao": "Hemocultura para bactérias anaeróbias (por amostra)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304850",
+      "descricao": "Hemoglobina - triagem (EI.HB., hemoglob. Fetal.reticulócitos, corpos de H,\r\nT.falcização hemácias, resist.osmótica, termo estabilidade)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304353",
+      "descricao": "Hemoglobina (eletroforese ou HPLC)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302075",
+      "descricao": "Hemoglobina glicada (A1 total)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302733",
+      "descricao": "Hemoglobina glicada (Fração A1c)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304833",
+      "descricao": "Hemoglobina instalbilidade a 37 graus C",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302083",
+      "descricao": "Hemoglobina plasmática livre",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304345",
+      "descricao": "Hemoglobina, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304841",
+      "descricao": "Hemoglobina, solubilidade (HbS e HbD)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304361",
+      "descricao": "Hemograma com contagem de plaquetas ou frações (eritrograma, leucograma, plaquetas)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310272",
+      "descricao": "Hemophilus (bordetella) pertussis",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304370",
+      "descricao": "Hemossedimentação, (VHS)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304388",
+      "descricao": "Hemossiderina (siderócitos), sangue ou urina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304396",
+      "descricao": "Heparina, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306933",
+      "descricao": "Hepatite A - HAV - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306941",
+      "descricao": "Hepatite A - HAV - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306950",
+      "descricao": "Hepatite B - HBCAC - IgG (anti-core IgG ou Acoreg)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306968",
+      "descricao": "Hepatite B - HBCAC - IgM (anti-core IgM ou Acorem)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306976",
+      "descricao": "Hepatite B - HBeAC (anti HBE)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306984",
+      "descricao": "Hepatite B - HBeAG (antígeno \"E\")",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40306992",
+      "descricao": "Hepatite B - HBSAC (anti-antígeno de superfície)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307018",
+      "descricao": "Hepatite B - HBSAG (AU, antígeno austrália)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314073",
+      "descricao": "Hepatite B (qualitativo) PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314081",
+      "descricao": "Hepatite B (quantitativo) PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307026",
+      "descricao": "Hepatite C - anti-HCV",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307034",
+      "descricao": "Hepatite C - anti-HCV - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314111",
+      "descricao": "Hepatite C - genotipagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307042",
+      "descricao": "Hepatite C - imunoblot",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314090",
+      "descricao": "Hepatite C (qualitativo) por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314103",
+      "descricao": "Hepatite C (quantitativo) por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307050",
+      "descricao": "Hepatite delta, anticorpo IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307069",
+      "descricao": "Hepatite delta, anticorpo IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307077",
+      "descricao": "Hepatite delta, antigeno",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307085",
+      "descricao": "Herpes simples - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307093",
+      "descricao": "Herpes simples - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307107",
+      "descricao": "Herpes zoster - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307115",
+      "descricao": "Herpes zoster - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302091",
+      "descricao": "Hexosaminidase A",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308081",
+      "descricao": "Hidatidose (equinococose) IDi dupla",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302105",
+      "descricao": "Hidroxiprolina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307123",
+      "descricao": "Hipersensibilidade retardada (intradermo reação IDeR) candidina, caxumba, estreptoquinase-dornase, PPD, tricofitina, vírus vacinal, outro(s), cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307131",
+      "descricao": "Histamina, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311325",
+      "descricao": "Histidina, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307140",
+      "descricao": "Histona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307158",
+      "descricao": "Histoplasmose",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307166",
+      "descricao": "HIV - antígeno P24",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314120",
+      "descricao": "HIV - carga viral PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314138",
+      "descricao": "HIV - qualitativo por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314146",
+      "descricao": "HIV, genotipagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307174",
+      "descricao": "HIV1 ou HIV2, pesquisa de anticorpos",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307182",
+      "descricao": "HIV1+ HIV2, (determinação conjunta), pesquisa de anticorpos",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307190",
+      "descricao": "HLA-DR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307204",
+      "descricao": "HLA-DR+DQ",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312089",
+      "descricao": "Hollander (inclusive tubagem) teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302113",
+      "descricao": "Homocisteína",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305384",
+      "descricao": "Hormônio antidiurético (vasopressina)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305759",
+      "descricao": "Hormônio gonodotrofico corionico qualitativo (HCG-Beta-HCG)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305767",
+      "descricao": "Hormônio gonodotrofico corionico quantitativo (HCG-Beta-HCG)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712338",
+      "descricao": "Hormônio luteinizante (LH)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314154",
+      "descricao": "HPV (vírus do papiloma humano) + subtipagem quando necessário PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314162",
+      "descricao": "HTLV I / II por PCR (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307212",
+      "descricao": "HTLV1 ou HTLV2 pesquisa de anticorpo (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403190",
+      "descricao": "Identificação de anticorpos séricos irregulares antieritrocitários - método de eluição",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403203",
+      "descricao": "Identificação de anticorpos séricos irregulares antieritrocitários - painel de hemácias\r\nenzimático",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403211",
+      "descricao": "Identificação de anticorpos séricos irregulares antieritrocitários c/ painel de hemácias",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403220",
+      "descricao": "Identificação de anticorpos séricos irregulares antieritrocitários c/ painel de\r\nhemácias tratadas por enzimas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403238",
+      "descricao": "Identificação de anticorpos séricos irregulares antieritrocitários com painel de hemácias - gel liss",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303071",
+      "descricao": "Identificação de helmintos,  exame de fragmentos",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307220",
+      "descricao": "IgA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307239",
+      "descricao": "IgA na saliva",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307247",
+      "descricao": "IgD",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307255",
+      "descricao": "IgE, grupo específico, cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307263",
+      "descricao": "IgE, por alérgeno, cada (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307271",
+      "descricao": "IgE, total",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305406",
+      "descricao": "IGF BP3 (proteína ligadora dos fatores de crescimento \"insulin-like\")",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307280",
+      "descricao": "IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307298",
+      "descricao": "IgG, subclasses 1,2,3,4 (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307301",
+      "descricao": "IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302121",
+      "descricao": "Imipramina - desipramina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307310",
+      "descricao": "Imunocomplexos circulantes",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307328",
+      "descricao": "Imunocomplexos circulantes, com células Raji",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307336",
+      "descricao": "Imunoeletroforese (estudo da gamopatia)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403246",
+      "descricao": "Imunofenotipagem de subpopulações linfocitárias - Citômetro de Fluxo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403254",
+      "descricao": "Imunofenotipagem para classificação de leucemias - Citômetro de Fluxo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304701",
+      "descricao": "Imunofenotipagem para doença residual mínima (*)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304710",
+      "descricao": "Imunofenotipagem para hemoglobinúria paroxistica noturna (*)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304728",
+      "descricao": "Imunofenotipagem para leucemias agudas ou sindrome mielodisplásica (*)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304736",
+      "descricao": "Imunofenotipagem para linfoma não hodgkin / sindrome linfoproliferativa crônica (*)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304744",
+      "descricao": "Imunofenotipagem para perfil imune (*)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302121",
+      "descricao": "Imunofixação-cada fração",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712346",
+      "descricao": "Imunoglobulina (IGE)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311333",
+      "descricao": "Inclusão citomegálica, pesquisa de células com",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309096",
+      "descricao": "Índice de imunoprodução (eletrof. e IgG em soro e líquor)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712354",
+      "descricao": "Índice de tiroxina livre (ITL)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307344",
+      "descricao": "Inibidor de C1 esterase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304752",
+      "descricao": "Inibidor do fator IX, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304400",
+      "descricao": "Inibidor do TPA (PAI)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304760",
+      "descricao": "Inibidor dos fatores da hemostasia, triagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712362",
+      "descricao": "Insulina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305600",
+      "descricao": "Iodo protéico (PBI)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312046",
+      "descricao": "Iontoforese para a coleta de suor, com dosagem de cloro",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302148",
+      "descricao": "Isomerase fosfohexose",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302156",
+      "descricao": "Isoniazida",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307352",
+      "descricao": "Isospora, pesquisa de antígeno",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307360",
+      "descricao": "Ito (cancro mole), IDeR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307379",
+      "descricao": "Kveim (sarcoidose), IDeR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305619",
+      "descricao": "Lactogênico placentário hormônio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302164",
+      "descricao": "Lactose, teste de tolerância",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303080",
+      "descricao": "Larvas (fezes), pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309100",
+      "descricao": "LCR ambulatorial rotina (aspectos cor + índice de cor + contagem global e  específica\r\nde leucócitos e  hemácias + citologia  oncótica + proteína + glicose + cloro + eletroforese  com  concentração + IgG + reações para neurocisticercose (2) +",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309118",
+      "descricao": "LCR hospitalar neurologia (aspectos cor + índices de cor + contagem global e\r\nespecífica de  leucócitos e hemácias + proteína + glicose + cloro + reações para neurocisticercose (2) + reações para  neurolues (2) + bacterioscopia + cultura + látex para bactérias",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309126",
+      "descricao": "LCR pronto socorro (aspectos cor + índice  de cor + contagem  global  e  específica  de leucócitos  e hemácias + proteína + glicose + cloro + lactato + bacterioscopia + cultura + látex para bactérias)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307387",
+      "descricao": "Legionella - IgG e IgM (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307395",
+      "descricao": "Leishmaniose - IgG e IgM (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305422",
+      "descricao": "Leptina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310299",
+      "descricao": "Leptospira (campo escuro após concentração) pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307409",
+      "descricao": "Leptospirose - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307417",
+      "descricao": "Leptospirose - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307425",
+      "descricao": "Leptospirose, aglutinação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302172",
+      "descricao": "Leucino aminopeptidase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303098",
+      "descricao": "Leucócitos e hemácias, pesquisa nas fezes",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304418",
+      "descricao": "Leucócitos, contagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303101",
+      "descricao": "Leveduras, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302180",
+      "descricao": "Lidocaina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307433",
+      "descricao": "Linfócitos T \"helper\" contagem de (IF com OKT-4) (CD-4+) citometria de fluxo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307441",
+      "descricao": "Linfócitos T supressores contagem de (IF com OKT-8) (D-8) citometria de fluxo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302199",
+      "descricao": "Lipase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302202",
+      "descricao": "Lipase lipoprotéica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311147",
+      "descricao": "Lipóides, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302210",
+      "descricao": "Lipoproteína (a) - Lp (a)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307450",
+      "descricao": "Listeriose, reação sorológica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302229",
+      "descricao": "Lítio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307468",
+      "descricao": "Lyme - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307476",
+      "descricao": "Lyme - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305775",
+      "descricao": "Macroprolactina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302237",
+      "descricao": "Magnésio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307484",
+      "descricao": "Malária - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307492",
+      "descricao": "Malária - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302644",
+      "descricao": "Maltose,teste de tolerância",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307506",
+      "descricao": "Mantoux, IDeR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712370",
+      "descricao": "Marcadores tumorais (CA 19.9, CA 125, CA 72-4, CA 15-3, etc.) cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309436",
+      "descricao": "Maturidade pulmonar fetal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307514",
+      "descricao": "MCA (antígeno cárcino-mamário)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304485",
+      "descricao": "Medula óssea, aspiração para mielograma ou microbiológico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311155",
+      "descricao": "Melanina, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313182",
+      "descricao": "Meta-hemoglobina (para anilina nitrobenzeno)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304434",
+      "descricao": "Meta-hemoglobina, determinação da",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313190",
+      "descricao": "Metais Al, As, Cd, Cr, Mn, Hg, Ni, Zn, Co, outro (s) absorção atômica (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311163",
+      "descricao": "Metanefrinas urinárias, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313204",
+      "descricao": "Metanol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313344",
+      "descricao": "Metil Etil Cetona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307522",
+      "descricao": "Micoplasma pneumoniae - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307530",
+      "descricao": "Micoplasma pneumoniae - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311171",
+      "descricao": "Microalbuminúria",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310302",
+      "descricao": "Microorganismos - teste de sensibilidade a drogas MIC, por droga testada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310370",
+      "descricao": "Microsporídia, pesquisa nas fezes",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304892",
+      "descricao": "Mielograma",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302245",
+      "descricao": "Mioglobina, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311341",
+      "descricao": "Mioglobina, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307565",
+      "descricao": "Mononucleose - Epstein BARR - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307573",
+      "descricao": "Mononucleose, anti-VCA (EBV) IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307581",
+      "descricao": "Mononucleose, anti-VCA (EBV) IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307557",
+      "descricao": "Mononucleose, reação sorológica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307590",
+      "descricao": "Montenegro, IDeR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312054",
+      "descricao": "Muco-nasal, pesquisa de eosinófilos e mastócitos",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302652",
+      "descricao": "Mucopolissacaridose,pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302660",
+      "descricao": "Mucoproteínas",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314170",
+      "descricao": "Mycobactéria PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308090",
+      "descricao": "NBT estimulado",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302253",
+      "descricao": "Nitrogênio amoniacal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302261",
+      "descricao": "Nitrogênio total",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309177",
+      "descricao": "Nonne-Apple; reação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305449",
+      "descricao": "N-telopeptídeo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302679",
+      "descricao": "Ocitocinase, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302270",
+      "descricao": "Osmolalidade",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311350",
+      "descricao": "Osmolalidade, determinação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712389",
+      "descricao": "Osteocalcina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307603",
+      "descricao": "Outros testes bioquímicos para determinação do risco fetal (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302288",
+      "descricao": "Oxcarbazepina, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313212",
+      "descricao": "P-aminofenol (para anilina)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312097",
+      "descricao": "Pancreozima - secretina no suco duodenal, teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302768",
+      "descricao": "PAPP-A",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310310",
+      "descricao": "Paracoccidioides, pesquisa de",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303110",
+      "descricao": "Parasitológico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303128",
+      "descricao": "Parasitológico, colheita múltipla com fornecimento do líquido conservante",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305465",
+      "descricao": "Paratormônio - PTH ou fração (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307611",
+      "descricao": "Parvovirus - IgG, IgM (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314189",
+      "descricao": "Parvovirus por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712397",
+      "descricao": "Peptídeo C",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302776",
+      "descricao": "Peptídeo natriurético BNP/PROBNP",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307620",
+      "descricao": "Peptídio intestinal vasoativo, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312062",
+      "descricao": "Perfil  metabólico  p/  litíase  renal: sangue (Ca, P, AU, Cr) urina: (Ca, AU, P, citr, pesq. Cistina) AMP-cíclico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302750",
+      "descricao": "Perfil lipídico / lipidograma (lípidios totais, colesterol, triglicerídios e eletroforese lipoproteínas)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312127",
+      "descricao": "Perfil reumatológico (ácido úrico, eletroforese de proteínas, FAN, VHS, prova do látex P/F. R, W. Rose)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403343",
+      "descricao": "Pesquisa de anticorpos séricos irregulares antieritrocitários",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403351",
+      "descricao": "Pesquisa de anticorpos séricos irregulares antieritrocitários - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403360",
+      "descricao": "Pesquisa de anticorpos séricos irregulares antieritrocitários - método de eluição",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403378",
+      "descricao": "Pesquisa de anticorpos séricos irregulares antieritrocitários a frio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309134",
+      "descricao": "Pesquisa de bandas oligoclonais por isofocalização",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403386",
+      "descricao": "Pesquisa de hemoglobina S por componente hemoterápico - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403394",
+      "descricao": "Pesquisa de hemoglobina S por unidade de sangue total - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314286",
+      "descricao": "Pesquisa de mutação de alelo específico por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314278",
+      "descricao": "Pesquisa de outros agentes por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311180",
+      "descricao": "Pesquisa ou dosagem de um componente urinário",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312135",
+      "descricao": "pH - tornassol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305490",
+      "descricao": "Piridinolina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302296",
+      "descricao": "Piruvato quinase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304450",
+      "descricao": "Plaquetas, teste de agregação (por agente agregante), cada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304469",
+      "descricao": "Plasminogênio, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304477",
+      "descricao": "Plasmódio, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310329",
+      "descricao": "Pneumocysti carinii, pesquisa por coloração especial",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313220",
+      "descricao": "P-nitrofenol (para nitrobenzeno)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311198",
+      "descricao": "Porfibilinogênio, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302300",
+      "descricao": "Porfirinas quantitativas (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311252",
+      "descricao": "Porfobilinogênio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302318",
+      "descricao": "Potássio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307638",
+      "descricao": "PPD (tuberculina), IDeR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302326",
+      "descricao": "Pré-albumina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305503",
+      "descricao": "Pregnandiol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305511",
+      "descricao": "Pregnantriol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302334",
+      "descricao": "Primidona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302342",
+      "descricao": "Procainamida",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304493",
+      "descricao": "Produtos de degradação da fibrina, qualitativo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304779",
+      "descricao": "Produtos de degradação da fibrina, quantitativo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712400",
+      "descricao": "Progesterona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712419",
+      "descricao": "Prolactina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302350",
+      "descricao": "Propanolol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304507",
+      "descricao": "Proteína C",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307646",
+      "descricao": "Proteína C reativa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307654",
+      "descricao": "Proteína C, teste imunológico",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307662",
+      "descricao": "Proteína eosinofílica catiônica (ECP)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302369",
+      "descricao": "Proteína ligadora do retinol",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309142",
+      "descricao": "Proteína mielina básica, anticorpo anti",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304787",
+      "descricao": "Proteína S livre, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314197",
+      "descricao": "Proteína S livre, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304515",
+      "descricao": "Proteína S, teste funcional",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311201",
+      "descricao": "Proteínas de Bence Jones, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302377",
+      "descricao": "Proteínas totais",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302385",
+      "descricao": "Proteínas totais albumina e globulina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304523",
+      "descricao": "Protoporfirina eritrocitária livre - zinco",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313239",
+      "descricao": "Protoporfirinas livres (para chumbo inorgânico)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313247",
+      "descricao": "Protoporfirinas Zn (para chumbo inorgânico)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312143",
+      "descricao": "Prova atividade de febre reumática (aslo, eletroforese de proteínas, muco-proteínas e proteína \"C\" reativa)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403408",
+      "descricao": "Prova de compatibilidade pré-transfusional completa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403416",
+      "descricao": "Prova de compatibilidade pré-transfusional completa - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311368",
+      "descricao": "Prova de concentração (Fishberg ou Volhard)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311376",
+      "descricao": "Prova de diluição",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304531",
+      "descricao": "Prova do laço",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305546",
+      "descricao": "Prova do LH-Rh, dosagem do FSH sem fornecimento de medicamento (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305554",
+      "descricao": "Prova do LH-Rh, dosagem do LH sem fornecimento de medicamento (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305562",
+      "descricao": "Prova do TRH-HPR, dosagem do HPR sem fornecimento do material (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305570",
+      "descricao": "Prova do TRH-TSH, dosagem do TSH sem fornecimento do material (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305589",
+      "descricao": "Prova para diabete insípido (restrição hídrica  NaCL 3% vasopressina)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312151",
+      "descricao": "Provas de função hepática (bilirrubinas, eletroforese de proteínas. FA, TGO, TGP e\r\nGama-PGT)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305627",
+      "descricao": "Provas de função tireoideana (T3, T4, índices e TSH)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307670",
+      "descricao": "Psitacose, reação sorológica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712427",
+      "descricao": "PTH",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309150",
+      "descricao": "Punção cisternal subocciptal com manometria para coleta de líquido cefalorraqueano",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309169",
+      "descricao": "Punção lombar com manometria para coleta de líquido cefalorraqueano",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314308",
+      "descricao": "Quantificação de outros agentes por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302393",
+      "descricao": "Quinidina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309517",
+      "descricao": "Ragócitos, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307689",
+      "descricao": "Reação sorológica para coxsackie, neutralização IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712435",
+      "descricao": "Renina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302407",
+      "descricao": "Reserva alcalina (bicarbonato)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314294",
+      "descricao": "Resistência a agentes anti virais por biologia molecular (cada droga)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304540",
+      "descricao": "Resistência globular, curva de",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304558",
+      "descricao": "Reticulócitos, contagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304566",
+      "descricao": "Retração do coágulo",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304574",
+      "descricao": "Ristocetina, co-fator, teste funcional, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310337",
+      "descricao": "Rotavírus, pesquisa, Elisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312100",
+      "descricao": "Rotina da biles A, B, C e do suco duodenal (caracteres físicos e microscópicos inclusive tubagem)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311210",
+      "descricao": "Rotina de urina (caracteres físicos, elementos anormais e sedimentoscopia)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309444",
+      "descricao": "Rotina do líquido amniótico-amniograma (citológico espectrofotometria, creatinina e\r\nteste de clements)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309525",
+      "descricao": "Rotina líquido sinovial - caracteres físicos, citologia, proteínas, ácido úrico, látex p/ F.R., BACT.",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307697",
+      "descricao": "Rubéola - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307700",
+      "descricao": "Rubéola - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314200",
+      "descricao": "Rubéola por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308103",
+      "descricao": "Rubeola, reação sorológica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302415",
+      "descricao": "Sacarose, teste de tolerância",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313336",
+      "descricao": "Salicilatos, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303136",
+      "descricao": "Sangue oculto, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308120",
+      "descricao": "Sarampo - anticorpos IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308138",
+      "descricao": "Sarampo - anticorpos IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308111",
+      "descricao": "Sarampo, reação sorológica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310388",
+      "descricao": "Sarcoptes scabei, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307719",
+      "descricao": "Schistosomose - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307727",
+      "descricao": "Schistosomose - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308278",
+      "descricao": "Schistosomose, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313255",
+      "descricao": "Selênio, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303144",
+      "descricao": "Shistossoma, pesquisa ovos em fragmentos mucosa após biópsia retal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307735",
+      "descricao": "Sífilis - FTA-ABS-IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307743",
+      "descricao": "Sífilis - FTA-ABS-IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307751",
+      "descricao": "Sífilis - TPHA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307760",
+      "descricao": "Sífilis - VDRL",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308286",
+      "descricao": "Sífilis anticorpo total",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308294",
+      "descricao": "Sífilis IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314219",
+      "descricao": "Sífilis por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311384",
+      "descricao": "Sobrecarga de água, prova",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302423",
+      "descricao": "Sódio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712443",
+      "descricao": "Somatomedina C (IGF1)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40305635",
+      "descricao": "Somatotrófico coriônico (HCS ou PHL)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303152",
+      "descricao": "Substâncias redutoras nas fezes",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302431",
+      "descricao": "Succinil acetona",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712451",
+      "descricao": "Sulfato de dehidroepiandrosterona (S-DHEA)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313263",
+      "descricao": "Sulfatos orgânicos ou inorgânicos, pesquisa (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304876",
+      "descricao": "Sulfo-hemoglobina, determinação da",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302440",
+      "descricao": "Sulfonamidas livre e acetilada (% de acetilação)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712460",
+      "descricao": "T3 livre",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712478",
+      "descricao": "T3 retenção",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712486",
+      "descricao": "T3 reverso",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712494",
+      "descricao": "T4 livre",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302458",
+      "descricao": "Tacrolimus",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40309185",
+      "descricao": "Takata-Ara reação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302466",
+      "descricao": "Tálio, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304582",
+      "descricao": "Tempo de coagulação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304590",
+      "descricao": "Tempo de protrombina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304604",
+      "descricao": "Tempo de reptilase",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304914",
+      "descricao": "Tempo de sangramento (Duke)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304612",
+      "descricao": "Tempo de sangramento de IVY",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304620",
+      "descricao": "Tempo de trombina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304639",
+      "descricao": "Tempo de tromboplastina parcial ativada",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302474",
+      "descricao": "Teofilina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403688",
+      "descricao": "Teste de Coombs direto",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403696",
+      "descricao": "Teste de Coombs direto - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403700",
+      "descricao": "Teste de Coombs direto - mono específico (IgG, IgA, C3, C3D, Poliv. - AGH) - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40403718",
+      "descricao": "Teste de Coombs indireto - mono específico (IgG, IgA, C3, C3D, Poliv. - AGH) - gel teste",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307778",
+      "descricao": "Teste de inibição da migração dos linfócitos (para cada antígeno)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302482",
+      "descricao": "Teste de tolerância a insulina ou hipoglicemiantes orais (até 6 dosagens)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302709",
+      "descricao": "Teste oral de tolerância à glicose - 2 dosagens",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307786",
+      "descricao": "Teste respiratório para H. Pylori",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712508",
+      "descricao": "Testosterona livre",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712516",
+      "descricao": "Testosterona total",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313271",
+      "descricao": "Tiocianato (para cianetos  nitrilas alifáticas)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712524",
+      "descricao": "Tireoestimulante, hormônio (TSH)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712532",
+      "descricao": "Tireoglobulina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302490",
+      "descricao": "Tirosina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311392",
+      "descricao": "Tirosinose, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712540",
+      "descricao": "Tiroxina (T4)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307794",
+      "descricao": "Toxocara cannis - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307808",
+      "descricao": "Toxocara cannis - IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307816",
+      "descricao": "Toxoplasmina, IDeR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308146",
+      "descricao": "Toxoplasmose",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308154",
+      "descricao": "Toxoplasmose - IgA",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307824",
+      "descricao": "Toxoplasmose IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307832",
+      "descricao": "Toxoplasmose IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314227",
+      "descricao": "Toxoplasmose por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302504",
+      "descricao": "Transaminase oxalacética (amino transferase aspartato)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302512",
+      "descricao": "Transaminase pirúvica (amino transferase de alanina)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302520",
+      "descricao": "Transferrina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310345",
+      "descricao": "Treponema (campo escuro)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302539",
+      "descricao": "Triazolam",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313280",
+      "descricao": "Triclorocompostos totais (para tetracloroetileno, tricloroetano, tricloroetileno)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302547",
+      "descricao": "Triglicerídeos",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712559",
+      "descricao": "Triiodotironina (T3)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302555",
+      "descricao": "Trimipramina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304647",
+      "descricao": "Tripanossoma, pesquisa",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302563",
+      "descricao": "Tripsina imuno reativa (IRT)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40303160",
+      "descricao": "Tripsina, prova de (digestão da gelatina)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40304655",
+      "descricao": "Tromboelastograma",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302571",
+      "descricao": "Troponina",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40312119",
+      "descricao": "Tubagem duodenal",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307840",
+      "descricao": "Urease, teste rápido para helicobacter pylori",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302580",
+      "descricao": "Uréia",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302598",
+      "descricao": "Urobilinogênio",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40311228",
+      "descricao": "Uroporfirinas, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40310353",
+      "descricao": "Vacina autógena",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308162",
+      "descricao": "Varicela, IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308170",
+      "descricao": "Varicela, IgM",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308189",
+      "descricao": "Varicela, reação sorológica",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712567",
+      "descricao": "Vasopressina (ADH)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307859",
+      "descricao": "Vírus sincicial respiratório - Elisa - IgG",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308197",
+      "descricao": "Vírus, (sincicial, respiratório) pesquisa direta",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302601",
+      "descricao": "Vitamina A, dosagem",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40712575",
+      "descricao": "Vitamina B12",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302610",
+      "descricao": "Vitamina E",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307867",
+      "descricao": "Waaler-Rose (fator reumatóide)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40308200",
+      "descricao": "Weil Felix (Ricketsiose), reação de aglutinação",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307875",
+      "descricao": "Western Blot (anticorpos anti-HIV)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307883",
+      "descricao": "Western Blot (anticorpos anti-HTVI ou HTLVII) (cada)",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40307891",
+      "descricao": "Widal, reação de",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40314235",
+      "descricao": "X frágil por PCR",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40302628",
+      "descricao": "Xilose, teste de absorção à",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  },
+  {
+      "codigo": "40313328",
+      "descricao": "Zinco",
+      "fabricante": "Sem Dados",
+      "tabela": 0
+  }
+
+
 	]

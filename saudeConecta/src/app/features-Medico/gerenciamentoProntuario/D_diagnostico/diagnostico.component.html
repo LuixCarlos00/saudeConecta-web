@@ -27,6 +27,10 @@
       <button class="anterior" (click)="goToPage(currentPage + 1)"
         [disabled]="currentPage === totalPages">Próxima</button>
     </div>
-    <button class="proximo" (click)="Proximo()">Próximo</button>
+    <div style="display: flex; justify-content: center;">
+      <div>
+        <button class="proximo" (click)="Proximo()">Próximo</button>
+      </div>
+    </div>
   </div>
 </body>

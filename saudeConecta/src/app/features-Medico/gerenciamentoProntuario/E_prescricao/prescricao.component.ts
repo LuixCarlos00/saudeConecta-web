@@ -1,31 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs';
+import { ProntuarioService } from 'src/app/service/MEDICO-prontuario/prontuario.service';
+import { Prontuario } from 'src/app/util/variados/interfaces/Prontuario/Prontuario';
 import { Tuss_terminologia_Unificada_Saude_Suplementar } from 'src/app/util/variados/options/tuss-Terminologia-unificada-saude-splementar';
 
 @Component({
-  selector: 'app-solicitacao-de-exame',
-  templateUrl: './solicitacao-de-exame.component.html',
-  styleUrls: ['./solicitacao-de-exame.component.css']
+  selector: 'app-prescricao',
+  templateUrl: './prescricao.component.html',
+  styleUrls: ['./prescricao.component.css'],
 })
-export class SolicitacaoDeExameComponent implements OnInit {
+export class PrescricaoComponent implements OnInit {
+  //
+  //
+  ///
+  PrescricaoText: string = '';
+  DataPrescricao: string = '';
+  ModeloPrescricao: string = '';
+  TituloPrescricao: string = '';
 
+  @Output() mudarAba = new EventEmitter<number>();
   myControl = new FormControl('');
-  options: Tuss_terminologia_Unificada_Saude_Suplementar[] = Tuss_terminologia_Unificada_Saude_Suplementar;
+  options: Tuss_terminologia_Unificada_Saude_Suplementar[] =
+    Tuss_terminologia_Unificada_Saude_Suplementar;
   filteredOptions: Tuss_terminologia_Unificada_Saude_Suplementar[] = [];
   selectedOptions: Tuss_terminologia_Unificada_Saude_Suplementar[] = [];
 
-  // Paginação
   pageSize = 10; // Número de itens por página
   currentPage = 1; // Página atual
   totalPages = 1; // Total de páginas
   paginatedOptions: Tuss_terminologia_Unificada_Saude_Suplementar[] = [];
 
-  constructor() {}
+  constructor(private ProntuarioService: ProntuarioService) {}
 
   ngOnInit() {
     this.filtrandoDadosCid();
   }
+
+
+  Proximo() {
+
+    const prontPrescricao = this.selectedOptions.map(option => option.descricao).join(', ');
+    const prontuario: Prontuario = {
+      prontPrescricao: prontPrescricao,
+      prontDataPrescricao: this.DataPrescricao,
+      prontModeloPrescricao: this.ModeloPrescricao,
+      prontTituloPrescricao: this.TituloPrescricao
+    };
+    console.log(prontuario,'aqui');
+
+    this.ProntuarioService.chageSolicitacaoExame(prontuario);
+    this.mudarAba.emit(5);
+  }
+
+
+
 
   filtrandoDadosCid() {
     this.filteredOptions = this.options;
@@ -47,7 +76,9 @@ export class SolicitacaoDeExameComponent implements OnInit {
       });
   }
 
-  private _filter(value: string): Tuss_terminologia_Unificada_Saude_Suplementar[] {
+  private _filter(
+    value: string
+  ): Tuss_terminologia_Unificada_Saude_Suplementar[] {
     if (!value.trim()) {
       return this.options; // Retorna todas as opções se o valor estiver vazio
     }
@@ -70,20 +101,27 @@ export class SolicitacaoDeExameComponent implements OnInit {
     }
   }
 
-  selectOption(option: Tuss_terminologia_Unificada_Saude_Suplementar, event: any) {
+  selectOption(
+    option: Tuss_terminologia_Unificada_Saude_Suplementar,
+    event: any
+  ) {
     if (event.target.checked) {
       this.selectedOptions.push(option);
     } else {
-      const index = this.selectedOptions.findIndex(o => o.codigo === option.codigo);
+      const index = this.selectedOptions.findIndex(
+        (o) => o.codigo === option.codigo
+      );
       if (index !== -1) {
         this.selectedOptions.splice(index, 1);
       }
     }
-    console.log('Selecionado:', this.selectedOptions);
+    this.updatePrescricaoText();
   }
 
-  Proximo() {
-    console.log('Selecionados:', this.selectedOptions);
+  updatePrescricaoText() {
+    this.PrescricaoText = this.selectedOptions
+      .map((option) => option.descricao)
+      .join('\n');
   }
 
   resetarPesquisa() {

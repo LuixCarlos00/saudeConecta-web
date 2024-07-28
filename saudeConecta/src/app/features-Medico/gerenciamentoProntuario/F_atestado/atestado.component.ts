@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-atestado',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./atestado.component.css']
 })
 export class AtestadoComponent implements OnInit {
-
+  @Output() mudarAba = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit() {
