@@ -12,6 +12,7 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
   minutes: number = 0;
   seconds: number = 0;
   interval: any;
+  Consulta: any;
 
   constructor(
     public dialogRef: MatDialogRef<GerenciamentoProntuarioComponent>,
@@ -19,6 +20,7 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.Consulta = this.data.element;
     console.log('element', this.data.element);
     this.startTimer();
     this.resetTimer();
@@ -56,6 +58,9 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
   }
 
   onMudarAba(index: number) {
+    if (index === 6) { // Aba de finalização
+      this.pausarTempo();
+    }
     this.selectedTabIndex = index;
   }
 

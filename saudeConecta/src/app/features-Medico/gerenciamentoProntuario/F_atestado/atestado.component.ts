@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./atestado.component.css']
 })
 export class AtestadoComponent implements OnInit {
-  @Output() mudarAba = new EventEmitter<number>();
+  @Output() onMudarAba = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit() {

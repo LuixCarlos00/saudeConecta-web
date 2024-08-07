@@ -19,7 +19,12 @@ export class PrescricaoComponent implements OnInit {
   ModeloPrescricao: string = '';
   TituloPrescricao: string = '';
 
-  @Output() mudarAba = new EventEmitter<number>();
+  ModeloExame : string='';
+  TituloExame : string='';
+  DataExame : string='';
+  ExameText : string='';
+
+  @Output() onMudarAba = new EventEmitter<number>();
   myControl = new FormControl('');
   options: Tuss_terminologia_Unificada_Saude_Suplementar[] =
     Tuss_terminologia_Unificada_Saude_Suplementar;
@@ -45,12 +50,19 @@ export class PrescricaoComponent implements OnInit {
       prontPrescricao: prontPrescricao,
       prontDataPrescricao: this.DataPrescricao,
       prontModeloPrescricao: this.ModeloPrescricao,
-      prontTituloPrescricao: this.TituloPrescricao
+      prontTituloPrescricao: this.TituloPrescricao,
+
+      prontExame: this.ExameText,
+      prontDataExame: this.DataExame,
+      prontModeloExame: this.ModeloExame,
+      prontTituloExame: this.TituloExame
+
+
     };
     console.log(prontuario,'aqui');
 
     this.ProntuarioService.chageSolicitacaoExame(prontuario);
-    this.mudarAba.emit(5);
+    this.onMudarAba.emit(5);
   }
 
 

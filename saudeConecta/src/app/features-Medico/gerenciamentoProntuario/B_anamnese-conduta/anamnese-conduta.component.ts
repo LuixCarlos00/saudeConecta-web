@@ -8,7 +8,7 @@ import { Prontuario } from 'src/app/util/variados/interfaces/Prontuario/Prontuar
   styleUrls: ['./anamnese-conduta.component.css'],
 })
 export class AnamneseCondutaComponent implements OnInit {
-  @Output() mudarAba = new EventEmitter<number>();
+  @Output() onMudarAba = new EventEmitter<number>();
   Conduta: string = '';
   Anamnese: string = '';
 
@@ -28,6 +28,6 @@ export class AnamneseCondutaComponent implements OnInit {
     };
     this.ProntuarioService.chageAnamneseConduta(prontuario);
 
-    this.mudarAba.emit(2);
+    this.onMudarAba.emit(2);
   }
 }

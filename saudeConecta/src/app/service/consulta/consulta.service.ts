@@ -166,6 +166,8 @@ export class ConsultaService {
   }
 
   ConcluirDadosDaTabela(IdConclusao: number): Observable<Consulta> {
+    console.log(IdConclusao, 'IdConclusao', this.Token.toString());
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.Token}`,

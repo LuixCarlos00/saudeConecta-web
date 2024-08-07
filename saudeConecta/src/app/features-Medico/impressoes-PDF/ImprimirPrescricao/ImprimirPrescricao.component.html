@@ -1,0 +1,27 @@
+<div id="pdfContent">
+  <hr>
+  <div style="display: flex; justify-content: left;">
+    <div style="align-items: left; margin-left: 10px; font-size: 12px;">
+      <label style="font-size: 12px; margin-left: 10px;">Dr: {{ data.Consulta.ConMedico.medNome?.trim() }}</label>
+      <br>
+      <label style="font-size: 9px; margin-left: 10px; margin-top: -15px;">CRM: {{ data.Consulta.ConMedico.medCrm?.trim() }}</label>
+      <br>
+      <label style="font-size: 9px; margin-left: 10px; margin-top: -15px;">Especialidade: {{ data.Consulta.ConMedico.medEspecialidade?.trim() }}</label>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <label style="font-size: 20px; margin-left: 10px;">Prescrição  </label>
+    <br>
+    <label style="font-size: 12px; margin-left: 10px;">Data: {{ Prontuario.prontDataPrescricao || dataAtual}}</label>
+    <br>
+    <label style="font-size: 12px; margin-left: 10px;">Informação: {{ Prontuario.prontDataPrescricao || 'SEM INFORMACÃO' }}</label>
+    <div class="undefined campoTexto" appAutoResize>{{ Prontuario.prontPrescricao?.trim() }}</div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <hr>
+</div>
+<button (click)="GerarPDF()">Imprimir</button>

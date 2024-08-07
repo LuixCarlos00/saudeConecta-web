@@ -16,8 +16,7 @@ import { RecuperaCadastroComponent } from './features/recupera-Cadastro/recupera
 import { PesquisaMedicosComponent } from './features/pesquisaMedicos/pesquisaMedicos.component';
 
 import { AgendaComponent } from './features/agenda/agenda.component';
-import { HistoricoComponent } from './features/historico/historico.component';
-import { TrocaSenhaComponent } from './features/troca-senha/troca-senha.component';
+ import { TrocaSenhaComponent } from './features/troca-senha/troca-senha.component';
 import { CadastroAdmComponent } from './features/cadastro/cadastro-adm/cadastro-adm.component';
 import { GuardaRotasHome } from './features/dashboard/guards/GuardaRotasHome';
 import { CadastroSecretariaComponent } from './features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
@@ -25,6 +24,7 @@ import { GerenciamentoComponent } from './features/gerenciamento/gerenciamento.c
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ProntuarioComponent } from './features-Medico/prontuario/prontuario.component';
 import { TabelaAgendaMedicoComponent } from './features-Medico/tabela-agenda-medico/tabela-agenda-medico.component';
+import { HistoricosComponent } from './features-Medico/historicos/historicos.component';
 
 
 const routes: Routes = [
@@ -97,8 +97,8 @@ const routes: Routes = [
   },
 
   {
-    path: 'historico',
-    component: HistoricoComponent,
+    path: 'Historico',
+    component: HistoricosComponent,
     canActivate: [GuardaRotasHome],
   },
 

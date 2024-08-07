@@ -1,3 +1,4 @@
+import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -119,7 +120,6 @@ export class ConsultaStatusService {
 
 
       EditarConsulasStatus(consultaId: any, NovaConsulta: ConsultaStatus): Observable<ConsultaStatus> {
-        console.log(consultaId, NovaConsulta);
 
         const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
         const options = { headers, withCredentials: true };
@@ -128,7 +128,7 @@ export class ConsultaStatusService {
 
 
       ConcluirDadosDaTabelaStatus(IdConclusao: number): Observable<ConsultaStatus> {
-        console.log(IdConclusao, 'IdConclusao', this.Token.toString());
+
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -137,5 +137,17 @@ export class ConsultaStatusService {
 
         return this.http.put<ConsultaStatus>(`${this.apiUrl}/consultaStatus/concluido/${IdConclusao}`, {}, { headers });
     }
+
+
+
+    BuscarRegistrosDeConsultaStatusPesquisandoPorTodosOsCampos(Consulta: any) {
+      console.log('buscando consulta status  ', Consulta);
+
+      const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
+      const options = { headers, withCredentials: true };
+      return this.http.get<ConsultaStatus>(`${this.apiUrl}/consultaStatus/Allcampos/medico=${Consulta.ConMedico.medCodigo}&data=${Consulta.ConData}&horario=${Consulta.ConHorario}&paciente=${Consulta.ConPaciente.paciCodigo}&Administrador=${Consulta.ConAdm.admCodigo}&DataCriacao=${Consulta.ConDadaCriacao}`, options);
+    }
+
+
 
 }

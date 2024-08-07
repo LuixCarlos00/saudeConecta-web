@@ -21,6 +21,11 @@
           <span class="tooltip">Dados Pessoais</span>
         </button>
 
+        <button class="fetures" *ngIf="this.ControleAcessoService.AcessoMedico()" (click)="redirecionamentoDePaginas('Historico')" title="Dados Pessoais">
+          <i  style="color: #e3e9f7;" class="fa-solid fa-user-doctor fa-xl"></i>
+          <span class="tooltip">Histórico de Prontuarios </span>
+        </button>
+
         <button class="fetures" *ngIf="this.ControleAcessoService.AcessoAdministrador()" (click)="redirecionamentoDePaginas('gerenciamento')" title="Gerenciamento">
 
           <i  style="color: #e3e9f7;" class="fa-solid fa-notes-medical fa-xl"></i>

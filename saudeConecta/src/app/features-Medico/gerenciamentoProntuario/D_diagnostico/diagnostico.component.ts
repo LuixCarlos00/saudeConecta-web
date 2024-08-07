@@ -11,7 +11,7 @@ import { Cid_codigo_internaciona_doecas } from 'src/app/util/variados/options/ci
   styleUrls: ['./diagnostico.component.css'],
 })
 export class DiagnosticoComponent implements OnInit {
-  @Output() mudarAba = new EventEmitter<number>();
+  @Output() onMudarAba = new EventEmitter<number>();
   myControl = new FormControl('');
   options: Cid_codigo_internaciona_doecas[] = Cid_codigo_internaciona_doecas;
   filteredOptions: Cid_codigo_internaciona_doecas[] = [];
@@ -85,7 +85,7 @@ export class DiagnosticoComponent implements OnInit {
     console.log(prontuario, 'aqui');
 
     this.ProntuarioService.chageDiagnostico(prontuario);
-    this.mudarAba.emit(4);
+    this.onMudarAba.emit(4);
   }
 
   resetarPesquisa() {

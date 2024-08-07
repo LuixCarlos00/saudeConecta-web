@@ -17,6 +17,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BarraLateraComponent } from './util/variados/barra-Latera/barra-Latera.component';
 import { NgChartsModule } from 'ng2-charts';
 import { QuillModule } from 'ngx-quill';
+ import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgrokInterceptor } from './util/variados/interceptor\'s/ngGrok.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, BarraLateraComponent],
@@ -37,7 +39,9 @@ import { QuillModule } from 'ngx-quill';
     NgChartsModule,
 
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: NgrokInterceptor , multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

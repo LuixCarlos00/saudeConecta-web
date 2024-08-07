@@ -55,7 +55,7 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
     private cdr: ChangeDetectorRef
   ) {
     this.DadosPDFConsulta = this.data.DadoSelecionadoParaGerarPDF[0];
-    console.log(this.DadosPDFConsulta);
+
 
     this.dataAtual();
     this.dataISO = this.criarDataComTimeZone(this.DadosPDFConsulta.ConData);

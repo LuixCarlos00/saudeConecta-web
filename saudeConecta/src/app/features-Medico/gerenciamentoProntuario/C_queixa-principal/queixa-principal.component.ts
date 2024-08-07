@@ -8,7 +8,7 @@ import { Prontuario } from 'src/app/util/variados/interfaces/Prontuario/Prontuar
   styleUrls: ['./queixa-principal.component.css'],
 })
 export class QueixaPrincipalComponent implements OnInit {
-  @Output() mudarAba = new EventEmitter<number>();
+  @Output() onMudarAba = new EventEmitter<number>();
 
   QueixaPrincipal: string = '';
   constructor(private ProntuarioService: ProntuarioService) {}
@@ -21,6 +21,6 @@ export class QueixaPrincipalComponent implements OnInit {
     };
     this.ProntuarioService.chageQueixaPrincipal(prontuario);
 
-    this.mudarAba.emit(3);
+    this.onMudarAba.emit(3);
   }
 }

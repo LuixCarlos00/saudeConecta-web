@@ -1,25 +1,20 @@
-import { ProntuarioService } from 'src/app/service/MEDICO-prontuario/prontuario.service';
-import { Consulta } from './../../util/variados/interfaces/consulta/consulta';
-import { TabelaAgendaMedicoService } from './../../service/MEDICO-tabela-agenda-medico/tabelaAgendaMedico.service';
-import { Usuario } from './../../util/variados/interfaces/usuario/usuario';
-import { tokenService } from './../../util/Token/Token.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import Swal from 'sweetalert2';
-import { ObservacoesComponent } from 'src/app/features/agenda/tabela-agenda/Observacoes/Observacoes.component';
+import { PageEvent } from '@angular/material/paginator';
+import { ProntuarioService } from 'src/app/service/MEDICO-prontuario/prontuario.service';
+import { TabelaAgendaMedicoService } from 'src/app/service/MEDICO-tabela-agenda-medico/tabelaAgendaMedico.service';
+import { tokenService } from 'src/app/util/Token/Token.service';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
-import { elements } from 'chart.js';
-import { el } from 'date-fns/locale';
-import { GerenciamentoComponent } from 'src/app/features/gerenciamento/gerenciamento.component';
-import { GerenciamentoProntuarioComponent } from '../gerenciamentoProntuario/gerenciamentoProntuario.component';
+import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-tabela-agenda-medico',
-  templateUrl: './tabela-agenda-medico.component.html',
-  styleUrls: ['./tabela-agenda-medico.component.css'],
+  selector: 'app-historicos',
+  templateUrl: './historicos.component.html',
+  styleUrls: ['./historicos.component.css']
 })
-export class TabelaAgendaMedicoComponent implements OnInit {
+export class HistoricosComponent implements OnInit {
 
   @Output() selecionaMedico = new EventEmitter<any>();
   @Output() fechar = new EventEmitter<void>();
@@ -60,34 +55,34 @@ export class TabelaAgendaMedicoComponent implements OnInit {
   ngOnInit() {}
 
 
-  DesejaAbrirConsulta(element: any) {
-    Swal.fire({
-      title: 'Tem certeza que deseja abrir essa consulta?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#5ccf6c',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, abrir!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.AbrirConsulta(element);
-      }else{
-        this.BuscarDadosDeAgendaDoMedicoDoDia();
-      }
-    });
-   }
+  // DesejaAbrirConsulta(element: any) {
+  //   Swal.fire({
+  //     title: 'Tem certeza que deseja abrir essa consulta?',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#5ccf6c',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Sim, abrir!',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //      // this.AbrirConsulta(element);
+  //     }else{
+  //       this.BuscarDadosDeAgendaDoMedicoDoDia();
+  //     }
+  //   });
+  //  }
 
 
 
-   AbrirConsulta(element: any) {
-    this.ProntuarioService.changeObjetoConsulta(element);
-    this.dialog.open(GerenciamentoProntuarioComponent, {
-      width: '1200px',
-      height: '600px',
-      data: { element: element },
-    });
+  //  AbrirConsulta(element: any) {
+  //   this.ProntuarioService.changeObjetoConsulta(element);
+  //   this.dialog.open(GerenciamentoProntuarioComponent, {
+  //     width: '1200px',
+  //     height: '600px',
+  //     data: { element: element },
+  //   });
 
-   }
+  //  }
 
 
 
@@ -205,13 +200,13 @@ export class TabelaAgendaMedicoComponent implements OnInit {
     this.pesquisa = '';
   }
 
-  openObservacoesDialog(observacoes: string): void {
-    this.dialog.open(ObservacoesComponent, {
-      width: '550px',
-      data: { observacoes: observacoes },
-    });
+  // openObservacoesDialog(observacoes: string): void {
+  //   this.dialog.open(ObservacoesComponent, {
+  //     width: '550px',
+  //     data: { observacoes: observacoes },
+  //   });
 
-  }
+  // }
 
   getPaginatorData(event: PageEvent): PageEvent {
     this.lowValue = event.pageIndex * event.pageSize;
@@ -227,6 +222,7 @@ export class TabelaAgendaMedicoComponent implements OnInit {
     'ConData',
     'ConHorario',
     'ConObservacoes',
-    'Consulta',
+    'Imprimir',
+
   ];
 }

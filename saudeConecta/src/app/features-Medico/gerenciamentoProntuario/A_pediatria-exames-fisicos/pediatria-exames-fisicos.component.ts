@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./pediatria-exames-fisicos.component.css'],
 })
 export class PediatriaExamesFisicosComponent implements OnInit {
-  @Output() mudarAba = new EventEmitter<number>();
+  @Output() onMudarAba = new EventEmitter<number>();
   peso: string = '';
   altura: string = '';
   Temperatura: string = '';
@@ -56,9 +56,11 @@ export class PediatriaExamesFisicosComponent implements OnInit {
         prontFrequenciaArterialDiastolica: this.FreqArterialDiastolica,
         prontObservacao: this.observacao,
       };
+      console.log('os dados chegara aqui   ', prontuario);
+
 
       this.ProntuarioService.chagePediatriaExamesFisicos(prontuario);
-      this.mudarAba.emit(1);
+      this.onMudarAba.emit(1);
     }
   }
 }

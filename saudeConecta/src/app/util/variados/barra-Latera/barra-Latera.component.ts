@@ -58,6 +58,11 @@ export class BarraLateraComponent implements OnInit {
       this.router.navigate(['Prontuario']);
 
     }
+    else if (rota === 'Historico') {
+
+    this.router.navigate(['Historico']);
+
+  }
 
 
 

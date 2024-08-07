@@ -1,0 +1,82 @@
+<body>
+  <div style="  width: 80%; margin: auto;height: auto;">
+
+
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput [(ngModel)]="pesquisa" placeholder="Ex. Nome,Dia,Horario" #input>
+      <mat-icon matSuffix (click)="chamandoPesquisa()" title="Pesquisa">search</mat-icon>
+      <mat-icon matSuffix (click)="limparPesquisa()" title="Limpa a pesquisa">clear</mat-icon>
+      <mat-icon matSuffix (click)="resetarPesquisa()" title="Recarrega a tabela">restore</mat-icon>
+    </mat-form-field>
+
+
+
+
+
+    <section class="example-container mat-elevation-z8 custom-table" tabindex="0" style="  border-radius: 10px;">
+
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="ConCodigoConsulta">
+          <th mat-header-cell *matHeaderCellDef class="NomeCod ">Cod</th>
+          <td mat-cell *matCellDef="let element ;let i = index" class="colunascod">{{i+1}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="NomePaciente">
+          <th mat-header-cell *matHeaderCellDef class=" NomePaciente">Paciente</th>
+          <td mat-cell *matCellDef="let element" class="colunasPaciente">{{element.ConPaciente.paciNome ||
+            element.ConPaciente}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ConDia_semana">
+          <th mat-header-cell *matHeaderCellDef class=" NomeDiaSemana">Dia</th>
+          <td mat-cell *matCellDef="let element" class="colunasDiaSemana">{{element.ConDia_semana}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ConData">
+          <th mat-header-cell *matHeaderCellDef class=" Nomedata"> Ano/Mes/Dia </th>
+          <td mat-cell *matCellDef="let element" class="colunasData">{{element.ConData}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="ConHorario">
+          <th mat-header-cell *matHeaderCellDef class=" NomeHorario">Horário</th>
+          <td mat-cell *matCellDef="let element" class="colunasHorario">{{element.ConHorario}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ConObservacoes">
+          <th mat-header-cell *matHeaderCellDef class=" NomeObecervacao">Aviso</th>
+          <td mat-cell *matCellDef="let element" class="colunasObecervacao">
+            <button *ngIf="element.ConObservacoes" style="border: hidden;">
+              <i style="color: cadetblue;" class="fa-solid fa-note-sticky fa-xl"></i>
+            </button>
+          </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="Imprimir">
+          <th mat-header-cell *matHeaderCellDef class="NomeObecervacao">Abrir Consulta</th>
+          <td mat-cell *matCellDef="let element" class="colunasObecervacao">
+            <mat-radio-button [checked]="element.selected"
+
+            >
+            </mat-radio-button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+        <tr mat-row (click)="clickedRows.add(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
+          *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </section>
+
+
+
+
+
+  </div>
+</body>

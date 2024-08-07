@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ApiUrlService {
 
 private apiUrl = 'http://localhost:8080'
-private ngGrok = 'https://f624-168-194-194-201.ngrok-free.app'
+private ngGrok = 'https://b7e3-45-235-35-231.ngrok-free.app'
 
 constructor() { }
 

@@ -67,6 +67,9 @@ import { DiagnosticoComponent } from '../features-Medico/gerenciamentoProntuario
 import { PediatriaExamesFisicosComponent } from '../features-Medico/gerenciamentoProntuario/A_pediatria-exames-fisicos/pediatria-exames-fisicos.component';
 import { PrescricaoComponent } from '../features-Medico/gerenciamentoProntuario/E_prescricao/prescricao.component';
  import { AnamneseCondutaComponent } from '../features-Medico/gerenciamentoProntuario/B_anamnese-conduta/anamnese-conduta.component';
+import { ImprimirPrescricaoComponent } from '../features-Medico/impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
+import { ImprimirSoliciatacaoDeExamesComponent } from '../features-Medico/impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
+import { HistoricosComponent } from '../features-Medico/historicos/historicos.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +113,9 @@ import { PrescricaoComponent } from '../features-Medico/gerenciamentoProntuario/
     DiagnosticoComponent,
     PediatriaExamesFisicosComponent,
     PrescricaoComponent,
+    ImprimirPrescricaoComponent,
+    ImprimirSoliciatacaoDeExamesComponent,
+    HistoricosComponent
 
   ],
   exports: [],

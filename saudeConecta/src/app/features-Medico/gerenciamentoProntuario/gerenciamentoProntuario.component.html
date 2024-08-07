@@ -5,20 +5,22 @@
 </div>
 
 <mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onMudarAba($event)">
-  <mat-tab label="Pediatria & Exames Fisicos"> <app-pediatria-exames-fisicos></app-pediatria-exames-fisicos>
+  <mat-tab label="Pediatria & Exames Fisicos">
+    <app-pediatria-exames-fisicos (onMudarAba)="onMudarAba($event)"></app-pediatria-exames-fisicos>
   </mat-tab>
-  <mat-tab label="Condulta & Anamnese"> <app-anamnese-conduta></app-anamnese-conduta>
+
+  <mat-tab label="Condulta & Anamnese"> <app-anamnese-conduta (onMudarAba)="onMudarAba($event)"></app-anamnese-conduta>
   </mat-tab>
-  <mat-tab label="Queixa Principal"> <app-queixa-principal></app-queixa-principal>
+  <mat-tab label="Queixa Principal"> <app-queixa-principal (onMudarAba)="onMudarAba($event)" ></app-queixa-principal>
   </mat-tab>
-  <mat-tab label="Diagnóstico">  <app-diagnostico></app-diagnostico>
+  <mat-tab label="Diagnóstico"> <app-diagnostico (onMudarAba)="onMudarAba($event)"></app-diagnostico>
   </mat-tab>
-  <mat-tab label="Prescrição & Soliciatação de Exames"> <app-prescricao></app-prescricao>
+  <mat-tab label="Prescrição & Soliciatação de Exames"> <app-prescricao (onMudarAba)="onMudarAba($event)"></app-prescricao>
   </mat-tab>
-  <mat-tab label="Atestado"> <app-atestado></app-atestado>
+  <mat-tab label="Atestado"> <app-atestado (onMudarAba)="onMudarAba($event)"></app-atestado>
   </mat-tab>
-  <mat-tab label="Finalizar"> <app-finalizar [selectedTabIndex]="selectedTabIndex" [tempo]="interval"
-      (mudarTempo)="ngOnDestroy()" (pausarTempo)="pausarTempo()">
+  <mat-tab label="Finalizar"> <app-finalizar [selectedTabIndex]="selectedTabIndex" [tempo]="timer"
+      (mudarTempo)="ngOnDestroy()" (pausarTempo)="pausarTempo()" [Consultas]="Consulta" >
     </app-finalizar>
   </mat-tab>
 </mat-tab-group>

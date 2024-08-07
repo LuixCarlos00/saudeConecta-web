@@ -4,7 +4,7 @@ import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,9 @@ import { Observable } from 'rxjs';
 export class TabelaAgendaMedicoService {
 
 
+
   private apiUrl = '';
   private Token = this.tokenService.retornaToken();
-
-
 
   constructor(
     private router: Router,
@@ -32,5 +31,8 @@ export class TabelaAgendaMedicoService {
     const options = { headers, withCredentials: true };
     return this.http.get<any[]>( `${this.apiUrl}/consulta/BuscarTodaAgendaDeMedico/${IdUsuarioMedico}/${dataHoje}`, options);
   }
+
+
+
 
 }

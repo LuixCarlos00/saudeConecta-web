@@ -39,4 +39,13 @@ export interface Prontuario {
       prontCodigoMedico ?: any,
       prontCodigoConsulta ?: any,
 
+
+      prontModeloExame ?: string,
+      prontTituloExame ?: string,
+      prontDataExame ?: string,
+      prontExame ?: string,
+
 }
+
+
+/// cria no bando e na api campos de solicitacao de exames como data  titulo e solicitacao
