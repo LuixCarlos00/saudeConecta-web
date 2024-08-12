@@ -2,21 +2,22 @@
   <hr>
   <div style="display: flex; justify-content: left;">
     <div style="align-items: left; margin-left: 10px; font-size: 12px;">
-      <label style="font-size: 12px; margin-left: 10px;">Dr: {{ data.Consulta.ConMedico.medNome?.trim() }}</label>
+       <label style="font-size: 12px; margin-left: 10px;">Dr: {{  NomeMedico }}</label>
+
       <br>
-      <label style="font-size: 9px; margin-left: 10px; margin-top: -15px;">CRM: {{ data.Consulta.ConMedico.medCrm?.trim() }}</label>
+      <label style="font-size: 9px; margin-left: 10px; margin-top: -15px;">CRM: {{ Crm }}</label>
       <br>
-      <label style="font-size: 9px; margin-left: 10px; margin-top: -15px;">Especialidade: {{ data.Consulta.ConMedico.medEspecialidade?.trim() }}</label>
+      <label style="font-size: 9px; margin-left: 10px; margin-top: -15px;">Especialidade: {{ Especialidade }}</label>
     </div>
   </div>
   <hr>
   <div>
-    <label style="font-size: 20px; margin-left: 10px;">Exame  </label>
+    <label style="font-size: 20px; margin-left: 10px;">Exame </label>
     <br>
-    <label style="font-size: 12px; margin-left: 10px;">Data: {{ Prontuario.prontDataPrescricao || dataAtual}}</label>
+    <label style="font-size: 12px; margin-left: 10px;">Data: {{ Data}}</label>
     <br>
-    <label style="font-size: 12px; margin-left: 10px;">Informação: {{ Prontuario.prontExame || 'SEM INFORMACÃO' }}</label>
-    <div class="undefined campoTexto" appAutoResize>{{ Prontuario.prontPrescricao?.trim() }}</div>
+    <label style="font-size: 12px; margin-left: 10px;">Informação: {{'Pedido de Exames Laboratoriais' }}</label>
+    <div class="undefined campoTexto" appAutoResize>{{ Prescricao }}</div>
   </div>
   <br>
   <br>

@@ -63,6 +63,11 @@ export class BarraLateraComponent implements OnInit {
     this.router.navigate(['Historico']);
 
   }
+  else if (rota === 'DadosMedicos') {
+
+    this.router.navigate(['Dados-Medicos']);
+
+  }
 
 
 

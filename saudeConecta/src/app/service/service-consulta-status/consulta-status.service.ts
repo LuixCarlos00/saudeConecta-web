@@ -82,20 +82,20 @@ export class ConsultaStatusService {
 
 
 
-    CriarConsulataStatus(Consulta: Consulta): Observable<Consulta> {
-      const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.Token}`,};
-      const options = { headers, withCredentials: true };
-      return this.http.post<Consulta>(`${this.apiUrl}/consultaStatus/post`,Consulta,options );
-      }
+    // CriarConsulataStatus(Consulta: Consulta): Observable<Consulta> {
+    //   const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.Token}`,};
+    //   const options = { headers, withCredentials: true };
+    //   return this.http.post<Consulta>(`${this.apiUrl}/consultaStatus/post`,Consulta,options );
+    //   }
 
 
 
 
-      VericarSeExetemConsultasMarcadasNaTabelaStatus(consult: ConsultaStatus) {
-        const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.Token}`,};
-        const options = { headers, withCredentials: true };
-        return this.http.get<ConsultaStatus>(`${this.apiUrl}/consultaStatus/consultaData=${consult.ConSttData}&horario=${consult.ConSttHorario}&medico=${consult.ConSttHorario} `,options );
-      }
+      // VericarSeExetemConsultasMarcadasNaTabelaStatus(consult: ConsultaStatus) {
+      //   const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.Token}`,};
+      //   const options = { headers, withCredentials: true };
+      //   return this.http.get<ConsultaStatus>(`${this.apiUrl}/consultaStatus/consultaData=${consult.ConSttData}&horario=${consult.ConSttHorario}&medico=${consult.ConSttHorario} `,options );
+      // }
 
       BuscarTodosRegistrosDeConsultaStatus(): Observable<{content: ConsultaStatus[]}> {
         const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
@@ -104,39 +104,39 @@ export class ConsultaStatusService {
       }
 
 
-      BuscarRegistrosDeConsultaStatus(busca: any) {
-        const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
-        const options = { headers, withCredentials: true };
-        return this.http.get<{content: ConsultaStatus[]}>(`${this.apiUrl}/consultaStatus/BuscarRegistrosDeConsulta/${busca}`, options);
-      }
+      // BuscarRegistrosDeConsultaStatus(busca: any) {
+      //   const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
+      //   const options = { headers, withCredentials: true };
+      //   return this.http.get<{content: ConsultaStatus[]}>(`${this.apiUrl}/consultaStatus/BuscarRegistrosDeConsulta/${busca}`, options);
+      // }
 
 
-      DeletarConsulasStatus(consultaId: any) {
-        const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
-        const options = { headers, withCredentials: true };
-        return this.http.delete<{content: Consulta[]}>(`${this.apiUrl}/consultaStatus/${consultaId}`, options);
-      }
+      // DeletarConsulasStatus(consultaId: any) {
+      //   const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
+      //   const options = { headers, withCredentials: true };
+      //   return this.http.delete<{content: Consulta[]}>(`${this.apiUrl}/consultaStatus/${consultaId}`, options);
+      // }
 
 
 
-      EditarConsulasStatus(consultaId: any, NovaConsulta: ConsultaStatus): Observable<ConsultaStatus> {
+      // EditarConsulasStatus(consultaId: any, NovaConsulta: ConsultaStatus): Observable<ConsultaStatus> {
 
-        const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
-        const options = { headers, withCredentials: true };
-        return this.http.put<ConsultaStatus>(`${this.apiUrl}/consultaStatus/editar/${consultaId}`,NovaConsulta, options);
-      }
-
-
-      ConcluirDadosDaTabelaStatus(IdConclusao: number): Observable<ConsultaStatus> {
+      //   const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
+      //   const options = { headers, withCredentials: true };
+      //   return this.http.put<ConsultaStatus>(`${this.apiUrl}/consultaStatus/editar/${consultaId}`,NovaConsulta, options);
+      // }
 
 
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${this.Token}`
-        });
+    //   ConcluirDadosDaTabelaStatus(IdConclusao: number): Observable<ConsultaStatus> {
 
-        return this.http.put<ConsultaStatus>(`${this.apiUrl}/consultaStatus/concluido/${IdConclusao}`, {}, { headers });
-    }
+
+    //     const headers = new HttpHeaders({
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${this.Token}`
+    //     });
+
+    //     return this.http.put<ConsultaStatus>(`${this.apiUrl}/consultaStatus/concluido/${IdConclusao}`, {}, { headers });
+    // }
 
 
 
@@ -146,6 +146,14 @@ export class ConsultaStatusService {
       const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
       const options = { headers, withCredentials: true };
       return this.http.get<ConsultaStatus>(`${this.apiUrl}/consultaStatus/Allcampos/medico=${Consulta.ConMedico.medCodigo}&data=${Consulta.ConData}&horario=${Consulta.ConHorario}&paciente=${Consulta.ConPaciente.paciCodigo}&Administrador=${Consulta.ConAdm.admCodigo}&DataCriacao=${Consulta.ConDadaCriacao}`, options);
+    }
+
+
+
+    BuscarHistoricoDeAgendaDoMedico(IdUsuarioMedico: number) {
+      const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}`, };
+      const options = { headers, withCredentials: true };
+      return this.http.get<any[]>( `${this.apiUrl}/consultaStatus/BuscarHistoricoDeAgendaDoMedico/${IdUsuarioMedico}`, options);
     }
 
 

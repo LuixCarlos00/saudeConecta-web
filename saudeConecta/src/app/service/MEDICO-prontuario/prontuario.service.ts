@@ -15,6 +15,7 @@ export class ProntuarioService {
 
 
 
+
   private apiUrl = '';
   private Token = this.tokenService.retornaToken();
 
@@ -84,6 +85,11 @@ cadastraProntuario(Prontuario: Prontuario) {
   return this.http.post<Prontuario>( `${this.apiUrl}/prontuario/Post`, Prontuario, options);
 }
 
+BuscarPorProntuarioPassadoIdDeConsultaStatus(value: any) {
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}`, };
+  const options = { headers, withCredentials: true };
+  return this.http.get<Prontuario>( `${this.apiUrl}/prontuario/BuscarPorProntuarioPassadoIdDeConsultaStatus/${value}`, options);
+}
 
 
 

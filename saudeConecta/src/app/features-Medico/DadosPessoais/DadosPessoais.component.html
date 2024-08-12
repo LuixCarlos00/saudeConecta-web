@@ -1,0 +1,97 @@
+
+<body>
+
+    <h1>  Dados Pessoais   </h1>
+
+    <div class="container">
+
+        <form class="column" [formGroup]="dadosPessoaisForm">
+            <div class="section-title">Informações Pessoais</div>
+             <div class="inner-container">
+                <div class="inner-column">
+                    <label>Nome</label>
+                    <input formControlName="MedNome"  type="text" id="MedNome" name="MedNome" value="">
+
+                    <label>Sexo</label>
+                    <select formControlName="MedSexo" id="MedSexo" name="MedSexo">
+                        <option value="1">Masculino</option>
+                        <option value="2">Feminino</option>
+                    </select>
+
+                    <label>CRM</label>
+                    <input formControlName="MedCrm" type="text" id="MedCrm" name="MedCrm" value="">
+
+                    <label>RG</label>
+                    <input formControlName="MedRg" type="text" id="MedRg" name="MedRg" value="">
+
+                    <label>Email</label>
+                    <input formControlName="MedEmail" type="email" id="MedEmail" name="MedEmail" value="">
+
+                </div>
+                <div class="inner-column">
+                    <label>Data de Nascimento</label>
+                    <input formControlName="MedDataNacimento" type="date" id="MedDataNacimento" name="MedDataNacimento" value="">
+
+                    <label>CPF</label>
+                    <input formControlName="MedCpf" type="text" id="MedCpf" name="MedCpf" value="">
+
+                    <label>Especialidade</label>
+                    <input formControlName="MedEspecialidade" type="text" id="MedEspecialidade" name="MedEspecialidade" value="">
+
+                    <label>Telefone</label>
+                    <input formControlName="MedTelefone" type="tel" id="MedTelefone" name="MedTelefone" value="">
+
+
+                    <label> Consultas Por Minuto</label>
+                    <select formControlName="MedTempoDeConsulta" id="MedTempoDeConsulta" name="MedTempoDeConsulta">
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="25">25</option>
+                      <option value="30">30</option>
+                      <option value="35">35</option>
+                  </select>
+
+
+                </div>
+            </div>
+        </form>
+
+        <form class="column" [formGroup]="enderecoForm">
+            <div class="section-title">Endereço</div>
+            <div class="inner-container">
+                <div class="inner-column">
+                    <label>Rua</label>
+                    <input formControlName="EndRua" type="text" id="EndRua" name="EndRua" value="">
+
+                    <label>Número</label>
+                    <input formControlName="EndNumero" type="text" id="EndNumero" name="EndNumero" value="">
+
+                    <label>Complemento</label>
+                    <input formControlName="EndComplemento" type="text" id="EndComplemento" name="EndComplemento" value="">
+
+                    <label>Bairro</label>
+                    <input formControlName="EndBairro" type="text" id="EndBairro" name="EndBairro" value="">
+
+                </div>
+                <div class="inner-column">
+                    <label>CEP</label>
+                    <input formControlName="EndCep" type="text" id="EndCep" name="EndCep" value="">
+
+                    <label>Município</label>
+                    <input formControlName="EndMunicipio" type="text" id="EndMunicipio" name="EndMunicipio" value="">
+
+                    <label>UF</label>
+                    <input formControlName="EndUF" type="text" id="EndUF" name="EndUF" value="">
+
+                    <label>Nacionalidade</label>
+                    <input formControlName="EndNacionalidade" type="text" id="EndNacionalidade" name="EndNacionalidade" value="">
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <button type="submit" (click)="salvar()">Salvar</button>
+</body>
+
+

@@ -11,7 +11,10 @@ export class ObservacoesComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ObservacoesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { observacoes: string }
-  ) { }
+  ) {
+    console.log('data', data);
+
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

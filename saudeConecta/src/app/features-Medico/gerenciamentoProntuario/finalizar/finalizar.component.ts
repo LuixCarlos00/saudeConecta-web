@@ -209,13 +209,9 @@ export class FinalizarComponent implements OnInit, OnChanges {
   }
 
   salvar() {
-    this.ConsultaService.ConcluirDadosDaTabela(
-      this.Consultas.ConCodigoConsulta
-    ).subscribe(
+    this.ConsultaService.ConcluirDadosDaTabela(this.Consultas.ConCodigoConsulta).subscribe(
       (dados) => {
-        this.ConsultaStatusService.BuscarRegistrosDeConsultaStatusPesquisandoPorTodosOsCampos(
-          this.Consultas
-        ).subscribe((dados) => {
+        this.ConsultaStatusService.BuscarRegistrosDeConsultaStatusPesquisandoPorTodosOsCampos(this.Consultas).subscribe((dados) => {
           this.cadastraProntuario(dados);
         });
       },

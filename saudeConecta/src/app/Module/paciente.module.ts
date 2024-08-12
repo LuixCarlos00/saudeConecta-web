@@ -70,6 +70,7 @@ import { PrescricaoComponent } from '../features-Medico/gerenciamentoProntuario/
 import { ImprimirPrescricaoComponent } from '../features-Medico/impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
 import { ImprimirSoliciatacaoDeExamesComponent } from '../features-Medico/impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
 import { HistoricosComponent } from '../features-Medico/historicos/historicos.component';
+import { DadosPessoaisComponent } from '../features-Medico/DadosPessoais/DadosPessoais.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { HistoricosComponent } from '../features-Medico/historicos/historicos.co
     PrescricaoComponent,
     ImprimirPrescricaoComponent,
     ImprimirSoliciatacaoDeExamesComponent,
-    HistoricosComponent
+    HistoricosComponent,
+    DadosPessoaisComponent
 
   ],
   exports: [],

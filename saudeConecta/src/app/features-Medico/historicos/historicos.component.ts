@@ -1,3 +1,6 @@
+import { Prontuario } from './../../util/variados/interfaces/Prontuario/Prontuario';
+import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
+import { ConsultaStatus } from './../../util/variados/interfaces/consultaStatus/consultaStatus';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
@@ -8,19 +11,23 @@ import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialo
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import Swal from 'sweetalert2';
+import { ObservacoesComponent } from 'src/app/features/agenda/tabela-agenda/Observacoes/Observacoes.component';
+import { id, is } from 'date-fns/locale';
+import { ImprimirPrescricaoComponent } from '../impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
+import { ImprimirSoliciatacaoDeExamesComponent } from '../impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
 
 @Component({
   selector: 'app-historicos',
   templateUrl: './historicos.component.html',
-  styleUrls: ['./historicos.component.css']
+  styleUrls: ['./historicos.component.css'],
 })
 export class HistoricosComponent implements OnInit {
+  // @Output() selecionaMedico = new EventEmitter<any>();
+  // @Output() fechar = new EventEmitter<void>();
 
-  @Output() selecionaMedico = new EventEmitter<any>();
-  @Output() fechar = new EventEmitter<void>();
   highValue: number = 5;
   lowValue: number = 0;
-  dataSource: Consulta[] = [];
+  dataSource: ConsultaStatus[] = [];
   filteredDataSource: any[] = [];
   clickedRows = new Set<any>();
   pesquisa: string = '';
@@ -35,7 +42,7 @@ export class HistoricosComponent implements OnInit {
 
   constructor(
     private tokenService: tokenService,
-    private TabelaAgendaMedicoService: TabelaAgendaMedicoService,
+    private ConsultaStatusService: ConsultaStatusService,
     public dialog: MatDialog,
     private ProntuarioService: ProntuarioService,
     private DialogService: DialogService
@@ -47,45 +54,10 @@ export class HistoricosComponent implements OnInit {
       }
     });
 
-    this.BuscarDadosDeAgendaDoMedicoDoDia();
-
-
+    this.BuscarDadosDeAgendaDoMedico();
   }
 
   ngOnInit() {}
-
-
-  // DesejaAbrirConsulta(element: any) {
-  //   Swal.fire({
-  //     title: 'Tem certeza que deseja abrir essa consulta?',
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#5ccf6c',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Sim, abrir!',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //      // this.AbrirConsulta(element);
-  //     }else{
-  //       this.BuscarDadosDeAgendaDoMedicoDoDia();
-  //     }
-  //   });
-  //  }
-
-
-
-  //  AbrirConsulta(element: any) {
-  //   this.ProntuarioService.changeObjetoConsulta(element);
-  //   this.dialog.open(GerenciamentoProntuarioComponent, {
-  //     width: '1200px',
-  //     height: '600px',
-  //     data: { element: element },
-  //   });
-
-  //  }
-
-
-
 
   filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados: any) {
     // Função para normalizar e remover acentos e caracteres especiais
@@ -100,14 +72,14 @@ export class HistoricosComponent implements OnInit {
     // Filtrar os dados da consulta, comparando as strings normalizadas
     let resultadoFiltrado = this.filteredDataSource.filter(
       (item) =>
-        normalizeString(item.ConCodigoConsulta.toString()).includes(
+        normalizeString(item.ConSttCodigoConsulata.toString()).includes(
           dadosUpper
         ) ||
-        normalizeString(item.ConPaciente.paciNome).includes(dadosUpper) ||
-        normalizeString(item.ConDia_semana).includes(dadosUpper) ||
-        normalizeString(item.ConData).includes(dadosUpper) ||
-        normalizeString(item.ConHorario).includes(dadosUpper) ||
-        normalizeString(item.ConObservacoes).includes(dadosUpper)
+        normalizeString(item.ConSttPaciente.paciNome).includes(dadosUpper) ||
+        normalizeString(item.ConSttDia_semana).includes(dadosUpper) ||
+        normalizeString(item.ConSttData).includes(dadosUpper) ||
+        normalizeString(item.ConSttHorario).includes(dadosUpper) ||
+        normalizeString(item.ConSttObservacao).includes(dadosUpper)
     );
 
     if (resultadoFiltrado.length > 0) {
@@ -116,7 +88,7 @@ export class HistoricosComponent implements OnInit {
     } else {
       this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
       this.LimparTabela();
-      this.BuscarDadosDeAgendaDoMedicoDoDia();
+      this.BuscarDadosDeAgendaDoMedico();
     }
   }
 
@@ -129,33 +101,33 @@ export class HistoricosComponent implements OnInit {
     this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(this.pesquisa);
   }
 
-  BuscarDadosDeAgendaDoMedicoDoDia() {
-    const dataHoje = new Date();
-    this.TabelaAgendaMedicoService.BuscarTodaAgendaDeMedicoDoDia(
-      this.UsuarioLogado.id,
-      dataHoje.toISOString().split('T')[0]
+  BuscarDadosDeAgendaDoMedico() {
+    this.ConsultaStatusService.BuscarHistoricoDeAgendaDoMedico(
+      this.UsuarioLogado.id
     ).subscribe((dados) => {
-      let novaConsulta: Consulta[] = [];
+      console.log('dados', dados);
+
+      let Consulta: ConsultaStatus[] = [];
       for (let i = 0; i < dados.length; i++) {
-        novaConsulta[i] = {
-          ConCodigoConsulta: dados[i].conCodigoConsulta,
-          ConMedico: dados[i].conMedico,
-          ConPaciente: dados[i].conPaciente,
-          ConDia_semana: dados[i].conDia_semana,
-          ConHorario: dados[i].conHorario,
-          ConData: dados[i].conData,
-          ConObservacoes: dados[i].conObservacoes,
-          ConDadaCriacao: dados[i].conDataCriacao,
-          ConFormaPagamento: dados[i].conFormaPagamento,
-          ConStatus: dados[i].conStatus,
-          ConAdm: dados[i].conAdm,
+        Consulta[i] = {
+          ConSttCodigoConsulata: dados[i].ConSttCodigoConsulata,
+          ConSttMedico: dados[i].ConSttMedico,
+          ConSttPaciente: dados[i].ConSttPaciente,
+          ConSttDia_semana: dados[i].ConSttDia_semana,
+          ConSttHorario: dados[i].ConSttHorario,
+          ConSttData: dados[i].ConSttData,
+          ConSttObservacao: dados[i].ConSttObservacao,
+          ConSttDataCriacao: dados[i].ConSttDataCriacao,
+          ConSttFormaPagamento: dados[i].ConSttFormaPagamento,
+          ConSttAdm: dados[i].ConSttStatus,
+          ConSttStatus: dados[i].conAdm,
         };
       }
 
       // Ordenar a novaConsulta pelo horário
-      novaConsulta.sort((a, b) => {
-        const horaA = a.ConHorario.split(':').map(Number);
-        const horaB = b.ConHorario.split(':').map(Number);
+      Consulta.sort((a, b) => {
+        const horaA = a.ConSttData.split('-').map(Number);
+        const horaB = b.ConSttData.split('-').map(Number);
 
         // Comparar horas
         if (horaA[0] !== horaB[0]) {
@@ -165,34 +137,34 @@ export class HistoricosComponent implements OnInit {
         return horaA[1] - horaB[1];
       });
 
-      if (novaConsulta.length > 0) {
-        console.log(novaConsulta);
-        this.dataSource = novaConsulta;
-        this.filteredDataSource = novaConsulta; // Inicializa o filtro
+      if (Consulta.length > 0) {
+        console.log(Consulta);
+        this.dataSource = Consulta;
+        this.filteredDataSource = Consulta; // Inicializa o filtro
       } else {
         Swal.fire('Nenhuma consulta encontrada', 'Tente novamente', 'warning');
-        novaConsulta[0] = {
-          ConCodigoConsulta: 0,
-          ConMedico: 0,
-          ConPaciente: 0,
-          ConDia_semana: 'Sem Dados',
-          ConHorario: 'Sem Dados',
-          ConData: 'Sem Dados',
-          ConObservacoes: 'Sem Dados',
-          ConDadaCriacao: 'Sem Dados',
-          ConFormaPagamento: 0,
-          ConStatus: 0,
-          ConAdm: 0,
+        Consulta[0] = {
+          ConSttCodigoConsulata: 0,
+          ConSttMedico: 0,
+          ConSttPaciente: 0,
+          ConSttDia_semana: 'Sem Dados',
+          ConSttHorario: 'Sem Dados',
+          ConSttData: 'Sem Dados',
+          ConSttObservacao: 'Sem Dados',
+          ConSttDataCriacao: 'Sem Dados',
+          ConSttFormaPagamento: 0,
+          ConSttStatus: 0,
+          ConSttAdm: 0,
         };
-        this.dataSource = novaConsulta;
-        this.filteredDataSource = novaConsulta; // Inicializa o filtro
+        this.dataSource = Consulta;
+        this.filteredDataSource = Consulta; // Inicializa o filtro
       }
     });
   }
 
   resetarPesquisa() {
     this.pesquisa = '';
-    this.BuscarDadosDeAgendaDoMedicoDoDia();
+    this.BuscarDadosDeAgendaDoMedico();
   }
 
   limparPesquisa() {
@@ -200,13 +172,65 @@ export class HistoricosComponent implements OnInit {
     this.pesquisa = '';
   }
 
-  // openObservacoesDialog(observacoes: string): void {
-  //   this.dialog.open(ObservacoesComponent, {
-  //     width: '550px',
-  //     data: { observacoes: observacoes },
-  //   });
+  openObservacoesDialog(observacoes: string): void {
+    this.dialog.open(ObservacoesComponent, {
+      width: '550px',
+      data: { observacoes: observacoes },
+    });
+  }
 
-  // }
+  //   ImprimirPrescricao() {
+  //     this.dialog.open(ImprimirPrescricaoComponent, {
+  //       width: '60%',
+  //       height: '90%',
+  //       data: { prontuario: this.Prontuario, Consulta: this.Consultas },
+  //     });
+  //   }
+
+  ImprimirSOlicitacaoDeExames(prontuario: any) {
+    this.dialog.open(ImprimirSoliciatacaoDeExamesComponent, {
+      width: '60%',
+      height: '90%',
+      data:  { prontuario: prontuario , Consulta: prontuario.prontCodigoConsulta}
+    });
+  }
+
+
+  openImprimirDialog(value: any) {
+    this.ProntuarioService.BuscarPorProntuarioPassadoIdDeConsultaStatus(
+      value
+    ).subscribe((dados) => {
+      console.log('dados', dados);
+
+      Swal.fire({
+        title: 'Selecione uma opção para imprimir',
+        input: 'select',
+        inputOptions: {
+          '1': 'Solicitação de Exames',
+          '2': 'Prescrição',
+          '3': 'Relatório',
+          '4': 'Atestado de Paciente',
+        },
+        showCancelButton: true,
+        inputValidator: (value) => {
+          if (value === '1') {
+            console.log('Imprimir Solicitação de Exames');
+            this.ImprimirSOlicitacaoDeExames(dados);
+          } else if (value === '2') {
+            console.log('Imprimir Prescrição');
+          } else if (value === '3') {
+            console.log('Imprimir Relatório');
+          } else if (value === '4') {
+            console.log('Imprimir Paciente');
+          }
+          if (!value) {
+            return null;
+          }
+          return null;
+        },
+      });
+    });
+  }
 
   getPaginatorData(event: PageEvent): PageEvent {
     this.lowValue = event.pageIndex * event.pageSize;
@@ -223,6 +247,5 @@ export class HistoricosComponent implements OnInit {
     'ConHorario',
     'ConObservacoes',
     'Imprimir',
-
   ];
 }

@@ -26,11 +26,11 @@ export class GraficoAgendamentoDiaService {
   }
 
 
-  BuscatodasAsConsultas(): Observable<Consulta[]> {
-    const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
-    const options = { headers, withCredentials: true };
-    return this.http.get<Consulta[]>(`${this.apiUrl}/consulta/listatodasConsulta`, options);
-  }
+  // BuscatodasAsConsultas(): Observable<Consulta[]> {
+  //   const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
+  //   const options = { headers, withCredentials: true };
+  //   return this.http.get<Consulta[]>(`${this.apiUrl}/consulta/listatodasConsulta`, options);
+  // }
 
   // BuscatodasAsConsultasPorDataSelecionada(paramentrosBusca : string): Observable<Consulta[]> {
   //   const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};

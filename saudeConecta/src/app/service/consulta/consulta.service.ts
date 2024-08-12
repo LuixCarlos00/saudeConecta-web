@@ -119,17 +119,17 @@ export class ConsultaService {
     );
   }
 
-  BuscarRegistrosDeConsulta(busca: any) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http.get<{ content: Consulta[] }>(
-      `${this.apiUrl}/consulta/BuscarRegistrosDeConsulta/${busca}`,
-      options
-    );
-  }
+   // BuscarRegistrosDeConsulta(busca: any) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${this.Token}`,
+  //   };
+  //   const options = { headers, withCredentials: true };
+  //   return this.http.get<{ content: Consulta[] }>(
+  //     `${this.apiUrl}/consulta/BuscarRegistrosDeConsulta/${busca}`,
+  //     options
+  //   );
+  // }
 
   DeletarConsulas(consultaId: any) {
     const headers = {

@@ -133,6 +133,7 @@ export class TabelaAgendaMedicoComponent implements OnInit {
   chamandoPesquisa() {
     this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(this.pesquisa);
   }
+  ///tras todos os dados e organiza pelo dia  e mostra apenas os que sao do dia de hoje
 
   BuscarDadosDeAgendaDoMedicoDoDia() {
     const dataHoje = new Date();
