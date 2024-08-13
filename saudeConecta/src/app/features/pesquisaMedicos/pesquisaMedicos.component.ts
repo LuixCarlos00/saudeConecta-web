@@ -50,12 +50,14 @@ export class PesquisaMedicosComponent implements OnInit {
   }
 
   PesquisarMedicosFiltro() {
+
+
     const pesquisa: string = this.FormularioPesquisa.get('Pesquisa')?.value;
-    const FiltroPesquisa: number = this.FormularioPesquisa.get(
-      'FiltroPesquisaMedico'
-    )?.value;
+    const FiltroPesquisa: number = this.FormularioPesquisa.get('FiltroPesquisaMedico')?.value;
 
     if (FiltroPesquisa === 1) {
+
+
       this.medicosService.buscarListaMedicosPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {

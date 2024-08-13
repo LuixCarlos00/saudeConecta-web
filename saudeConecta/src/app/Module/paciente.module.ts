@@ -71,6 +71,7 @@ import { ImprimirPrescricaoComponent } from '../features-Medico/impressoes-PDF/I
 import { ImprimirSoliciatacaoDeExamesComponent } from '../features-Medico/impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
 import { HistoricosComponent } from '../features-Medico/historicos/historicos.component';
 import { DadosPessoaisComponent } from '../features-Medico/DadosPessoais/DadosPessoais.component';
+import { AtestadoPacienteComponent } from '../features-Medico/impressoes-PDF/AtestadoPaciente/AtestadoPaciente.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { DadosPessoaisComponent } from '../features-Medico/DadosPessoais/DadosPe
     ImprimirPrescricaoComponent,
     ImprimirSoliciatacaoDeExamesComponent,
     HistoricosComponent,
-    DadosPessoaisComponent
+    DadosPessoaisComponent,
+    AtestadoPacienteComponent
 
   ],
   exports: [],
@@ -149,6 +151,7 @@ import { DadosPessoaisComponent } from '../features-Medico/DadosPessoais/DadosPe
     MatTabsModule,
     MatAutocompleteModule,
     MatRadioModule,
+
 
   ],
 })

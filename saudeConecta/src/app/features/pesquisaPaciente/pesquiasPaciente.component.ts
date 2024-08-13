@@ -89,13 +89,12 @@ export class PesquiasPacienteComponent implements OnInit {
 
 
   PesquisarPacientes() {
-    const pesquisa: string =
-      this.FormGroupConsulta.get('PesquisaPaciente')?.value;
-    const FiltroPesquisaPaciente: number = this.FormGroupConsulta.get(
-      'FiltroPesquisaPaciente'
-    )?.value;
+    const pesquisa: string =this.FormGroupConsulta.get('PesquisaPaciente')?.value;
+    const FiltroPesquisaPaciente: number = this.FormGroupConsulta.get('FiltroPesquisaPaciente' )?.value;
 
     if (FiltroPesquisaPaciente === 1) {
+      console.log('pesquisa', pesquisa);
+
       this.PacientesService.buscarListaPacientesPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {

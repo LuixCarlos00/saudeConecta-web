@@ -20,7 +20,7 @@ export class ImprimirSoliciatacaoDeExamesComponent implements OnInit {
   Crm: string = '';
   Especialidade: string = '';
   Data: string = '';
-    Prescricao: string = '';
+  Exame: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<ImprimirSoliciatacaoDeExamesComponent>,
@@ -30,15 +30,13 @@ export class ImprimirSoliciatacaoDeExamesComponent implements OnInit {
   ngOnInit() {
     this.Prontuario = this.data.prontuario;
     this.Consulta = this.data.Consulta;
-    console.log('consulta', this.Consulta);
 
-    console.log('prontuario', this.Prontuario);
 
     this.NomeMedico = this.Prontuario.prontCodigoMedico.medNome?.trim() ||this.Consulta.conSttMedico.medNome?.trim();
     this.Crm = this.Prontuario.prontCodigoMedico.medCrm?.trim() || this.Consulta.conSttMedico.medCrm?.trim();
     this.Especialidade = this.Prontuario.prontCodigoMedico.medEspecialidade?.trim() || this.Consulta.conSttMedico.medEspecialidade?.trim();
     this.Data = this.Prontuario.prontDataPrescricao || this.dataAtual
-     this.Prescricao = this.Prontuario.prontPrescricao?.trim() || 'SEM INFORMACÃO';
+     this.Exame = this.Prontuario.prontExame?.trim() || 'SEM INFORMACÃO';
 
   }
 

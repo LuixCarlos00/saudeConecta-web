@@ -10,6 +10,16 @@ import * as html2pdf from 'html2pdf.js';
   styleUrls: ['./ImprimirPrescricao.component.css']
 })
 export class ImprimirPrescricaoComponent implements OnInit {
+  //
+  //
+  //
+
+ NomeMedico: string = '';
+  Crm: string = '';
+  Especialidade: string = '';
+  Data: string = '';
+  Prescricao: string = '';
+
   Prontuario!: Prontuario;
   Consulta!: any;
   dataAtual = new Date().toISOString().split('T')[0];
@@ -23,6 +33,15 @@ export class ImprimirPrescricaoComponent implements OnInit {
     this.Consulta = this.data.Consulta;
     console.log('prontuario', this.data.prontuario);
     console.log('Consulta', this.data.Consulta);
+
+    this.NomeMedico = this.Prontuario.prontCodigoMedico.medNome?.trim() ||this.Consulta.conSttMedico.medNome?.trim();
+    this.Crm = this.Prontuario.prontCodigoMedico.medCrm?.trim() || this.Consulta.conSttMedico.medCrm?.trim();
+    this.Especialidade = this.Prontuario.prontCodigoMedico.medEspecialidade?.trim() || this.Consulta.conSttMedico.medEspecialidade?.trim();
+
+    this.Data = this.Prontuario.prontDataPrescricao || this.dataAtual
+    this.Prescricao = this.Prontuario.prontPrescricao?.trim() || 'SEM INFORMACÃO';
+
+
   }
 
   GerarPDF() {

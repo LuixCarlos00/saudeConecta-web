@@ -133,68 +133,74 @@ export class TabelaAgendaMedicoComponent implements OnInit {
   chamandoPesquisa() {
     this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(this.pesquisa);
   }
-  ///tras todos os dados e organiza pelo dia  e mostra apenas os que sao do dia de hoje
 
-  BuscarDadosDeAgendaDoMedicoDoDia() {
-    const dataHoje = new Date();
-    this.TabelaAgendaMedicoService.BuscarTodaAgendaDeMedicoDoDia(
-      this.UsuarioLogado.id,
-      dataHoje.toISOString().split('T')[0]
-    ).subscribe((dados) => {
-      let novaConsulta: Consulta[] = [];
-      for (let i = 0; i < dados.length; i++) {
-        novaConsulta[i] = {
-          ConCodigoConsulta: dados[i].conCodigoConsulta,
-          ConMedico: dados[i].conMedico,
-          ConPaciente: dados[i].conPaciente,
-          ConDia_semana: dados[i].conDia_semana,
-          ConHorario: dados[i].conHorario,
-          ConData: dados[i].conData,
-          ConObservacoes: dados[i].conObservacoes,
-          ConDadaCriacao: dados[i].conDataCriacao,
-          ConFormaPagamento: dados[i].conFormaPagamento,
-          ConStatus: dados[i].conStatus,
-          ConAdm: dados[i].conAdm,
-        };
-      }
+//
+ // todos os dados e organiza pelo dia  e mostra apenas os que sao do dia de hoje
 
-      // Ordenar a novaConsulta pelo horário
-      novaConsulta.sort((a, b) => {
+ BuscarDadosDeAgendaDoMedicoDoDia() {
+  this.TabelaAgendaMedicoService.BuscarTodaAgendaDeMedicoDoDia(this.UsuarioLogado.id).subscribe((dados) => {
+    console.log('dados', dados);
+
+    let novaConsulta: Consulta[] = [];
+    for (let i = 0; i < dados.length; i++) {
+      novaConsulta[i] = {
+        ConCodigoConsulta: dados[i].conCodigoConsulta,
+        ConMedico: dados[i].conMedico,
+        ConPaciente: dados[i].conPaciente,
+        ConDia_semana: dados[i].conDia_semana,
+        ConHorario: dados[i].conHorario,
+        ConData: dados[i].conData,
+        ConObservacoes: dados[i].conObservacoes,
+        ConDadaCriacao: dados[i].conDataCriacao,
+        ConFormaPagamento: dados[i].conFormaPagamento,
+        ConStatus: dados[i].conStatus,
+        ConAdm: dados[i].conAdm,
+      };
+    }
+
+    // Ordenar a novaConsulta pela data e depois pelo horário
+    novaConsulta.sort((a, b) => {
+      const dataA = new Date(a.ConData).getTime();
+      const dataB = new Date(b.ConData).getTime();
+
+      if (dataA !== dataB) {
+        return dataA - dataB; // Ordena por data
+      } else {
         const horaA = a.ConHorario.split(':').map(Number);
         const horaB = b.ConHorario.split(':').map(Number);
 
-        // Comparar horas
+        // Ordenar por horário se as datas forem iguais
         if (horaA[0] !== horaB[0]) {
           return horaA[0] - horaB[0];
         }
-        // Comparar minutos se horas forem iguais
         return horaA[1] - horaB[1];
-      });
-
-      if (novaConsulta.length > 0) {
-        console.log(novaConsulta);
-        this.dataSource = novaConsulta;
-        this.filteredDataSource = novaConsulta; // Inicializa o filtro
-      } else {
-        Swal.fire('Nenhuma consulta encontrada', 'Tente novamente', 'warning');
-        novaConsulta[0] = {
-          ConCodigoConsulta: 0,
-          ConMedico: 0,
-          ConPaciente: 0,
-          ConDia_semana: 'Sem Dados',
-          ConHorario: 'Sem Dados',
-          ConData: 'Sem Dados',
-          ConObservacoes: 'Sem Dados',
-          ConDadaCriacao: 'Sem Dados',
-          ConFormaPagamento: 0,
-          ConStatus: 0,
-          ConAdm: 0,
-        };
-        this.dataSource = novaConsulta;
-        this.filteredDataSource = novaConsulta; // Inicializa o filtro
       }
     });
-  }
+
+    if (novaConsulta.length > 0) {
+       this.dataSource = novaConsulta;
+      this.filteredDataSource = novaConsulta; // Inicializa o filtro
+    } else {
+      Swal.fire('Nenhuma consulta encontrada', 'Tente novamente', 'warning');
+      novaConsulta[0] = {
+        ConCodigoConsulta: 0,
+        ConMedico: 0,
+        ConPaciente: 0,
+        ConDia_semana: 'Sem Dados',
+        ConHorario: 'Sem Dados',
+        ConData: 'Sem Dados',
+        ConObservacoes: 'Sem Dados',
+        ConDadaCriacao: 'Sem Dados',
+        ConFormaPagamento: 0,
+        ConStatus: 0,
+        ConAdm: 0,
+      };
+      this.dataSource = novaConsulta;
+      this.filteredDataSource = novaConsulta; // Inicializa o filtro
+    }
+  });
+}
+
 
   resetarPesquisa() {
     this.pesquisa = '';

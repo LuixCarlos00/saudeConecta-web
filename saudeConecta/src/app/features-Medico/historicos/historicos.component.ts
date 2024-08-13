@@ -1,3 +1,4 @@
+import { ImprimirPrescricaoComponent } from './../impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
 import { Prontuario } from './../../util/variados/interfaces/Prontuario/Prontuario';
 import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
 import { ConsultaStatus } from './../../util/variados/interfaces/consultaStatus/consultaStatus';
@@ -13,8 +14,8 @@ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import Swal from 'sweetalert2';
 import { ObservacoesComponent } from 'src/app/features/agenda/tabela-agenda/Observacoes/Observacoes.component';
 import { id, is } from 'date-fns/locale';
-import { ImprimirPrescricaoComponent } from '../impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
-import { ImprimirSoliciatacaoDeExamesComponent } from '../impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
+ import { ImprimirSoliciatacaoDeExamesComponent } from '../impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
+import { AtestadoPacienteComponent } from '../impressoes-PDF/AtestadoPaciente/AtestadoPaciente.component';
 
 @Component({
   selector: 'app-historicos',
@@ -179,19 +180,28 @@ export class HistoricosComponent implements OnInit {
     });
   }
 
-  //   ImprimirPrescricao() {
-  //     this.dialog.open(ImprimirPrescricaoComponent, {
-  //       width: '60%',
-  //       height: '90%',
-  //       data: { prontuario: this.Prontuario, Consulta: this.Consultas },
-  //     });
-  //   }
+  ImprimirPrescricaoComponent(prontuario: any) {
+      this.dialog.open(ImprimirPrescricaoComponent, {
+        width: '60%',
+        height: '90%',
+        data: { prontuario: prontuario,  Consulta: prontuario.prontCodigoConsulta}
+      });
+    }
 
-  ImprimirSOlicitacaoDeExames(prontuario: any) {
+  ImprimirSolicitacaoDeExames(prontuario: any) {
     this.dialog.open(ImprimirSoliciatacaoDeExamesComponent, {
       width: '60%',
       height: '90%',
       data:  { prontuario: prontuario , Consulta: prontuario.prontCodigoConsulta}
+    });
+  }
+
+
+  ImprimirAtestadoPacienteComponent(prontuario: any) {
+    this.dialog.open(AtestadoPacienteComponent, {
+      width: '60%',
+      height: '90%',
+      data:  {  Consulta: prontuario.prontCodigoConsulta}
     });
   }
 
@@ -208,20 +218,21 @@ export class HistoricosComponent implements OnInit {
         inputOptions: {
           '1': 'Solicitação de Exames',
           '2': 'Prescrição',
-          '3': 'Relatório',
+          '3': 'Imprimir Histórico Completo',
           '4': 'Atestado de Paciente',
         },
         showCancelButton: true,
         inputValidator: (value) => {
           if (value === '1') {
             console.log('Imprimir Solicitação de Exames');
-            this.ImprimirSOlicitacaoDeExames(dados);
+            this.ImprimirSolicitacaoDeExames(dados);
           } else if (value === '2') {
             console.log('Imprimir Prescrição');
+             this.ImprimirPrescricaoComponent(dados);
           } else if (value === '3') {
-            console.log('Imprimir Relatório');
+            console.log('Imprimir Histórico Completo');
           } else if (value === '4') {
-            console.log('Imprimir Paciente');
+            this.ImprimirAtestadoPacienteComponent(dados);
           }
           if (!value) {
             return null;

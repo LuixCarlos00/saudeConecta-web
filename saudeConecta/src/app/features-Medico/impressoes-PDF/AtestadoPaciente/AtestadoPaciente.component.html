@@ -1,0 +1,50 @@
+<body>
+  <div id="pdfContent">
+    <div style="margin: 10px 20px 10px 20px" >
+      <h1>Atestado Médico</h1>
+
+      <div class="section">
+        <h2>Dados do Paciente</h2>
+        <p><strong>Nome:</strong> {{NomePaciente}}</p>
+        <p><strong>CPF:</strong> {{CPF}}</p>
+        <p><strong>RG:</strong> {{Rg}}</p>
+        <p><strong>Data de Nascimento:</strong>{{DataNacimeto}}</p>
+        <p><strong>Telefone:</strong>{{telefone}}</p>
+      </div>
+
+      <div class="section">
+        <h2>Dados da Consulta</h2>
+        <p><strong>Data da Consulta:</strong> {{DataConsulta}}</p>
+        <p><strong>Horário:</strong> {{HorarioConsulta}}</p>
+        <p><strong>Dia da Semana:</strong> {{DiaSemana}}</p>
+      </div>
+
+      <div class="section">
+        <h2>Dados do Médico</h2>
+        <p><strong>Nome:</strong>{{ NomeMedico}}</p>
+        <p><strong>CRM:</strong>{{Crm}}</p>
+        <p><strong>Especialidade:</strong>{{Especialidade}}</p>
+      </div>
+
+      <div class="section">
+        <p>Atesto para os devidos fins que o(a) paciente acima identificado(a) foi atendido(a) por mim na data e horário
+          mencionados, necessitando de repouso por ______ <strong>dias</strong>.</p>
+        <br>
+      </div>
+
+      <div class="signature section">
+        <p><strong>______________________________________________________</strong></p>
+        <p> Nome: {{ NomeMedico}}</p>
+        <p>{{Crm}}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <button style="width: 100%;" (click)="GerarPDF()">Imprimir</button>
+  </div>
+
+
+
+</body>

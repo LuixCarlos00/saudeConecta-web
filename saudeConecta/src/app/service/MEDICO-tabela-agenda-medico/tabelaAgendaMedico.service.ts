@@ -26,10 +26,10 @@ export class TabelaAgendaMedicoService {
   }
 
 
-  BuscarTodaAgendaDeMedicoDoDia(IdUsuarioMedico: number,dataHoje :string): Observable<any[]> {
+  BuscarTodaAgendaDeMedicoDoDia(IdUsuarioMedico: number ): Observable<any[]> {
     const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}`, };
     const options = { headers, withCredentials: true };
-    return this.http.get<any[]>( `${this.apiUrl}/consulta/BuscarTodaAgendaDeMedico/${IdUsuarioMedico}/${dataHoje}`, options);
+    return this.http.get<any[]>( `${this.apiUrl}/consulta/BuscarTodaAgendaDeMedico/${IdUsuarioMedico}`, options);
   }
 
 

@@ -21,23 +21,19 @@
           <span class="tooltip">Dados Pessoais</span>
         </button>
 
-        <button class="fetures" *ngIf="this.ControleAcessoService.AcessoMedico()" (click)="redirecionamentoDePaginas('Historico')" title="Dados Pessoais">
 
-          <i  style="color: #e3e9f7;" class="fa-solid fa-timeline fa-xl"></i>
-          <span class="tooltip">Histórico de Prontuarios </span>
-        </button>
 
         <button class="fetures" *ngIf="this.ControleAcessoService.AcessoAdministrador()" (click)="redirecionamentoDePaginas('gerenciamento')" title="Gerenciamento">
 
           <i  style="color: #e3e9f7;" class="fa-solid fa-notes-medical fa-xl"></i>
           <span class="tooltip">Gerenciamento</span>
         </button>
-        <button class="fetures"   *ngIf="this.ControleAcessoService.AcessoAdministrador()" (click)="redirecionamentoDePaginas('cadastroPaciente')" title="Cadastra Paciente">
 
-          <i  style="color: #e3e9f7;" class="fa-solid fa-user-plus fa-xl "></i>
-          <span class="tooltip"> Cadastra Paciente</span>
+        <button class="fetures" *ngIf="this.ControleAcessoService.AcessoMedico() || this.ControleAcessoService.AcessoAdministrador()" (click)="redirecionamentoDePaginas('Historico')" title="Dados Pessoais">
+
+          <i  style="color: #e3e9f7;" class="fa-solid fa-timeline fa-xl"></i>
+          <span class="tooltip">Histórico de Prontuarios </span>
         </button>
-
 
         <button class="fetures"  *ngIf="this.ControleAcessoService.AcessoAdministrador()"  (click)="redirecionamentoDePaginas('Usuarios')" title="Usuarios">
 
