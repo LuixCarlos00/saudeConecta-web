@@ -13,6 +13,7 @@ import { elements } from 'chart.js';
 import { el } from 'date-fns/locale';
 import { GerenciamentoComponent } from 'src/app/features/gerenciamento/gerenciamento.component';
 import { GerenciamentoProntuarioComponent } from '../gerenciamentoProntuario/gerenciamentoProntuario.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabela-agenda-medico',
@@ -43,7 +44,8 @@ export class TabelaAgendaMedicoComponent implements OnInit {
     private TabelaAgendaMedicoService: TabelaAgendaMedicoService,
     public dialog: MatDialog,
     private ProntuarioService: ProntuarioService,
-    private DialogService: DialogService
+    private DialogService: DialogService,
+    private route: Router
   ) {
     this.tokenService.decodificaToken();
     this.tokenService.UsuarioLogadoValue$.subscribe((Usuario) => {
@@ -70,7 +72,10 @@ export class TabelaAgendaMedicoComponent implements OnInit {
       confirmButtonText: 'Sim, abrir!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.AbrirConsulta(element);
+       this.route.navigate(['startconsulta']);
+       console.log('element', element);
+
+       this.ProntuarioService.changeConsulta(element);
       }else{
         this.BuscarDadosDeAgendaDoMedicoDoDia();
       }
@@ -80,7 +85,7 @@ export class TabelaAgendaMedicoComponent implements OnInit {
 
 
    AbrirConsulta(element: any) {
-    this.ProntuarioService.changeObjetoConsulta(element);
+    //this.ProntuarioService.changeObjetoConsulta(element);
     this.dialog.open(GerenciamentoProntuarioComponent, {
       width: '1200px',
       height: '600px',

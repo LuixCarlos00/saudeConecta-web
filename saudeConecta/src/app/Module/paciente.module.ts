@@ -1,3 +1,4 @@
+import { TrocaSenhaComponent } from './../features/troca-senha/troca-senha.component';
 import { GerenciamentoProntuarioComponent } from '../features-Medico/gerenciamentoProntuario/gerenciamentoProntuario.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -36,8 +37,7 @@ import { RecuperaCadastroComponent } from '../features/recupera-Cadastro/recuper
 import { PesquisaMedicosComponent } from '../features/pesquisaMedicos/pesquisaMedicos.component';
 import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
 
-import { TrocaSenhaComponent } from '../features/troca-senha/troca-senha.component';
-import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro-adm.component';
+ import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro-adm.component';
 import { TabelaAgendaComponent } from '../features/agenda/tabela-agenda/tabela-agenda.component';
 import { AgendaComponent } from '../features/agenda/agenda.component';
 import { ObservacoesComponent } from '../features/agenda/tabela-agenda/Observacoes/Observacoes.component';
@@ -60,18 +60,15 @@ import { GerenciamentoUsuarioComponent } from '../features/gerenciamento-usuario
 import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/tabela-todos-usuarios.component';
 import { TabelaAgendaMedicoComponent } from '../features-Medico/tabela-agenda-medico/tabela-agenda-medico.component';
 import { ProntuarioComponent } from '../features-Medico/prontuario/prontuario.component';
-import { FinalizarComponent } from '../features-Medico/gerenciamentoProntuario/finalizar/finalizar.component';
-import { QueixaPrincipalComponent } from '../features-Medico/gerenciamentoProntuario/C_queixa-principal/queixa-principal.component';
-import { AtestadoComponent } from '../features-Medico/gerenciamentoProntuario/F_atestado/atestado.component';
-import { DiagnosticoComponent } from '../features-Medico/gerenciamentoProntuario/D_diagnostico/diagnostico.component';
+ import { DiagnosticoComponent } from '../features-Medico/gerenciamentoProntuario/D_diagnostico/diagnostico.component';
 import { PediatriaExamesFisicosComponent } from '../features-Medico/gerenciamentoProntuario/A_pediatria-exames-fisicos/pediatria-exames-fisicos.component';
 import { PrescricaoComponent } from '../features-Medico/gerenciamentoProntuario/E_prescricao/prescricao.component';
- import { AnamneseCondutaComponent } from '../features-Medico/gerenciamentoProntuario/B_anamnese-conduta/anamnese-conduta.component';
-import { ImprimirPrescricaoComponent } from '../features-Medico/impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
+ import { ImprimirPrescricaoComponent } from '../features-Medico/impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
 import { ImprimirSoliciatacaoDeExamesComponent } from '../features-Medico/impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
 import { HistoricosComponent } from '../features-Medico/historicos/historicos.component';
 import { DadosPessoaisComponent } from '../features-Medico/DadosPessoais/DadosPessoais.component';
 import { AtestadoPacienteComponent } from '../features-Medico/impressoes-PDF/AtestadoPaciente/AtestadoPaciente.component';
+import { TrocaSenhaUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/TrocaSenhaUsuarios/TrocaSenhaUsuarios.component';
 
 @NgModule({
   declarations: [
@@ -108,10 +105,7 @@ import { AtestadoPacienteComponent } from '../features-Medico/impressoes-PDF/Ate
     TabelaAgendaMedicoComponent,
     ProntuarioComponent,
     GerenciamentoProntuarioComponent,
-    FinalizarComponent,
-    QueixaPrincipalComponent,
-    AtestadoComponent,
-    AnamneseCondutaComponent,
+
     DiagnosticoComponent,
     PediatriaExamesFisicosComponent,
     PrescricaoComponent,
@@ -119,7 +113,8 @@ import { AtestadoPacienteComponent } from '../features-Medico/impressoes-PDF/Ate
     ImprimirSoliciatacaoDeExamesComponent,
     HistoricosComponent,
     DadosPessoaisComponent,
-    AtestadoPacienteComponent
+    AtestadoPacienteComponent,
+    TrocaSenhaUsuariosComponent
 
   ],
   exports: [],
@@ -151,6 +146,7 @@ import { AtestadoPacienteComponent } from '../features-Medico/impressoes-PDF/Ate
     MatTabsModule,
     MatAutocompleteModule,
     MatRadioModule,
+
 
 
   ],

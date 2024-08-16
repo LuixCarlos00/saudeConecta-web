@@ -1,12 +1,91 @@
 label {
   font-weight: bold;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-left: 10px;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+
 
 }
 
-.inputFilter {
+.container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  margin: 10px auto;
+  padding: 10px;
+   border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+.proximo {
+  background-color: rgb(189, 230, 148);
+  color: black;
+  width: 40%;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.anterior {
+  background-color: rgb(175, 202, 240);
+  color: black;
+  width: 40%;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.example-full-width {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Alinha os rótulos acima dos inputs */
+}
+
+.example-full-width label {
+  margin-bottom: 5px; /* Espaçamento entre o rótulo e o input */
+}
+
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.inputRadios {
   border: hidden;
   margin-top: -auto;
+  background-color: rgb(237, 247, 247);
+  width: 50%;
+  border-radius: 5px;
+  border: 1px solid black;
+  height: 20px;
+  margin-left: 10px;
+}
+
+
+
+.inputTexte {
+  background-color: aqua;
+  border: hidden;
+  margin-top: -auto;
+  background-color: rgb(237, 247, 247);
   width: 90%;
   border-radius: 5px;
   border: 1px solid black;
@@ -14,51 +93,13 @@ label {
   margin-left: 10px;
 }
 
-.divPediatria {
-  display: flex;
-  margin: 10px;
-  border-radius: 5px;
+textarea {
   border: hidden;
-}
-
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+  border: 1px solid black;
+  border-radius: 5px;
   width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-.proximo {
-  background-color: chartreuse;
-  color: black;
-  width: 90%;
-  margin: 10px;
-  border: hidden;
-  border-radius: 5px;
-}
-
-.anterior {
-  background-color: rgb(221, 229, 240);
-  color: black;
-  width: 10%;
-  margin: 10px;
-  border: hidden;
-  border-radius: 5px;
-}
+  height: 150px;
+  background-color: rgb(237, 247, 247);
 
 
-
-
-.example-full-width {
- margin-left: 30px;
- width: 80%;
-
-}
-
-.mat-mdc-form-field {
-  font-size: 14px;
-  width: 80%;
 }

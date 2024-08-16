@@ -1,26 +1,27 @@
-<div class="header">
-  <div class="timer">
-    Tempo: {{ minutes }}m {{ seconds }}s
+<body>
+  <div class="main-container">
+    <div class="header">
+      <div class="timer-container">
+        <div class="clock-face">
+          <div class="clock-hand" [ngStyle]="{'transform': 'rotate(' + (minutes * 6) + 'deg)'}"></div>
+          <div class="clock-label">{{ minutes }}m</div>
+        </div>
+        <div class="clock-face">
+          <div class="clock-hand" [ngStyle]="{'transform': 'rotate(' + (seconds * 6) + 'deg)'}"></div>
+          <div class="clock-label">{{ seconds }}s</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <app-pediatria-exames-fisicos [Finalizar]="FinalizarConsulta"></app-pediatria-exames-fisicos>
+    </div>
+    <div class="section">
+      <app-diagnostico [Finalizar]="FinalizarConsulta"></app-diagnostico>
+    </div>
+    <div class="section">
+      <app-prescricao [Finalizar]="FinalizarConsulta"></app-prescricao>
+    </div>
+    <button style="background-color: green; color: white; padding: 10px; border: none; border-radius: 5px;" (click)="finalizar()">Finalizar consulta</button>
   </div>
-</div>
-
-<mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onMudarAba($event)">
-  <mat-tab label="Pediatria & Exames Fisicos">
-    <app-pediatria-exames-fisicos (onMudarAba)="onMudarAba($event)"></app-pediatria-exames-fisicos>
-  </mat-tab>
-
-  <mat-tab label="Condulta & Anamnese"> <app-anamnese-conduta (onMudarAba)="onMudarAba($event)"></app-anamnese-conduta>
-  </mat-tab>
-  <mat-tab label="Queixa Principal"> <app-queixa-principal (onMudarAba)="onMudarAba($event)" ></app-queixa-principal>
-  </mat-tab>
-  <mat-tab label="Diagnóstico"> <app-diagnostico (onMudarAba)="onMudarAba($event)"></app-diagnostico>
-  </mat-tab>
-  <mat-tab label="Prescrição & Soliciatação de Exames"> <app-prescricao (onMudarAba)="onMudarAba($event)"></app-prescricao>
-  </mat-tab>
-  <mat-tab label="Atestado"> <app-atestado (onMudarAba)="onMudarAba($event)"></app-atestado>
-  </mat-tab>
-  <mat-tab label="Finalizar"> <app-finalizar [selectedTabIndex]="selectedTabIndex" [tempo]="timer"
-      (mudarTempo)="ngOnDestroy()" (pausarTempo)="pausarTempo()" [Consultas]="Consulta" >
-    </app-finalizar>
-  </mat-tab>
-</mat-tab-group>
+</body>

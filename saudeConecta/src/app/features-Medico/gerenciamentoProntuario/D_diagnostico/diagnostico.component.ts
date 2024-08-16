@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { ProntuarioService } from 'src/app/service/MEDICO-prontuario/prontuario.service';
@@ -11,22 +18,41 @@ import { Cid_codigo_internaciona_doecas } from 'src/app/util/variados/options/ci
   styleUrls: ['./diagnostico.component.css'],
 })
 export class DiagnosticoComponent implements OnInit {
-  @Output() onMudarAba = new EventEmitter<number>();
+  @Input() Finalizar = false;
+
   myControl = new FormControl('');
   options: Cid_codigo_internaciona_doecas[] = Cid_codigo_internaciona_doecas;
   filteredOptions: Cid_codigo_internaciona_doecas[] = [];
 
   // Paginação
-  pageSize = 10; // Número de itens por página
+  pageSize = 20; // Número de itens por página
   currentPage = 1; // Página atual
   totalPages = 1; // Total de páginas
-  paginatedOptions: Cid_codigo_internaciona_doecas[] = [];
+  primeiraColuna: Cid_codigo_internaciona_doecas[] = [];
+  segundaColuna: Cid_codigo_internaciona_doecas[] = [];
   selectedOptions: Cid_codigo_internaciona_doecas[] = [];
 
   constructor(private ProntuarioService: ProntuarioService) {}
 
   ngOnInit() {
     this.filtrandoDadosCid();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['Finalizar'] && this.Finalizar) {
+      this.enviandoAquivos();
+    }
+  }
+
+  enviandoAquivos() {
+    const prontDiagnostico = this.selectedOptions
+      .map((option) => option.label)
+      .join(', ');
+    const prontuario: Prontuario = {
+      prontDiagnostico: prontDiagnostico,
+    };
+
+    this.ProntuarioService.chageDiagnostico(prontuario);
   }
 
   filtrandoDadosCid() {
@@ -59,11 +85,23 @@ export class DiagnosticoComponent implements OnInit {
     );
   }
 
+
+
   private updatePaginatedOptions() {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    this.paginatedOptions = this.filteredOptions.slice(startIndex, endIndex);
+    const currentOptions = this.filteredOptions.slice(startIndex, endIndex);
+
+    // Garantindo que a primeira coluna tenha 10 itens
+    const primeiraColunaLength = Math.min(10, currentOptions.length);
+    this.primeiraColuna = currentOptions.slice(0, primeiraColunaLength);
+
+    // Colocando os itens restantes na segunda coluna
+    this.segundaColuna = currentOptions.slice(primeiraColunaLength);
   }
+
+
+
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
@@ -75,17 +113,6 @@ export class DiagnosticoComponent implements OnInit {
   selectOption(option: Cid_codigo_internaciona_doecas) {
     this.selectedOptions.push(option);
     console.log('Selecionado:', option);
-  }
-
-  Proximo() {
-    const prontDiagnostico = this.selectedOptions.map(option => option.label).join(', ');
-    const prontuario: Prontuario = {
-      prontDiagnostico: prontDiagnostico,
-    };
-    console.log(prontuario, 'aqui');
-
-    this.ProntuarioService.chageDiagnostico(prontuario);
-    this.onMudarAba.emit(4);
   }
 
   resetarPesquisa() {

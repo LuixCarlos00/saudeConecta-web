@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="content">
+    <div class="password-container">
+      <input
+        type="{{ showPassword ? 'text' : 'password' }}"
+        placeholder="Nova Senha"
+        [(ngModel)]="novaSenha"
+      />
+      <button type="button" class="show-password-btn" (click)="togglePasswordVisibility()">
+        <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </div>
+    <button (click)="TrocaSenha()">Trocar Senha</button>
+  </div>
+</div>

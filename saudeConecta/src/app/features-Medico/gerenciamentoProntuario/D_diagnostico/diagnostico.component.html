@@ -1,36 +1,49 @@
 <body>
-  <div>
+  <div style="border: 5px solid rgb(146, 146, 146); border-radius: 10px; margin: 10px;">
+    <div style="margin: 10px">
     <div class="example-full-width">
-
       <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput [formControl]="myControl" placeholder="Ex. Nome,Dia,Horario" #input>
-
+        <mat-label>Filtros-Cid</mat-label>
+        <input matInput [formControl]="myControl" placeholder="Ex. Diabetes Mellitus, Poliomielite Aguda, Febres Hemorrágicas" #input>
         <mat-icon matSuffix (click)="limparPesquisa()" title="Limpa a pesquisa">clear</mat-icon>
         <mat-icon matSuffix (click)="resetarPesquisa()" title="Recarrega a tabela">restore</mat-icon>
       </mat-form-field>
     </div>
 
-    <div>
-      <ul style="list-style: none; padding: 0;">
-        <li *ngFor="let option of paginatedOptions" style="display: flex; align-items: center; margin-left: 10px;">
-          <label style="border-top: 1px solid black; padding-right: 5px;">
-            {{ option.codigo }} - {{ option.label }}
-          </label>
-          <input type="radio" name="cid" (change)="selectOption(option)" />
-        </li>
-      </ul>
-    </div>
-    <div>
+    <!-- Tabela para as colunas -->
+    <table style="width: 100%;">
+      <tr>
+        <!-- Primeira coluna -->
+        <td style="vertical-align: top; padding-right: 10px;">
+          <ul>
+            <li *ngFor="let option of primeiraColuna">
+              <label style="border-top: 1px solid black; padding-right: 5px; font-size: 15px;">
+                {{ option.codigo }} - {{ option.label }}
+              </label>
+              <input type="radio" name="cid" (change)="selectOption(option)" />
+            </li>
+          </ul>
+        </td>
+        <!-- Segunda coluna -->
+        <td style="vertical-align: top; padding-left: 10px;">
+          <ul>
+            <li *ngFor="let option of segundaColuna">
+              <label style="border-top: 1px solid black; padding-right: 5px; font-size: 12px;">
+                {{ option.codigo }} - {{ option.label }}
+              </label>
+              <input type="radio" name="cid" (change)="selectOption(option)" />
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Controles de paginação -->
+    <div style="text-align: center; margin-top: 20px; align-items: center; justify-content: center; display: flex;">
       <button class="anterior" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
       <span>Página {{ currentPage }} de {{ totalPages }}</span>
-      <button class="anterior" (click)="goToPage(currentPage + 1)"
-        [disabled]="currentPage === totalPages">Próxima</button>
-    </div>
-    <div style="display: flex; justify-content: center;">
-      <div>
-        <button class="proximo" (click)="Proximo()">Próximo</button>
-      </div>
+      <button class="proximo" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
     </div>
   </div>
+</div>
 </body>

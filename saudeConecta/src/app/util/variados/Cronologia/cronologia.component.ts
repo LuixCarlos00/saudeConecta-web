@@ -48,6 +48,7 @@ export class CalendarDialogComponent implements OnInit {
     });
   }
 
+
   PesquisaPorIntervaloDeDatas(dataInicio: Date, dataFim: Date) {
     if (dataInicio && dataFim) {
       const DataInicioFormatada = dataInicio.toISOString().split('T')[0];
@@ -57,6 +58,8 @@ export class CalendarDialogComponent implements OnInit {
         DataInicioFormatada,
         DataFimFormatada
       ).subscribe((dados) => {
+        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
+
         this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
       });
     }
@@ -75,6 +78,8 @@ export class CalendarDialogComponent implements OnInit {
         DataFimFormatada,
         especialidades
       ).subscribe((dados) => {
+        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
+
         this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
       });
     }
@@ -85,6 +90,8 @@ export class CalendarDialogComponent implements OnInit {
       this.CronologiaService.BuscandoTodasConsultasPorMedico(
         medico.medCodigo
       ).subscribe((dados) => {
+        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
+
         this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
       });
     }
@@ -103,6 +110,8 @@ export class CalendarDialogComponent implements OnInit {
         DataInicioFormatada,
         DataFimFormatada
       ).subscribe((dados) => {
+        console.log('PesquisarMedicoEmUmIntervaloDeDatas', dados);
+        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
         this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
       });
     }
@@ -113,6 +122,8 @@ export class CalendarDialogComponent implements OnInit {
       this.CronologiaService.BuscandoTodasConsultasPorEspecialidade(
         especialidades
       ).subscribe((dados) => {
+        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
+
         this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
       });
     }

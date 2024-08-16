@@ -26,6 +26,7 @@ import { ProntuarioComponent } from './features-Medico/prontuario/prontuario.com
 import { TabelaAgendaMedicoComponent } from './features-Medico/tabela-agenda-medico/tabela-agenda-medico.component';
 import { HistoricosComponent } from './features-Medico/historicos/historicos.component';
 import { DadosPessoaisComponent } from './features-Medico/DadosPessoais/DadosPessoais.component';
+import { GerenciamentoProntuarioComponent } from './features-Medico/gerenciamentoProntuario/gerenciamentoProntuario.component';
 
 
 const routes: Routes = [
@@ -127,6 +128,13 @@ const routes: Routes = [
     component: DadosPessoaisComponent,
     canActivate: [GuardaRotasHome],
   },
+
+  {
+    path: 'startconsulta',
+    component: GerenciamentoProntuarioComponent,
+    canActivate: [GuardaRotasHome],
+  },
+
 
 
 

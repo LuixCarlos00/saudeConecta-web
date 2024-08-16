@@ -490,6 +490,8 @@ export class EditarConsultasComponent implements OnInit {
 
   atualizarHorarios() {
     if (this.horariosDisponiveis) {
+      console.log('horariosDisponiveis', this.horariosDisponiveis);
+
       const horariosDisponiveisFormatados = this.horariosDisponiveis.map(horario => horario.substring(0, 5));
       this.Hora = HoradaConsulta.filter(horario => {
         const horarioFormatado = horario.value.substring(0, 5);

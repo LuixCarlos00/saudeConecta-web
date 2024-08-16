@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs';
 import { ProntuarioService } from 'src/app/service/MEDICO-prontuario/prontuario.service';
@@ -19,22 +26,24 @@ export class PrescricaoComponent implements OnInit {
   ModeloPrescricao: string = '';
   TituloPrescricao: string = '';
 
-  ModeloExame : string='';
-  TituloExame : string='';
-  DataExame : string='';
-  ExameText : string='';
+  ModeloExame: string = '';
+  TituloExame: string = '';
+  DataExame: string = '';
+  ExameText: string = '';
 
-  @Output() onMudarAba = new EventEmitter<number>();
+  @Input() Finalizar: boolean = false;
+
   myControl = new FormControl('');
   options: Tuss_terminologia_Unificada_Saude_Suplementar[] =
     Tuss_terminologia_Unificada_Saude_Suplementar;
   filteredOptions: Tuss_terminologia_Unificada_Saude_Suplementar[] = [];
+  primeiraColuna: Tuss_terminologia_Unificada_Saude_Suplementar[] = [];
+  segundaColuna: Tuss_terminologia_Unificada_Saude_Suplementar[] = [];
   selectedOptions: Tuss_terminologia_Unificada_Saude_Suplementar[] = [];
 
-  pageSize = 10; // Número de itens por página
+  pageSize = 20; // Número de itens por página
   currentPage = 1; // Página atual
   totalPages = 1; // Total de páginas
-  paginatedOptions: Tuss_terminologia_Unificada_Saude_Suplementar[] = [];
 
   constructor(private ProntuarioService: ProntuarioService) {}
 
@@ -42,10 +51,16 @@ export class PrescricaoComponent implements OnInit {
     this.filtrandoDadosCid();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['Finalizar'] && this.Finalizar) {
+      this.enviandoAquivos();
+    }
+  }
 
-  Proximo() {
-
-    const prontPrescricao = this.selectedOptions.map(option => option.descricao).join(', ');
+  enviandoAquivos() {
+    const prontPrescricao = this.selectedOptions
+      .map((option) => option.descricao)
+      .join(', ');
     const prontuario: Prontuario = {
       prontPrescricao: prontPrescricao,
       prontDataPrescricao: this.DataPrescricao,
@@ -55,18 +70,11 @@ export class PrescricaoComponent implements OnInit {
       prontExame: this.ExameText,
       prontDataExame: this.DataExame,
       prontModeloExame: this.ModeloExame,
-      prontTituloExame: this.TituloExame
-
-
+      prontTituloExame: this.TituloExame,
     };
-    console.log(prontuario,'aqui');
 
-    this.ProntuarioService.chageSolicitacaoExame(prontuario);
-    this.onMudarAba.emit(5);
+    this.ProntuarioService.chagePrescricao(prontuario);
   }
-
-
-
 
   filtrandoDadosCid() {
     this.filteredOptions = this.options;
@@ -103,7 +111,14 @@ export class PrescricaoComponent implements OnInit {
   private updatePaginatedOptions() {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    this.paginatedOptions = this.filteredOptions.slice(startIndex, endIndex);
+    const currentOptions = this.filteredOptions.slice(startIndex, endIndex);
+
+    // Garantindo que a primeira coluna tenha 10 itens
+    const primeiraColunaLength = Math.min(10, currentOptions.length);
+    this.primeiraColuna = currentOptions.slice(0, primeiraColunaLength);
+
+    // Colocando os itens restantes na segunda coluna
+    this.segundaColuna = currentOptions.slice(primeiraColunaLength);
   }
 
   goToPage(page: number) {

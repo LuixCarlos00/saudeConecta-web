@@ -1,5 +1,6 @@
+import { InputModalityDetector } from '@angular/cdk/a11y';
 import { ProntuarioService } from '../../../service/MEDICO-prontuario/prontuario.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Prontuario } from 'src/app/util/variados/interfaces/Prontuario/Prontuario';
 import Swal from 'sweetalert2';
 
@@ -9,7 +10,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./pediatria-exames-fisicos.component.css'],
 })
 export class PediatriaExamesFisicosComponent implements OnInit {
-  @Output() onMudarAba = new EventEmitter<number>();
+
+  QueixaPrincipal: string = '';
   peso: string = '';
   altura: string = '';
   Temperatura: string = '';
@@ -22,26 +24,30 @@ export class PediatriaExamesFisicosComponent implements OnInit {
   FreqArterialSistolica: string = '';
   observacao: string = '';
   FreqArterialDiastolica: string = '';
+  Conduta: any;
+  Anamnese: any;
+
+  @Input() Finalizar: boolean = false;
+
+
 
   constructor(private ProntuarioService: ProntuarioService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
 
-  Proximo() {
 
-    if (
-      this.DataNacimento === null ||
-      this.DataNacimento === undefined ||
-      this.DataNacimento === ''
-    ) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Atenção',
-        text: 'Para prosseguir, preencha o campo Data de Nascimento',
-        showConfirmButton: true,
-        showCancelButton: true,
-      });
-    } else {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['Finalizar'] && this.Finalizar) {
+      this.enviandoAquivos();
+    }
+  }
+
+
+  enviandoAquivos() {
+
+
       const prontuario: Prontuario = {
         prontAltura: this.altura,
         prontPeso: this.peso,
@@ -55,12 +61,17 @@ export class PediatriaExamesFisicosComponent implements OnInit {
         prontFrequenciaArterialSistolica: this.FreqArterialSistolica,
         prontFrequenciaArterialDiastolica: this.FreqArterialDiastolica,
         prontObservacao: this.observacao,
-      };
-      console.log('os dados chegara aqui   ', prontuario);
+        prontCondulta: this.Conduta,
+        prontAnamnese: this.Anamnese,
+        prontQueixaPricipal: this.QueixaPrincipal,
 
+
+      };
 
       this.ProntuarioService.chagePediatriaExamesFisicos(prontuario);
-      this.onMudarAba.emit(1);
-    }
   }
+
+
+
+
 }

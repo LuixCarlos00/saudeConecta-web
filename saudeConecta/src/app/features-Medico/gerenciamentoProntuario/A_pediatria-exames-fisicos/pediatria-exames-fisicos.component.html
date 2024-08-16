@@ -1,33 +1,34 @@
 <body>
-  <div>
+  <div style="border: 5px solid rgb(146, 146, 146); border-radius: 10px; margin: 10px;">
+    <div style="margin: 10px">
     <div class="divPediatria">
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Peso (kg)</mat-label>
+        <div class="example-full-width">
+          <label>Peso (kg)</label>
           <input matInput type="text" [(ngModel)]="peso" name="peso">
-        </mat-form-field>
+        </div>
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Altura (m)</mat-label>
+        <div class="example-full-width">
+          <label>Altura (m)</label>
           <input matInput type="text" [(ngModel)]="altura" name="altura">
-        </mat-form-field>
+        </div>
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Temperatura</mat-label>
+        <div class="example-full-width">
+          <label>Temperatura</label>
           <input matInput type="text" [(ngModel)]="Temperatura" name="Temperatura">
-        </mat-form-field>
+        </div>
 
-        <mat-form-field class="example-full-width">
+        <div class="example-full-width">
 
-          <mat-label>     <font color="red">* </font> Data de Nascimento</mat-label>
+          <label> Data de Nascimento</label>
           <input matInput type="date" [(ngModel)]="DataNacimento" name="DataNacimento">
-        </mat-form-field>
+        </div>
 
     </div>
 
     <div class="divPediatria">
       <div style="width: 100%; margin: 5px; ">
-        <mat-label>Sexo</mat-label>
+        <label>Sexo</label>
         <div style="width: 100%; margin: 5px;">
           <mat-radio-group [(ngModel)]="Sexo" name="Sexo">
             <mat-radio-button value="1">Masculino</mat-radio-button>
@@ -36,50 +37,74 @@
         </div>
       </div>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Saturação (%)</mat-label>
+      <div class="example-full-width">
+        <label>Saturação (%)</label>
         <input matInput type="text" [(ngModel)]="Saturacao" name="Saturacao">
-      </mat-form-field>
+      </div>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Hemoglobinação (g/L)</mat-label>
+      <div class="example-full-width">
+        <label>Hemoglobinação (g/L)</label>
         <input matInput type="text" [(ngModel)]="Hemoglobinacao" name="Hemoglobinacao">
-      </mat-form-field>
+      </div>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Pressão Arterial</mat-label>
+      <div class="example-full-width">
+        <label>Pressão Arterial</label>
         <input matInput type="text" [(ngModel)]="PressArterial" name="PressArterial">
-      </mat-form-field>
+      </div>
     </div>
 
     <div class="divPediatria">
-      <mat-form-field class="example-full-width">
-        <mat-label>Frequência Respiratória (IRPM)</mat-label>
+      <div class="example-full-width">
+        <label>Frequência Respiratória (IRPM)</label>
         <input matInput type="text" [(ngModel)]="FreqRespiratoria" name="FreqRespiratoria">
-      </mat-form-field>
+      </div>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Frequência Arterial Sistólica (mmHG)</mat-label>
+      <div class="example-full-width">
+        <label>Frequência Arterial Sistólica (mmHG)</label>
         <input matInput type="text" [(ngModel)]="FreqArterialSistolica" name="FreqArterialSistolica">
-      </mat-form-field>
+      </div>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Frequência Arterial Diastólica (mmHG)</mat-label>
+      <div class="example-full-width">
+        <label>Frequência Arterial Diastólica (mmHG)</label>
         <input matInput type="text" [(ngModel)]="FreqArterialDiastolica" name="FreqArterialDiastolica">
-      </mat-form-field>
+      </div>
     </div>
 
     <div style="display: flex; margin: 10px;">
-      <mat-form-field class="example-full-width">
-        <mat-label>Observação</mat-label>
+      <div class="example-full-width">
+        <label>Observação</label>
         <textarea matInput style="width: 100%; height: 100px;"   [(ngModel)]="observacao" name="observacao"></textarea>
-      </mat-form-field>
-    </div>
-
-    <div style="display: flex; justify-content: center;">
-      <div>
-        <button class="proximo" (click)="Proximo()">Próximo</button>
       </div>
     </div>
+
+
+
+    <div style="display: flex; margin: 10px;">
+      <div class="example-full-width">
+        <label>Queixa Principal</label>
+        <textarea matInput style="width: 100%; height: 100px;"   [(ngModel)]="QueixaPrincipal" name="QueixaPrincipal"></textarea>
+      </div>
+    </div>
+
+    <div style="display:grid ; grid-template-columns: 1fr 1fr;">
+
+      <div style="display: flex; margin: 10px;">
+        <div class="example-full-width">
+          <label>Conduta</label>
+          <textarea matInput style="width: 100%; height: 100px;"   [(ngModel)]="Conduta" name="Conduta"></textarea>
+        </div>
+      </div>
+
+
+      <div style="display: flex; margin: 10px;">
+        <div class="example-full-width">
+          <label>Anamnese</label>
+          <textarea matInput style="width: 100%; height: 100px;"   [(ngModel)]="Anamnese" name="Anamnese"></textarea>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
   </div>
 </body>

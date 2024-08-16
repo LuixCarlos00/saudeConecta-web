@@ -1,99 +1,89 @@
 <body>
-  <div>
+  <div style="border: 5px solid rgb(146, 146, 146); border-radius: 10px; margin: 10px;">
+    <div style="margin: 10px">
     <div class="example-full-width">
       <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput [formControl]="myControl" placeholder="Ex. Nome,Dia,Horario" #input>
+        <mat-label>Filtros-Tuss</mat-label>
+        <input matInput [formControl]="myControl" placeholder="Ex. Diabetes Mellitus, Poliomielite Aguda, Febres Hemorrágicas" #input>
         <mat-icon matSuffix (click)="limparPesquisa()" title="Limpa a pesquisa">clear</mat-icon>
         <mat-icon matSuffix (click)="resetarPesquisa()" title="Recarrega a tabela">restore</mat-icon>
       </mat-form-field>
     </div>
 
-    <div style="display: flex; justify-content: center">
-      <div
-        style="margin: 10px; margin-left: 10px; width: 90%; border: hidden; box-shadow: 1px 1px 5px black; border-radius: 10px;">
-        <div>
+    <!-- Tabela para as colunas -->
+    <table style="width: 100%;">
+      <tr>
+        <!-- Primeira coluna -->
+        <td style="vertical-align: top; padding-right: 10px;">
           <ul style="list-style: none; padding: 0;">
-            <li *ngFor="let option of paginatedOptions" style="display: flex; align-items: center; margin-left: 10px;">
-              <label style="border-top: 1px solid black; padding-right: 5px;">
+            <li *ngFor="let option of primeiraColuna" style="margin-bottom: 10px;">
+              <label style="border-top: 1px solid black; padding-right: 5px; font-size: 15px;">
                 {{ option.codigo }} - {{ option.descricao }}
               </label>
-              <input type="checkbox" (change)="selectOption(option, $event)" />
+              <input   type="radio" name="cid" (change)="selectOption(option, $event)" />
             </li>
           </ul>
-        </div>
+        </td>
+        <!-- Segunda coluna -->
 
-        <div>
-          <button class="anterior" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
-          <span>Página {{ currentPage }} de {{ totalPages }}</span>
-          <button class="anterior" (click)="goToPage(currentPage + 1)"
-            [disabled]="currentPage === totalPages">Próxima</button>
-        </div>
-      </div>
+      </tr>
+    </table>
+
+    <div style="text-align: center; margin-top: 20px; align-items: center; justify-content: center; display: flex;">
+      <button class="anterior" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button class="proximo" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
     </div>
 
     <hr>
 
-    <div style="   display: grid; grid-template-columns: 50% 50%;">
-      <div >
-        <mat-form-field class="example-full-width">
-          <mat-label>Modelo Prescrição</mat-label>
-          <input matInput type="text" [(ngModel)]="ModeloPrescricao" name="FreqArterialSistolica">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Titulo Prescricao</mat-label>
-          <input matInput [(ngModel)]="TituloPrescricao" type="text" name="FreqRespiratoria">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Data Prescricao</mat-label>
-          <input matInput type="date" [(ngModel)]="DataPrescricao" name="FreqArterialDiastolica">
-        </mat-form-field>
+    <div style="display: grid; grid-template-columns: 50% 50%;">
+      <div>
+        <div class="example-full-width">
+          <label>Modelo Prescrição</label>
+          <input class="inputTexte" matInput type="text" [(ngModel)]="ModeloPrescricao" name="FreqArterialSistolica">
+        </div>
+        <div class="example-full-width">
+          <label>Titulo Prescricao</label>
+          <input class="inputTexte" matInput [(ngModel)]="TituloPrescricao" type="text" name="FreqRespiratoria">
+        </div>
+        <div class="example-full-width">
+          <label>Data Prescricao</label>
+          <input class="inputTexte" matInput type="date" [(ngModel)]="DataPrescricao" name="FreqArterialDiastolica">
+        </div>
 
         <div style="display: flex; margin: 10px;">
-          <mat-form-field class="example-full-width">
-            <mat-label>Prescrição</mat-label>
-            <textarea matInput style="width: 100%; height: 100px;" [(ngModel)]="PrescricaoText"
-              name="Anamnese">{{PrescricaoText}}</textarea>
-          </mat-form-field>
+          <div class="example-full-width">
+            <label>Prescrição</label>
+            <textarea matInput style="width: 100%; height: 100px;" [(ngModel)]="PrescricaoText" name="Anamnese">{{PrescricaoText}}</textarea>
+          </div>
         </div>
       </div>
 
       <div>
-        <mat-form-field class="example-full-width">
-          <mat-label>Modelo Exame</mat-label>
-          <input matInput type="text" [(ngModel)]="ModeloExame" name="FreqArterialSistolica">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Titulo Exame</mat-label>
-          <input matInput [(ngModel)]="TituloExame" type="text" name="FreqRespiratoria">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Data Exame</mat-label>
-          <input matInput type="date" [(ngModel)]="DataExame" name="FreqArterialDiastolica">
-        </mat-form-field>
+        <div class="example-full-width">
+          <label>Modelo Exame</label>
+          <input class="inputTexte" matInput type="text" [(ngModel)]="ModeloExame" name="FreqArterialSistolica">
+        </div>
+        <div class="example-full-width">
+          <label>Titulo Exame</label>
+          <input class="inputTexte" matInput [(ngModel)]="TituloExame" type="text" name="FreqRespiratoria">
+        </div>
+        <div class="example-full-width">
+          <label>Data Exame</label>
+          <input class="inputTexte" matInput type="date" [(ngModel)]="DataExame" name="FreqArterialDiastolica">
+        </div>
 
         <div style="display: flex; margin: 10px;">
-          <mat-form-field class="example-full-width">
-            <mat-label>Exame</mat-label>
-            <textarea matInput style="width: 100%; height: 100px;" [(ngModel)]="ExameText"
-              name="Anamnese">{{ExameText}}</textarea>
-          </mat-form-field>
+          <div class="example-full-width">
+            <label>Exame</label>
+            <textarea matInput style="width: 100%; height: 100px;" [(ngModel)]="ExameText" name="Anamnese">{{ExameText}}</textarea>
+          </div>
         </div>
       </div>
-
     </div>
 
-
-
-
-    <div style="display: flex; justify-content: center;">
-      <div>
-        <button class="proximo" (click)="Proximo()">Próximo</button>
-      </div>
-    </div>
-    <br>
-    <br>
-    <br>
-
+    <!-- Controles de paginação -->
+  </div>
   </div>
 </body>

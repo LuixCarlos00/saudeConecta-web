@@ -50,6 +50,11 @@ export class AgendaComponent implements OnInit {
 
   Pesquisar() {
     const busca = this.FormularioAgenda.get('busca')?.value;
+console.log('busca', busca);
+
+console.log('consulta status', this.ConsultaStatus);
+console.log('consulta', this.Consulta);
+
 
     if (this.ConsultaStatus) {
       this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);

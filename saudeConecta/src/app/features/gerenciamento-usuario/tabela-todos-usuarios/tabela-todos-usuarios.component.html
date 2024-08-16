@@ -69,6 +69,16 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="Senha">
+      <th mat-header-cell *matHeaderCellDef class="NomeHorario">Senha</th>
+      <td mat-cell *matCellDef="let element" class="colunasHorario">
+        <button *ngIf="!element.paciCodigo" (click)="TrocaSenhaUsuario(element)" style="border: hidden;   cursor: pointer; background-color: white;">
+          <i class="fa-solid fa-key fa-xl" style="color: #FFD43B;"></i>
+        </button>
+
+      </td>
+    </ng-container>
+
 
     <ng-container matColumnDef="Bloquear">
       <th mat-header-cell *matHeaderCellDef class="NomeHorario">Bloquear</th>

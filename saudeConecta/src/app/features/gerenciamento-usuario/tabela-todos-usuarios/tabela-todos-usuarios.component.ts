@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { elements } from 'chart.js';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
@@ -11,8 +12,7 @@ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { el } from 'date-fns/locale';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import Swal from 'sweetalert2';
-import { OutletContext } from '@angular/router';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { TrocaSenhaUsuariosComponent } from './TrocaSenhaUsuarios/TrocaSenhaUsuarios.component';
 
 @Component({
   selector: 'app-tabela-todos-usuarios',
@@ -36,15 +36,15 @@ export class TabelaTodosUsuariosComponent implements OnInit {
   constructor(
     private UsuariosService: UsuariosService,
     private GerenciamentoUsuariosService: GerenciamentoUsuariosService,
-    private DialogService: DialogService
+    private DialogService: DialogService,
+    private Dialog: MatDialog
   ) {}
 
   ngOnInit() {
-
     this.GerenciamentoUsuariosService.RadioValue$.subscribe((radioValue) => {
-      if (radioValue && radioValue!== 1) {
-       this.radioValue = radioValue;
-        this.filterCategoriras( this.radioValue);
+      if (radioValue && radioValue !== 1) {
+        this.radioValue = radioValue;
+        this.filterCategoriras(this.radioValue);
       }
     });
 
@@ -128,10 +128,9 @@ export class TabelaTodosUsuariosComponent implements OnInit {
   }
 
   filterCategoriras(radioValue: number) {
-
     let filteredData: Usuario[] = [];
 
-    if (radioValue!== null) {
+    if (radioValue !== null) {
       if (radioValue == 1) {
         for (let i = 0; i < this.Paciente.length; i++) {
           filteredData.push(this.Paciente[i]);
@@ -296,7 +295,7 @@ export class TabelaTodosUsuariosComponent implements OnInit {
                 this.BuscarTodosUsuarios();
                 setTimeout(() => {
                   this.filterCategoriras(this.radioValue);
-                },  500 );
+                }, 500);
                 this.LimparCampos.emit();
               }
             });
@@ -306,7 +305,10 @@ export class TabelaTodosUsuariosComponent implements OnInit {
           }
         );
       } else if (element.paciCodigo) {
-        this.UsuariosService.bloquearPaciente(element.paciCodigo,status).subscribe(
+        this.UsuariosService.bloquearPaciente(
+          element.paciCodigo,
+          status
+        ).subscribe(
           (dados) => {
             Swal.fire({
               icon: 'success',
@@ -317,7 +319,7 @@ export class TabelaTodosUsuariosComponent implements OnInit {
                 this.BuscarTodosUsuarios();
                 setTimeout(() => {
                   this.filterCategoriras(this.radioValue);
-                },  500 );
+                }, 500);
                 this.LimparCampos.emit();
               }
             });
@@ -330,6 +332,18 @@ export class TabelaTodosUsuariosComponent implements OnInit {
     }
   }
 
+  TrocaSenhaUsuario(elements: any) {
+
+
+    const dialoRef = this.Dialog.open(TrocaSenhaUsuariosComponent, {
+      width: '250px',
+      height: '250px',
+      data: {
+        elements: elements,
+      },
+    });
+  }
+
   displayedColumns = [
     'Codigo',
     'Login',
@@ -337,6 +351,7 @@ export class TabelaTodosUsuariosComponent implements OnInit {
     'Email',
     'Status',
     'Deletar',
+    'Senha',
     'Bloquear',
   ];
 }

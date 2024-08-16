@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Faz com que o container ocupe a altura total da tela */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaçamento entre o input e o botão */
+  text-align: center;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+input[type="password"],
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px; /* Define uma largura máxima para o input */
+  flex: 1;
+}
+
+.show-password-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #007bff;
+  margin-left: -40px; /* Ajuste conforme necessário para sobrepor o input */
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+mat-icon {
+  font-size: 24px;
+}

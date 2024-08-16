@@ -1,9 +1,12 @@
 <div>
   <form class="fomulario" [formGroup]="FormularioAgenda">
     <div class="divPesquisar">
+
       <label for="busca" class="label_search">Pesquisar </label>
       <input type="text" id="busca" class="input_search" name="busca" formControlName="busca">
+
       <button class="btnPesquisar" type="submit" (click)="Pesquisar()">Pesquisar</button>
+
       <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit"
         (click)="MostraTabelaDeConcluidos()">Finalizadas</button>
     </div>

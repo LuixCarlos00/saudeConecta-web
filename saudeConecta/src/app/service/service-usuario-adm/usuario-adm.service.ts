@@ -75,4 +75,13 @@ TrocaSenha(Administrador: any) {
 }
 
 
+TrocaSenhaDoUsuario(codigo: any, senhaNovaDTO: any) {
+  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
+  const options = { headers, withCredentials: true };
+  return this.http.put<any>( `${this.apiUrl}/Home/TrocaSenhaDoUsuario/${codigo}`,senhaNovaDTO, options);
+
+}
+
+
+
 }
