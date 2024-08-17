@@ -15,21 +15,17 @@ import { el } from 'date-fns/locale';
   styleUrls: ['./gerenciamentoProntuario.component.css'],
 })
 export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
+
+
   selectedTabIndex = 0;
   timer: number = 0;
   minutes: number = 0;
   seconds: number = 0;
   interval: any;
   Consulta: any;
-  ///=======
   Prontuario!: Prontuario;
   FinalizarConsulta: boolean = false;
 
-  DadosPediatria!: Prontuario;
-
-  DadosPrescricao_Pediatria!: Prontuario;
-
-  DadosDiagnostico!: Prontuario;
 
   constructor(
     private ProntuarioService: ProntuarioService,
@@ -71,6 +67,8 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
   }
 
   concluido() {
+
+
     this.Prontuario = {} as any;
 
     const pediatriaPromise = firstValueFrom(
@@ -131,8 +129,11 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
         const data = new Date();
         const dataAtual = data.toISOString().split('T')[0];
         this.Prontuario.prontDataFinalizado = dataAtual.toString();
+        this.Prontuario.prontTempoDuracao = 10+this.minutes + ':' + this.seconds;
 
-        this.salvar();
+        console.log('Prontuario:', this.Prontuario);
+
+        //this.salvar();
       })
       .catch((error) => {
         console.error('Erro ao finalizar:', error);

@@ -1,89 +1,103 @@
 <body>
   <div style="border: 5px solid rgb(146, 146, 146); border-radius: 10px; margin: 10px;">
     <div style="margin: 10px">
-    <div class="example-full-width">
-      <mat-form-field>
-        <mat-label>Filtros-Tuss</mat-label>
-        <input matInput [formControl]="myControl" placeholder="Ex. Diabetes Mellitus, Poliomielite Aguda, Febres Hemorrágicas" #input>
-        <mat-icon matSuffix (click)="limparPesquisa()" title="Limpa a pesquisa">clear</mat-icon>
-        <mat-icon matSuffix (click)="resetarPesquisa()" title="Recarrega a tabela">restore</mat-icon>
-      </mat-form-field>
-    </div>
+      <div class="example-full-width">
+        <mat-form-field>
+          <mat-label>Filtros-Tuss</mat-label>
+          <input matInput [formControl]="myControl"
+            placeholder="Ex. Diabetes Mellitus, Poliomielite Aguda, Febres Hemorrágicas" #input>
+          <mat-icon matSuffix (click)="limparPesquisa()" title="Limpa a pesquisa">clear</mat-icon>
+          <mat-icon matSuffix (click)="resetarPesquisa()" title="Recarrega a tabela">restore</mat-icon>
+        </mat-form-field>
+      </div>
 
-    <!-- Tabela para as colunas -->
-    <table style="width: 100%;">
-      <tr>
-        <!-- Primeira coluna -->
-        <td style="vertical-align: top; padding-right: 10px;">
-          <ul style="list-style: none; padding: 0;">
-            <li *ngFor="let option of primeiraColuna" style="margin-bottom: 10px;">
-              <label style="border-top: 1px solid black; padding-right: 5px; font-size: 15px;">
-                {{ option.codigo }} - {{ option.descricao }}
-              </label>
-              <input   type="radio" name="cid" (change)="selectOption(option, $event)" />
-            </li>
-          </ul>
-        </td>
-        <!-- Segunda coluna -->
+      <!-- Tabela para as colunas -->
+      <table style="width: 100%;">
+        <tr>
+          <!-- Primeira coluna -->
+          <td style="vertical-align: top; padding-right: 10px;">
+            <ul style="list-style: none; padding: 0;">
+              <li *ngFor="let option of primeiraColuna" style="margin-bottom: 10px;">
+                <label style="border-top: 1px solid black; padding-right: 5px; font-size: 15px;">
+                  {{ option.codigo }} - {{ option.descricao }}
+                </label>
+                <input type="radio" name="cid" (change)="selectOption(option, $event)" />
+              </li>
+            </ul>
+          </td>
+          <!-- Segunda coluna -->
 
-      </tr>
-    </table>
+        </tr>
+      </table>
 
-    <div style="text-align: center; margin-top: 20px; align-items: center; justify-content: center; display: flex;">
-      <button class="anterior" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
-      <span>Página {{ currentPage }} de {{ totalPages }}</span>
-      <button class="proximo" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
-    </div>
+      <div style="text-align: center; margin-top: 20px; align-items: center; justify-content: center; display: flex;">
+        <button class="anterior" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <button class="proximo" (click)="goToPage(currentPage + 1)"
+          [disabled]="currentPage === totalPages">Próxima</button>
+      </div>
 
-    <hr>
+      <hr>
 
-    <div style="display: grid; grid-template-columns: 50% 50%;">
-      <div>
-        <div class="example-full-width">
-          <label>Modelo Prescrição</label>
-          <input class="inputTexte" matInput type="text" [(ngModel)]="ModeloPrescricao" name="FreqArterialSistolica">
-        </div>
-        <div class="example-full-width">
-          <label>Titulo Prescricao</label>
-          <input class="inputTexte" matInput [(ngModel)]="TituloPrescricao" type="text" name="FreqRespiratoria">
-        </div>
-        <div class="example-full-width">
-          <label>Data Prescricao</label>
-          <input class="inputTexte" matInput type="date" [(ngModel)]="DataPrescricao" name="FreqArterialDiastolica">
-        </div>
+      <div style="display: grid; grid-template-columns: 50% 50%;">
+        <div>
 
-        <div style="display: flex; margin: 10px;">
           <div class="example-full-width">
-            <label>Prescrição</label>
-            <textarea matInput style="width: 100%; height: 100px;" [(ngModel)]="PrescricaoText" name="Anamnese">{{PrescricaoText}}</textarea>
+            <label>Titulo Prescricao</label>
+            <select class="inputTexte" matInput [(ngModel)]="TituloPrescricao" type="text" name="FreqRespiratoria">
+              <option value="Prescrição Médica Geral">Prescrição Médica Geral</option>
+              <option value="Prescrição de Medicamento">Prescrição de Medicamento</option>
+              <option value="Prescrição de Procedimento">Prescrição de Procedimento</option>
+              <option value="Prescrição de Exames">Prescrição de Exames</option>
+              <option value="Prescrição de Farmacéutica">Prescrição de Farmacéutica</option>
+              <option value="Prescrição de Diagnóstico">Prescrição de Diagnóstico</option>
+            </select>
+          </div>
+          <div class="example-full-width">
+            <label>Data Prescricao</label>
+            <input class="inputTexte" matInput type="date" [(ngModel)]="DataPrescricao" name="FreqArterialDiastolica">
+          </div>
+
+          <div style="display: flex; margin: 10px;">
+            <div class="example-full-width">
+              <label>Prescrição</label>
+              <textarea matInput style="width: 100%; height: 100px;" [(ngModel)]="PrescricaoText"
+                name="Anamnese">{{PrescricaoText}}</textarea>
+            </div>
+          </div>
+        </div>
+
+        <div>
+
+          <div class="example-full-width">
+            <label>Titulo Exame</label>
+            <select class="inputTexte" matInput [(ngModel)]="TituloExame" type="text" name="FreqRespiratoria">
+              <option value="Exames Gerais">Exames Gerais</option>
+              <option value="Exames de Diagnóstico">Exames de Diagnóstico</option>
+              <option value="Exames de Laboratório">Exames de Laboratório</option>
+              <option value="Exames de Radiologia">Exames de Radiologia</option>
+              <option value="Exames de Imagem">Exames de Imagem</option>
+              <option value="Exames de Patologia">Exames de Patologia</option>
+              <option value="Teste de Esforço">Teste de Esforço</option>
+              <option value="Exames de Patologia Clínica">Exames de Patologia Clínica</option>
+            </select>
+          </div>
+          <div class="example-full-width">
+            <label>Data Exame</label>
+            <input class="inputTexte" matInput type="date" [(ngModel)]="DataExame" name="FreqArterialDiastolica">
+          </div>
+
+          <div style="display: flex; margin: 10px;">
+            <div class="example-full-width">
+              <label>Exame</label>
+              <textarea matInput style="width: 100%; height: 100px;" [(ngModel)]="ExameText"
+                name="Anamnese">{{ExameText}}</textarea>
+            </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <div class="example-full-width">
-          <label>Modelo Exame</label>
-          <input class="inputTexte" matInput type="text" [(ngModel)]="ModeloExame" name="FreqArterialSistolica">
-        </div>
-        <div class="example-full-width">
-          <label>Titulo Exame</label>
-          <input class="inputTexte" matInput [(ngModel)]="TituloExame" type="text" name="FreqRespiratoria">
-        </div>
-        <div class="example-full-width">
-          <label>Data Exame</label>
-          <input class="inputTexte" matInput type="date" [(ngModel)]="DataExame" name="FreqArterialDiastolica">
-        </div>
-
-        <div style="display: flex; margin: 10px;">
-          <div class="example-full-width">
-            <label>Exame</label>
-            <textarea matInput style="width: 100%; height: 100px;" [(ngModel)]="ExameText" name="Anamnese">{{ExameText}}</textarea>
-          </div>
-        </div>
-      </div>
+      <!-- Controles de paginação -->
     </div>
-
-    <!-- Controles de paginação -->
-  </div>
   </div>
 </body>

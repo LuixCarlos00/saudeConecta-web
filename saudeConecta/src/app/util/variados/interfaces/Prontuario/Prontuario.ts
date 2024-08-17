@@ -38,6 +38,7 @@ export interface Prontuario {
       prontDataFinalizado ?: string,
       prontCodigoMedico ?: any,
       prontCodigoConsulta ?: any,
+      prontTempoDuracao ?: string
 
 
       prontModeloExame ?: string,

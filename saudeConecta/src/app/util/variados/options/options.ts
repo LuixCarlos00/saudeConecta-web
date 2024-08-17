@@ -88,6 +88,7 @@ export const tipoCivilOptions: { value: string; label: string }[] = [
   { value: '4', label: 'PERIÓDICO (REVISTAS, JORNAIS)' },
   { value: '5', label: 'PAGINAS WEB (SITES)' },
 ];
+
 export const HoradaConsulta: { value: string; label: string }[] = [
   { value: '08:00', label: '08:00' },
   { value: '08:10', label: '08:10' },

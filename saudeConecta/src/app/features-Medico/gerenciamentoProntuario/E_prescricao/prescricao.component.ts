@@ -62,7 +62,7 @@ export class PrescricaoComponent implements OnInit {
       .map((option) => option.descricao)
       .join(', ');
     const prontuario: Prontuario = {
-      prontPrescricao: prontPrescricao,
+      prontPrescricao: this.PrescricaoText,
       prontDataPrescricao: this.DataPrescricao,
       prontModeloPrescricao: this.ModeloPrescricao,
       prontTituloPrescricao: this.TituloPrescricao,

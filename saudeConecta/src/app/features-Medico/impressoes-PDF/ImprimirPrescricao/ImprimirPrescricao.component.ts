@@ -19,6 +19,7 @@ export class ImprimirPrescricaoComponent implements OnInit {
   Especialidade: string = '';
   Data: string = '';
   Prescricao: string = '';
+tituloPrescricao: string = '';
 
   Prontuario!: Prontuario;
   Consulta!: any;
@@ -38,6 +39,7 @@ export class ImprimirPrescricaoComponent implements OnInit {
     this.Crm = this.Prontuario.prontCodigoMedico.medCrm?.trim() || this.Consulta.conSttMedico.medCrm?.trim();
     this.Especialidade = this.Prontuario.prontCodigoMedico.medEspecialidade?.trim() || this.Consulta.conSttMedico.medEspecialidade?.trim();
 
+    this.tituloPrescricao = this.Prontuario.prontTituloPrescricao?.trim() || 'SEM INFORMACÃO';
     this.Data = this.Prontuario.prontDataPrescricao || this.dataAtual
     this.Prescricao = this.Prontuario.prontPrescricao?.trim() || 'SEM INFORMACÃO';
 

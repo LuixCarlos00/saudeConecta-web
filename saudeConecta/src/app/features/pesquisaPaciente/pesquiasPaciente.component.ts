@@ -12,8 +12,9 @@ import Swal from 'sweetalert2';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciamento.service';
- import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { LoginService } from 'src/app/service/service-login/login.service';
+import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 
 @Component({
   selector: 'app-pesquias-Paciente',
@@ -32,7 +33,7 @@ export class PesquiasPacienteComponent implements OnInit {
   pagamento: Boolean = false;
   dadosPaciente: any;
   showResultadoPaciente: boolean = false;
-  DataSelecionada:any
+  DataSelecionada: any;
   horariosDisponiveis: string[] = [];
 
   UsuarioLogado: Usuario = {
@@ -40,19 +41,20 @@ export class PesquiasPacienteComponent implements OnInit {
     aud: '',
     exp: '',
     iss: '',
-    sub: ''
+    sub: '',
   };
 
   constructor(
     private form: FormBuilder,
     private router: Router,
+    private MedicosService: MedicosService,
 
     private tokenService: tokenService,
     private consultaService: ConsultaService,
     private DialogService: DialogService,
     private PacientesService: PacientesService,
     private gerenciamentoService: GerenciamentoService,
-    public LoginService: LoginService,
+    public LoginService: LoginService
   ) {
     this.LoginService.iniciarObservacaoDadosUsuario();
     this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
@@ -63,9 +65,9 @@ export class PesquiasPacienteComponent implements OnInit {
       if (medico) {
         this.Medico = medico;
         this.verificarCondicoesParaConsulta();
+        //  this.generateAvailableTimes(this.Medico.medTempoDeConsulta);
       }
     });
-
 
     this.gerenciamentoService.pacienteEscolhido$.subscribe((paciente) => {
       if (paciente) {
@@ -73,7 +75,6 @@ export class PesquiasPacienteComponent implements OnInit {
       }
     });
   }
-
 
   ngOnInit() {
     this.FormGroupConsulta = this.form.group({
@@ -86,11 +87,12 @@ export class PesquiasPacienteComponent implements OnInit {
     });
   }
 
-
-
   PesquisarPacientes() {
-    const pesquisa: string =this.FormGroupConsulta.get('PesquisaPaciente')?.value;
-    const FiltroPesquisaPaciente: number = this.FormGroupConsulta.get('FiltroPesquisaPaciente' )?.value;
+    const pesquisa: string =
+      this.FormGroupConsulta.get('PesquisaPaciente')?.value;
+    const FiltroPesquisaPaciente: number = this.FormGroupConsulta.get(
+      'FiltroPesquisaPaciente'
+    )?.value;
 
     if (FiltroPesquisaPaciente === 1) {
       console.log('pesquisa', pesquisa);
@@ -170,9 +172,6 @@ export class PesquiasPacienteComponent implements OnInit {
       }
     });
 
-
-
-
     let time = this.FormGroupConsulta.get('time')?.value;
     const data = this.FormGroupConsulta.get('date')?.value;
     const observacao = this.FormGroupConsulta.get('observacao')?.value;
@@ -205,21 +204,19 @@ export class PesquiasPacienteComponent implements OnInit {
         ConStatus: 0,
       };
 
-      this.consultaService.VericarSeExetemConsultasMarcadas(
-        consult
-      ).subscribe(
+      this.consultaService.VericarSeExetemConsultasMarcadas(consult).subscribe(
         (data) => {
           if (data) {
             this.DialogService.JaexisteDadosCAdastradosComEssesParamentros();
             this.FormGroupConsulta.reset();
           } else if (!data) {
-            this.consultaService.CriarConsulata(
-              consult
-            ).subscribe(
+            this.consultaService.CriarConsulata(consult).subscribe(
               (response) => {
                 console.log('response ', response);
 
-                this.consultaService.ChangeCadastroRealizadoComSucesso(response);
+                this.consultaService.ChangeCadastroRealizadoComSucesso(
+                  response
+                );
                 this.PacienteEscolhido = null;
                 this.FormGroupConsulta.reset();
                 const texto: string = `O cadastro da consulta foi realizado com sucesso.\nCodigo de consulta: ${response.ConCodigoConsulta} `;
@@ -234,7 +231,7 @@ export class PesquiasPacienteComponent implements OnInit {
                 });
               },
               (error) => {
-                console.log(error,'erros');
+                console.log(error, 'erros');
 
                 Swal.fire({
                   icon: 'error',
@@ -255,8 +252,6 @@ export class PesquiasPacienteComponent implements OnInit {
     }
   }
 
-
-
   onDateChange(event: Event) {
     const selectedDate: string = (event.target as HTMLInputElement).value;
     const date = new Date(selectedDate + 'T00:00:00');
@@ -268,34 +263,113 @@ export class PesquiasPacienteComponent implements OnInit {
     this.verificarCondicoesParaConsulta(); // Chama a função ao mudar a data
   }
 
+
+
   verificarCondicoesParaConsulta() {
     this.horariosDisponiveis = []; // Limpa os horários disponíveis ao iniciar a consulta
+
+    // Se o médico e a data estiverem selecionados
     if (this.Medico && this.DataSelecionada) {
-      this.consultaService.VerificarHorariosDisponiveisReferentesAoMedicoEData(this.Medico.medCodigo, this.DataSelecionada).subscribe(
-        (data) => {
-          console.log(data, 'data');
-          this.horariosDisponiveis = data;
-          this.atualizarHorarios(); // Atualiza os horários disponíveis ao receber os dados
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      // Gera os horários disponíveis com base no tempo de consulta do médico
+      if (this.Medico.medTempoDeConsulta) {
+        this.generateAvailableTimes(this.Medico.medTempoDeConsulta);
+      } else {
+        // Se não houver tempo de consulta definido, usa os horários padrão
+        Swal.fire({
+          icon: 'warning',
+          title: 'Atenção',
+          text: 'O médico ainda não informou o tempo de consulta. Portanto, serão utilizados os horários padrão.',
+          showCloseButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              text: 'É altamente recomendado que o tempo de consulta seja definido pelo médico para evitar problemas futuros.',
+            });
+          }
+        });
+
+
+
+        this.Hora = [...HoradaConsulta];
+      }
+
+      // Verifica os horários indisponíveis para a data e o médico selecionados
+      this.consultaService.VerificarHorariosDisponiveisReferentesAoMedicoEData(this.Medico.medCodigo,this.DataSelecionada).subscribe(
+          (data) => {
+            console.log(data, 'horarios INDisponiveis');
+            this.horariosDisponiveis = data;
+
+            // Filtra os horários disponíveis com base nos horários gerados/selecionados
+            this.atualizarHorarios();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
   }
+
+  generateAvailableTimes(medTempoDeConsulta: number) {
+    const startTime = '08:00';
+    const endTime = '18:00';
+
+    let currentTime = this.convertToDateObject(startTime);
+    const endDateTime = this.convertToDateObject(endTime);
+
+    this.Hora = [];
+
+    // Enquanto o tempo atual for menor ou igual ao tempo final
+    while (currentTime <= endDateTime) {
+      // Adiciona o horário formatado ao array
+      this.Hora.push({
+        value: this.formatTime(currentTime),
+        label: this.formatTime(currentTime),
+      });
+
+      // Incrementa o tempo atual de acordo com o tempo de consulta
+      currentTime = new Date(
+        currentTime.getTime() + medTempoDeConsulta * 60000
+      ); // 60000 ms = 1 minuto
+    }
+
+    console.log('Horários disponíveis:', this.Hora);
+  }
+
+
+
+
 
   atualizarHorarios() {
     if (this.horariosDisponiveis) {
-      const horariosDisponiveisFormatados = this.horariosDisponiveis.map(horario => horario.substring(0, 5));
-      this.Hora = HoradaConsulta.filter(horario => {
+      const horariosDisponiveisFormatados = this.horariosDisponiveis.map(
+        (horario) => horario.substring(0, 5)
+      );
+
+      // Filtra os horários gerados pelo método generateAvailableTimes
+      this.Hora = this.Hora.filter((horario) => {
         const horarioFormatado = horario.value.substring(0, 5);
         return !horariosDisponiveisFormatados.includes(horarioFormatado);
       });
-    }else{
-      this.Hora = HoradaConsulta;
     }
-
   }
+
+  convertToDateObject(timeString: string): Date {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    return date;
+  }
+
+  formatTime(date: Date): string {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+
+
 
 
   voltarParaPesquisaMedicos() {
@@ -333,5 +407,4 @@ export class PesquiasPacienteComponent implements OnInit {
         return (FornaPAgamento = 0); // Valor padrão, caso nenhuma das opções seja selecionada
     }
   }
-
 }

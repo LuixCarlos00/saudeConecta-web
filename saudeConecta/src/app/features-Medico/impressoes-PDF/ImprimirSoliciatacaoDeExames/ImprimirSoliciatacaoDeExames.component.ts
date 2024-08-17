@@ -21,6 +21,7 @@ export class ImprimirSoliciatacaoDeExamesComponent implements OnInit {
   Especialidade: string = '';
   Data: string = '';
   Exame: string = '';
+  tituloExame: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<ImprimirSoliciatacaoDeExamesComponent>,
@@ -32,11 +33,15 @@ export class ImprimirSoliciatacaoDeExamesComponent implements OnInit {
     this.Consulta = this.data.Consulta;
 
 
+
+
+
     this.NomeMedico = this.Prontuario.prontCodigoMedico.medNome?.trim() ||this.Consulta.conSttMedico.medNome?.trim();
     this.Crm = this.Prontuario.prontCodigoMedico.medCrm?.trim() || this.Consulta.conSttMedico.medCrm?.trim();
     this.Especialidade = this.Prontuario.prontCodigoMedico.medEspecialidade?.trim() || this.Consulta.conSttMedico.medEspecialidade?.trim();
     this.Data = this.Prontuario.prontDataPrescricao || this.dataAtual
-     this.Exame = this.Prontuario.prontExame?.trim() || 'SEM INFORMACÃO';
+    this.Exame = this.Prontuario.prontExame?.trim() || 'SEM INFORMACÃO';
+    this.tituloExame = this.Prontuario.prontTituloExame?.trim() || 'SEM INFORMACÃO';
 
   }
 

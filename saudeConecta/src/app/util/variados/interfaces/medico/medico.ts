@@ -17,4 +17,5 @@ export interface Medico {
 
   medNome?: string;
 
+  MedTempoDeConsulta ?: string;
 }
