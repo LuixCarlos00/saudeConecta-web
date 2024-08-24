@@ -78,3 +78,28 @@ button{
   border: hidden;
   background-color: greenyellow
 }
+
+
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.warning-message {
+  color: #d9534f; /* Cor de alerta, vermelho */
+  font-size: 12px;
+  margin-top: 4px;
+  position: absolute;
+  left: 0;
+  bottom: -20px; /* Ajuste conforme necessário para o espaço abaixo do select */
+}
+
+select:invalid {
+  border-color: #d9534f; /* Cor de borda para campos inválidos */
+}

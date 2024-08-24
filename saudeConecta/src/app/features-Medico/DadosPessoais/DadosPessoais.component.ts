@@ -67,7 +67,6 @@ export class DadosPessoaisComponent implements OnInit {
         this.IdRegistroMedico = dados.MedCodigo;
         this.IdEndereco = dados.endereco.endCodigo;
 
-        console.log('dados', dados, this.IdRegistroMedico, this.IdEndereco);
 
         // Preencher o formulário com os dados recebidos
         this.dadosPessoaisForm.patchValue({

@@ -19,6 +19,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { QuillModule } from 'ngx-quill';
  import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgrokInterceptor } from './util/variados/interceptor\'s/ngGrok.service';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, BarraLateraComponent],
@@ -37,6 +38,7 @@ import { NgrokInterceptor } from './util/variados/interceptor\'s/ngGrok.service'
     MatDatepickerModule,
     MatNativeDateModule,
     NgChartsModule,
+    MatBadgeModule
 
   ],
   providers: [provideAnimationsAsync(),

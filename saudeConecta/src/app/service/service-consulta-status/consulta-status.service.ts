@@ -156,6 +156,13 @@ export class ConsultaStatusService {
       return this.http.get<any[]>( `${this.apiUrl}/consultaStatus/BuscarHistoricoDeAgendaDoMedico/${IdUsuarioMedico}`, options);
     }
 
+      BuscarDadosDeAgendaDeTodosOsMedicos() {
+        const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}`, };
+        const options = { headers, withCredentials: true };
+        return this.http.get<any[]>( `${this.apiUrl}/consultaStatus/BuscarDadosDeAgendaDeTodosOsMedicos`, options);
+      }
+
+
 
 
 }

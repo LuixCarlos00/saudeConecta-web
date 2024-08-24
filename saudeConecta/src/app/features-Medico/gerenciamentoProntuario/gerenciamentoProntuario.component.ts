@@ -133,7 +133,7 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
 
         console.log('Prontuario:', this.Prontuario);
 
-        //this.salvar();
+      this.salvar();
       })
       .catch((error) => {
         console.error('Erro ao finalizar:', error);

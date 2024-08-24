@@ -69,6 +69,9 @@ import { HistoricosComponent } from '../features-Medico/historicos/historicos.co
 import { DadosPessoaisComponent } from '../features-Medico/DadosPessoais/DadosPessoais.component';
 import { AtestadoPacienteComponent } from '../features-Medico/impressoes-PDF/AtestadoPaciente/AtestadoPaciente.component';
 import { TrocaSenhaUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/TrocaSenhaUsuarios/TrocaSenhaUsuarios.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { HistoricoCompletoComponent } from '../features-Medico/impressoes-PDF/historicoCompleto/historicoCompleto.component';
+
 
 @NgModule({
   declarations: [
@@ -114,7 +117,8 @@ import { TrocaSenhaUsuariosComponent } from '../features/gerenciamento-usuario/t
     HistoricosComponent,
     DadosPessoaisComponent,
     AtestadoPacienteComponent,
-    TrocaSenhaUsuariosComponent
+    TrocaSenhaUsuariosComponent,
+    HistoricoCompletoComponent
 
   ],
   exports: [],
@@ -146,6 +150,8 @@ import { TrocaSenhaUsuariosComponent } from '../features/gerenciamento-usuario/t
     MatTabsModule,
     MatAutocompleteModule,
     MatRadioModule,
+    MatBadgeModule,
+
 
 
 

@@ -14,8 +14,9 @@ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import Swal from 'sweetalert2';
 import { ObservacoesComponent } from 'src/app/features/agenda/tabela-agenda/Observacoes/Observacoes.component';
 import { id, is } from 'date-fns/locale';
- import { ImprimirSoliciatacaoDeExamesComponent } from '../impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
+import { ImprimirSoliciatacaoDeExamesComponent } from '../impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
 import { AtestadoPacienteComponent } from '../impressoes-PDF/AtestadoPaciente/AtestadoPaciente.component';
+import { HistoricoCompletoComponent } from '../impressoes-PDF/historicoCompleto/historicoCompleto.component';
 
 @Component({
   selector: 'app-historicos',
@@ -52,10 +53,82 @@ export class HistoricosComponent implements OnInit {
     this.tokenService.UsuarioLogadoValue$.subscribe((Usuario) => {
       if (Usuario) {
         this.UsuarioLogado = Usuario;
+        console.log('this.UsuarioLogado', this.UsuarioLogado);
       }
     });
 
-    this.BuscarDadosDeAgendaDoMedico();
+    if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
+      this.BuscarDadosDeAgendaDoMedico();
+    }
+
+    if (this.UsuarioLogado.aud == '[ROLE_ADMIN]') {
+      this.BuscarDadosDeAgendaDeTodosOsMedicos();
+    }
+  }
+
+  BuscarDadosDeAgendaDeTodosOsMedicos() {
+    console.log('Buscando dados adm');
+
+    this.ConsultaStatusService.BuscarDadosDeAgendaDeTodosOsMedicos().subscribe(
+      (dados) => {
+        let Consulta: ConsultaStatus[] = [];
+        for (let i = 0; i < dados.length; i++) {
+          Consulta[i] = {
+            ConSttCodigoConsulata: dados[i].ConSttCodigoConsulata,
+            ConSttMedico: dados[i].ConSttMedico,
+            ConSttPaciente: dados[i].ConSttPaciente,
+            ConSttDia_semana: dados[i].ConSttDia_semana,
+            ConSttHorario: dados[i].ConSttHorario,
+            ConSttData: dados[i].ConSttData,
+            ConSttObservacao: dados[i].ConSttObservacao,
+            ConSttDataCriacao: dados[i].ConSttDataCriacao,
+            ConSttFormaPagamento: dados[i].ConSttFormaPagamento,
+            ConSttAdm: dados[i].ConSttStatus,
+            ConSttStatus: dados[i].conAdm,
+          };
+        }
+
+        // Ordenar a novaConsulta pelo horário
+        Consulta.sort((a, b) => {
+          const horaA = a.ConSttData.split('-').map(Number);
+          const horaB = b.ConSttData.split('-').map(Number);
+
+          // Comparar horas
+          if (horaA[0] !== horaB[0]) {
+            return horaA[0] - horaB[0];
+          }
+          // Comparar minutos se horas forem iguais
+          return horaA[1] - horaB[1];
+        });
+
+        if (Consulta.length > 0) {
+          console.log(Consulta);
+          this.dataSource = Consulta;
+          this.filteredDataSource = Consulta; // Inicializa o filtro
+        } else {
+          Swal.fire(
+            'Nenhuma consulta encontrada',
+            'Tente novamente',
+            'warning'
+          );
+          Consulta[0] = {
+            ConSttCodigoConsulata: 0,
+            ConSttMedico: 0,
+            ConSttPaciente: 0,
+            ConSttDia_semana: 'Sem Dados',
+            ConSttHorario: 'Sem Dados',
+            ConSttData: 'Sem Dados',
+            ConSttObservacao: 'Sem Dados',
+            ConSttDataCriacao: 'Sem Dados',
+            ConSttFormaPagamento: 0,
+            ConSttStatus: 0,
+            ConSttAdm: 0,
+          };
+          this.dataSource = Consulta;
+          this.filteredDataSource = Consulta; // Inicializa o filtro
+        }
+      }
+    );
   }
 
   ngOnInit() {}
@@ -106,8 +179,6 @@ export class HistoricosComponent implements OnInit {
     this.ConsultaStatusService.BuscarHistoricoDeAgendaDoMedico(
       this.UsuarioLogado.id
     ).subscribe((dados) => {
-      console.log('dados', dados);
-
       let Consulta: ConsultaStatus[] = [];
       for (let i = 0; i < dados.length; i++) {
         Consulta[i] = {
@@ -181,30 +252,42 @@ export class HistoricosComponent implements OnInit {
   }
 
   ImprimirPrescricaoComponent(prontuario: any) {
-      this.dialog.open(ImprimirPrescricaoComponent, {
-        width: '60%',
-        height: '90%',
-        data: { prontuario: prontuario,  Consulta: prontuario.prontCodigoConsulta}
-      });
-    }
+    this.dialog.open(ImprimirPrescricaoComponent, {
+      width: '60%',
+      height: '90%',
+      data: {
+        prontuario: prontuario,
+        Consulta: prontuario.prontCodigoConsulta,
+      },
+    });
+  }
 
   ImprimirSolicitacaoDeExames(prontuario: any) {
     this.dialog.open(ImprimirSoliciatacaoDeExamesComponent, {
       width: '60%',
       height: '90%',
-      data:  { prontuario: prontuario , Consulta: prontuario.prontCodigoConsulta}
+      data: {
+        prontuario: prontuario,
+        Consulta: prontuario.prontCodigoConsulta,
+      },
     });
   }
-
 
   ImprimirAtestadoPacienteComponent(prontuario: any) {
     this.dialog.open(AtestadoPacienteComponent, {
       width: '60%',
       height: '90%',
-      data:  {  Consulta: prontuario.prontCodigoConsulta}
+      data: { Consulta: prontuario.prontCodigoConsulta },
     });
   }
 
+  ImprimirHistorioCompleto(prontuario: Prontuario) {
+    this.dialog.open(HistoricoCompletoComponent, {
+      width: '60%',
+      height: '90%',
+      data: { Consulta: prontuario.prontCodigoConsulta },
+    });
+  }
 
   openImprimirDialog(value: any) {
     this.ProntuarioService.BuscarPorProntuarioPassadoIdDeConsultaStatus(
@@ -228,9 +311,10 @@ export class HistoricosComponent implements OnInit {
             this.ImprimirSolicitacaoDeExames(dados);
           } else if (value === '2') {
             console.log('Imprimir Prescrição');
-             this.ImprimirPrescricaoComponent(dados);
+            this.ImprimirPrescricaoComponent(dados);
           } else if (value === '3') {
             console.log('Imprimir Histórico Completo');
+            this.ImprimirHistorioCompleto(dados);
           } else if (value === '4') {
             this.ImprimirAtestadoPacienteComponent(dados);
           }

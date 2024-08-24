@@ -1,0 +1,108 @@
+<body>
+  <div id="pdfContent">
+    <div class="container">
+      <h1>Histórico do Paciente</h1>
+
+      <div class="section">
+        <div class="section-title">Informações do Paciente</div>
+        <div class="data-row">
+          <div class="data-row-item">
+            <div class="data-label">Nome do Paciente:</div>
+            <div class="data-value">{{ data.Consulta.conSttPaciente.paciNome }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">CPF:</div>
+            <div class="data-value">{{ data.Consulta.conSttPaciente.paciCpf }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Data Nacimento:</div>
+            <div class="data-value">{{ data.Consulta.conSttPaciente.paciDataNacimento | date: 'dd/MM/yyyy' }} </div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Email:</div>
+            <div class="data-value">{{ data.Consulta.conSttPaciente.paciEmail }} </div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">RG:</div>
+            <div class="data-value">{{ data.Consulta.conSttPaciente.paciRg }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Sexo:</div>
+            <div class="data-value" *ngIf="data.Consulta.conSttPaciente.paciSexo ==='1' "> Masculino </div>
+            <div class="data-value" *ngIf="data.Consulta.conSttPaciente.paciSexo === '2' "> Feminino </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <div class="section" *ngFor="let item of prontuarios ; let i = index">
+        <hr style="border: 1px solid #ddd;">
+
+
+        <div class="section-title">Consulta: {{ consulta[i].conSttData | date: 'dd/MM/yyyy' }}</div>
+        <div class="data-row">
+          <div class="data-row-item">
+            <div class="data-label">Horário:</div>
+            <div class="data-value">{{ consulta[i].conSttHorario }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Médico:</div>
+            <div class="data-value">{{ item.prontCodigoMedico.medNome }} (CRM: {{ item.prontCodigoMedico.medCrm
+              }})</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Especialidade:</div>
+            <div class="data-value">{{ item.prontCodigoMedico.medEspecialidade }}</div>
+          </div>
+
+          <div class="data-row-item">
+            <div class="data-label">Diagnóstico:</div>
+            <div class="data-value">{{ item.prontDiagnostico}}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Prescrição:</div>
+            <div class="data-value">{{ item.prontPrescricao }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Exame:</div>
+            <div class="data-value">{{ item.prontExame }}</div>
+          </div>
+
+          <div class="data-row-item">
+            <div class="data-label">Peso:</div>
+            <div class="data-value">{{ item.prontPeso }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Altura:</div>
+            <div class="data-value">{{ item.prontAltura }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Anamese:</div>
+            <div class="data-value">{{ item.prontAnamnese }}</div>
+          </div>
+
+          <div class="data-row-item">
+            <div class="data-label">Condulta:</div>
+            <div class="data-value">{{ item.prontCondulta }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Observação:</div>
+            <div class="data-value">{{ item.observacao }}</div>
+          </div>
+          <div class="data-row-item">
+            <div class="data-label">Curação da colsulta:</div>
+            <div class="data-value">{{ item.prontTempoDuracao }}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <button style="width: 100%;" (click)="GerarPDF()">Imprimir</button>
+  </div>
+
+</body>

@@ -42,15 +42,22 @@
                     <input formControlName="MedTelefone" type="tel" id="MedTelefone" name="MedTelefone" value="">
 
 
-                    <label> Consultas Por Minuto</label>
-                    <select formControlName="MedTempoDeConsulta" id="MedTempoDeConsulta" name="MedTempoDeConsulta">
-                      <option value="10">10</option>
-                      <option value="15">15</option>
-                      <option value="20">20</option>
-                      <option value="25">25</option>
-                      <option value="30">30</option>
-                      <option value="35">35</option>
-                  </select>
+                    <label>Consultas Por Minuto</label>
+                    <div class="select-container">
+                      <select formControlName="MedTempoDeConsulta" id="MedTempoDeConsulta" name="MedTempoDeConsulta">
+                        <option value="" disabled selected>Selecione um tempo</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="35">35</option>
+                      </select>
+                      <div *ngIf="!dadosPessoaisForm.get('MedTempoDeConsulta')?.value" class="warning-message">
+                        Defina o tempo de consulta
+                      </div>
+                    </div>
+
 
 
                 </div>
