@@ -69,7 +69,6 @@ export class GerenciamentoUsuarioComponent implements OnInit {
   AdicionarAdministrador() {
     this.dialog.open(CadastroAdmComponent, {
       width: '800px',
-      height: '600px',
-    });
+     });
   }
 }

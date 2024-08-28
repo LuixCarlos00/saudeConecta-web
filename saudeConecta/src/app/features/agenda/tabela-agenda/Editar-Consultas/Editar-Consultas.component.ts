@@ -321,7 +321,6 @@ export class EditarConsultasComponent implements OnInit {
     } else if (FiltroPesquisaPaciente === 5) {
       this.PacientesService.buscarTodosPacientes().subscribe(
         (dados) => {
-          console.log(dados);
 
           if (dados && dados.length > 0) {
             this.dadosPacientePassandoTabela = dados;
@@ -338,15 +337,19 @@ export class EditarConsultasComponent implements OnInit {
   }
 
   PesquisarMedicosFiltro() {
-    const pesquisa: string = this.FormGroupConsulta.get('Pesquisa')?.value;
+    const pesquisa: string = this.FormGroupConsulta.get('PesquisaMedico')?.value;
     const FiltroPesquisa: number = this.FormGroupConsulta.get(
       'FiltroPesquisaMedico'
     )?.value;
 
     if (FiltroPesquisa === 1) {
+      console.log('nome', pesquisa);
+
       this.medicosService.buscarListaMedicosPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
+            console.log('dados', dados);
+
             this.dadosMedicoPassandoTabela = dados;
             this.showResultadoMedico = true;
           } else {

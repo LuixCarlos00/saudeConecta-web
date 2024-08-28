@@ -147,3 +147,115 @@
     margin-top: 5px;
   }
 }
+
+
+
+
+
+
+
+
+
+/* Estilos para Mobile */
+@media screen and (max-width: 750px) {
+  .desktop {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .formulario {
+    background-color: rgb(206, 212, 212);
+    padding: 10px;
+  }
+
+
+  .divPesquisar {
+    margin-top: 25px;
+    margin: 5px;
+  }
+
+  .label_search {
+    margin-top: 0;
+    margin: 5px;
+
+    padding: 10px;
+  }
+
+  .input_search {
+    display: flex;
+    border-radius: 5px;
+    margin-left: 15px;
+    padding: 10px;
+    width: 80%;
+    border-color: #000000;
+  }
+
+  .btnPesquisar {
+    padding: 10px;
+    margin-top: 10px;
+    width: 40%;
+    margin: 5px;
+    background-color: rgb(49, 168, 59);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
+  }
+
+  .disabled-button {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .btnPesquisarCosultaConcluidas {
+    padding: 10px;
+    margin-top: 10px;
+    width: 40%;
+    margin: 5px;
+    background-color: rgb(49, 168, 59);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(71, 87, 175);
+    margin-left: 15px;
+
+
+  }
+
+  .btnPesquisarCosultaConcluidas:active {
+    background-color: rgb(97, 106, 158);
+  }
+
+  .grid {
+    margin-left: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .divOperacoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+  }
+
+
+  .btnRecarregar {
+    border: none;
+    background-color: rgb(206, 212, 212);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .btnRecarregar:active {
+    background-color: rgb(184, 183, 183);
+  }
+}

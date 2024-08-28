@@ -1,11 +1,10 @@
 <app-cadastro-usuario
   [RolesUsuario]="RolesUsuarioMedico">
 </app-cadastro-usuario>
-<div style="  display: flex;" *ngIf="NovoUsuariocadastrado_Medico" >
-  <div class="container" [ngClass]="{'blurred':  FormularioUsuaroValido}">
-    <div *ngIf=" LoginService.estaLogado()" style="  justify-content: left; display: flex; margin-top: -15px; margin-left: -20px;">
 
-    </div>
+<body>
+<div class="containerExterno"  >
+  <div class="container" [ngClass]="{'blurred':  FormularioUsuaroValido}">
     <h2>Cadastro de Medico</h2>
     <form id="cadastroForm" class="responsivo" [formGroup]="FormularioMedico">
       <div class="form-group">
@@ -155,3 +154,4 @@
 </div>
 
 <br>
+</body>

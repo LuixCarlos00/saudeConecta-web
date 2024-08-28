@@ -1,67 +1,57 @@
-<div class="desktop">
-  <div class="rectangle">
-    <form class="fomulario">
-
-      <div>
-        <button (click)="TrocarSenha()">Trocar Senha</button>
-        <button (click)="EsqueciASenha()">Esqueci a Senha</button>
-      </div>
-
-      <div style="display: flex; justify-content: center;" *ngIf="EsqueciMinhaSenha"
-        [formGroup]="FormularioEsqueciMinhaSenha">
-
-        <div class="fomularioTrocarSenha">
-          <div *ngIf="!emailValido" style="margin-left: 50px; justify-content: center; margin-top: 30px;">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" formControlName="email">
-
-            <button style="display: flex; width: 100px; justify-content: center;" type="submit"
-              (click)="enviar()">Enviar</button>
-               <div *ngIf="PesquisandoEmail">
-                <mat-spinner  class="custom-spinner"></mat-spinner>
-               </div>
-          </div>
 
 
-          <div *ngIf="emailValido" style="margin-left: 50px; justify-content: center; margin-top: 30px;">
-            <label for="codigo">Insira o codigo que foi enviado ao seu email </label>
-            <input type="text" maxlength="6" id="codigo" name="codigo" formControlName="codigo">
-            <button style="display: flex; width: 100px; justify-content: center;" type="submit"
-              (click)="ConfirmaCodigoDeSeguraca()">Enviar</button>
-          </div>
+<body>
+    <div class="desktop">
+        <div class="rectangle">
+            <form class="fomulario">
+                <div>
+                    <button (click)="TrocarSenha()">Trocar Senha</button>
+                    <button (click)="EsqueciASenha()">Esqueci a Senha</button>
+                </div>
 
+                <div style="display: flex; justify-content: center;" *ngIf="EsqueciMinhaSenha" [formGroup]="FormularioEsqueciMinhaSenha">
+                    <div class="fomularioTrocarSenha">
+                        <div *ngIf="!emailValido" style="justify-content: center; margin-top: 30px;">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" formControlName="email">
 
-          <div *ngIf="codigoDeSegurancaValidao" style="margin-left: 50px; justify-content: center; margin-top: 30px;">
-            <label for="NovaSenha">Nova senha</label>
-            <input type="password" id="NovaSenha" name="NovaSenha" formControlName="NovaSenha">
-            <button
-              style="display: flex; width: 100px; justify-content: center;" type="submit"
-              (click)="ConfirmaNovaSenha_ESQUECI_A_SENHA()">Enviar</button>
-          </div>
+                            <button style="width: 100px; justify-content: center;" type="submit" (click)="enviar()">Enviar</button>
+                            <div *ngIf="PesquisandoEmail">
+                                <mat-spinner class="custom-spinner"></mat-spinner>
+                            </div>
+                        </div>
 
+                        <div *ngIf="emailValido" style="justify-content: center; margin-top: 30px;">
+                            <label for="codigo">Insira o código que foi enviado ao seu email</label>
+                            <input type="text" maxlength="6" id="codigo" name="codigo" formControlName="codigo">
+                            <button style="width: 100px; justify-content: center;" type="submit" (click)="ConfirmaCodigoDeSeguraca()">Enviar</button>
+                        </div>
 
+                        <div *ngIf="codigoDeSegurancaValidao" style="justify-content: center; margin-top: 30px;">
+                            <label for="NovaSenha">Nova senha</label>
+                            <input type="password" id="NovaSenha" name="NovaSenha" formControlName="NovaSenha">
+                            <button style="width: 100px; justify-content: center;" type="submit" (click)="ConfirmaNovaSenha_ESQUECI_A_SENHA()">Enviar</button>
+                        </div>
+                    </div>
+                </div>
 
+                <div style="display: flex; justify-content: center;" *ngIf="trocaMinhaSenha" [formGroup]="FormularioTrocaSenha">
+                    <div class="fomularioTrocarSenha">
+                        <div style="justify-content: center; margin-top: 10px;">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" formControlName="email">
 
+                            <label for="SenhaAntiga">Senha Antiga</label>
+                            <input type="password" id="SenhaAntiga" name="SenhaAntiga" formControlName="SenhaAntiga">
+
+                            <label for="SenhaNova">Senha Nova</label>
+                            <input type="password" id="SenhaNova" name="SenhaNova" formControlName="SenhaNova">
+
+                            <button style="width: 100px; justify-content: center;" type="submit" (click)="enviar()">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-      </div>
+    </div>
 
-      <div style="display: flex; justify-content: center;" *ngIf="trocaMinhaSenha" [formGroup]="FormularioTrocaSenha">
-        <div class="fomularioTrocarSenha">
-          <div style="margin-left: 50px; justify-content: center; margin-top: 10px;">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" formControlName="email">
-
-            <label for="SenhaAntiga">Senha Antiga</label>
-            <input type="password" id="SenhaAntiga" name="SenhaAntiga" formControlName="SenhaAntiga">
-
-            <label for="SenhaNova">Senha Nova</label>
-            <input type="password" id="SenhaNova" name="SenhaNova" formControlName="SenhaNova">
-
-            <button style="display: flex; width: 100px; justify-content: center;" type="submit"
-              (click)="enviar()">Enviar</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>

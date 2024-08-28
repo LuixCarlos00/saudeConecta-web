@@ -1,14 +1,16 @@
+/* Estilos para Desktop */
 @media screen and (min-width: 750px) {
-
   .desktop {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 100vh;
+    width: 100%;
+    /* Certifique-se de que a largura ocupe toda a tela */
   }
 
   .formulario {
     background-color: rgb(206, 212, 212);
+    padding: 20px;
   }
 
   .label_filtro_PESQUISA {
@@ -19,14 +21,14 @@
   .input_search {
     display: flex;
     border-radius: 5px;
-    margin-left: 10px;
     padding: 10px;
-    width: 400px;
-    border-color: #000000;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #000000;
   }
 
   .input_filtro {
-    margin-left: -9px;
+    margin-left: 10px;
   }
 
   .label_filtro {
@@ -45,72 +47,100 @@
     cursor: pointer;
   }
 
-
-
   .grid-container {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
+    /* 50% 50% */
+    gap: 20px;
   }
 
-  .rectangle {
-    margin: 30px;
-    height: 100%;
+  .grid-container_Insade {
+    display: grid;
+    grid-template-columns: 70% 20%;
+  }
+
+
+
+  .filtro-container {
+     margin: 3px;
   }
 }
 
-@media screen and (max-width: 750px) {
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos para Mobile */
+@media screen and (max-width: 750px) {
   .desktop {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 100vh;
-  }
-
-  .rectangle-4 {
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    height: 50px;
-    background-color: #080808;
+    height: auto;
   }
 
-  .icon-person {
-    position: absolute;
-    width: 83px;
-    height: 69px;
-    top: 36px;
-    left: 180px;
+  .formulario {
+    background-color: rgb(206, 212, 212);
+    padding: 18px;
   }
 
-  .icon-logout {
-    position: absolute;
-    width: 56px;
-    height: 57px;
-    top: 40px;
-    left: 1290px;
+
+  .label_filtro_PESQUISA {
+    font-size: 12px;
+    margin-left: 10px;
   }
 
-  .icon-menu {
-    position: absolute;
-    width: 90px;
-    height: 82px;
-    top: 30px;
-    left: 70px;
+  .input_search {
+    display: flex;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    max-width: 250px;
+    border: 1px solid #000000;
   }
 
-  .rectangle-2 {
-    margin-left: 30px;
-    height: 150px;
-    margin: 20px;
-    margin-top: 50px;
+  .label_filtro {
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 14px;
   }
 
-  .rectangle-3 {
-    margin-left: 30px;
-    height: 150px;
-    margin: 20px;
-    margin-top: 50px;
+  .btnPesquisar {
+    padding: 10px;
+    margin-top: 10px;
+    width: 40%;
+    /* Botão ocupa toda a largura */
+    background-color: rgb(49, 168, 59);
+    color: #fff;
+    border: none;
+    cursor: pointer;
   }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* 100% */
+    gap: 10px;
+  }
+
+  .filtro-container {
+     margin: 3px;
+     margin-top: 10px;
+  }
+
+  .grid-container-user{
+    margin: 15px;
+  }
+
+
 }

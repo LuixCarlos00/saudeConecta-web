@@ -1,0 +1,91 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.seedMSG {
+  width: 100%;
+  height: auto;
+  border: 1px solid black;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.divUsuario {
+  width: 100%;
+}
+
+.u {
+  margin-left: 10px;
+}
+
+.mensagem-textarea {
+  border: 1px solid black;
+  width: 100%;
+  height: 100px;
+  background-color: rgb(185, 190, 190);
+}
+
+.actions-container {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+
+
+
+
+/* Estilos para Mobile */
+@media screen and (max-width: 750px) {
+  body {
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .container {
+    width: 95%;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+  }
+
+  .seedMSG {
+    width: 100%;
+  }
+
+  .form-group {
+    gap: 10px;
+  }
+
+  .divUsuario {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .actions-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .close-button {
+    width: 100%;
+  }
+}

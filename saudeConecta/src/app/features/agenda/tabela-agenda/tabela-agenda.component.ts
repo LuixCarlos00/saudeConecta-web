@@ -351,8 +351,7 @@ export class TabelaAgendaComponent implements OnInit {
     const paciente = Consulta.ConPaciente;
     this.dialog.open(AvisosLembretesComponent, {
       width: '550px',
-      height: '500px',
-      data: { Consulta: Consulta, Medico: medico, Paciente: paciente },
+       data: { Consulta: Consulta, Medico: medico, Paciente: paciente },
     });
   }
 

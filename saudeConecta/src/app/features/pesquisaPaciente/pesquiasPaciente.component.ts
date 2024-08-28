@@ -14,7 +14,6 @@ import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciamento.service';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { LoginService } from 'src/app/service/service-login/login.service';
-import { Medico } from 'src/app/util/variados/interfaces/medico/medico';
 
 @Component({
   selector: 'app-pesquias-Paciente',

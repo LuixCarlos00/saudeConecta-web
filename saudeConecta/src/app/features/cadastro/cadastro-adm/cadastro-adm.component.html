@@ -3,7 +3,11 @@
   [RolesUsuario]="RolesUsuarioAdministrador"
   >
 </app-cadastro-usuario>
-<div style="  display: flex;"  *ngIf="NovoUsuariocadastrado_Administrador">
+
+
+<body>
+  <div class="containeExterno">
+
   <div class="container"  [ngClass]="{'blurred':  FormularioUsuaroValido}">
     <br>
     <h2>Cadastra Usuario de Administracao</h2>
@@ -31,3 +35,5 @@
   </div>
 </div>
 <br><br>
+
+</body>

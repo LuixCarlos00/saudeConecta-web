@@ -1,14 +1,17 @@
+<body>
+  <div class="container">
 
-<div style="display: flex; justify-content: center;">
-  <div>
-    <h1>Painel de Controle
-    </h1>
-  </div>
-</div>
-<div class="dashboard-container" *ngIf="this.ControleAcessoService.AcessoAdministrador()">
+    <div class="header">
+      <div>
+        <h1>Painel de Controle
+        </h1>
+      </div>
+    </div>
 
-  <div class="dashboard-row">
-    <div class="dashboard-item">
+    <div class="dashboard-container" *ngIf="this.ControleAcessoService.AcessoAdministrador()">
+
+      <div class="dashboard-row"  >
+    <div class="dashboard-item"  >
       <app-grafico-qnt-consultas-dia-anterior></app-grafico-qnt-consultas-dia-anterior>
     </div>
     <div class="dashboard-item">
@@ -25,12 +28,15 @@
     </div>
   </div>
 
-</div>
+    </div>
 
-<div  *ngIf="this.ControleAcessoService.AcessoMedico()" class="dashboard-container">
-<div>
-  <p>
-    Colocar os grafos para o medico  ver
-  </p>
-</div>
-</div>
+    <div *ngIf="this.ControleAcessoService.AcessoMedico()" class="dashboard-container">
+      <div>
+        <p>
+          Colocar os grafos para o medico ver
+        </p>
+      </div>
+    </div>
+  </div>
+
+</body>

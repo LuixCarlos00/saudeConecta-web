@@ -1,43 +1,43 @@
-<div style="background-color: rgb(255, 255, 255);">
+<body>
+  <div class="container">
+    <form [formGroup]="FormGroupConsulta" class="fomulario">
 
-  <div style="float: right;">
-    <button class="BotaoFechar" (click)="onNoClick()">X</button>
+      <label class="label_filtro_Identificador">
+        <font style="color: red; font-size: 12px;">* </font>Nº Registro {{DadosDeEdicaoConsulta.ConCodigoConsulta}}
+      </label>
+      <br>
 
-  </div>
-
-
-  <form [formGroup]="FormGroupConsulta" class="fomulario">
-
-
-    <label class="label_filtro_Identificador">
-      <font style="color: red; font-size: 12px;">* </font>Nº Registro {{DadosDeEdicaoConsulta.ConCodigoConsulta}}
-    </label>
-
-
-    <label class="label_filtro_PESQUISA">Pesquisar Paciente </label>
-    <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaPaciente">
-    <button class="btnPesquisar" (click)="PesquisarPacientes()">Pesquisar</button>
+      <div class="search-container">
+        <label class="label_filtro_PESQUISA">Pesquisar Paciente</label>
+        <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaPaciente">
+        <button class="btnPesquisar" (click)="PesquisarPacientes()">Pesquisar</button>
+      </div>
 
 
-    <div style=" display: flex; margin-top: -10px;   width: 450px;">
-
-      <label class="label_filtro">Nome</label>
-      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="1" required>
-
-      <label class="label_filtro">CPF</label>
-      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="2" required>
-
-      <label class="label_filtro">RG</label>
-      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="3" required>
-
-      <label class="label_filtro">Telefone</label>
-      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="4" required>
-
-      <label class="label_filtro">Buscar Todos</label>
-      <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="5" required>
-
+      <div class="filtro-container" >
+        <div>
+        <label class="label_filtro">Nome</label>
+        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="1" required>
+      </div>
+      <div>
+        <label class="label_filtro">CPF</label>
+        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="2" required>
+      </div>
+      <div>
+        <label class="label_filtro">RG</label>
+        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="3" required>
+      </div>
+      <div>
+        <label class="label_filtro">Telefone</label>
+        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="4" required>
+      </div>
+      <div>
+        <label class="label_filtro">Buscar Todos</label>
+        <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="5" required>
+      </div>
     </div>
 
+    <br>
 
     <app-tabela-de-pacientes *ngIf="showResultadoPaciente" [dadosPaciente]="dadosPacientePassandoTabela"
       (fechar)="fecharTabela()" (selecionaPaciente)="PacienteSelecionado($event)"></app-tabela-de-pacientes>
@@ -71,28 +71,31 @@
 
 
 
-    <div style=" display: flex; margin-top: -10px;   width: 450px;">
-
-      <label class="label_filtro">Nome</label>
-      <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="1" required>
-
-      <label class="label_filtro">CRM</label>
-      <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="2" required>
-
-      <label class="label_filtro">Cidade</label>
+    <div class="filtro-container" >
+      <div>
+        <label class="label_filtro">Nome</label>
+        <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="1" required>
+      </div>
+      <div>
+        <label class="label_filtro">CRM</label>
+        <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="2" required>
+      </div>
+      <div>
+        <label class="label_filtro">Cidade</label>
       <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="3" required>
-
-      <label class="label_filtro">Especialidade</label>
+      </div>
+      <div>
+        <label class="label_filtro">Especialidade</label>
       <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="4" required>
-
-      <label class="label_filtro">Buscar todos</label>
-      <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="5" required>
-
-
+      </div>
+      <div>
+        <label class="label_filtro">Buscar todos</label>
+        <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="5" required>
+      </div>
     </div>
 
 
-
+<br>
 
 
     <app-tabela-editar-Medicos-Consultas *ngIf="showResultadoMedico" [dadosMedicos]="dadosMedicoPassandoTabela"
@@ -162,8 +165,8 @@
     </div>
 
     <br>
-    <div>
 
+    <div>
       <label class="label_filtro">Dinheiro</label>
       <input [(ngModel)]="DadosDeEdicaoConsulta.ConFormaPagamento" formControlName="Pagamento" class="input_filtro"
         type="radio" [value]="1" required>
@@ -175,7 +178,6 @@
       <label class="label_filtro">PIx</label>
       <input [(ngModel)]="DadosDeEdicaoConsulta.ConFormaPagamento" formControlName="Pagamento" class="input_filtro"
         type="radio" [value]="3" required>
-
     </div>
 
     <br>
@@ -193,3 +195,5 @@
 
 
 </div>
+
+</body>

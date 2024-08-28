@@ -26,8 +26,7 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
   FormularioEndereco!: FormGroup;
   IdUsuario: number = 0;
   EspecialidadeMedicas = EspecialidadeMedicas;
- // CadastroValidoMedico = false;
-  FormularioUsuaroValido = false;
+   FormularioUsuaroValido = false;
   ufOptions = ufOptions;
 
   NovoUsuariocadastrado_Medico: any;

@@ -110,8 +110,7 @@ console.log('consulta', this.Consulta);
       height: '300px',
 
     });
-    // this.consultaService.CronologiaDoDiaSubject(true);
-  }
+   }
 
 
   MostraTabelaDeConcluidos() {
@@ -128,8 +127,7 @@ console.log('consulta', this.Consulta);
   AdicionarMedico() {
     this.dialog.open(CadastroMedicoComponent, {
       width: '800px',
-      height: '700px',
-
+      height: '600px',
     });
     }
 
@@ -137,16 +135,13 @@ console.log('consulta', this.Consulta);
     AdicionarPaciente() {
     this.dialog.open(CadastroPacienteComponent, {
       width: '800px',
-      height: '700px',
-
+      height: '600px',
     });
     }
 
     AdicionarSecretaria() {
       this.dialog.open(CadastroSecretariaComponent, {
       width: '800px',
-      height: '600px',
-
     });
       }
 

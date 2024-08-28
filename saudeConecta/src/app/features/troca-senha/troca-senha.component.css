@@ -1,94 +1,114 @@
-@media screen and (min-width: 750px) {
 
-  .desktop {
+        /* Estilos gerais */
+        .desktop {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
 
-    flex-direction: column;
-    position: relative;
-    height: 100vh;
-  }
+        .rectangle {
+            background-color: rgb(206, 214, 219);
+            width: 100%;
+            max-width: 750px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-  .rectangle {
-    background-color: rgb(206, 214, 219);
-    height: 690px;
-    display: flex;
-    justify-content: center;
-  }
+        .fomulario, .fomularioTrocarSenha {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+        }
 
+        button {
+            margin: 10px;
+            border: none;
+            background-color: rgb(128, 158, 223);
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-  .fomulario {
-    background-color: white;
-    height: 480px;
-    border: 1px solid;
-    width: 650px;
-    border-radius: 10px;
-    margin: 35px;
-  }
+        button:focus {
+            outline: none;
+        }
 
-  .fomularioTrocarSenha{
-    background-color: white;
-    height: 280px;
-    border: 1px solid;
-    width: 590px;
-    border-radius: 10px;
-    margin: 35px;
-  }
+        label {
+            font-weight: bold;
+            margin: 10px 0;
+            display: block;
+        }
 
+        input {
+            margin: 10px 0;
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
 
-  button {
-    margin: 10px;
-    border: hidden;
-    background-color: rgb(128, 158, 223);
-    color: black;
-    padding: 10px;
-    border-radius: 5px;
-   cursor: pointer;
-  }
+        .custom-spinner {
+            width: 100px;
+            height: 100px;
+            background: url('../../../assets/imagens/cruz.png') no-repeat center center;
+            background-size: contain;
+            animation: rotate 5s linear infinite;
+            margin: 20px auto;
+        }
 
-  label{
-    font-weight: bold;
-    margin: 10px;
-    display: flex;
-  }
-  input{
-    margin: 10px;
-    display: flex;
-    width: 300px;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid;
-  }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+        /* Responsividade */
+        @media screen and (max-width: 768px) {
+            .desktop {
+                padding: 10px;
+            }
 
-  .custom-spinner {
-    width: 100px;  /* Defina o tamanho desejado */
-    height: 100px; /* Defina o tamanho desejado */
-    background: url('../../../assets/imagens/cruz.png') no-repeat center center;
-    background-size: contain;
-    position: relative;
-    animation: rotate 5s linear infinite;
-    background-size: 30px 30px; /* Diminuir a imagem para 50x50 pixels */
-    margin-top: -80px;
-    margin-left: 110px;
-  }
+            .rectangle {
+                padding: 10px;
+            }
 
-  .custom-spinner::before {
-    content: "";
-    display: block;
-    padding-top: 100%; /* Manter a proporção da imagem */
-  }
+            .fomulario, .fomularioTrocarSenha {
+                width: 100%;
+                padding: 15px;
+                margin: 10px auto;
+            }
 
-  .mat-spinner circle {
-    stroke: none; /* Remove a cor de fundo do círculo */
-  }
+            button {
+                padding: 8px 16px;
+            }
 
+            .custom-spinner {
+                width: 80px;
+                height: 80px;
+            }
+        }
 
+        @media screen and (max-width: 480px) {
+            .fomulario, .fomularioTrocarSenha {
+                padding: 10px;
+            }
 
-}
+            button {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+
+            .custom-spinner {
+                width: 60px;
+                height: 60px;
+            }
+        }

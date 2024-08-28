@@ -1,148 +1,17 @@
 <body>
-  <div style=" height: 100vh; margin: 30px;">
-    <br>
-    <div style="background-color: rgb(206, 212, 212); border: 1px solid black; border-radius: 10px;">
+  <div class="header">
 
+    <div class="container">
       <app-pesquisaMedicos></app-pesquisaMedicos>
       <hr>
-      <br>
+
       <app-pesquias-Paciente></app-pesquias-Paciente>
       <hr>
       <app-agenda></app-agenda>
-
     </div>
 
-
-    <br>
-    <br>
     <div>
 
     </div>
-
-
-
-
-    <!-- <div class="grid-container">
-          <div>
-            <br>
-
-            <form class="fomulario" [formGroup]="FormularioPesquisa">
-              <div style="margin-left: 10px; margin-top: 10px; ">
-                <button  style=" border: hidden; background-color: white;" (click)="voltarParaHome()">
-                  <i class="fa-solid fa-arrow-left fa-xl"></i>
-                </button>
-              </div>
-              <br>
-              <div *ngIf="MostraCamposDePEsquisa">
-                <label class="label_search">
-                  <font style="color: red;">* Selecione a opcao abaixo para fazer a Pesquisa</font>
-                </label>
-                <br>
-                <br>
-                <div>
-                  <label class="label_search">Pesquisar Medicos </label>
-                  <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required
-                    formControlName="Pesquisa">
-                  <button *ngIf="FormularioPesquisa.valid || FormularioPesquisa.get('FiltroPesquisaMedico')?.value==5" class="btnPesquisar"
-                    (click)="PesquisarMedicosFiltro()">Pesquisar</button>
-                </div>
-
-                <br><br>
-                <div>
-
-                  <label class="label_filtro">Nome</label>
-                  <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="1" required>
-
-                  <label class="label_filtro">CRM</label>
-                  <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="2" required>
-
-                  <label class="label_filtro">Cidade</label>
-                  <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="3" required>
-
-                  <label class="label_filtro">Especialidade</label>
-                  <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="4" required>
-
-                  <label class="label_filtro">Buscar todos</label>
-                  <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="5" required>
-
-
-                </div>
-
-                <hr>
-              </div>
-
-
-              <div *ngIf="mostraTabela" class="tabela">
-                <app-tabelas-Pesquisas-Medicos></app-tabelas-Pesquisas-Medicos>
-              </div>
-
-              <br>
-              <br>
-            </form>
-
-          </div>
-
-          <div *ngIf="  mostraTabela">
-            <form class="fomularioMedico">
-
-              <div style="justify-content: center; display: flex; margin-top: 50px;">
-                <mat-icon style="  width: 100px; height: 100px;">
-                  <i class="fa-solid fa-user-doctor" style="color: rgb(142, 199, 221); font-size: 100px; "></i>
-                </mat-icon>
-              </div>
-
-
-              <div>
-                <br>
-
-                <div class="informacoesMedicos" *ngIf="Medico.medNome">
-                  <hr>
-                  <label>Nome : {{Medico.medNome}}</label><br>
-                </div>
-
-                <div class="informacoesMedicos" *ngIf="Medico.medEspecialidade">
-                  <hr>
-                  <label>Especialidade : {{Medico.medEspecialidade}}</label><br>
-                </div>
-
-                <div class="informacoesMedicos" *ngIf="Medico.medTelefone">
-                  <hr>
-                  <label>Telefone : {{Medico.medTelefone}}</label><br>
-                </div>
-
-                <div class="informacoesMedicos" *ngIf="Medico.medEmpresa">
-                  <hr>
-                  <label>Empresa/Clinica : {{Medico.medEmpresa}} </label> <br>
-                </div>
-
-                <div class="informacoesMedicos" *ngIf="Medico.medCrm">
-                  <hr>
-                  <label>CRM : {{Medico.medCrm}} </label> <br>
-                </div>
-
-                <div class="informacoesMedicos" *ngIf="Medico.medFormacoes">
-                  <hr>
-                  <label>Formações : {{Medico.medFormacoes}} </label>
-                </div>
-
-                <div class="informacoesMedicos" *ngIf="Medico.medGraduacao">
-                  <hr>
-                  <label>Graduacao : {{Medico.medGraduacao}} </label>
-                </div>
-
-              </div>
-
-
-
-
-
-
-
-            </form>
-          </div>
-        </div>-->
-
-
-
   </div>
 </body>

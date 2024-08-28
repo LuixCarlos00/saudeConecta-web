@@ -1,32 +1,31 @@
-<div style="  display: flex;">
+
+<body>
+<div class="containeExterno">
   <div class="container">
-<div style="justify-content: center; display: flex;">
-  <font color="#FF0000"><p> <u> Esse login vai ser usado para entrar no sistema</u></p></font>
-</div>
-
-
+    <div style="justify-content: center; display: flex;">
+      <font color="#FF0000">
+        <p> <u> Esse login vai ser usado para entrar no sistema</u></p>
+      </font>
+    </div>
     <form id="cadastroForm" class="responsivo" [formGroup]="FormularioUsuario">
       <div class="form-group">
         <label for="login">login:</label>
-        <input    formControlName="login" type="text" id="login" name="login" placeholder="Exp:. CPF , Email ,telefone " required>
+        <input formControlName="login" type="text" id="login" name="login" placeholder="Exp:. CPF , Email ,telefone "
+          required>
       </div>
 
       <div class="form-group">
         <label for="novaSenha">
-          <font color="#FF0000"><b>* </b></font> Insira a  Senha
+          <font color="#FF0000"><b>* </b></font> Insira a Senha
         </label>
-        <input  formControlName="password" type="password" id="password" name="password" placeholder="Senha deve conter mais de 8 caracteres"
-          required>
+        <input formControlName="password" type="password" id="password" name="password"
+          placeholder="Senha deve conter mais de 8 caracteres" required>
       </div>
       <label>
-        <font color="#FF0000">*</font>   Senhas com 8 caracteres
+        <font color="#FF0000">*</font> Senhas com 8 caracteres
       </label>
     </form>
     <button type="submit" (click)="cadatraUsuario()" *ngIf="FormularioUsuario.valid  ">Cadastrar</button>
-
-
-
-
-
   </div>
 </div>
+</body>

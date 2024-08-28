@@ -1,11 +1,11 @@
 <body>
+  <div class="desktop">
+
+  <form class="formulario"  [formGroup]="FormGroupConsulta">
 
 
-  <form class="fomulario"  [formGroup]="FormGroupConsulta">
-
-
-    <div style="display: grid; grid-template-columns: 50% 50%; ">
-      <div style="display: grid; grid-template-columns:70% 20%; "   >
+    <div class="grid-container">
+      <div class="grid-container_Insade">
         <div>
           <label class="label_filtro_PESQUISA">Pesquisar Pacientes </label>
           <input class="input_search" type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaPaciente">
@@ -15,8 +15,8 @@
         </div>
       </div>
 
-      <div    >
-        - <i class="fa-solid fa-user fa-xl" style="color: #2c3230;"></i>
+      <div class="grid-container-user">
+         <i class="fa-solid fa-user fa-xl" style="color: #2c3230;"></i>
         <div *ngIf="PacienteEscolhido" >
 
           <label style="font-size: 12px;margin-left: 10px;">
@@ -32,7 +32,7 @@
     </div>
 
 
-    <div style="margin: 3px;  ">
+    <div class="filtro-container" >
       <label class="label_filtro">Nome</label>
       <input formControlName="FiltroPesquisaPaciente" class="input_filtro" type="radio" [value]="1" required>
 
@@ -58,7 +58,7 @@
 
 
       <br>
-      <div style="display: grid; grid-template-columns: 50% 15% 10% 15%;">
+      <div  class ="grid-containerInfo"  >
         <div style="margin: 3px;">
           <label class="label_filtro_Observacao">Observação:</label>
           <br>
@@ -84,7 +84,7 @@
 
 
 
-        <div style="margin: 3px; display: grid; grid-template-rows: 50% 50%;">
+        <div class="grid-containerPAGAMENTO">
           <div >
             <select class="input_Forma_Pagamento" formControlName="Pagamento" name="Pagamento" id="Pagamento">
               <option>Forma de Pagamento</option>
@@ -108,7 +108,6 @@
 
   </form>
 
-
+  </div>
 </body>
-
 

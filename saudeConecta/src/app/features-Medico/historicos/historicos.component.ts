@@ -236,7 +236,14 @@ export class HistoricosComponent implements OnInit {
 
   resetarPesquisa() {
     this.pesquisa = '';
-    this.BuscarDadosDeAgendaDoMedico();
+
+    if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
+      this.BuscarDadosDeAgendaDoMedico();
+    }
+
+    if (this.UsuarioLogado.aud == '[ROLE_ADMIN]') {
+      this.BuscarDadosDeAgendaDeTodosOsMedicos();
+    }
   }
 
   limparPesquisa() {

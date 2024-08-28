@@ -1,3 +1,241 @@
+/* Estilos para Desktop */
+
+@media screen and (min-width: 750px) {
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
+
+.container {
+  border-radius: 8px;
+  width: 100%;
+  margin: auto;
+}
+
+
+
+.fomulario {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  border-radius: 10px;
+  margin: 0
+}
+
+
+.desktop {
+  flex-direction: column;
+  position: relative;
+  /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
+  /* Ocupa toda a altura da tela */
+}
+
+
+
+.input_filtro {
+  margin-left: -9px;
+}
+
+.label_search {
+  margin-top: 0;
+  margin: 20px;
+  padding: 10px;
+}
+
+.input_DATA {
+  display: flex;
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  width: 105px;
+  border-color: #000000;
+
+}
+
+.label_filtro {
+  margin-top: 0;
+  margin: 10px;
+  padding: 10px;
+}
+
+
+.label_filtro_DATA {
+  padding: 10px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.label_filtro_Hora {
+  font-family: 'Times New Roman', Times, serif;
+  padding: 10px;
+  margin-left: 145px;
+  display: flex;
+  margin-top: -110px;
+}
+
+.label_filtro_Identificador {
+  font-family: 'Times New Roman', Times, serif;
+  padding: 10px;
+  margin-left: 520px;
+
+  margin-top: -110px;
+
+}
+
+.input_HORA {
+  border-color: #000000;
+  margin-top: -10px;
+  display: flex;
+  border-radius: 5px;
+  margin-left: 155px;
+  padding: 10px;
+  width: 105px;
+}
+
+.label_filtro_PESQUISA {
+  padding: 10px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.input_search {
+  display: flex;
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  width: 400px;
+  border-color: #000000;
+}
+
+.btnPesquisar {
+  display: flex;
+  margin-left: 450px;
+  margin-top: -40px;
+  padding: 10px;
+  width: 80px;
+  cursor: pointer;
+  background-color: rgb(49, 168, 59);
+  border-radius: 5px;
+  color: white;
+}
+
+.BotaoSalvar {
+
+
+  margin-top: -40px;
+  padding: 10px;
+  width: 120px;
+  cursor: pointer;
+  background-color: rgb(49, 168, 59);
+  border-radius: 5px;
+  color: white;
+}
+
+.label_filtro {
+  padding: 10px;
+  margin-left: 30px;
+  margin: 5px;
+  font-size: 12px;
+}
+
+
+.mat-select-Descktop {
+  width: 450px;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  border-radius: 4px;
+}
+
+.label_filtro_Observacao {
+  padding: 10px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.textarea_observacao {
+  margin-left: 10px;
+  width: 550px;
+  height: 100px;
+}
+
+.blur-background {
+  filter: blur(5px);
+}
+
+/* Estilo personalizado para o modal */
+.custom-modal .mat-dialog-container {
+  backdrop-filter: blur(0px);
+  /* Remove desfoque do modal */
+  background: rgba(255, 255, 255, 0.9);
+}
+
+
+.rectangle {
+  background-color: rgb(206, 214, 219);
+  height: 760px;
+  display: flex;
+  justify-content: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 30px;
+  margin-top: 15px;
+}
+
+
+
+.aumentar-altura {
+  height: 540px !important;
+  /* Aumenta a altura em 20px */
+}
+
+.fomularioPagamneto {
+  background-color: white;
+  height: 120px;
+  border: 1px solid;
+  width: 650px;
+  border-radius: 10px;
+  margin: 35px;
+}
+
+.botaoFormaPagamento {
+  margin-left: 7px;
+  width: 580px;
+  padding: 20px;
+  background-color: rgb(29, 139, 71);
+  color: white;
+}
+
+
+.divbtnFP {
+  margin-top: -18px;
+  align-items: center;
+  display: block;
+}
+
+.divbtnMC {
+  margin-top: -70px;
+  margin-left: 50%;
+}
+
+.botaoMarcaConsulta {
+  border-top-right-radius: 9px;
+  border-end-end-radius: 9px;
+  width: 325px;
+  height: 120px;
+  padding: 20px;
+  background-color: rgb(29, 139, 71);
+  color: white;
+}
+
 .BotaoFechar {
 
   margin-left: 730px;
@@ -9,223 +247,160 @@
 
 }
 
+.filtro-container {
+  display: grid; /* Utilizando grid para organizar os elementos em linhas */
+  grid-template-columns: repeat(5, auto); /* Cria 5 linhas automáticas, uma para cada item */
+  margin-top: 15px;
+}
 
-@media screen and (min-width: 750px) {
 
-  .desktop {
 
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos para Mobile */
+@media screen and (max-width: 750px) {
+
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .container {
+    border-radius: 8px;
+    width: 100%;
+    margin: auto;
+  }
+
+  .fomulario {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    border-radius: 10px;
+    margin: 0;
+    display: flex;
     flex-direction: column;
     position: relative;
-    /* Para garantir que os elementos posicionados absolutamente sejam relativos ao contêiner .desktop */
-    height: 100vh;
-    /* Ocupa toda a altura da tela */
+    width: 100%;
+    height: auto;
   }
 
 
 
-  .input_filtro {
-    margin-left: -9px;
-  }
-
-  .label_search {
-    margin-top: 0;
-    margin: 20px;
-    padding: 10px;
-  }
-
-  .input_DATA {
-    display: flex;
+  .input_search {
+    margin-left: 5px;
     border-radius: 5px;
-    margin-left: 10px;
+    margin: 10px 0;
     padding: 10px;
-    width: 105px;
+    width: 80%;
     border-color: #000000;
-
-  }
-
-  .label_filtro {
-    margin-top: 0;
-    margin: 10px;
-    padding: 10px;
-  }
-
-
-  .label_filtro_DATA {
-    padding: 10px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-
-  .label_filtro_Hora {
-    font-family: 'Times New Roman', Times, serif;
-    padding: 10px;
-    margin-left: 145px;
-    display: flex;
-    margin-top: -110px;
-  }
-
-  .label_filtro_Identificador{
-    font-family: 'Times New Roman', Times, serif;
-    padding: 10px;
-    margin-left: 520px;
-
-    margin-top: -110px;
-
-  }
-
-  .input_HORA {
-    border-color: #000000;
-    margin-top: -10px;
-    display: flex;
-    border-radius: 5px;
-    margin-left: 155px;
-    padding: 10px;
-    width: 105px;
   }
 
   .label_filtro_PESQUISA {
-    padding: 10px;
+    padding: 10px 0;
+    margin-top: 10px;
     font-family: 'Times New Roman', Times, serif;
+    display: block;
   }
 
-  .input_search {
 
-    display: flex;
-    border-radius: 5px;
-    margin-left: 10px;
-    padding: 10px;
-    width: 400px;
-    border-color: #000000;
+
+
+  .search-container {
+    display: block;
   }
 
   .btnPesquisar {
-    display: flex;
-    margin-left: 450px;
-    margin-top: -40px;
-    padding: 10px;
+    margin-left: 5px;
     width: 80px;
     cursor: pointer;
     background-color: rgb(49, 168, 59);
     border-radius: 5px;
     color: white;
-  }
-
-  .BotaoSalvar {
-
-
-    margin-top: -40px;
-    padding: 10px;
-    width: 120px;
-    cursor: pointer;
-    background-color: rgb(49, 168, 59);
-    border-radius: 5px;
-    color: white;
-  }
-
-  .label_filtro {
-    padding: 10px;
-    margin-left: 30px;
-    margin: 5px;
-    font-size: 12px;
+    margin-top: 10px;
   }
 
 
-  .mat-select-Descktop {
-    width: 450px;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    border-radius: 4px;
-  }
-
-  .label_filtro_Observacao {
-    padding: 10px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-
-  .textarea_observacao {
-    margin-left: 10px;
-    width: 550px;
-    height: 100px;
-  }
-
-  .blur-background {
-    filter: blur(5px);
-  }
-
-  /* Estilo personalizado para o modal */
-  .custom-modal .mat-dialog-container {
-    backdrop-filter: blur(0px);
-    /* Remove desfoque do modal */
-    background: rgba(255, 255, 255, 0.9);
-  }
-
-
-  .rectangle {
-    background-color: rgb(206, 214, 219);
-    height: 760px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .grid-container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    margin: 30px;
+  .filtro-container {
+    display: grid; /* Utilizando grid para organizar os elementos em linhas */
+    grid-template-rows: repeat(5, auto); /* Cria 5 linhas automáticas, uma para cada item */
     margin-top: 15px;
-  }
+}
 
-  .fomulario {
+.label_filtro {
+  margin-left: 10px;
+    margin-right: 10px; /* Espaçamento entre o label e o input */
+}
 
-    background-color: white;
-
-    border: 1px solid;
-    width: 650px;
-    border-radius: 10px;
-    margin: 35px;
-  }
-
-  .aumentar-altura {
-    height: 540px !important;
-    /* Aumenta a altura em 20px */
-  }
-
-  .fomularioPagamneto {
-    background-color: white;
-    height: 120px;
-    border: 1px solid;
-    width: 650px;
-    border-radius: 10px;
-    margin: 35px;
-  }
-
-  .botaoFormaPagamento {
-    margin-left: 7px;
-    width: 580px;
-    padding: 20px;
-    background-color: rgb(29, 139, 71);
-    color: white;
-  }
+.input_filtro {
+    margin-left: 10px; /* Espaçamento entre o input e a borda do div, se necessário */
+}
 
 
-  .divbtnFP {
-    margin-top: -18px;
-    align-items: center;
-    display: block;
-  }
 
-  .divbtnMC {
-    margin-top: -70px;
-    margin-left: 50%;
-  }
+ .textarea_observacao {
+  border: 1px solid black;
+  margin-left: 10px;
+  width: 270px;
+  height: 100px;
+}
 
-  .botaoMarcaConsulta {
-    border-top-right-radius: 9px;
-    border-end-end-radius: 9px;
-    width: 325px;
-    height: 120px;
-    padding: 20px;
-    background-color: rgb(29, 139, 71);
-    color: white;
-  }
+.label_filtro_DATA {
+  padding: 10px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.label_filtro_Hora {
+  font-family: 'Times New Roman', Times, serif;
+  padding: 10px;
+  margin-left: 145px;
+  display: flex;
+  margin-top: -110px;
+}
+
+.input_HORA {
+  border-color: #000000;
+  margin-top: -10px;
+  display: flex;
+  border-radius: 5px;
+  margin-left: 155px;
+  padding: 10px;
+  width: 105px;
+}
+.input_DATA {
+  display: flex;
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  width: 105px;
+  border-color: #000000;
+
+}
+
+
+
 }
