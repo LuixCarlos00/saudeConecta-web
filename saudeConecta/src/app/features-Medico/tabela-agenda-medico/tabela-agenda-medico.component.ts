@@ -151,7 +151,7 @@ export class TabelaAgendaMedicoComponent implements OnInit {
     };
 
 
-    const dadosUpper = safeNormalize(dados);
+    const dadosUpper = safeNormalize(dados.trim());
     console.log('DadosDeConsulta', this.filteredDataSource);
 
     // Filtrar os dados da consulta, comparando as strings normalizadas e tratando a data e o horário de forma específica
@@ -161,8 +161,8 @@ export class TabelaAgendaMedicoComponent implements OnInit {
         safeNormalize(item.ConMedico?.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
         safeNormalize(item.ConPaciente?.paciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
         safeNormalize(item.ConDia_semana).includes(dadosUpper) ||
-        isDateMatch(item.ConData, dados) || // Compara as datas sem normalizar
-        isTimeMatch(item.ConHorario, dados) || // Compara os horários diretamente
+        isDateMatch(item.ConData, dados.trim()) || // Compara as datas sem normalizar
+        isTimeMatch(item.ConHorario, dados.trim()) || // Compara os horários diretamente
         safeNormalize(item.ConObservacoes).includes(dadosUpper)
     );
 
@@ -192,40 +192,6 @@ export class TabelaAgendaMedicoComponent implements OnInit {
 
 
 
-
-
-  // filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados: any) {
-  //   // Função para normalizar e remover acentos e caracteres especiais
-  //   const normalizeString = (str: string) => {
-  //     return str
-  //       .normalize('NFD')
-  //       .replace(/[\u0300-\u036f]/g, '') // Remove diacríticos
-  //       .toUpperCase(); // Converte para maiúsculas
-  //   };
-  //   const dadosUpper = normalizeString(dados.toString());
-
-  //   // Filtrar os dados da consulta, comparando as strings normalizadas
-  //   let resultadoFiltrado = this.filteredDataSource.filter(
-  //     (item) =>
-  //       normalizeString(item.ConCodigoConsulta.toString()).includes(
-  //         dadosUpper
-  //       ) ||
-  //       normalizeString(item.ConPaciente.paciNome).includes(dadosUpper) ||
-  //       normalizeString(item.ConDia_semana).includes(dadosUpper) ||
-  //       normalizeString(item.ConData).includes(dadosUpper) ||
-  //       normalizeString(item.ConHorario).includes(dadosUpper) ||
-  //       normalizeString(item.ConObservacoes).includes(dadosUpper)
-  //   );
-
-  //   if (resultadoFiltrado.length > 0) {
-  //     this.LimparTabela();
-  //     this.dataSource = resultadoFiltrado;
-  //   } else {
-  //     this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
-  //     this.LimparTabela();
-  //     this.BuscarDadosDeAgendaDoMedicoDoDia();
-  //   }
-  // }
 
   LimparTabela() {
     this.dataSource = [];

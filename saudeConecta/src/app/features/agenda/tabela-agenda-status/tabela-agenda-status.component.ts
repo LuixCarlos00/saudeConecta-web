@@ -116,38 +116,6 @@ export class TabelaAgendaStatusComponent implements OnInit {
       });
   }
 
-  // filtrandoDadosDoBancoPassadoParametros(dados: any) {
-  //   const normalizeString = (str: string) => {
-  //     return str
-  //       .normalize('NFD')
-  //       .replace(/[\u0300-\u036f]/g, '')
-  //       .toUpperCase();
-  //   };
-  //   const dadosUpper = normalizeString(dados.toString());
-
-  //   const resultadoFiltrado = this.DadosDeConsulta.filter(
-  //     (item) =>
-  //       normalizeString(item.ConSttCodigoConsulata.toString()).includes(
-  //         dadosUpper
-  //       ) ||
-  //       normalizeString(item.ConSttMedico.medNome).includes(dadosUpper) ||
-  //       normalizeString(item.ConSttPaciente.paciNome).includes(dadosUpper) ||
-  //       normalizeString(item.ConSttDia_semana).includes(dadosUpper) ||
-  //       normalizeString(item.ConSttData).includes(dadosUpper) ||
-  //       normalizeString(item.ConSttHorario).includes(dadosUpper) ||
-  //       normalizeString(item.ConSttObservacao).includes(dadosUpper)
-  //   );
-
-  //   if (resultadoFiltrado.length > 0) {
-
-  //     this.dataSource = resultadoFiltrado;
-
-  //   } else {
-  //     this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
-  //     this.BuscarTodosRegistrosDeConsulta();
-  //     this.consultaStatusService.FiltraDadosTabelaStatusSubject('');
-  //   }
-  // }
 
   filtrandoDadosDoBancoPassadoParametros(dados: any) {
     // Função para normalizar e remover acentos e caracteres especiais
@@ -201,7 +169,7 @@ export class TabelaAgendaStatusComponent implements OnInit {
     };
 
 
-    const dadosUpper = safeNormalize(dados);
+    const dadosUpper = safeNormalize(dados.trim());
     console.log('DadosDeConsulta', this.DadosDeConsulta);
 
     // Filtrar os dados da consulta, comparando as strings normalizadas e tratando a data e o horário de forma específica
@@ -211,8 +179,8 @@ export class TabelaAgendaStatusComponent implements OnInit {
         safeNormalize(item.ConMedico?.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
         safeNormalize(item.ConPaciente?.paciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
         safeNormalize(item.ConDia_semana).includes(dadosUpper) ||
-        isDateMatch(item.ConData, dados) || // Compara as datas sem normalizar
-        isTimeMatch(item.ConHorario, dados) || // Compara os horários diretamente
+        isDateMatch(item.ConData, dados.trim()) || // Compara as datas sem normalizar
+        isTimeMatch(item.ConHorario, dados.trim()) || // Compara os horários diretamente
         safeNormalize(item.ConObservacoes).includes(dadosUpper)
     );
 

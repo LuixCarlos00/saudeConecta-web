@@ -24,16 +24,13 @@ import { HistoricoCompletoComponent } from '../impressoes-PDF/historicoCompleto/
   styleUrls: ['./historicos.component.css'],
 })
 export class HistoricosComponent implements OnInit {
-  // @Output() selecionaMedico = new EventEmitter<any>();
-  // @Output() fechar = new EventEmitter<void>();
-
   highValue: number = 5;
   lowValue: number = 0;
   dataSource: ConsultaStatus[] = [];
   filteredDataSource: any[] = [];
   clickedRows = new Set<any>();
   pesquisa: string = '';
-
+  displayedColumns: any = [];
   UsuarioLogado: Usuario = {
     id: 0,
     aud: '',
@@ -48,7 +45,10 @@ export class HistoricosComponent implements OnInit {
     public dialog: MatDialog,
     private ProntuarioService: ProntuarioService,
     private DialogService: DialogService
-  ) {
+  ) {}
+
+
+  ngOnInit(): void {
     this.tokenService.decodificaToken();
     this.tokenService.UsuarioLogadoValue$.subscribe((Usuario) => {
       if (Usuario) {
@@ -56,19 +56,18 @@ export class HistoricosComponent implements OnInit {
         console.log('this.UsuarioLogado', this.UsuarioLogado);
       }
     });
-
     if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
       this.BuscarDadosDeAgendaDoMedico();
+      this.displayedColumnsMedico();
     }
 
     if (this.UsuarioLogado.aud == '[ROLE_ADMIN]') {
       this.BuscarDadosDeAgendaDeTodosOsMedicos();
+      this.displayedColumnsAdmin();
     }
   }
 
   BuscarDadosDeAgendaDeTodosOsMedicos() {
-    console.log('Buscando dados adm');
-
     this.ConsultaStatusService.BuscarDadosDeAgendaDeTodosOsMedicos().subscribe(
       (dados) => {
         let Consulta: ConsultaStatus[] = [];
@@ -125,15 +124,18 @@ export class HistoricosComponent implements OnInit {
             ConSttAdm: 0,
           };
           this.dataSource = Consulta;
+          console.log('dataSource', this.dataSource);
+
           this.filteredDataSource = Consulta; // Inicializa o filtro
         }
       }
     );
   }
 
-  ngOnInit() {}
 
-  filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados: any) {
+
+
+  filtrandoDadosDoBancoPassadoParametros(dados: any) {
     // Função para normalizar e remover acentos e caracteres especiais
     const normalizeString = (str: string) => {
       return str
@@ -141,20 +143,66 @@ export class HistoricosComponent implements OnInit {
         .replace(/[\u0300-\u036f]/g, '') // Remove diacríticos
         .toUpperCase(); // Converte para maiúsculas
     };
-    const dadosUpper = normalizeString(dados.toString());
 
-    // Filtrar os dados da consulta, comparando as strings normalizadas
+    const safeNormalize = (value: any) => {
+      return value ? normalizeString(value.toString()) : ''; // Verifica se o valor não é nulo ou undefined
+    };
+
+    const isDateMatch = (date1: string, date2: string) => {
+      const parseDate = (dateStr: string) => {
+        const date = new Date(dateStr);
+        return isNaN(date.getTime()) ? null : date;
+      };
+
+      const parsedDate1 = parseDate(date1);
+      const parsedDate2 = parseDate(date2);
+
+      if (!parsedDate1 || !parsedDate2) {
+        return false; // Se qualquer data for inválida, retorne false
+      }
+
+      return parsedDate1.toISOString().split('T')[0] === parsedDate2.toISOString().split('T')[0];
+    };
+
+
+    const isTimeMatch = (time1: string, time2: string) => {
+      const formatTime = (time: string) => {
+        let [hour, minute] = time.split(':');
+        if (!hour || !minute) {
+          return null; // Se não for possível dividir corretamente, retorne null
+        }
+        hour = hour.padStart(2, '0'); // Garante que a hora tenha 2 dígitos
+        minute = minute.padStart(2, '0'); // Garante que os minutos tenham 2 dígitos
+        return `${hour}:${minute}`;
+      };
+
+      const formattedTime1 = formatTime(time1.trim());
+      const formattedTime2 = formatTime(time2.trim());
+
+      if (!formattedTime1 || !formattedTime2) {
+        return false; // Se qualquer hora for inválida, retorne false
+      }
+
+      return formattedTime1 === formattedTime2;
+    };
+
+
+    const dadosUpper = safeNormalize(dados.trim());
+    console.log('DadosDeConsulta', this.filteredDataSource);
+
+    // Filtrar os dados da consulta, comparando as strings normalizadas e tratando a data e o horário de forma específica
     let resultadoFiltrado = this.filteredDataSource.filter(
       (item) =>
-        normalizeString(item.ConSttCodigoConsulata.toString()).includes(
-          dadosUpper
-        ) ||
-        normalizeString(item.ConSttPaciente.paciNome).includes(dadosUpper) ||
-        normalizeString(item.ConSttDia_semana).includes(dadosUpper) ||
-        normalizeString(item.ConSttData).includes(dadosUpper) ||
-        normalizeString(item.ConSttHorario).includes(dadosUpper) ||
-        normalizeString(item.ConSttObservacao).includes(dadosUpper)
+
+        safeNormalize(item.ConSttMedico?.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
+        safeNormalize(item.ConSttPaciente?.paciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
+        safeNormalize(item.ConSttDia_semana).includes(dadosUpper) ||
+        isDateMatch(item.ConSttData, dados.trim()) || // Compara as datas sem normalizar
+        isTimeMatch(item.ConSttHorario, dados.trim()) || // Compara os horários diretamente
+        safeNormalize(item.ConSttObservacao).includes(dadosUpper)
     );
+
+    console.log('resultadoFiltrado', resultadoFiltrado);
 
     if (resultadoFiltrado.length > 0) {
       this.LimparTabela();
@@ -162,9 +210,20 @@ export class HistoricosComponent implements OnInit {
     } else {
       this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
       this.LimparTabela();
-      this.BuscarDadosDeAgendaDoMedico();
+      if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
+        this.BuscarDadosDeAgendaDoMedico();
+        this.displayedColumnsMedico();
+      }
+      if (this.UsuarioLogado.aud == '[ROLE_ADMIN]') {
+        this.BuscarDadosDeAgendaDeTodosOsMedicos();
+        this.displayedColumnsAdmin();
+      }
     }
   }
+
+
+
+
 
   LimparTabela() {
     this.dataSource = [];
@@ -172,7 +231,7 @@ export class HistoricosComponent implements OnInit {
   }
 
   chamandoPesquisa() {
-    this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(this.pesquisa);
+    this.filtrandoDadosDoBancoPassadoParametros(this.pesquisa);
   }
 
   BuscarDadosDeAgendaDoMedico() {
@@ -341,13 +400,28 @@ export class HistoricosComponent implements OnInit {
     return event;
   }
 
-  displayedColumns = [
-    'ConCodigoConsulta',
-    'NomePaciente',
-    'ConDia_semana',
-    'ConData',
-    'ConHorario',
-    'ConObservacoes',
-    'Imprimir',
-  ];
+
+  displayedColumnsAdmin() {
+    this.displayedColumns = [
+      'ConCodigoConsulta',
+      'NomeMedico',
+      'NomePaciente',
+      'ConDia_semana',
+      'ConData',
+      'ConHorario',
+      'ConObservacoes',
+      'Imprimir',
+    ];
+  }
+  displayedColumnsMedico() {
+    this.displayedColumns = [
+      'ConCodigoConsulta',
+      'NomePaciente',
+      'ConDia_semana',
+      'ConData',
+      'ConHorario',
+      'ConObservacoes',
+      'Imprimir',
+    ];
+  }
 }

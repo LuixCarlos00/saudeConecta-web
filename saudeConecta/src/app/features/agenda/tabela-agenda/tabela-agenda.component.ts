@@ -303,7 +303,7 @@ export class TabelaAgendaComponent implements OnInit {
     };
 
 
-    const dadosUpper = safeNormalize(dados);
+    const dadosUpper = safeNormalize(dados.trim());
     console.log('DadosDeConsulta', this.DadosDeConsulta);
 
     // Filtrar os dados da consulta, comparando as strings normalizadas e tratando a data e o horário de forma específica
@@ -313,8 +313,8 @@ export class TabelaAgendaComponent implements OnInit {
         safeNormalize(item.ConMedico?.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
         safeNormalize(item.ConPaciente?.paciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
         safeNormalize(item.ConDia_semana).includes(dadosUpper) ||
-        isDateMatch(item.ConData, dados) || // Compara as datas sem normalizar
-        isTimeMatch(item.ConHorario, dados) || // Compara os horários diretamente
+        isDateMatch(item.ConData, dados.trim()) || // Compara as datas sem normalizar
+        isTimeMatch(item.ConHorario, dados.trim()) || // Compara os horários diretamente
         safeNormalize(item.ConObservacoes).includes(dadosUpper)
     );
 
