@@ -13,7 +13,7 @@ constructor() { }
 
 
 getUrl(){
-  return this.ngGrok
+  return this.apiUrl
 }
 
 
