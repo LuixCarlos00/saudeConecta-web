@@ -48,7 +48,6 @@ export class RecuperaCadastroService {
 
 
   recuperaLogin(id:number, tipoUsusario :string ): Observable<any> {
-    console.log(id, tipoUsusario);
 
     return this.http.get<Usuario>(`${this.apiUrl}/Home/recuperaLogin=${id}&dados=${tipoUsusario}`   );
   }

@@ -67,18 +67,15 @@ export class LoginComponent implements OnInit {
       if (existe) {
         this.LoginService.fazerLogin(Usuario).subscribe(
           (response) => {
-            console.log(response,'resposta');
 
             if (response.body && response.body.token) {
               const token = response.body.token;
               this.tokenService.salvarToken(token);
               this.tokenService.decodificaToken();
 
-              console.log(token);
-              this.tokenService.UsuarioLogadoValue$.subscribe(
+               this.tokenService.UsuarioLogadoValue$.subscribe(
                 (UsuarioLogado) => {
                   this.Usuario = UsuarioLogado;
-                  console.log(this.Usuario, 'this.Usuario');
 
                 }
               );
@@ -88,7 +85,6 @@ export class LoginComponent implements OnInit {
                 this.Usuario.aud === '[ROLE_Secretaria]' ||
                 this.Usuario.aud === '[ROLE_Medico]'
               ) {
-                console.log('entrou');
 
 
                 this.tokenService.setAuthTwof(true);

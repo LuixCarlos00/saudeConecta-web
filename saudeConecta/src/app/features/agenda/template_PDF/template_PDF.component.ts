@@ -189,7 +189,6 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
 
    const adm = ConAdm;
 
-   console.log(adm,'adm');
 
     if (adm == 1) {
       this.NivelDeHierarquico = 'Administrador(a)';

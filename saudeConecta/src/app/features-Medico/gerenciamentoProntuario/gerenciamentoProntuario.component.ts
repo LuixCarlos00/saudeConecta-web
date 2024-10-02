@@ -39,8 +39,7 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
     this.ProntuarioService.Consulta$.subscribe((consulta) => {
       this.Consulta = consulta;
     });
-    console.log('Consulta:', this.Consulta);
-  }
+   }
 
   finalizar() {
     this.FinalizarConsulta = true;
@@ -131,7 +130,6 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
         this.Prontuario.prontDataFinalizado = dataAtual.toString();
         this.Prontuario.prontTempoDuracao = 10+this.minutes + ':' + this.seconds;
 
-        console.log('Prontuario:', this.Prontuario);
 
       this.salvar();
       })
@@ -179,8 +177,7 @@ export class GerenciamentoProntuarioComponent implements OnInit, OnDestroy {
     this.ConsultaService.DeletarConsulas(
       this.Consulta.ConCodigoConsulta
     ).subscribe((dados) => {
-      console.log(dados);
-      setTimeout(() => {
+       setTimeout(() => {
         window.location.reload();
       }, 2000);
     });

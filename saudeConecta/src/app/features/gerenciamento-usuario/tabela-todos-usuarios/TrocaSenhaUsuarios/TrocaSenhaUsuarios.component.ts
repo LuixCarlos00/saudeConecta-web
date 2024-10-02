@@ -33,7 +33,6 @@ export class TrocaSenhaUsuariosComponent implements OnInit {
       })
     } else {
 
-      console.log('troca', this.elements.elements);
 
       // Verifica se a propriedade secreUsuario existe e possui um ID
       const codigo = this.elements.elements.secreUsuario?.id ||
@@ -41,7 +40,6 @@ export class TrocaSenhaUsuariosComponent implements OnInit {
                      this.elements.elements.admUsuario?.id ||
                      0;
 
-      console.log('o codigo é', codigo);
 
       const SenhaNovaDTO = {
           id:0,

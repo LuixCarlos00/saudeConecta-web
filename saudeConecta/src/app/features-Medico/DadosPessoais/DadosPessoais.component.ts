@@ -55,8 +55,7 @@ export class DadosPessoaisComponent implements OnInit {
     this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
       if (paciente) {
         this.UsuarioLogado = paciente;
-        console.log(this.UsuarioLogado, 'paciente');
-      }
+       }
     });
   }
 

@@ -12,7 +12,6 @@ export class ObservacoesComponent implements OnInit {
     public dialogRef: MatDialogRef<ObservacoesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { observacoes: string }
   ) {
-    console.log('data', data);
 
   }
 

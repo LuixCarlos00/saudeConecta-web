@@ -53,8 +53,7 @@ export class HistoricosComponent implements OnInit {
     this.tokenService.UsuarioLogadoValue$.subscribe((Usuario) => {
       if (Usuario) {
         this.UsuarioLogado = Usuario;
-        console.log('this.UsuarioLogado', this.UsuarioLogado);
-      }
+       }
     });
     if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
       this.BuscarDadosDeAgendaDoMedico();
@@ -101,8 +100,7 @@ export class HistoricosComponent implements OnInit {
         });
 
         if (Consulta.length > 0) {
-          console.log(Consulta);
-          this.dataSource = Consulta;
+           this.dataSource = Consulta;
           this.filteredDataSource = Consulta; // Inicializa o filtro
         } else {
           Swal.fire(
@@ -124,7 +122,6 @@ export class HistoricosComponent implements OnInit {
             ConSttAdm: 0,
           };
           this.dataSource = Consulta;
-          console.log('dataSource', this.dataSource);
 
           this.filteredDataSource = Consulta; // Inicializa o filtro
         }
@@ -188,7 +185,6 @@ export class HistoricosComponent implements OnInit {
 
 
     const dadosUpper = safeNormalize(dados.trim());
-    console.log('DadosDeConsulta', this.filteredDataSource);
 
     // Filtrar os dados da consulta, comparando as strings normalizadas e tratando a data e o horário de forma específica
     let resultadoFiltrado = this.filteredDataSource.filter(
@@ -202,7 +198,6 @@ export class HistoricosComponent implements OnInit {
         safeNormalize(item.ConSttObservacao).includes(dadosUpper)
     );
 
-    console.log('resultadoFiltrado', resultadoFiltrado);
 
     if (resultadoFiltrado.length > 0) {
       this.LimparTabela();
@@ -269,8 +264,7 @@ export class HistoricosComponent implements OnInit {
       });
 
       if (Consulta.length > 0) {
-        console.log(Consulta);
-        this.dataSource = Consulta;
+         this.dataSource = Consulta;
         this.filteredDataSource = Consulta; // Inicializa o filtro
       } else {
         Swal.fire('Nenhuma consulta encontrada', 'Tente novamente', 'warning');
@@ -359,7 +353,6 @@ export class HistoricosComponent implements OnInit {
     this.ProntuarioService.BuscarPorProntuarioPassadoIdDeConsultaStatus(
       value
     ).subscribe((dados) => {
-      console.log('dados', dados);
 
       Swal.fire({
         title: 'Selecione uma opção para imprimir',
@@ -373,14 +366,11 @@ export class HistoricosComponent implements OnInit {
         showCancelButton: true,
         inputValidator: (value) => {
           if (value === '1') {
-            console.log('Imprimir Solicitação de Exames');
-            this.ImprimirSolicitacaoDeExames(dados);
+             this.ImprimirSolicitacaoDeExames(dados);
           } else if (value === '2') {
-            console.log('Imprimir Prescrição');
-            this.ImprimirPrescricaoComponent(dados);
+             this.ImprimirPrescricaoComponent(dados);
           } else if (value === '3') {
-            console.log('Imprimir Histórico Completo');
-            this.ImprimirHistorioCompleto(dados);
+             this.ImprimirHistorioCompleto(dados);
           } else if (value === '4') {
             this.ImprimirAtestadoPacienteComponent(dados);
           }

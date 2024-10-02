@@ -73,7 +73,6 @@ export class TabelaAgendaMedicoComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
        this.route.navigate(['startconsulta']);
-       console.log('element', element);
 
        this.ProntuarioService.changeConsulta(element);
       }else{
@@ -152,7 +151,6 @@ export class TabelaAgendaMedicoComponent implements OnInit {
 
 
     const dadosUpper = safeNormalize(dados.trim());
-    console.log('DadosDeConsulta', this.filteredDataSource);
 
     // Filtrar os dados da consulta, comparando as strings normalizadas e tratando a data e o horário de forma específica
     let resultadoFiltrado = this.filteredDataSource.filter(
@@ -166,7 +164,6 @@ export class TabelaAgendaMedicoComponent implements OnInit {
         safeNormalize(item.ConObservacoes).includes(dadosUpper)
     );
 
-    console.log('resultadoFiltrado', resultadoFiltrado);
 
     if (resultadoFiltrado.length > 0) {
       this.LimparTabela();
@@ -207,7 +204,6 @@ export class TabelaAgendaMedicoComponent implements OnInit {
 
  BuscarDadosDeAgendaDoMedicoDoDia() {
   this.TabelaAgendaMedicoService.BuscarTodaAgendaDeMedicoDoDia(this.UsuarioLogado.id).subscribe((dados) => {
-    console.log('dados', dados);
 
     let novaConsulta: Consulta[] = [];
     for (let i = 0; i < dados.length; i++) {

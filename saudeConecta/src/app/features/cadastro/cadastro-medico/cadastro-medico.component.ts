@@ -71,16 +71,13 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
     // É necessario cadastra e pega o id do usuario cadastrado  e associa ao medico
     this.usuarioService.NovoUsuariocadastradoValue$.subscribe((value) => {
       if (value) {
-        console.log('novousuario cadastrado subject ', value);
-        this.NovoUsuariocadastrado_Medico = false;
+         this.NovoUsuariocadastrado_Medico = false;
         this.NovoUsuariocadastrado_Medico = value;
 
-        console.log('1');
 
         this.FormularioUsuaroValido = false;
       } else {
-        console.log('2');
-        this.FormularioUsuaroValido = true;
+         this.FormularioUsuaroValido = true;
       }
     });
   }
@@ -163,7 +160,6 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
   }
 
   private handleHttpError(error: any) {
-    console.log(error);
 
     let errorMessage = 'Erro desconhecido ao realizar o cadastro.';
 
@@ -185,7 +181,6 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
   }
 
   onUsuarioCadastrado(usuario: Usuario) {
-  console.log('os dados chegara aqui   ', usuario);
 
     //this.NovoUsuariocadastrado_Medico = usuario;
     this.FormularioUsuaroValido = false;

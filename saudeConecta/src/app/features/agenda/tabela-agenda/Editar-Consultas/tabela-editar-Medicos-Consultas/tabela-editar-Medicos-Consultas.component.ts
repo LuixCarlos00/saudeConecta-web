@@ -24,7 +24,6 @@ export class TabelaEditarMedicosConsultasComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.dadosMedicos,'dados');
 
     this.dataSource = this.dadosMedicos
   }
@@ -34,7 +33,6 @@ export class TabelaEditarMedicosConsultasComponent implements OnInit {
 
   SelecionaMedico(elemento: Medico) {
     this.fecharTabela();
-    console.log('SelecionaMedico', elemento);
 
     this.selecionaMedico.emit(elemento);
   }

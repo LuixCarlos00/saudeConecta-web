@@ -141,7 +141,6 @@ export class ConsultaStatusService {
 
 
     BuscarRegistrosDeConsultaStatusPesquisandoPorTodosOsCampos(Consulta: any) {
-      console.log('buscando consulta status  ', Consulta);
 
       const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
       const options = { headers, withCredentials: true };

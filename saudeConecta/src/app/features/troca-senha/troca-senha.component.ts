@@ -40,7 +40,6 @@ export class TrocaSenhaComponent implements OnInit {
     this.tokenService.decodificaToken();
     this.tokenService.UsuarioLogadoValue$.subscribe((paciente) => {
       if (paciente) {
-        console.log(paciente, 'paciente');
 
         this.UsuarioLogado = paciente;
       }
@@ -88,7 +87,6 @@ export class TrocaSenhaComponent implements OnInit {
       if (email && SenhaAntiga && SenhaNova) {
         this.usuarioAdmService.TrocaSenha(administrador).subscribe(
           (response) => {
-            console.log(response);
 
               this.FormularioTrocaSenha.reset();
               Swal.fire({
@@ -109,11 +107,9 @@ export class TrocaSenhaComponent implements OnInit {
         );
       }
     } else if (this.EsqueciMinhaSenha) {
-      console.log('EsqueciMinhaSenha');
 
       this.PesquisandoEmail = true;
       const email = this.FormularioEsqueciMinhaSenha.value.email;
-      console.log('email', email);
 
       this.usuarioAdmService
         .ObeterCodigoParaRecuperacaoDeSenhaPassandoOEmail(email)

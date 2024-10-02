@@ -36,7 +36,6 @@ BuscarDadosPessoais(Id:number) {
 
 
 AtualizarEnderecoMedico(form: any) {
-  console.log('AtualizarEndereco',form);
 
   const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
   const options = { headers, withCredentials: true };
@@ -45,7 +44,6 @@ AtualizarEnderecoMedico(form: any) {
 
 
 AtualizarDadosPessoais( form: any) {
-  console.log('AtualizarDadosPessoais',form);
 
   const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`,};
   const options = { headers, withCredentials: true };

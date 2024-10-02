@@ -32,8 +32,6 @@ tituloPrescricao: string = '';
   ngOnInit() {
     this.Prontuario = this.data.prontuario;
     this.Consulta = this.data.Consulta;
-    console.log('prontuario', this.data.prontuario);
-    console.log('Consulta', this.data.Consulta);
 
     this.NomeMedico = this.Prontuario.prontCodigoMedico.medNome?.trim() ||this.Consulta.conSttMedico.medNome?.trim();
     this.Crm = this.Prontuario.prontCodigoMedico.medCrm?.trim() || this.Consulta.conSttMedico.medCrm?.trim();

@@ -94,7 +94,6 @@ export class PesquiasPacienteComponent implements OnInit {
     )?.value;
 
     if (FiltroPesquisaPaciente === 1) {
-      console.log('pesquisa', pesquisa);
 
       this.PacientesService.buscarListaPacientesPorNome(pesquisa).subscribe(
         (dados) => {
@@ -211,7 +210,6 @@ export class PesquiasPacienteComponent implements OnInit {
           } else if (!data) {
             this.consultaService.CriarConsulata(consult).subscribe(
               (response) => {
-                console.log('response ', response);
 
                 this.consultaService.ChangeCadastroRealizadoComSucesso(
                   response
@@ -295,8 +293,7 @@ export class PesquiasPacienteComponent implements OnInit {
       // Verifica os horários indisponíveis para a data e o médico selecionados
       this.consultaService.VerificarHorariosDisponiveisReferentesAoMedicoEData(this.Medico.medCodigo,this.DataSelecionada).subscribe(
           (data) => {
-            console.log(data, 'horarios INDisponiveis');
-            this.horariosDisponiveis = data;
+             this.horariosDisponiveis = data;
 
             // Filtra os horários disponíveis com base nos horários gerados/selecionados
             this.atualizarHorarios();
@@ -331,8 +328,7 @@ export class PesquiasPacienteComponent implements OnInit {
       ); // 60000 ms = 1 minuto
     }
 
-    console.log('Horários disponíveis:', this.Hora);
-  }
+   }
 
 
 

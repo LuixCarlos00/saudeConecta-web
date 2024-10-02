@@ -22,22 +22,19 @@ export class GuardaRotasCadastraUsuario {
 
     // Se a rota anterior for vazia (ou seja, se veio de login) e não houver token, permite o acesso
     if (!rotaAnterior && !this.tokeService.possuiToken()) {
-      console.log('Permitir acesso a partir da tela de login sem token.');
-      return true;
+       return true;
     }
 
     // Se a rota anterior for 'cadastro' e não houver token, desloga e redireciona para a tela de login
     if (rotaAnterior.includes('cadastro') && !this.tokeService.possuiToken()) {
-      console.log('Deslogar e redirecionar para a tela de login a partir da tela de cadastro.');
-      this.login.deslogar();
+       this.login.deslogar();
       this.router.navigate(['']);
       return false;
     }
 
     // Se não houver token, redireciona para a tela de login
     if (!this.tokeService.possuiToken()) {
-      console.log('Redirecionar para a tela de login.');
-      return true;
+       return true;
     }
 
     if (this.tokeService.possuiToken()) {
@@ -45,8 +42,7 @@ export class GuardaRotasCadastraUsuario {
     }
 
     // Caso contrário, não permite o acesso
-    console.log('Bloquear acesso.');
-    return false;
+     return false;
   }
 
 

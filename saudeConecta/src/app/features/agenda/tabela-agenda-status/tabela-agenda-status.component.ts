@@ -107,11 +107,9 @@ export class TabelaAgendaStatusComponent implements OnInit {
   }
  BuscarTodosRegistrosDeConsulta() {
     this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).subscribe((response) => {
-        console.log( response.content, ' response.content response.content');
 
         this.DadosDeConsulta = response.content;
         this.dataSource = response.content;
-        console.log(this.DadosDeConsulta, 'this.DadosDeConsulta');
 
       });
   }
@@ -170,7 +168,6 @@ export class TabelaAgendaStatusComponent implements OnInit {
 
 
     const dadosUpper = safeNormalize(dados.trim());
-    console.log('DadosDeConsulta', this.DadosDeConsulta);
 
     // Filtrar os dados da consulta, comparando as strings normalizadas e tratando a data e o horário de forma específica
     let resultadoFiltrado = this.DadosDeConsulta.filter(
@@ -184,7 +181,6 @@ export class TabelaAgendaStatusComponent implements OnInit {
         safeNormalize(item.ConObservacoes).includes(dadosUpper)
     );
 
-    console.log('resultadoFiltrado', resultadoFiltrado);
 
     if (resultadoFiltrado.length > 0) {
       this.LimparTabela();

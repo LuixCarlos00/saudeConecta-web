@@ -110,8 +110,7 @@ export class CalendarDialogComponent implements OnInit {
         DataInicioFormatada,
         DataFimFormatada
       ).subscribe((dados) => {
-        console.log('PesquisarMedicoEmUmIntervaloDeDatas', dados);
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
+         this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
         this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
       });
     }

@@ -162,7 +162,6 @@ export class RecuperaCadastroComponent implements OnInit {
 
   enviaCodigoVerificacao() {
     const codigo: string = this.FormularioCodigo.get('codigo')?.value;
-    console.log(codigo, 'codigp');
 
     this.recuperaCadastroService.codigoVerificacao(codigo).subscribe(
       (dadoDOCodigoVerificacao) => {
@@ -229,21 +228,18 @@ export class RecuperaCadastroComponent implements OnInit {
 
   RecuperarLogin() {
     const id: number = this.InstanciaUsuario.usuario.usuario.id;
-    console.log(this.InstanciaUsuario);
 
     if (this.InstanciaUsuario.usuario.paciNome) {
       this.recuperaCadastroService.recuperaLogin(id, 'Paciente').subscribe(
         () => {
-        console.log('deu certo Pa ');
-        this.route.navigate(['']);
+         this.route.navigate(['']);
         },
 
       );
     } else if (this.InstanciaUsuario.usuario.MedNome) {
       this.recuperaCadastroService.recuperaLogin(id, 'Medico').subscribe(
         () => {
-          console.log('deu certo Me ');
-          this.route.navigate(['']);
+           this.route.navigate(['']);
         },
 
       );

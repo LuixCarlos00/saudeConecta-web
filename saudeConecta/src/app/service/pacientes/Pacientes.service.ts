@@ -95,7 +95,6 @@ export class PacientesService {
   }
 
   buscarListaPacientesPorNome(pesquisa: string): Observable<Paciente[]> {
-    console.log(pesquisa,'nome');
 
     const headers = {'Content-Type': 'application/json',Authorization: `Bearer ${this.tokenService.retornaToken()}`, };
     const options = { headers, withCredentials: true };

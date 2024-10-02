@@ -112,8 +112,7 @@ export class DiagnosticoComponent implements OnInit {
 
   selectOption(option: Cid_codigo_internaciona_doecas) {
     this.selectedOptions.push(option);
-    console.log('Selecionado:', option);
-  }
+   }
 
   resetarPesquisa() {
     this.filtrandoDadosCid();

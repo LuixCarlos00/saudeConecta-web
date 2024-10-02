@@ -32,8 +32,7 @@ export class BarraLateraComponent implements OnInit {
     this.LoginService.iniciarObservacaoDadosUsuario();
     this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
       if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
-      console.log(UsuarioLogado, 'paciente');
-    });
+     });
   }
 
   redirecionamentoDePaginas(rota: string) {

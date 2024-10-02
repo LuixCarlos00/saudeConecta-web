@@ -38,7 +38,6 @@ export class AtestadoPacienteComponent implements OnInit {
 
   ngOnInit() {
     this.Consulta = this.data.Consulta;
-    console.log('Consulta', this.data.Consulta);
 
     this.NomeMedico =  this.Consulta.conSttMedico.medNome?.trim().toUpperCase();
     this.Crm =  this.Consulta.conSttMedico.medCrm?.trim().toUpperCase();
