@@ -109,12 +109,6 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.usuarioSubscription) {
-      this.usuarioSubscription.unsubscribe();
-    }
-  }
-
   cadastra() {
     if (this.FormularioEndereco.valid && this.FormularioMedico.valid) {
       this.usuarioService.cadastraEndereco(this.Endereco).subscribe(
@@ -158,7 +152,6 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
       });
     }
   }
-
   private handleHttpError(error: any) {
 
     let errorMessage = 'Erro desconhecido ao realizar o cadastro.';
@@ -179,6 +172,13 @@ export class CadastroMedicoComponent implements OnInit, OnDestroy {
       text: errorMessage,
     });
   }
+
+  ngOnDestroy(): void {
+    if (this.usuarioSubscription) {
+      this.usuarioSubscription.unsubscribe();
+    }
+  }
+
 
   onUsuarioCadastrado(usuario: Usuario) {
 
