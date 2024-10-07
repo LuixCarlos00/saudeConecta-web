@@ -11,21 +11,24 @@ export class CadastroComponent {
 
   constructor(private router: Router){}
 
+
+  cadastraSecretaria() {
+    this.router.navigate(['cadastroSecretaria'])
+  }
+
+  cadastraAdmin() {
+    this.router.navigate(['cadastroadmin'])
+    }
+
+    voltarParaHome() {
+      this.router.navigate(['home'])
+      }
+
   cadastraMedico() {
    this.router.navigate(['cadastroMedico'])
     }
 
 
-    cadastraSecretaria() {
-      this.router.navigate(['cadastroSecretaria'])
-    }
 
-    cadastraAdmin() {
-      this.router.navigate(['cadastroadmin'])
-      }
-
-      voltarParaHome() {
-        this.router.navigate(['home'])
-        }
 
 }

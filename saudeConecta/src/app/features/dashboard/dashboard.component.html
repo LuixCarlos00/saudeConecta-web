@@ -10,23 +10,23 @@
 
     <div class="dashboard-container" *ngIf="this.ControleAcessoService.AcessoAdministrador()">
 
-      <div class="dashboard-row"  >
-    <div class="dashboard-item"  >
-      <app-grafico-qnt-consultas-dia-anterior></app-grafico-qnt-consultas-dia-anterior>
-    </div>
-    <div class="dashboard-item">
-      <app-grafico-agendamentos-dias-semanas-mes></app-grafico-agendamentos-dias-semanas-mes>
-    </div>
-  </div>
+      <div class="dashboard-row">
+        <div class="dashboard-item">
+          <app-grafico-qnt-consultas-dia-anterior></app-grafico-qnt-consultas-dia-anterior>
+        </div>
+        <div class="dashboard-item">
+          <app-grafico-agendamentos-dias-semanas-mes></app-grafico-agendamentos-dias-semanas-mes>
+        </div>
+      </div>
 
-  <div class="dashboard-row">
-    <div class="dashboard-item smaller">
-      <app-grafico-saldo></app-grafico-saldo>
-    </div>
-    <div class="dashboard-item smaller">
-      <app-grafico-categoria-medicos></app-grafico-categoria-medicos>
-    </div>
-  </div>
+      <div class="dashboard-row">
+        <div class="dashboard-item smaller">
+          <app-grafico-saldo></app-grafico-saldo>
+        </div>
+        <div class="dashboard-item smaller">
+          <app-grafico-categoria-medicos></app-grafico-categoria-medicos>
+        </div>
+      </div>
 
     </div>
 
@@ -35,6 +35,24 @@
         <p>
           Colocar os grafos para o medico ver
         </p>
+        <div class="dashboard-row">
+          <div class="dashboard-item">
+            <app-grafico-qnt-consultas-dia-anterior></app-grafico-qnt-consultas-dia-anterior>
+          </div>
+          <div class="dashboard-item">
+            <app-grafico-agendamentos-dias-semanas-mes></app-grafico-agendamentos-dias-semanas-mes>
+          </div>
+        </div>
+
+        <div class="dashboard-row">
+          <div class="dashboard-item smaller">
+            <app-grafico-saldo></app-grafico-saldo>
+          </div>
+          <div class="dashboard-item smaller">
+            <app-grafico-categoria-medicos></app-grafico-categoria-medicos>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
