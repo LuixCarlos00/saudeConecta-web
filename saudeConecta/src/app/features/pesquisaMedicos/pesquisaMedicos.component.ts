@@ -14,8 +14,6 @@ import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciament
   styleUrls: ['./pesquisaMedicos.component.css'],
 })
 export class PesquisaMedicosComponent implements OnInit {
-
-
   showResultadoMedico: boolean = false;
   dadosMedico: any;
   MedicoEscolhido!: any;
@@ -29,17 +27,14 @@ export class PesquisaMedicosComponent implements OnInit {
     private medicosService: MedicosService,
     private DialogService: DialogService,
     private router: Router,
-    private gerenciamentoService :GerenciamentoService,
-    private consultaService  : ConsultaService
+    private gerenciamentoService: GerenciamentoService,
+    private consultaService: ConsultaService
   ) {
-
     this.consultaService.CadastroRealizadoComSucesso$.subscribe((cadastro) => {
       if (cadastro) {
         this.LimparFormulario();
       }
     });
-
-
   }
 
   ngOnInit() {
@@ -50,14 +45,12 @@ export class PesquisaMedicosComponent implements OnInit {
   }
 
   PesquisarMedicosFiltro() {
-
-
     const pesquisa: string = this.FormularioPesquisa.get('Pesquisa')?.value;
-    const FiltroPesquisa: number = this.FormularioPesquisa.get('FiltroPesquisaMedico')?.value;
+    const FiltroPesquisa: number = this.FormularioPesquisa.get(
+      'FiltroPesquisaMedico'
+    )?.value;
 
     if (FiltroPesquisa === 1) {
-
-
       this.medicosService.buscarListaMedicosPorNome(pesquisa).subscribe(
         (dados) => {
           if (dados && dados.length > 0) {
@@ -139,7 +132,7 @@ export class PesquisaMedicosComponent implements OnInit {
     this.gerenciamentoService.setMedicoEscolhido(event); // Adicionado
   }
 
-  LimparFormulario(){
+  LimparFormulario() {
     this.FormularioPesquisa.reset();
     this.MedicoEscolhido = null;
   }

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
@@ -12,9 +19,6 @@ import { MedicosService } from 'src/app/service/medicos/medicos.service';
   styleUrls: ['./tabelas-Pesquisas-Medicos.component.css'],
 })
 export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
-
-
-
   dataSource: Medico[] = [];
   highValue: number = 5;
   lowValue: number = 0;
@@ -28,9 +32,7 @@ export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
   constructor(private medicosService: MedicosService, private router: Router) {}
 
   ngOnInit() {
-
     this.dataSource = this.dadosMedico;
-
   }
 
   ngOnDestroy() {
@@ -47,10 +49,9 @@ export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['position', 'Especialidade', 'MarcaConsulta'];
 
   marcarConsulta(elemento: Medico) {
-    this.fecharTabela()
-    this.selecionaMedico.emit(elemento )
+    this.fecharTabela();
+    this.selecionaMedico.emit(elemento);
   }
-
 
   clicked(Medico: Medico) {
     this.selecionaMedico.emit(Medico);

@@ -259,7 +259,6 @@ export class TabelaTodosUsuariosComponent implements OnInit {
   gerenciarStatusDeUsuario(element: any, status: number) {
     if (element !== undefined || element !== null) {
       if (element.medCodigo || element.secreCodigo || element.admCodigo) {
-
         let codigoSecretaria = null;
         let codigoAdm = null;
         let codigoMedico = null;
@@ -332,8 +331,6 @@ export class TabelaTodosUsuariosComponent implements OnInit {
   }
 
   TrocaSenhaUsuario(elements: any) {
-
-
     const dialoRef = this.Dialog.open(TrocaSenhaUsuariosComponent, {
       width: '250px',
       height: '250px',
