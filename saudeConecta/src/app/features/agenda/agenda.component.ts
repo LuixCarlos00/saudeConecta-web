@@ -13,15 +13,13 @@ import { CadastroPacienteComponent } from '../cadastro/cadastro-paciente/cadastr
 import { CadastroSecretariaComponent } from '../cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { CalendarDialogComponent } from 'src/app/util/variados/Cronologia/cronologia.component';
 
-
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.css'],
 })
 export class AgendaComponent implements OnInit {
-
-
+  ValorOpcao: any;
   //
   //
   //
@@ -44,25 +42,39 @@ export class AgendaComponent implements OnInit {
     this.FormularioAgenda = this.form.group({
       busca: [''],
     });
-
-
   }
 
   Pesquisar() {
     const busca = this.FormularioAgenda.get('busca')?.value;
-console.log('busca', busca);
+    console.log('busca', busca);
+    const Dados: any = {
+      date: busca,
+      tipo: 1,
+    };
+    this.ValorOpcao = Dados;
+    console.log('consulta status', this.ConsultaStatus);
+    console.log('consulta', this.Consulta);
 
-console.log('consulta status', this.ConsultaStatus);
-console.log('consulta', this.Consulta);
-
-
-    if (this.ConsultaStatus) {
-      this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);
-      this.FormularioAgenda.reset();
-    } else if (this.Consulta) {
+    //else if (this.Consulta) {
       this.consultaService.FiltraDadosSubject(busca);
       this.FormularioAgenda.reset();
-    }
+   // }
+  }
+
+
+  PesquisarNaTabelaConcluidos() {
+    this.Consulta = false;
+    this.ConsultaStatus = true;
+    const busca = this.FormularioAgenda.get('busca')?.value;
+    console.log('busca', busca);
+    const Dados: any = {
+      date: busca,
+      tipo: 2,
+    };
+    this.ValorOpcao = Dados;
+    this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);
+    this.FormularioAgenda.reset();
+    this.FormularioAgenda.reset();
   }
 
   Recarregar() {
@@ -92,10 +104,6 @@ console.log('consulta', this.Consulta);
     this.consultaService.ExcluirDadosDaTabelaSubject(true);
   }
 
-
-
-
-
   GerarPDF() {
     if (this.ConsultaStatus) {
       this.consultastatusService.Gera_PDF_DeRegistroDaTabelaSubject(true);
@@ -108,16 +116,9 @@ console.log('consulta', this.Consulta);
     this.dialog.open(CalendarDialogComponent, {
       width: '300px',
       height: '300px',
-
     });
-   }
-
-
-  MostraTabelaDeConcluidos() {
-    this.Consulta = false;
-    this.ConsultaStatus = true;
-    this.FormularioAgenda.reset();
   }
+
 
 
   voltarParaHome() {
@@ -129,21 +130,18 @@ console.log('consulta', this.Consulta);
       width: '800px',
       height: '600px',
     });
-    }
+  }
 
-
-    AdicionarPaciente() {
+  AdicionarPaciente() {
     this.dialog.open(CadastroPacienteComponent, {
       width: '800px',
       height: '600px',
     });
-    }
+  }
 
-    AdicionarSecretaria() {
-      this.dialog.open(CadastroSecretariaComponent, {
+  AdicionarSecretaria() {
+    this.dialog.open(CadastroSecretariaComponent, {
       width: '800px',
     });
-      }
-
-
+  }
 }

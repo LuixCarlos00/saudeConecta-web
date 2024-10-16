@@ -2,7 +2,13 @@ import { Consulta } from './../../../util/variados/interfaces/consulta/consulta'
 import { map, take } from 'rxjs';
 import { Paciente } from './../../../util/variados/interfaces/paciente/paciente';
 import { Medico } from './../../../util/variados/interfaces/medico/medico';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ObservacoesComponent } from './Observacoes/Observacoes.component';
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
@@ -13,16 +19,19 @@ import { lastDayOfDecade } from 'date-fns';
 import { EditarConsultasComponent } from './Editar-Consultas/Editar-Consultas.component';
 import { Template_PDFComponent } from '../template_PDF/template_PDF.component';
 import { AvisosLembretesComponent } from './Avisos-Lembretes/Avisos-Lembretes.component';
+import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
 
 @Component({
   selector: 'app-tabela-agenda',
   templateUrl: './tabela-agenda.component.html',
   styleUrls: ['./tabela-agenda.component.css'],
 })
-export class TabelaAgendaComponent implements OnInit {
+export class TabelaAgendaComponent implements OnInit, OnChanges {
   //
   //
   //
+
+  @Input() ValorOpcao: any;
   Medicos: Medico = {
     MedCodigo: 0,
     MedNome: '',
@@ -36,7 +45,7 @@ export class TabelaAgendaComponent implements OnInit {
     MedTelefone: '',
     endereco: 0,
     usuario: 0,
-    medNome: ''
+    medNome: '',
   };
   Pacientes: Paciente = {
     PaciCodigo: 0,
@@ -48,7 +57,7 @@ export class TabelaAgendaComponent implements OnInit {
     PaciEmail: '',
     PaciTelefone: '',
     endereco: 0,
-    PaciStatus: 0
+    PaciStatus: 0,
   };
 
   displayedColumns = [
@@ -69,16 +78,39 @@ export class TabelaAgendaComponent implements OnInit {
   DadoSelecionadoParaGerarPDF: any = [];
 
   ParametroDeFiltragem: any;
-  dataSource: Consulta[] = [];
+  dataSource: any[] = [];
   DadosDeConsulta: any[] = [];
   clickedRows = new Set<any>();
   constructor(
     private consultaService: ConsultaService,
     public dialog: MatDialog,
-    protected DialogService: DialogService
+    protected DialogService: DialogService,
+    private consultaStatusService: ConsultaStatusService,
+
   ) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['ValorOpcao'].currentValue) {
+      if (this.ValorOpcao.tipo == 1) {
+        this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(
+          this.ValorOpcao.date
+        );
+      }
+      if (this.ValorOpcao.tipo == 2) {
+         this.LimparTabela();
+         this.BuscarTodosRegistrosDeConsultaCONCLUIDADS()
+
+      }
+    }
+  }
+
+
+
+
+
   ngOnInit() {
+    console.log('ValorOpcao', this.ValorOpcao);
+
     //buscar todos os registros
     this.consultaService.CadastroRealizadoComSucesso$.subscribe((dados) => {
       if (dados) this.BuscarTodosRegistrosDeConsulta();
@@ -122,15 +154,17 @@ export class TabelaAgendaComponent implements OnInit {
 
     //Filtra e pesquisar Tabela
     this.consultaService.dadosFiltrados$.subscribe((dados) => {
-
       if (!dados.toString()) {
-        this.consultaService.BuscarTodosRegistrosDeConsulta().subscribe((response) => {
+        this.consultaService
+          .BuscarTodosRegistrosDeConsulta()
+          .subscribe((response) => {
             this.dataSource = response.content;
           });
       } else if (dados.toString()) {
-
         // pesquisa por dado filtrado
-        this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados);
+        console.log('tentou 1');
+
+        //this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados);
       }
     });
 
@@ -217,7 +251,7 @@ export class TabelaAgendaComponent implements OnInit {
       novaConsulta[i] = {
         ConCodigoConsulta: dados[i].conCodigoConsulta,
         ConMedico: dados[i].conMedico,
-        ConPaciente: dados[i].conPaciente ,
+        ConPaciente: dados[i].conPaciente,
         ConDia_semana: dados[i].conDia_semana,
         ConHorario: dados[i].conHorario,
         ConData: dados[i].conData,
@@ -225,11 +259,9 @@ export class TabelaAgendaComponent implements OnInit {
         ConDadaCriacao: dados[i].conDataCriacao,
         ConFormaPagamento: dados[i].conFormaPagamento,
         ConStatus: dados[i].conStatus,
-        ConAdm: dados[i].conAdm
+        ConAdm: dados[i].conAdm,
       };
     }
-
-
 
     if (novaConsulta.length > 0) {
       this.dataSource = [];
@@ -248,8 +280,6 @@ export class TabelaAgendaComponent implements OnInit {
         });
     }
   }
-
-
 
   filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados: any) {
     // Função para normalizar e remover acentos e caracteres especiais
@@ -277,9 +307,11 @@ export class TabelaAgendaComponent implements OnInit {
         return false; // Se qualquer data for inválida, retorne false
       }
 
-      return parsedDate1.toISOString().split('T')[0] === parsedDate2.toISOString().split('T')[0];
+      return (
+        parsedDate1.toISOString().split('T')[0] ===
+        parsedDate2.toISOString().split('T')[0]
+      );
     };
-
 
     const isTimeMatch = (time1: string, time2: string) => {
       const formatTime = (time: string) => {
@@ -301,7 +333,6 @@ export class TabelaAgendaComponent implements OnInit {
 
       return formattedTime1 === formattedTime2;
     };
-
 
     const dadosUpper = safeNormalize(dados.trim());
     console.log('DadosDeConsulta', this.DadosDeConsulta);
@@ -336,9 +367,6 @@ export class TabelaAgendaComponent implements OnInit {
     }
   }
 
-
-
-
   openObservacoesDialog(observacoes: string): void {
     this.dialog.open(ObservacoesComponent, {
       width: '550px',
@@ -351,7 +379,7 @@ export class TabelaAgendaComponent implements OnInit {
     const paciente = Consulta.ConPaciente;
     this.dialog.open(AvisosLembretesComponent, {
       width: '550px',
-       data: { Consulta: Consulta, Medico: medico, Paciente: paciente },
+      data: { Consulta: Consulta, Medico: medico, Paciente: paciente },
     });
   }
 
@@ -461,6 +489,39 @@ export class TabelaAgendaComponent implements OnInit {
       data: { DadoSelecionadoParaEdicao: DadoSelecionadoParaEdicao },
     });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  BuscarTodosRegistrosDeConsultaCONCLUIDADS() {
+    this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).subscribe((response) => {
+
+        this.DadosDeConsulta = response.content;
+        this.dataSource = response.content;
+
+      });
+  }
+
+
 
 
 }

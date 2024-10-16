@@ -99,8 +99,7 @@ export class LoginComponent implements OnInit {
                   title: 'Oops...',
                   text: 'Parece que você não tem permissão para acessar esta página',
                 });
-               // window.location.reload();
-              }
+               }
             }
           },
           (error) => {

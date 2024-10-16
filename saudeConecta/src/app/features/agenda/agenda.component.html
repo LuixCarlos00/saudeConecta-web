@@ -10,7 +10,7 @@
       <button class="btnPesquisar" type="submit" (click)="Pesquisar()">Pesquisar</button>
 
       <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit"
-        (click)="MostraTabelaDeConcluidos()">Finalizadas</button>
+        (click)="PesquisarNaTabelaConcluidos()">Finalizadas</button>
     </div>
 
     <div class="grid">
@@ -84,7 +84,7 @@
     </div>
 
     <div class="tabela" *ngIf="Consulta && !ConsultaStatus">
-      <app-tabela-agenda></app-tabela-agenda>
+      <app-tabela-agenda [ValorOpcao]="ValorOpcao"></app-tabela-agenda>
     </div>
 
     <div class="tabela" *ngIf="!Consulta && ConsultaStatus">

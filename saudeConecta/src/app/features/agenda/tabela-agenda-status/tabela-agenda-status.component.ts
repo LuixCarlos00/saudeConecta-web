@@ -96,7 +96,7 @@ export class TabelaAgendaStatusComponent implements OnInit {
 
     this.consultaStatusService.dadosStatusFiltrados$.subscribe((dados) => {
       if (!dados) {
-        this.BuscarTodosRegistrosDeConsulta();
+        this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
       } else {
         this.filtrandoDadosDoBancoPassadoParametros(dados);
       }
@@ -105,7 +105,7 @@ export class TabelaAgendaStatusComponent implements OnInit {
 
 
   }
- BuscarTodosRegistrosDeConsulta() {
+ BuscarTodosRegistrosDeConsultaCONCLUIDADS() {
     this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).subscribe((response) => {
 
         this.DadosDeConsulta = response.content;
@@ -187,7 +187,7 @@ export class TabelaAgendaStatusComponent implements OnInit {
       this.dataSource = resultadoFiltrado;
     } else {
       this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
-      this.BuscarTodosRegistrosDeConsulta();
+      this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
       this.consultaStatusService.FiltraDadosTabelaStatusSubject('');
     }
   }
@@ -293,7 +293,7 @@ export class TabelaAgendaStatusComponent implements OnInit {
 
   RecaregarTabela() {
     this.LimparTabela();
-    this.BuscarTodosRegistrosDeConsulta();
+    this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
   //  this.consultaStatusService.ExcluirDadosDaTabelaStatusSubject(false);
   }
 
