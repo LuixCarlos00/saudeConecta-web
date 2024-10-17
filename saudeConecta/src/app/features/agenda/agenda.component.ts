@@ -72,8 +72,7 @@ export class AgendaComponent implements OnInit {
       tipo: 2,
     };
     this.ValorOpcao = Dados;
-    this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);
-    this.FormularioAgenda.reset();
+    //this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);
     this.FormularioAgenda.reset();
   }
 

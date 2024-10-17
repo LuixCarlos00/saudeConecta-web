@@ -85,28 +85,36 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     private consultaService: ConsultaService,
     public dialog: MatDialog,
     protected DialogService: DialogService,
-    private consultaStatusService: ConsultaStatusService,
-
+    private consultaStatusService: ConsultaStatusService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['ValorOpcao'].currentValue) {
       if (this.ValorOpcao.tipo == 1) {
-        this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(
-          this.ValorOpcao.date
-        );
+        this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(this.ValorOpcao.date);
       }
       if (this.ValorOpcao.tipo == 2) {
-         this.LimparTabela();
-         this.BuscarTodosRegistrosDeConsultaCONCLUIDADS()
-
+        this.LimparTabela();
+        this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
+      }
+      if (this.ValorOpcao.tipo == 2) {
+        this.LimparTabela();
+        this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
+      }
+      if (this.ValorOpcao.tipo == 3) {
+        this.LimparTabela();
+        this.RecaregarTabela();
+      }
+      if (this.ValorOpcao.tipo == 4) {
+        this.LimparTabela();
+        this.DeletarDadoDaTabela(this.ValorOpcao.date)
+      }
+      if (this.ValorOpcao.tipo == 5) {
+        this.LimparTabela();
+        this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
       }
     }
   }
-
-
-
-
 
   ngOnInit() {
     console.log('ValorOpcao', this.ValorOpcao);
@@ -119,13 +127,13 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     //deletar Itens
     this.consultaService.DeletarDadosDaTabela$.subscribe((dados) => {
       if (dados === true && this.DadoSelecionaParaExclusao.length > 0)
-        this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao, dados);
+        this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao );
     });
 
     // Recarregar Tabela
-    this.consultaService.RecarregarTabela$.subscribe((dados) => {
-      if (dados) this.RecaregarTabela();
-    });
+    // this.consultaService.RecarregarTabela$.subscribe((dados) => {
+    //   if (dados) this.RecaregarTabela();
+    // });
 
     //Edita dado selecionado
     this.consultaService.EditarDadosDaTabela$.subscribe((dados) => {
@@ -436,7 +444,7 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     this.consultaService.ExcluirDadosDaTabelaSubject(false);
   }
 
-  DeletarDadoDaTabela(DadoSelecionaParaExclusao: any, dados: Boolean) {
+  DeletarDadoDaTabela(DadoSelecionaParaExclusao: any ) {
     Swal.fire({
       title: 'Tem certeza que deseja excluir esses registro?',
       icon: 'warning',
@@ -490,38 +498,13 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   BuscarTodosRegistrosDeConsultaCONCLUIDADS() {
-    this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).subscribe((response) => {
-
+    this.consultaStatusService
+      .BuscarTodosRegistrosDeConsultaStatus()
+      .pipe(take(1))
+      .subscribe((response) => {
         this.DadosDeConsulta = response.content;
         this.dataSource = response.content;
-
       });
   }
-
-
-
-
 }
