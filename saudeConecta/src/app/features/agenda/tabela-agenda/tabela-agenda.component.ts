@@ -118,6 +118,8 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log('ValorOpcao', this.ValorOpcao);
+    this.BuscarTodosRegistrosDeConsulta();
+
 
     //buscar todos os registros
     this.consultaService.CadastroRealizadoComSucesso$.subscribe((dados) => {
