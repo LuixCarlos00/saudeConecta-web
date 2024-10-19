@@ -46,52 +46,51 @@ export class AgendaComponent implements OnInit {
 
   Pesquisar() {
     const busca = this.FormularioAgenda.get('busca')?.value;
-    console.log('busca', busca);
     const Dados: any = {
       date: busca,
       tipo: 1,
     };
     this.ValorOpcao = Dados;
-    console.log('consulta status', this.ConsultaStatus);
-    console.log('consulta', this.Consulta);
-
-    //else if (this.Consulta) {
-      //this.consultaService.FiltraDadosSubject(busca);
-      this.FormularioAgenda.reset();
-   // }
+    this.FormularioAgenda.reset();
   }
-
 
   PesquisarNaTabelaConcluidos() {
     this.Consulta = false;
     this.ConsultaStatus = true;
     const busca = this.FormularioAgenda.get('busca')?.value;
-    console.log('busca', busca);
     const Dados: any = {
       date: busca,
       tipo: 2,
     };
     this.ValorOpcao = Dados;
-     this.FormularioAgenda.reset();
+    this.FormularioAgenda.reset();
   }
+
+
+
 
   Recarregar() {
     this.Consulta = true;
     this.ConsultaStatus = false;
     const Dados: any = {
-       tipo: 3,
+      tipo: 3,
     };
     this.ValorOpcao = Dados;
   }
+
+
 
   Concluido() {
     this.Consulta = true;
     this.ConsultaStatus = false;
     const Dados: any = {
       tipo: 6,
-   };
-   this.ValorOpcao = Dados;
-   }
+    };
+    this.ValorOpcao = Dados;
+  }
+
+
+
 
   Editar() {
     this.Consulta = true;
@@ -105,19 +104,23 @@ export class AgendaComponent implements OnInit {
 
 
   Deletar() {
-
     this.Consulta = true;
     this.ConsultaStatus = false;
-
-
-
     const Dados: any = {
-       tipo: 4,
+      tipo: 4,
     };
     this.ValorOpcao = Dados;
   }
 
   GerarPDF() {
+
+    this.Consulta = true;
+    this.ConsultaStatus = false;
+    const Dados: any = {
+      tipo: 7,
+    };
+    this.ValorOpcao = Dados;
+
     if (this.ConsultaStatus) {
       this.consultastatusService.Gera_PDF_DeRegistroDaTabelaSubject(true);
     } else if (this.Consulta) {
@@ -131,8 +134,6 @@ export class AgendaComponent implements OnInit {
       height: '300px',
     });
   }
-
-
 
   voltarParaHome() {
     this.router.navigate(['home']);

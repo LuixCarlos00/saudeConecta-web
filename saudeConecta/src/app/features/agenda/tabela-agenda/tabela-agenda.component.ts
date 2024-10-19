@@ -128,13 +128,31 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
       if (this.ValorOpcao.tipo == 6) {
         if (this.DadoSelecionadoParaConclusao.length > 0) {
           this.ConcluirDadosDaTabela();
-        }else{
+        } else {
           Swal.fire({
             icon: 'error',
             title: 'Selecione pelo menos um item para concluir!...',
           });
           this.RecaregarTabela();
         }
+      }
+      if (this.ValorOpcao.tipo == 7) {
+        //Gerar PDF
+        if (this.DadoSelecionadoParaGerarPDF.length > 0) {
+          this.GerarPDF(this.DadoSelecionadoParaGerarPDF);
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Selecione pelo menos um item para gerar PDF!...',
+          });
+          this.RecaregarTabela();
+        }
+      }
+
+      if (this.ValorOpcao.tipo == 8) {
+      }
+
+      if (this.ValorOpcao.tipo == 9) {
       }
     }
   }
