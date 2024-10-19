@@ -56,7 +56,7 @@ export class AgendaComponent implements OnInit {
     console.log('consulta', this.Consulta);
 
     //else if (this.Consulta) {
-      this.consultaService.FiltraDadosSubject(busca);
+      //this.consultaService.FiltraDadosSubject(busca);
       this.FormularioAgenda.reset();
    // }
   }
@@ -72,42 +72,56 @@ export class AgendaComponent implements OnInit {
       tipo: 2,
     };
     this.ValorOpcao = Dados;
-    //this.consultastatusService.FiltraDadosTabelaStatusSubject(busca);
-    this.FormularioAgenda.reset();
+     this.FormularioAgenda.reset();
   }
 
   Recarregar() {
     this.Consulta = true;
     this.ConsultaStatus = false;
-    this.FormularioAgenda.reset();
-    this.consultaService.RecarregarDadosTabelaSubject(true);
-    this.consultastatusService.RecarregarDadosTabelaStatusSubject(true);
-    window.location.reload();
+    const Dados: any = {
+       tipo: 3,
+    };
+    this.ValorOpcao = Dados;
   }
 
   Concluido() {
     this.Consulta = true;
     this.ConsultaStatus = false;
-    this.consultaService.ConcluidoTabelaSubject(true);
-  }
+    const Dados: any = {
+      tipo: 6,
+   };
+   this.ValorOpcao = Dados;
+   }
 
   Editar() {
     this.Consulta = true;
     this.ConsultaStatus = false;
-    this.consultaService.EditarDadosDaTabelaSubject(true);
+    const Dados: any = {
+      tipo: 5,
+    };
+    this.ValorOpcao = Dados;
   }
 
+
+
   Deletar() {
+
     this.Consulta = true;
     this.ConsultaStatus = false;
-    this.consultaService.ExcluirDadosDaTabelaSubject(true);
+
+
+
+    const Dados: any = {
+       tipo: 4,
+    };
+    this.ValorOpcao = Dados;
   }
 
   GerarPDF() {
     if (this.ConsultaStatus) {
       this.consultastatusService.Gera_PDF_DeRegistroDaTabelaSubject(true);
     } else if (this.Consulta) {
-      this.consultaService.Gera_PDF_DeRegistroDaTabelaSubject(true);
+      //this.consultaService.Gera_PDF_DeRegistroDaTabelaSubject(true);
     }
   }
 

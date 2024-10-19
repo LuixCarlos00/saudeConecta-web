@@ -131,16 +131,12 @@ export class ConsultaService {
   //   );
   // }
 
+
+
   DeletarConsulas(consultaId: any) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    };
+    const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}`,  };
     const options = { headers, withCredentials: true };
-    return this.http.delete<{ content: Consulta[] }>(
-      `${this.apiUrl}/consulta/${consultaId}`,
-      options
-    );
+    return this.http.delete<{ content: Consulta[] }>( `${this.apiUrl}/consulta/${consultaId}`,   options );
   }
 
   EditarConsultas(

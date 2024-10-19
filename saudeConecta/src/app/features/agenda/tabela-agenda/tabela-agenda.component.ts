@@ -91,27 +91,50 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['ValorOpcao'].currentValue) {
       if (this.ValorOpcao.tipo == 1) {
-        this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(this.ValorOpcao.date);
+        //pesquisa
+        this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(
+          this.ValorOpcao.date
+        );
       }
       if (this.ValorOpcao.tipo == 2) {
-        this.LimparTabela();
-        this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
-      }
-      if (this.ValorOpcao.tipo == 2) {
+        // pesquisa concluida
         this.LimparTabela();
         this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
       }
       if (this.ValorOpcao.tipo == 3) {
+        //Recarregar
         this.LimparTabela();
         this.RecaregarTabela();
       }
       if (this.ValorOpcao.tipo == 4) {
+        //Deletar
         this.LimparTabela();
-        this.DeletarDadoDaTabela(this.ValorOpcao.date)
+
+        this.DeletarDadoDaTabela(this.ValorOpcao.date);
       }
       if (this.ValorOpcao.tipo == 5) {
+        //Editar
         this.LimparTabela();
-        this.BuscarTodosRegistrosDeConsultaCONCLUIDADS();
+        if (this.DadoSelecionadoParaEdicao.length === 1) {
+          this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao);
+        } else if (this.DadoSelecionadoParaEdicao.length > 1) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Selecione apenas um item para editar!...',
+          });
+          this.RecaregarTabela();
+        }
+      }
+      if (this.ValorOpcao.tipo == 6) {
+        if (this.DadoSelecionadoParaConclusao.length > 0) {
+          this.ConcluirDadosDaTabela();
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Selecione pelo menos um item para concluir!...',
+          });
+          this.RecaregarTabela();
+        }
       }
     }
   }
@@ -120,63 +143,62 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     console.log('ValorOpcao', this.ValorOpcao);
     this.BuscarTodosRegistrosDeConsulta();
 
-
     //buscar todos os registros
-    this.consultaService.CadastroRealizadoComSucesso$.subscribe((dados) => {
-      if (dados) this.BuscarTodosRegistrosDeConsulta();
-    });
+    // this.consultaService.CadastroRealizadoComSucesso$.subscribe((dados) => {
+    //   if (dados) this.BuscarTodosRegistrosDeConsulta();
+    // });
 
     //deletar Itens
-    this.consultaService.DeletarDadosDaTabela$.subscribe((dados) => {
-      if (dados === true && this.DadoSelecionaParaExclusao.length > 0)
-        this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao );
-    });
+    // this.consultaService.DeletarDadosDaTabela$.subscribe((dados) => {
+    //   if (dados === true && this.DadoSelecionaParaExclusao.length > 0)
+    //     this.DeletarDadoDaTabela(this.DadoSelecionaParaExclusao );
+    // });
 
     // Recarregar Tabela
     // this.consultaService.RecarregarTabela$.subscribe((dados) => {
     //   if (dados) this.RecaregarTabela();
     // });
 
-    //Edita dado selecionado
-    this.consultaService.EditarDadosDaTabela$.subscribe((dados) => {
-      if (dados === true && this.DadoSelecionadoParaEdicao.length === 1) {
-        this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao);
-      } else if (dados === true && this.DadoSelecionadoParaEdicao.length > 1) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Selecione apenas um item para editar!...',
-          confirmButtonText: 'Ok',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.consultaService.EditarDadosDaTabelaSubject(false);
-            window.location.reload();
-          }
-        });
-      }
-    });
+    // //Edita dado selecionado
+    // this.consultaService.EditarDadosDaTabela$.subscribe((dados) => {
+    //   if (dados === true && this.DadoSelecionadoParaEdicao.length === 1) {
+    //     this.EditarDadoDaTabela(this.DadoSelecionadoParaEdicao);
+    //   } else if (dados === true && this.DadoSelecionadoParaEdicao.length > 1) {
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: 'Selecione apenas um item para editar!...',
+    //       confirmButtonText: 'Ok',
+    //     }).then((result) => {
+    //       if (result.isConfirmed) {
+    //         this.consultaService.EditarDadosDaTabelaSubject(false);
+    //         window.location.reload();
+    //       }
+    //     });
+    //   }
+    // });
 
     // concluir dados
-    this.consultaService.ConcluidoRegistroTabela$.subscribe((dados) => {
-      if (dados === true && this.DadoSelecionadoParaConclusao.length > 0) {
-        this.ConcluirDadosDaTabela();
-      }
-    });
+    // this.consultaService.ConcluidoRegistroTabela$.subscribe((dados) => {
+    //   if (dados === true && this.DadoSelecionadoParaConclusao.length > 0) {
+    //     this.ConcluirDadosDaTabela();
+    //   }
+    // });
 
     //Filtra e pesquisar Tabela
-    this.consultaService.dadosFiltrados$.subscribe((dados) => {
-      if (!dados.toString()) {
-        this.consultaService
-          .BuscarTodosRegistrosDeConsulta()
-          .subscribe((response) => {
-            this.dataSource = response.content;
-          });
-      } else if (dados.toString()) {
-        // pesquisa por dado filtrado
-        console.log('tentou 1');
+    // this.consultaService.dadosFiltrados$.subscribe((dados) => {
+    //   if (!dados.toString()) {
+    //     this.consultaService
+    //       .BuscarTodosRegistrosDeConsulta()
+    //       .subscribe((response) => {
+    //         this.dataSource = response.content;
+    //       });
+    //   } else if (dados.toString()) {
+    //     // pesquisa por dado filtrado
+    //     console.log('tentou 1');
 
-        //this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados);
-      }
-    });
+    //     //this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados);
+    //   }
+    // });
 
     //Gerar PDF
     this.consultaService.GeraPDFRegistroTabela$.subscribe((dados) => {
@@ -245,7 +267,7 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
       .BuscarTodosRegistrosDeConsulta()
       .pipe(take(1))
       .subscribe((response) => {
-        console.log(response, 'consulta');
+        console.log(response.content, 'consulta');
 
         this.DadosDeConsulta = [];
         this.DadosDeConsulta.push(...response.content);
@@ -446,7 +468,9 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     this.consultaService.ExcluirDadosDaTabelaSubject(false);
   }
 
-  DeletarDadoDaTabela(DadoSelecionaParaExclusao: any ) {
+  DeletarDadoDaTabela(DadoSelecionaParaExclusao: any) {
+    console.log('DadoSelecionaParaExclusao', DadoSelecionaParaExclusao);
+
     Swal.fire({
       title: 'Tem certeza que deseja excluir esses registro?',
       icon: 'warning',
@@ -462,25 +486,24 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
               this.DadoSelecionaParaExclusao[i].ConCodigoConsulta
             )
             .pipe(take(1))
-            .subscribe(() => {
-              // Limpe a seleção e atualize a tabela após a exclusão bem-sucedida
-              if (i === this.DadoSelecionaParaExclusao.length - 1) {
+            .subscribe(
+              (dados) => {
                 this.DadoSelecionaParaExclusao = [];
-                this.LimparTabela();
-                this.consultaService
-                  .BuscarTodosRegistrosDeConsulta()
-                  .subscribe((response) => {
-                    this.DadosDeConsulta = response.content;
-                    this.dataSource = response.content;
-                  });
+                this.RecaregarTabela();
+              },
+              (error) => {
+                this.DadoSelecionaParaExclusao = [];
+                this.RecaregarTabela();
               }
-            });
+            );
         }
       } else {
-        this.consultaService.ExcluirDadosDaTabelaSubject(false);
-        window.location.reload();
+        // this.consultaService.ExcluirDadosDaTabelaSubject(false);
+        this.DadoSelecionaParaExclusao = [];
       }
     });
+    this.LimparTabela();
+    this.RecaregarTabela();
   }
 
   GerarPDF(DadoSelecionadoParaGerarPDF: any) {
