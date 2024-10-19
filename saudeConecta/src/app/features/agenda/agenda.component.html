@@ -22,36 +22,13 @@
           <span class="btn-label">Recarregar <br> tabela</span>
         </div>
 
-        <div class="divOperacoes">
-          <button  title="Deletar Consulta" class="btnRecarregar"
-            (click)="Deletar()">
-            <i class="fa-regular fa-trash-can fa-xl" style="color: red;"></i>
-          </button>
-          <span class="btn-label">Deletar <br> Consulta</span>
-        </div>
 
         <div class="divOperacoes">
-          <button   title="Editar Consulta" class="btnRecarregar"
-            (click)="Editar()">
-            <i class="fa-regular fa-pen-to-square fa-xl" style="color: blue;"></i>
-          </button>
-          <span class="btn-label">Editar <br> Consulta</span>
-        </div>
-
-        <div class="divOperacoes">
-          <button  title="Concluir Consulta" class="btnRecarregar"
+          <button  [ngClass]="{ 'disabled-button': Finalizadas   }"  title="Concluir Consulta" class="btnRecarregar"
             (click)="Concluido()">
             <i class="fa-solid fa-square-check fa-xl" style="color: green;"></i>
           </button>
           <span class="btn-label">Concluir <br> Consulta</span>
-        </div>
-
-        <div class="divOperacoes">
-          <button  title="Gerar Arquivo de Consulta"
-            class="btnRecarregar" (click)="GerarPDF()">
-            <i class="fa-solid fa-file-pdf fa-xl" style="color: blue;"></i>
-          </button>
-          <span class="btn-label">Cria PDF</span>
         </div>
 
         <div class="divOperacoes">
@@ -112,8 +89,8 @@
       </ng-container>
 
       <ng-container matColumnDef="data">
-        <th mat-header-cell *matHeaderCellDef class="Nomedata">Ano/Mês/Dia</th>
-        <td mat-cell *matCellDef="let element" class="colunasData">{{ element.data }}</td>
+        <th mat-header-cell *matHeaderCellDef class="Nomedata">Dia/Mês/Ano</th>
+        <td mat-cell *matCellDef="let element" class="colunasData">{{ element.data |  date: 'dd/MM/yyyy'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="horario">
@@ -145,6 +122,34 @@
           <mat-checkbox (change)="DadoSelecionadoParaAcao(element, $event)"></mat-checkbox>
         </td>
       </ng-container>
+
+      <ng-container matColumnDef="deletar">
+        <th mat-header-cell *matHeaderCellDef class="NomeObecervacao" >Deletar</th>
+        <td mat-cell *matCellDef="let element" class="colunasObecervacao" >
+          <button style="border: hidden;" mat-button (click)="Deletar(element)">
+            <i class="fa-regular fa-trash-can" style="color: red; ;"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Edicao">
+        <th mat-header-cell *matHeaderCellDef class="NomeObecervacao" >Edição</th>
+        <td mat-cell *matCellDef="let element" class="colunasObecervacao" >
+          <button style="border: hidden;" mat-button (click)="Editar(element)">
+            <i class="fa-regular fa-pen-to-square fa-xl" style="color: blue;"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="PDF">
+        <th mat-header-cell *matHeaderCellDef class="NomeObecervacao" >PDF</th>
+        <td mat-cell *matCellDef="let element" class="colunasObecervacao" >
+          <button style="border: hidden;" mat-button (click)="Editar(element)">
+            <i class="fa-solid fa-file-pdf fa-xl" style="color: blue;"></i>
+          </button>
+        </td>
+      </ng-container>
+
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

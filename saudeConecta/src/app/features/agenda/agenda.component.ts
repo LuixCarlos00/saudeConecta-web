@@ -18,6 +18,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs';
 import { da } from 'date-fns/locale';
 import Swal from 'sweetalert2';
+import { EditarConsultasComponent } from './tabela-agenda/Editar-Consultas/Editar-Consultas.component';
+import { Template_PDFComponent } from './template_PDF/template_PDF.component';
 
 interface Tabela {
   consulta: string;
@@ -37,8 +39,8 @@ interface Tabela {
 export class AgendaComponent implements OnInit {
   FormularioAgenda!: FormGroup;
   dataSource = new MatTableDataSource<Tabela>([]);
-  displayedColumns: string[] = ['consulta', 'medico', 'paciente', 'diaSemana', 'data', 'horario', 'observacao', 'observar', 'seleciona'];
-
+  displayedColumns: string[] = ['consulta', 'medico', 'paciente', 'diaSemana', 'data', 'horario', 'observacao', 'observar', 'seleciona','deletar','Edicao','PDF'];
+  Finalizadas = false;
   clickedRows = new Set<Tabela>();
   ValorOpcao: any;
 
@@ -82,6 +84,8 @@ export class AgendaComponent implements OnInit {
 
 
   async PesquisarNaTabelaConcluidos() {
+    this.Finalizadas = true
+
     try {
       const dados = await   this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).toPromise()
       console.log('PesquisarNaTabelaConcluidos', dados);
@@ -118,7 +122,11 @@ export class AgendaComponent implements OnInit {
   }
 
 
+
+
+
   Recarregar() {
+    this.Finalizadas = false
     this.buscarDados();
 
   }
@@ -130,30 +138,42 @@ export class AgendaComponent implements OnInit {
     this.ValorOpcao = Dados;
   }
 
-  Editar() {
-    const Dados: any = {
-      tipo: 5,
-    };
-    this.ValorOpcao = Dados;
+
+
+
+
+
+  async Deletar(consulta: Tabela) {
+    try {
+      await this.consultaService.DeletarConsulas(consulta.consulta).toPromise();
+      Swal.fire('Deletado', 'Consulta deletada com sucesso', 'success');
+      this.buscarDados(); // Atualizar a tabela após deletar
+    } catch (error) {
+      console.error(error);
+      Swal.fire('Erro', 'Erro ao deletar consulta', 'error');
+    }
   }
 
-  Deletar() {
-    const Dados: any = {
-      tipo: 4,
-    };
-    this.ValorOpcao = Dados;
+
+  Editar(consulta: any) {
+    this.dialog.open(EditarConsultasComponent, {
+      width: '800px',
+      height: '550px',
+      data: { DadoSelecionadoParaEdicao: consulta },
+    });
   }
 
-  GerarPDF() {
-    const Dados: any = {
-      tipo: 7,
-    };
-    this.ValorOpcao = Dados;
 
-    const Dadoss: any = {
-      tipo: 8,
-    };
-    this.ValorOpcao = Dados;
+
+
+
+
+  GerarPDF(consulta : any) {
+    this.dialog.open(Template_PDFComponent, {
+      width: '800px',
+      height: '550px',
+      data: { DadoSelecionadoParaGerarPDF: consulta },
+    });
   }
 
   CronogramaDoDia() {
@@ -202,8 +222,12 @@ export class AgendaComponent implements OnInit {
 
 
 
-  DadoSelecionadoParaAcao(_t177: any, $event: MatCheckboxChange) {
-    console.log('_t177', _t177);
+  DadoSelecionadoParaAcao(info: any, $event: MatCheckboxChange) {
+
+    console.log('info', info);
+    console.log('$event', $event);
+
+
 
    }
   openAvisosDialog(_t164: any) {

@@ -201,6 +201,7 @@ export class PesquiasPacienteComponent implements OnInit {
         ConAdm: this.UsuarioLogado.id,
         ConStatus: 0,
       };
+console.log('consult', consult);
 
       this.consultaService.VericarSeExetemConsultasMarcadas(consult).subscribe(
         (data) => {
