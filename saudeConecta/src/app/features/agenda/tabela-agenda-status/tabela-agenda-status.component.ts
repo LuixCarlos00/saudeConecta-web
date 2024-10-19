@@ -108,8 +108,8 @@ export class TabelaAgendaStatusComponent implements OnInit {
  BuscarTodosRegistrosDeConsultaCONCLUIDADS() {
     this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).subscribe((response) => {
 
-        this.DadosDeConsulta = response.content;
-        this.dataSource = response.content;
+        // this.DadosDeConsulta = response.content;
+        // this.dataSource = response.content;
 
       });
   }

@@ -12,6 +12,22 @@ import { CadastroMedicoComponent } from '../cadastro/cadastro-medico/cadastro-me
 import { CadastroPacienteComponent } from '../cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroSecretariaComponent } from '../cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { CalendarDialogComponent } from 'src/app/util/variados/Cronologia/cronologia.component';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { CdkTableDataSourceInput } from '@angular/cdk/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { take } from 'rxjs';
+import { da } from 'date-fns/locale';
+import Swal from 'sweetalert2';
+
+interface Tabela {
+  consulta: string;
+  medico: string;
+  paciente: string;
+  diaSemana: string;
+  data: string;
+  horario: string;
+  observacao: string;
+}
 
 @Component({
   selector: 'app-agenda',
@@ -19,93 +35,109 @@ import { CalendarDialogComponent } from 'src/app/util/variados/Cronologia/cronol
   styleUrls: ['./agenda.component.css'],
 })
 export class AgendaComponent implements OnInit {
-  ValorOpcao: any;
-  //
-  //
-  //
-  Consulta: boolean = false;
-  ConsultaStatus: boolean = false;
   FormularioAgenda!: FormGroup;
+  dataSource = new MatTableDataSource<Tabela>([]);
+  displayedColumns: string[] = ['consulta', 'medico', 'paciente', 'diaSemana', 'data', 'horario', 'observacao', 'observar', 'seleciona'];
+
+  clickedRows = new Set<Tabela>();
+  ValorOpcao: any;
 
   constructor(
     private router: Router,
-    private form: FormBuilder,
+    private formBuilder: FormBuilder,
     private consultaService: ConsultaService,
-    private consultastatusService: ConsultaStatusService,
     public dialog: MatDialog,
-    protected DialogService: DialogService
+    private consultaStatusService : ConsultaStatusService
   ) {}
 
-  ngOnInit() {
-    this.Consulta = true;
-    this.ConsultaStatus = false;
-    this.FormularioAgenda = this.form.group({
+
+
+
+  async ngOnInit() {
+    this.buscarDados();
+
+    this.FormularioAgenda = this.formBuilder.group({
       busca: [''],
     });
   }
 
-  Pesquisar() {
-    const busca = this.FormularioAgenda.get('busca')?.value;
-    const Dados: any = {
-      date: busca,
-      tipo: 1,
-    };
-    this.ValorOpcao = Dados;
-    this.FormularioAgenda.reset();
-  }
 
-  PesquisarNaTabelaConcluidos() {
-    this.Consulta = false;
-    this.ConsultaStatus = true;
-    const busca = this.FormularioAgenda.get('busca')?.value;
-    const Dados: any = {
-      date: busca,
-      tipo: 2,
-    };
-    this.ValorOpcao = Dados;
-    this.FormularioAgenda.reset();
+
+
+
+
+  async buscarDados() {
+    try {
+      const dados = await this.consultaService.BuscarTodosRegistrosDeConsulta().toPromise();
+       if (dados) {
+        this.dataSource.data = this.tratarDadosParaTabela(dados);
+      }
+     } catch (error) {
+      console.error(error);
+      Swal.fire('Erro', 'Erro ao buscar dados', 'error');
+    }
   }
 
 
+
+
+  async PesquisarNaTabelaConcluidos() {
+    try {
+      const dados = await   this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).toPromise()
+      console.log('PesquisarNaTabelaConcluidos', dados);
+      if (dados) {
+        this.dataSource.data = this.tratarDadosParaTabela(dados);
+      }
+      console.log('this.PesquisarNaTabelaConcluidos', this.dataSource.data);
+    } catch (error) {
+      console.error(error);
+    }
+    }
+
+
+
+
+
+
+  async Pesquisar() {
+    const busca = this.FormularioAgenda.get('busca')?.value;
+    this.FormularioAgenda.reset();
+
+    try {
+      const dados = await this.consultaService.filtrandoDadosDoBancoPassadoParametros_Pesquisa(busca,this.dataSource.data)
+      if (dados) {
+        this.dataSource.data = dados;
+      }else{
+        this.buscarDados()
+        Swal.fire('Erro', 'Pesquisa não  encontrada', 'error');
+       }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
   Recarregar() {
-    this.Consulta = true;
-    this.ConsultaStatus = false;
-    const Dados: any = {
-      tipo: 3,
-    };
-    this.ValorOpcao = Dados;
+    this.buscarDados();
+
   }
 
-
-
   Concluido() {
-    this.Consulta = true;
-    this.ConsultaStatus = false;
     const Dados: any = {
       tipo: 6,
     };
     this.ValorOpcao = Dados;
   }
 
-
-
-
   Editar() {
-    this.Consulta = true;
-    this.ConsultaStatus = false;
     const Dados: any = {
       tipo: 5,
     };
     this.ValorOpcao = Dados;
   }
 
-
-
   Deletar() {
-    this.Consulta = true;
-    this.ConsultaStatus = false;
     const Dados: any = {
       tipo: 4,
     };
@@ -113,19 +145,15 @@ export class AgendaComponent implements OnInit {
   }
 
   GerarPDF() {
-
-    this.Consulta = true;
-    this.ConsultaStatus = false;
     const Dados: any = {
       tipo: 7,
     };
     this.ValorOpcao = Dados;
 
-    if (this.ConsultaStatus) {
-      this.consultastatusService.Gera_PDF_DeRegistroDaTabelaSubject(true);
-    } else if (this.Consulta) {
-      //this.consultaService.Gera_PDF_DeRegistroDaTabelaSubject(true);
-    }
+    const Dadoss: any = {
+      tipo: 8,
+    };
+    this.ValorOpcao = Dados;
   }
 
   CronogramaDoDia() {
@@ -158,4 +186,32 @@ export class AgendaComponent implements OnInit {
       width: '800px',
     });
   }
+
+
+  tratarDadosParaTabela(dados: any[]): Tabela[] {
+    return dados.map(dado => ({
+      consulta: dado.conCodigoConsulta || dado.conSttCodigoConsulta,
+      medico: dado.conMedico?.medNome || dado.conSttMedico?.medNome,
+      paciente: dado.conPaciente?.paciNome || dado.conSttPaciente?.paciNome,
+      diaSemana: dado.conDia_semana || dado.conSttDia_semana,
+      data: dado.conData || dado.conSttData,
+      horario: dado.conHorario || dado.conSttHorario,
+      observacao: dado.conObservacoes || dado.conSttObservacao,
+    }));
+  }
+
+
+
+  DadoSelecionadoParaAcao(_t177: any, $event: MatCheckboxChange) {
+    console.log('_t177', _t177);
+
+   }
+  openAvisosDialog(_t164: any) {
+    console.log('_t177', _t164);
+
+   }
+  openObservacoesDialog(arg0: any) {
+    console.log('_t177', arg0);
+
+   }
 }

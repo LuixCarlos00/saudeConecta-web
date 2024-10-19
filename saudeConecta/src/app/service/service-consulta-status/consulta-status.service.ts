@@ -97,10 +97,10 @@ export class ConsultaStatusService {
       //   return this.http.get<ConsultaStatus>(`${this.apiUrl}/consultaStatus/consultaData=${consult.ConSttData}&horario=${consult.ConSttHorario}&medico=${consult.ConSttHorario} `,options );
       // }
 
-      BuscarTodosRegistrosDeConsultaStatus(): Observable<{content: ConsultaStatus[]}> {
+      BuscarTodosRegistrosDeConsultaStatus(): Observable< ConsultaStatus[]> {
         const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}` };
         const options = { headers, withCredentials: true };
-        return this.http.get<{content: ConsultaStatus[]}>(`${this.apiUrl}/consultaStatus/Consultapagina`, options);
+        return this.http.get< ConsultaStatus[]>(`${this.apiUrl}/consultaStatus/Consultapagina`, options);
       }
 
 

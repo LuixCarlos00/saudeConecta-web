@@ -1,3 +1,126 @@
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.example-container {
+  height: 400px;
+  overflow: auto;
+
+}
+
+.custom-table .NomeCod{
+  color: rgb(69, 118, 211);
+  font-weight: bold;
+  width: 1% ;
+  align-items: center;
+  background: #efefef;
+  border-right: 1px solid black;
+}
+.custom-table .colunascod{
+  background: #efefef;
+  border-right: 1px solid black;
+
+}
+
+
+
+.custom-table .NomeMedico,
+.custom-table .NomePaciente {
+  color: rgb(69, 118, 211);
+  border-color: black;
+  font: bold;
+
+  font-size: 12.5px;
+  background: #efefef;
+
+}
+
+.custom-table .colunasMedico,
+.custom-table .colunasPaciente {
+  width: 200px;
+  background: #efefef;
+  font-size: 10.5px;
+}
+
+.custom-table .NomeDiaSemana ,
+.custom-table .NomeHorario,
+.custom-table .Nomedata {
+  color: rgb(69, 118, 211);
+  border-color: black;
+  font: bold;
+  padding: 0;
+  font-size: 12.5px;
+  text-align: left;
+  background: #efefef;
+}
+
+.custom-table .NomeObecervacao{
+  color: rgb(69, 118, 211);
+  border-color: black;
+  font: bold;
+  padding: 0;
+  font-size: 12.5px;
+  text-align: center;
+  background: #efefef;
+}
+
+.custom-table .colunasDiaSemana,
+.custom-table .colunasHorario{
+  width: 85px;
+  background: #efefef;
+
+  padding: 0.0;
+}
+
+.custom-table .colunasData{
+  width: 85px;
+  background: #efefef;
+  padding: 0.0;
+}
+
+
+.custom-table .colunasHorario{
+  width: 65px;
+  background: #efefef;
+
+}
+
+.custom-table .colunasObecervacao{
+  width: 85px;
+  text-align: center;
+  background: #efefef;
+
+
+}
+
+
+.demo-table {
+  width: 100%;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+
+
+
+
+
+
+
+
 @media screen and (min-width: 750px) {
 
   .input_filtro {

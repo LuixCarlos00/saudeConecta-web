@@ -1,95 +1,158 @@
 <body>
   <div class="desktop">
-  <form class="fomulario" [formGroup]="FormularioAgenda">
+    <form class="fomulario" [formGroup]="FormularioAgenda">
 
-    <div class="divPesquisar">
 
-      <label for="busca" class="label_search">Pesquisar </label>
-      <input type="text" id="busca" class="input_search" name="busca" formControlName="busca">
+      <div class="divPesquisar">
 
-      <button class="btnPesquisar" type="submit" (click)="Pesquisar()">Pesquisar</button>
+        <label for="busca" class="label_search">Pesquisar </label>
+        <input type="text" id="busca" class="input_search" name="busca" formControlName="busca">
 
-      <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit"
-        (click)="PesquisarNaTabelaConcluidos()">Finalizadas</button>
-    </div>
+        <button class="btnPesquisar" type="submit" (click)="Pesquisar()">Pesquisar</button>
 
-    <div class="grid">
-      <div class="divOperacoes">
-        <button title="Recarregar Tabela" class="btnRecarregar" (click)="Recarregar()">
-          <i class="fa-solid fa-rotate-right fa-xl" style="color: blue;"></i>
-        </button>
-        <span class="btn-label">Recarregar <br> tabela</span>
+        <button title="Dados de Consultas Concluídas" class="btnPesquisarCosultaConcluidas" type="submit"
+          (click)="PesquisarNaTabelaConcluidos()">Finalizadas</button>
       </div>
 
-      <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Deletar Consulta" class="btnRecarregar"
-          (click)="Deletar()">
-          <i class="fa-regular fa-trash-can fa-xl" style="color: red;"></i>
-        </button>
-        <span class="btn-label">Deletar <br> Consulta</span>
+      <div class="grid">
+        <div class="divOperacoes">
+          <button title="Recarregar Tabela" class="btnRecarregar" (click)="Recarregar()">
+            <i class="fa-solid fa-rotate-right fa-xl" style="color: blue;"></i>
+          </button>
+          <span class="btn-label">Recarregar <br> tabela</span>
+        </div>
+
+        <div class="divOperacoes">
+          <button  title="Deletar Consulta" class="btnRecarregar"
+            (click)="Deletar()">
+            <i class="fa-regular fa-trash-can fa-xl" style="color: red;"></i>
+          </button>
+          <span class="btn-label">Deletar <br> Consulta</span>
+        </div>
+
+        <div class="divOperacoes">
+          <button   title="Editar Consulta" class="btnRecarregar"
+            (click)="Editar()">
+            <i class="fa-regular fa-pen-to-square fa-xl" style="color: blue;"></i>
+          </button>
+          <span class="btn-label">Editar <br> Consulta</span>
+        </div>
+
+        <div class="divOperacoes">
+          <button  title="Concluir Consulta" class="btnRecarregar"
+            (click)="Concluido()">
+            <i class="fa-solid fa-square-check fa-xl" style="color: green;"></i>
+          </button>
+          <span class="btn-label">Concluir <br> Consulta</span>
+        </div>
+
+        <div class="divOperacoes">
+          <button  title="Gerar Arquivo de Consulta"
+            class="btnRecarregar" (click)="GerarPDF()">
+            <i class="fa-solid fa-file-pdf fa-xl" style="color: blue;"></i>
+          </button>
+          <span class="btn-label">Cria PDF</span>
+        </div>
+
+        <div class="divOperacoes">
+          <button   title="Cronograma do dia"
+            class="btnRecarregar" (click)="CronogramaDoDia()">
+            <i class="fa-solid fa-clock fa-xl" style="color: #035e4c;"></i>
+          </button>
+          <span class="btn-label">Cronograma <br> do dia</span>
+        </div>
+
+        <div class="divOperacoes">
+          <button class="btnRecarregar" title="Adicionar Medico" (click)="AdicionarMedico()">
+            <i class="fa-solid fa-user-nurse fa-xl" style="color: #035e31;"></i>
+          </button>
+          <span class="btn-label">Adicionar <br> Medico</span>
+        </div>
+
+        <div class="divOperacoes">
+          <button class="btnRecarregar" title="Adicionar Paciente" (click)="AdicionarPaciente()">
+            <i class="fa-solid fa-user-plus fa-xl" style="color: #f2a957;"></i>
+          </button>
+          <span class="btn-label">Adicionar <br> Paciente</span>
+        </div>
+
+        <div class="divOperacoes">
+          <button class="btnRecarregar" title="Adicionar Secretaria" (click)="AdicionarSecretaria()">
+            <i class="fa-solid fa-user-pen fa-xl" style="color: #8d0544;"></i>
+          </button>
+          <span class="btn-label">Adicionar <br> Secretaria</span>
+        </div>
       </div>
 
-      <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Editar Consulta" class="btnRecarregar"
-          (click)="Editar()">
-          <i class="fa-regular fa-pen-to-square fa-xl" style="color: blue;"></i>
-        </button>
-        <span class="btn-label">Editar <br> Consulta</span>
-      </div>
 
-      <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !Consulta }" title="Concluir Consulta" class="btnRecarregar"
-          (click)="Concluido()">
-          <i class="fa-solid fa-square-check fa-xl" style="color: green;"></i>
-        </button>
-        <span class="btn-label">Concluir <br> Consulta</span>
-      </div>
+<hr>
 
-      <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }" title="Gerar Arquivo de Consulta"
-          class="btnRecarregar" (click)="GerarPDF()">
-          <i class="fa-solid fa-file-pdf fa-xl" style="color: blue;"></i>
-        </button>
-        <span class="btn-label">Cria PDF</span>
-      </div>
+<div class="tabela">
+  <section class="example-container mat-elevation-z8 custom-table" tabindex="0" style="border: 1px solid black; border-radius: 10px;">
+    <table mat-table [dataSource]="dataSource">
 
-      <div class="divOperacoes">
-        <button [ngClass]="{ 'disabled-button': !ConsultaStatus && !Consulta }" title="Cronograma do dia"
-          class="btnRecarregar" (click)="CronogramaDoDia()">
-          <i class="fa-solid fa-clock fa-xl" style="color: #035e4c;"></i>
-        </button>
-        <span class="btn-label">Cronograma <br> do dia</span>
-      </div>
+      <ng-container matColumnDef="consulta">
+        <th mat-header-cell *matHeaderCellDef class="NomeCod">Cod</th>
+        <td mat-cell *matCellDef="let element" class="colunascod">{{ element.consulta }}</td>
+      </ng-container>
 
-      <div class="divOperacoes">
-        <button class="btnRecarregar" title="Adicionar Medico" (click)="AdicionarMedico()">
-          <i class="fa-solid fa-user-nurse fa-xl" style="color: #035e31;"></i>
-        </button>
-        <span class="btn-label">Adicionar <br> Medico</span>
-      </div>
+      <ng-container matColumnDef="medico">
+        <th mat-header-cell *matHeaderCellDef class="NomeMedico">Médico</th>
+        <td mat-cell *matCellDef="let element" class="colunasMedico">{{ element.medico }}</td>
+      </ng-container>
 
-      <div class="divOperacoes">
-        <button class="btnRecarregar" title="Adicionar Paciente" (click)="AdicionarPaciente()">
-          <i class="fa-solid fa-user-plus fa-xl" style="color: #f2a957;"></i>
-        </button>
-        <span class="btn-label">Adicionar <br> Paciente</span>
-      </div>
+      <ng-container matColumnDef="paciente">
+        <th mat-header-cell *matHeaderCellDef class="NomePaciente">Paciente</th>
+        <td mat-cell *matCellDef="let element" class="colunasPaciente">{{ element.paciente }}</td>
+      </ng-container>
 
-      <div class="divOperacoes">
-        <button class="btnRecarregar" title="Adicionar Secretaria" (click)="AdicionarSecretaria()">
-          <i class="fa-solid fa-user-pen fa-xl" style="color: #8d0544;"></i>
-        </button>
-        <span class="btn-label">Adicionar <br> Secretaria</span>
-      </div>
-    </div>
+      <ng-container matColumnDef="diaSemana">
+        <th mat-header-cell *matHeaderCellDef class="NomeDiaSemana">Dia</th>
+        <td mat-cell *matCellDef="let element" class="colunasDiaSemana">{{ element.diaSemana }}</td>
+      </ng-container>
 
-    <div class="tabela" *ngIf="Consulta && !ConsultaStatus">
-      <app-tabela-agenda [ValorOpcao]="ValorOpcao"></app-tabela-agenda>
-    </div>
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef class="Nomedata">Ano/Mês/Dia</th>
+        <td mat-cell *matCellDef="let element" class="colunasData">{{ element.data }}</td>
+      </ng-container>
 
-    <div class="tabela" *ngIf="!Consulta && ConsultaStatus">
-      <app-tabela-agenda-status></app-tabela-agenda-status>
-    </div>
-  </form>
+      <ng-container matColumnDef="horario">
+        <th mat-header-cell *matHeaderCellDef class="NomeHorario">Horário</th>
+        <td mat-cell *matCellDef="let element" class="colunasHorario">{{ element.horario }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="observacao">
+        <th mat-header-cell *matHeaderCellDef class="NomeObecervacao">Aviso</th>
+        <td mat-cell *matCellDef="let element" class="colunasObecervacao">
+          <button *ngIf="element.observacao" style="border: hidden;" (click)="openObservacoesDialog(element.observacao)">
+            <i style="color: cadetblue;" class="fa-solid fa-note-sticky fa-xl"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="observar">
+        <th mat-header-cell *matHeaderCellDef class="NomeObecervacao">Observar</th>
+        <td mat-cell *matCellDef="let element" class="colunasObecervacao">
+          <button style="border: hidden;" (click)="openAvisosDialog(element)">
+            <i style="color: cadetblue;" class="fa-solid fa-eye fa-xl"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="seleciona">
+        <th mat-header-cell *matHeaderCellDef class="NomeObecervacao">Seleciona</th>
+        <td mat-cell *matCellDef="let element" class="colunasObecervacao">
+          <mat-checkbox (change)="DadoSelecionadoParaAcao(element, $event)"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </section>
 </div>
+
+
+    </form>
+  </div>
 </body>
