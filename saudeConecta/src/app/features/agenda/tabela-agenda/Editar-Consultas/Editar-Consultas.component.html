@@ -3,7 +3,7 @@
     <form [formGroup]="FormGroupConsulta" class="fomulario">
 
       <label class="label_filtro_Identificador">
-        <font style="color: red; font-size: 12px;">* </font>Nº Registro {{DadosDeEdicaoConsulta.ConCodigoConsulta}}
+        <font style="color: red; font-size: 12px;">* </font>Nº Registro {{DadosDeEdicaoConsulta.consulta}}
       </label>
       <br>
 
@@ -127,14 +127,14 @@
       <label class="label_filtro_DATA">
         <font style="color: red; font-size: 12px;">* </font>Data
       </label>
-      <input class="input_DATA" formControlName="date" [(ngModel)]="DadosDeEdicaoConsulta.ConData" type="date" id="date"
+      <input class="input_DATA" formControlName="date" [(ngModel)]="DadosDeEdicaoConsulta.data" type="date" id="date"
         name="date" (change)="onDateChange($event)">
 
       <br><br>
       <label class="label_filtro_Hora">
         <font style="color: red; font-size: 12px;">* </font>Hora
       </label>
-      <select [(ngModel)]="DadosDeEdicaoConsulta.ConHorario" class="input_HORA" formControlName="time" name="time"
+      <select [(ngModel)]="DadosDeEdicaoConsulta.horario" class="input_HORA" formControlName="time" name="time"
         id="time">
         @for (time of Hora; track time) {
         <option [value]="time.value">{{time.label}}</option>
@@ -159,7 +159,7 @@
     <div>
       <label class="label_filtro_Observacao">Observação:</label>
       <br>
-      <textarea [(ngModel)]="DadosDeEdicaoConsulta.ConObservacoes" formControlName="observacao"
+      <textarea [(ngModel)]="DadosDeEdicaoConsulta.observacao" formControlName="observacao"
         class="textarea_observacao" type="text" formControlName="observacao">
                </textarea>
     </div>
@@ -168,15 +168,15 @@
 
     <div>
       <label class="label_filtro">Dinheiro</label>
-      <input [(ngModel)]="DadosDeEdicaoConsulta.ConFormaPagamento" formControlName="Pagamento" class="input_filtro"
+      <input [(ngModel)]="DadosDeEdicaoConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
         type="radio" [value]="1" required>
 
       <label class="label_filtro">Cartao</label>
-      <input [(ngModel)]="DadosDeEdicaoConsulta.ConFormaPagamento" formControlName="Pagamento" class="input_filtro"
+      <input [(ngModel)]="DadosDeEdicaoConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
         type="radio" [value]="2" required>
 
       <label class="label_filtro">PIx</label>
-      <input [(ngModel)]="DadosDeEdicaoConsulta.ConFormaPagamento" formControlName="Pagamento" class="input_filtro"
+      <input [(ngModel)]="DadosDeEdicaoConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
         type="radio" [value]="3" required>
     </div>
 

@@ -1,35 +1,22 @@
-import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
-import { TabelaAgendaComponent } from './tabela-agenda/tabela-agenda.component';
-import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/consultaStatus';
 import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import { CadastroMedicoComponent } from '../cadastro/cadastro-medico/cadastro-medico.component';
 import { CadastroPacienteComponent } from '../cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroSecretariaComponent } from '../cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { CalendarDialogComponent } from 'src/app/util/variados/Cronologia/cronologia.component';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs';
-import { da } from 'date-fns/locale';
 import Swal from 'sweetalert2';
 import { EditarConsultasComponent } from './tabela-agenda/Editar-Consultas/Editar-Consultas.component';
 import { Template_PDFComponent } from './template_PDF/template_PDF.component';
-
-interface Tabela {
-  consulta: string;
-  medico: string;
-  paciente: string;
-  diaSemana: string;
-  data: string;
-  horario: string;
-  observacao: string;
-}
+import { AvisosLembretesComponent } from './tabela-agenda/Avisos-Lembretes/Avisos-Lembretes.component';
+import { ObservacoesComponent } from './tabela-agenda/Observacoes/Observacoes.component';
+import { Tabela } from 'src/app/util/variados/interfaces/tabela/tabela';
 
 @Component({
   selector: 'app-agenda',
@@ -38,22 +25,32 @@ interface Tabela {
 })
 export class AgendaComponent implements OnInit {
   FormularioAgenda!: FormGroup;
-  dataSource = new MatTableDataSource<Tabela>([]);
-  displayedColumns: string[] = ['consulta', 'medico', 'paciente', 'diaSemana', 'data', 'horario', 'observacao', 'observar', 'seleciona','deletar','Edicao','PDF'];
+  dataSource: Tabela[] = [];
+  displayedColumns: string[] = [
+    'consulta',
+    'medico',
+    'paciente',
+    'diaSemana',
+    'data',
+    'horario',
+    'Seleciona',
+  ];
   Finalizadas = false;
   clickedRows = new Set<Tabela>();
   ValorOpcao: any;
+  observacoesOptions = [
+    { value: 'opcao1', viewValue: 'Opção 1' },
+    { value: 'opcao2', viewValue: 'Opção 2' },
+    // adicione mais opções conforme necessário
+  ];
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private consultaService: ConsultaService,
     public dialog: MatDialog,
-    private consultaStatusService : ConsultaStatusService
+    private consultaStatusService: ConsultaStatusService
   ) {}
-
-
-
 
   async ngOnInit() {
     this.buscarDados();
@@ -63,72 +60,62 @@ export class AgendaComponent implements OnInit {
     });
   }
 
-
-
-
-
-
   async buscarDados() {
     try {
       const dados = await this.consultaService.BuscarTodosRegistrosDeConsulta().toPromise();
-       if (dados) {
-        this.dataSource.data = this.tratarDadosParaTabela(dados);
+      if (dados) {
+        this.dataSource = this.tratarDadosParaTabela(dados);
+        console.log('this.dataSource', this.dataSource);
+
       }
-     } catch (error) {
+    } catch (error) {
       console.error(error);
       Swal.fire('Erro', 'Erro ao buscar dados', 'error');
     }
   }
 
-
-
-
   async PesquisarNaTabelaConcluidos() {
-    this.Finalizadas = true
+    this.Finalizadas = true;
 
     try {
-      const dados = await   this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).toPromise()
+      const dados = await this.consultaStatusService
+        .BuscarTodosRegistrosDeConsultaStatus()
+        .pipe(take(1))
+        .toPromise();
       console.log('PesquisarNaTabelaConcluidos', dados);
       if (dados) {
-        this.dataSource.data = this.tratarDadosParaTabela(dados);
+        this.dataSource = this.tratarDadosParaTabela(dados);
       }
-      console.log('this.PesquisarNaTabelaConcluidos', this.dataSource.data);
+      console.log('this.PesquisarNaTabelaConcluidos', this.dataSource);
     } catch (error) {
       console.error(error);
     }
-    }
-
-
-
-
-
+  }
 
   async Pesquisar() {
     const busca = this.FormularioAgenda.get('busca')?.value;
     this.FormularioAgenda.reset();
 
     try {
-      const dados = await this.consultaService.filtrandoDadosDoBancoPassadoParametros_Pesquisa(busca,this.dataSource.data)
+      const dados =
+        await this.consultaService.filtrandoDadosDoBancoPassadoParametros_Pesquisa(
+          busca,
+          this.dataSource
+        );
       if (dados) {
-        this.dataSource.data = dados;
-      }else{
-        this.buscarDados()
+        this.dataSource = dados;
+      } else {
+        this.buscarDados();
         Swal.fire('Erro', 'Pesquisa não  encontrada', 'error');
-       }
-
+      }
     } catch (error) {
       console.error(error);
     }
   }
 
-
-
-
-
   Recarregar() {
-    this.Finalizadas = false
+    this.Finalizadas = false;
     this.buscarDados();
-
   }
 
   Concluido() {
@@ -137,11 +124,6 @@ export class AgendaComponent implements OnInit {
     };
     this.ValorOpcao = Dados;
   }
-
-
-
-
-
 
   async Deletar(consulta: Tabela) {
     try {
@@ -154,7 +136,6 @@ export class AgendaComponent implements OnInit {
     }
   }
 
-
   Editar(consulta: any) {
     this.dialog.open(EditarConsultasComponent, {
       width: '800px',
@@ -163,12 +144,7 @@ export class AgendaComponent implements OnInit {
     });
   }
 
-
-
-
-
-
-  GerarPDF(consulta : any) {
+  GerarPDF(consulta: any) {
     this.dialog.open(Template_PDFComponent, {
       width: '800px',
       height: '550px',
@@ -207,35 +183,40 @@ export class AgendaComponent implements OnInit {
     });
   }
 
-
   tratarDadosParaTabela(dados: any[]): Tabela[] {
-    return dados.map(dado => ({
+     return dados.map((dado) => ({
       consulta: dado.conCodigoConsulta || dado.conSttCodigoConsulta,
-      medico: dado.conMedico?.medNome || dado.conSttMedico?.medNome,
-      paciente: dado.conPaciente?.paciNome || dado.conSttPaciente?.paciNome,
+      medico: dado.conMedico || dado.conSttMedico,
+      paciente: dado.conPaciente || dado.conSttPaciente,
       diaSemana: dado.conDia_semana || dado.conSttDia_semana,
       data: dado.conData || dado.conSttData,
       horario: dado.conHorario || dado.conSttHorario,
       observacao: dado.conObservacoes || dado.conSttObservacao,
+      dadaCriacao: dado.conDataCriacao || dado.conSttDataCriacao,
+      status: dado.conStatus || dado.conSttStatus,
+      adm: dado.conAdm || dado.conSttAdm,
+      formaPagamento: dado.conFormaPagamento || dado.conSttFormaPagamento,
     }));
   }
 
-
-
   DadoSelecionadoParaAcao(info: any, $event: MatCheckboxChange) {
-
     console.log('info', info);
     console.log('$event', $event);
+  }
 
+  openAvisosDialog(Consulta: any) {
+    const medico = Consulta.ConMedico;
+    const paciente = Consulta.ConPaciente;
+    this.dialog.open(AvisosLembretesComponent, {
+      width: '550px',
+      data: { Consulta: Consulta, Medico: medico, Paciente: paciente },
+    });
+  }
 
-
-   }
-  openAvisosDialog(_t164: any) {
-    console.log('_t177', _t164);
-
-   }
-  openObservacoesDialog(arg0: any) {
-    console.log('_t177', arg0);
-
-   }
+  openObservacoesDialog(observacoes: string): void {
+    this.dialog.open(ObservacoesComponent, {
+      width: '550px',
+      data: { observacoes: observacoes },
+    });
+  }
 }

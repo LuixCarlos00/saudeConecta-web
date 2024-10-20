@@ -91,7 +91,7 @@ table {
 }
 
 .custom-table .colunasObecervacao{
-  width: 5px;
+  width: 150px;
   text-align: center;
   background: #efefef;
 
@@ -115,6 +115,18 @@ table {
 
 
 
+.icon-option {
+  display: flex;
+  align-items: center;
+}
+
+.icon-option i {
+  margin-right: 8px;
+}
+
+.icon-text {
+  font-size: 14px;
+}
 
 
 

@@ -7,15 +7,8 @@ import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 import { CronologiaService } from '../cronologia/Cronologia.service';
 import { tr } from 'date-fns/locale';
-interface Tabela {
-  consulta: string;
-  medico: string;
-  paciente: string;
-  diaSemana: string;
-  data: string;
-  horario: string;
-  observacao: string;
-}
+import { Tabela } from 'src/app/util/variados/interfaces/tabela/tabela';
+
 
 
 @Injectable({
@@ -283,8 +276,8 @@ export class ConsultaService {
         let resultadoFiltrado = dataSource.filter(
           (item) =>
             safeNormalize(item.consulta).includes(dadosUpper) ||
-            safeNormalize(item.medico ).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
-            safeNormalize(item.paciente ).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
+            safeNormalize(item.medico.medNome ).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
+            safeNormalize(item.paciente.PaciNome ).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
             safeNormalize(item.diaSemana).includes(dadosUpper) ||
             isDateMatch(item.data, dados.trim()) || // Compara as datas sem normalizar
             isTimeMatch(item.horario, dados.trim()) || // Compara os horários diretamente
