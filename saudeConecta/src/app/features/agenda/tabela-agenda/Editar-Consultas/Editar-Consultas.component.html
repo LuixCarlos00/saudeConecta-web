@@ -3,7 +3,7 @@
     <form [formGroup]="FormGroupConsulta" class="fomulario">
 
       <label class="label_filtro_Identificador">
-        <font style="color: red; font-size: 12px;">* </font>Nº Registro {{DadosDeEdicaoConsulta.consulta}}
+        <font style="color: red; font-size: 12px;">* </font>Nº Registro {{DadosAntigosDeConsulta.consulta}}
       </label>
       <br>
 
@@ -102,17 +102,17 @@
       (fechar)="fecharTabelaMedicos()" (selecionaMedico)="MedicoSelecionado($event)">
     </app-tabela-editar-Medicos-Consultas>
 
-    <div *ngIf="MedicoEscolhido" style=" margin-left: 20px;   width: 600px;">
+    <div *ngIf="DadosAntigosDeConsulta" style=" margin-left: 20px;   width: 600px;">
       <div style="border: 1px solid ; border: hidden;">
         <i class="fa-solid fa-user fa-xl" style="color: #63E6BE; margin-left: 5px;"></i>
         <label style="font-size: 12px;margin-left: 10px;"> <br>
-          <strong>Nome</strong> {{MedicoEscolhido.medNome}} <br>
-          <strong>CPF</strong> {{MedicoEscolhido.medCpf}}<br>
-          <strong>Data Nac.</strong> {{MedicoEscolhido.medDataNacimento ? MedicoEscolhido.medDataNacimento : 'Não informado'}}<br>
-          <strong>Email</strong> {{MedicoEscolhido.medEmail}}<br>
-          <strong>RG</strong> {{MedicoEscolhido.medRg}}<br>
-          <strong>CRM</strong> {{MedicoEscolhido.medCrm}}<br>
-          <strong>Especialidade</strong> {{MedicoEscolhido.medEspecialidade}}
+          <strong>Nome</strong> {{DadosAntigosDeConsulta.medico.medNome }} <br>
+          <strong>CPF</strong> {{DadosAntigosDeConsulta.medico.medCpf}}<br>
+          <strong>Data Nac.</strong> {{DadosAntigosDeConsulta.medico.medDataNacimento ? DadosAntigosDeConsulta.medico.medDataNacimento : 'Não informado'}}<br>
+          <strong>Email</strong> {{DadosAntigosDeConsulta.medico.medEmail}}<br>
+          <strong>RG</strong> {{DadosAntigosDeConsulta.medico.medRg}}<br>
+          <strong>CRM</strong> {{DadosAntigosDeConsulta.medico.medCrm}}<br>
+          <strong>Especialidade</strong> {{DadosAntigosDeConsulta.medico.medEspecialidade}}
         </label>
       </div>
       <br>
@@ -127,14 +127,14 @@
       <label class="label_filtro_DATA">
         <font style="color: red; font-size: 12px;">* </font>Data
       </label>
-      <input class="input_DATA" formControlName="date" [(ngModel)]="DadosDeEdicaoConsulta.data" type="date" id="date"
+      <input class="input_DATA" formControlName="date" [(ngModel)]="DadosAntigosDeConsulta.data" type="date" id="date"
         name="date" (change)="onDateChange($event)">
 
       <br><br>
       <label class="label_filtro_Hora">
         <font style="color: red; font-size: 12px;">* </font>Hora
       </label>
-      <select [(ngModel)]="DadosDeEdicaoConsulta.horario" class="input_HORA" formControlName="time" name="time"
+      <select [(ngModel)]="DadosAntigosDeConsulta.horario" class="input_HORA" formControlName="time" name="time"
         id="time">
         @for (time of Hora; track time) {
         <option [value]="time.value">{{time.label}}</option>
@@ -159,7 +159,7 @@
     <div>
       <label class="label_filtro_Observacao">Observação:</label>
       <br>
-      <textarea [(ngModel)]="DadosDeEdicaoConsulta.observacao" formControlName="observacao"
+      <textarea [(ngModel)]="DadosAntigosDeConsulta.observacao" formControlName="observacao"
         class="textarea_observacao" type="text" formControlName="observacao">
                </textarea>
     </div>
@@ -168,15 +168,15 @@
 
     <div>
       <label class="label_filtro">Dinheiro</label>
-      <input [(ngModel)]="DadosDeEdicaoConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
+      <input [(ngModel)]="DadosAntigosDeConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
         type="radio" [value]="1" required>
 
       <label class="label_filtro">Cartao</label>
-      <input [(ngModel)]="DadosDeEdicaoConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
+      <input [(ngModel)]="DadosAntigosDeConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
         type="radio" [value]="2" required>
 
       <label class="label_filtro">PIx</label>
-      <input [(ngModel)]="DadosDeEdicaoConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
+      <input [(ngModel)]="DadosAntigosDeConsulta.formaPagamento" formControlName="Pagamento" class="input_filtro"
         type="radio" [value]="3" required>
     </div>
 

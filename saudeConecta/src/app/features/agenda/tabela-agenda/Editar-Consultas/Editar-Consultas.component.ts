@@ -71,7 +71,6 @@ export class EditarConsultasComponent implements OnInit {
     formaPagamento: 0,
     dadaCriacao: '',
   };
-
   DadosDeEdicaoConsulta: Tabela = {
     consulta: '',
     diaSemana: '',
@@ -100,21 +99,14 @@ export class EditarConsultasComponent implements OnInit {
     this.tokenService.UsuarioLogadoValue$.subscribe((Usuario) => {
       if (Usuario) this.UsuarioLogado = Usuario;
     });
-    console.log('data', this.data.DadoSelecionadoParaEdicao);
-
-    this.DadosAntigosDeConsulta = this.data.DadoSelecionadoParaEdicao;
-
-    // this.DadosPaciente = this.data.DadoSelecionadoParaEdicao.paciente
-    //this.DadosMedico = this.data.DadoSelecionadoParaEdicao.medico;
 
     this.PacienteEscolhido = this.data.DadoSelecionadoParaEdicao.paciente;
     this.MedicoEscolhido = this.data.DadoSelecionadoParaEdicao.medico;
   }
 
-  ngOnInit() {
-    this.DadosDeEdicaoConsulta.horario =
-      this.DadosDeEdicaoConsulta.horario.slice(0, 5);
 
+
+  async ngOnInit() {
     this.FormGroupConsulta = this.form.group({
       date: [''],
       time: ['', Validators.required],
@@ -126,24 +118,20 @@ export class EditarConsultasComponent implements OnInit {
       PesquisaMedico: ['', Validators.required],
     });
 
-    this.FormGroupConsulta.get('date')?.valueChanges.subscribe((value) => {
-      this.FormataçãoDeDatasParaDiasDaSemanas(value);
-    });
+    this.DadosAntigosDeConsulta = await this.data.DadoSelecionadoParaEdicao;
+    console.log('DadosAntigosDeConsulta', this.DadosAntigosDeConsulta);
 
-    // this.DadosAntigosDeConsulta = {
-    //   consulta: this.DadosDeEdicaoConsulta.consulta,
-    //   medico:   this.DadosDeEdicaoConsulta.medico,
-    //   paciente: this.DadosDeEdicaoConsulta.paciente,
-    //   diaSemana: this.DadosDeEdicaoConsulta.diaSemana,
-    //   data: this.DadosDeEdicaoConsulta.data,
-    //   horario:   this.DadosDeEdicaoConsulta.horario,
-    //   observacao:  this.DadosDeEdicaoConsulta.observacao,
-    //   dadaCriacao:   this.DadosDeEdicaoConsulta.dadaCriacao,
-    //   status:   this.DadosDeEdicaoConsulta.status,
-    //   adm : this.DadosDeEdicaoConsulta.adm,
-    //   formaPagamento :  this.DadosDeEdicaoConsulta.formaPagamento,
-    // };
+    this.FormGroupConsulta.patchValue({
+      date: this.DadosAntigosDeConsulta.data,
+      time: this.DadosAntigosDeConsulta.horario,
+      observacao: this.DadosAntigosDeConsulta.observacao,
+      Pagamento: this.DadosAntigosDeConsulta.formaPagamento,
+      FiltroPesquisaPaciente: this.DadosAntigosDeConsulta.paciente,
+      FiltroPesquisaMedico: this.DadosAntigosDeConsulta.medico,
+    });
   }
+
+
 
   Salvar() {
     Swal.fire({
@@ -155,11 +143,7 @@ export class EditarConsultasComponent implements OnInit {
       confirmButtonText: 'Sim, Editar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('this.sdata', this.FormGroupConsulta.get('Data')?.value);
-
-        this.FormataçãoDeDatasParaDiasDaSemanas(
-          this.FormGroupConsulta.get('Data')?.value
-        );
+        console.log('Editando consulta...', this.FormGroupConsulta.value);
 
         // this.DadosDeEdicaoConsulta.ConPaciente = this.PacienteEscolhido.paciCodigo;
         // this.DadosDeEdicaoConsulta.ConMedico = this.MedicoEscolhido.medCodigo;
@@ -436,11 +420,19 @@ export class EditarConsultasComponent implements OnInit {
   }
 
   PacienteSelecionado(elemento: any) {
-    this.PacienteEscolhido = elemento;
+    this.FormGroupConsulta.patchValue({
+      FiltroPesquisaPaciente: elemento,
+    })
+   //this.PacienteEscolhido = elemento;
   }
 
   MedicoSelecionado(elemento: Event) {
-    this.MedicoEscolhido = elemento;
+     this.FormGroupConsulta.patchValue({
+      FiltroPesquisaMedico: elemento,
+    });
+    console.log('FormGroupConsulta', this.FormGroupConsulta.value);
+
+   // this.MedicoEscolhido = elemento;
   }
 
   onNoClick(): void {

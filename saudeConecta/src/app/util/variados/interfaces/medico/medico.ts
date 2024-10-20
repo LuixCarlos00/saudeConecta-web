@@ -9,13 +9,27 @@ export interface Medico {
   MedEspecialidade: string;
   MedEmail: string;
   MedTelefone: string;
-  endereco: number;
-  usuario: number;
-
-  medTelefone ?: string;
-  medEmail ?: string;
-
-  medNome?: string;
-
   MedTempoDeConsulta ?: string;
+
+
+
+
+
+
+  medCodigo?: number;
+  medNome?: string;
+  medSexo?: number;
+  medDataNacimento?: string;
+  medCrm?: string;
+  medCpf?: string;
+  medRg?: string;
+  medEspecialidade?: string;
+  medEmail?: string;
+  medTelefone?: string;
+  endereco?: number;
+  usuario?: number;
+
+  medTempoDeConsulta ?: string;
+
+  //padronizar
 }
