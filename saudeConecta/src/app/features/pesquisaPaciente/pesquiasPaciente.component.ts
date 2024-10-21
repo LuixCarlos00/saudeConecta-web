@@ -86,74 +86,23 @@ export class PesquiasPacienteComponent implements OnInit {
     });
   }
 
-  PesquisarPacientes() {
+  async PesquisarPacientes() {
     const pesquisa: string =
       this.FormGroupConsulta.get('PesquisaPaciente')?.value;
     const FiltroPesquisaPaciente: number = this.FormGroupConsulta.get(
       'FiltroPesquisaPaciente'
     )?.value;
-
-    if (FiltroPesquisaPaciente === 1) {
-
-      this.PacientesService.buscarListaPacientesPorNome(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPaciente = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
+    try {
+      const dados = await this.PacientesService.PesquisarPacientes(
+        FiltroPesquisaPaciente,
+        pesquisa
       );
-    } else if (FiltroPesquisaPaciente === 2) {
-      this.PacientesService.buscarListaPacientesPorCPF(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPaciente = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
-      );
-    } else if (FiltroPesquisaPaciente === 3) {
-      this.PacientesService.buscarListaPacientesPor_RG(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPaciente = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
-      );
-    } else if (FiltroPesquisaPaciente === 4) {
-      this.PacientesService.buscarListaPacientesPorTelefone(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPaciente = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
-      );
-    } else if (FiltroPesquisaPaciente === 5) {
-      this.PacientesService.buscarTodosPacientes().subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPaciente = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
-      );
+      console.log(dados);
+      this.showResultadoPaciente = true;
+      this.dadosPaciente = dados;
+      console.log('this.dadosPaciente', this.dadosPaciente);
+    } catch (error) {
+      this.PacientesService.exibirMensagemErro();
     }
   }
 
@@ -201,7 +150,7 @@ export class PesquiasPacienteComponent implements OnInit {
         ConAdm: this.UsuarioLogado.id,
         ConStatus: 0,
       };
-console.log('consult', consult);
+      console.log('consult', consult);
 
       this.consultaService.VericarSeExetemConsultasMarcadas(consult).subscribe(
         (data) => {
@@ -211,7 +160,6 @@ console.log('consult', consult);
           } else if (!data) {
             this.consultaService.CriarConsulata(consult).subscribe(
               (response) => {
-
                 this.consultaService.ChangeCadastroRealizadoComSucesso(
                   response
                 );
@@ -261,8 +209,6 @@ console.log('consult', consult);
     this.verificarCondicoesParaConsulta(); // Chama a função ao mudar a data
   }
 
-
-
   verificarCondicoesParaConsulta() {
     this.horariosDisponiveis = []; // Limpa os horários disponíveis ao iniciar a consulta
 
@@ -286,15 +232,18 @@ console.log('consult', consult);
           }
         });
 
-
-
         this.Hora = [...HoradaConsulta];
       }
 
       // Verifica os horários indisponíveis para a data e o médico selecionados
-      this.consultaService.VerificarHorariosDisponiveisReferentesAoMedicoEData(this.Medico.medCodigo,this.DataSelecionada).subscribe(
+      this.consultaService
+        .VerificarHorariosDisponiveisReferentesAoMedicoEData(
+          this.Medico.medCodigo,
+          this.DataSelecionada
+        )
+        .subscribe(
           (data) => {
-             this.horariosDisponiveis = data;
+            this.horariosDisponiveis = data;
 
             // Filtra os horários disponíveis com base nos horários gerados/selecionados
             this.atualizarHorarios();
@@ -328,12 +277,7 @@ console.log('consult', consult);
         currentTime.getTime() + medTempoDeConsulta * 60000
       ); // 60000 ms = 1 minuto
     }
-
-   }
-
-
-
-
+  }
 
   atualizarHorarios() {
     if (this.horariosDisponiveis) {
@@ -364,9 +308,6 @@ console.log('consult', consult);
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   }
-
-
-
 
   voltarParaPesquisaMedicos() {
     this.router.navigate(['pesquisar']);

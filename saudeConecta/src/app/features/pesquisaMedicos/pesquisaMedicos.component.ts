@@ -44,74 +44,21 @@ export class PesquisaMedicosComponent implements OnInit {
     });
   }
 
-  PesquisarMedicosFiltro() {
-    const pesquisa: string = this.FormularioPesquisa.get('Pesquisa')?.value;
+  async PesquisarMedicosFiltro() {
+    const pesquisa: string =
+      this.FormularioPesquisa.get('PesquisaMedico')?.value;
     const FiltroPesquisa: number = this.FormularioPesquisa.get(
       'FiltroPesquisaMedico'
     )?.value;
-
-    if (FiltroPesquisa === 1) {
-      this.medicosService.buscarListaMedicosPorNome(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.showResultadoMedico = true;
-            this.dadosMedico = dados;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
+    try {
+      const dados = await this.medicosService.PesquisaMedicoFiltro(
+        FiltroPesquisa,
+        pesquisa
       );
-    } else if (FiltroPesquisa === 2) {
-      this.medicosService.buscarListaMedicosPorCRM(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.showResultadoMedico = true;
-            this.dadosMedico = dados;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
-      );
-    } else if (FiltroPesquisa === 3) {
-      this.medicosService.buscarListaMedicosPorCidade(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.showResultadoMedico = true;
-            this.dadosMedico = dados;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
-      );
-    } else if (FiltroPesquisa === 4) {
-      this.medicosService
-        .buscarListaMedicosPorEspecialidade(pesquisa)
-        .subscribe(
-          (dados) => {
-            if (dados && dados.length > 0) {
-              this.showResultadoMedico = true;
-              this.dadosMedico = dados;
-            } else {
-              this.exibirMensagemErro();
-            }
-          },
-          () => this.exibirMensagemErro()
-        );
-    } else if (FiltroPesquisa === 5) {
-      this.medicosService.buscarPorTodosOsMedicos().subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.showResultadoMedico = true;
-            this.dadosMedico = dados;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        () => this.exibirMensagemErro()
-      );
+      this.showResultadoMedico = true;
+      this.dadosMedico = dados;
+    } catch (error) {
+      this.medicosService.exibirMensagemErro();
     }
   }
 
