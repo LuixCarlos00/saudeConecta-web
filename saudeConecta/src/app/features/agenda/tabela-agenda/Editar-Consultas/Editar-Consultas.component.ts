@@ -1,3 +1,4 @@
+import { Paciente } from './../../../../util/variados/interfaces/paciente/paciente';
 import { Medico } from './../../../../util/variados/interfaces/medico/medico';
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import {
@@ -14,14 +15,13 @@ import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
-import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
-import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+ import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import { HoradaConsulta } from 'src/app/util/variados/options/options';
 import Swal from 'sweetalert2';
 
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 import { tokenService } from 'src/app/util/Token/Token.service';
-import { Tabela } from 'src/app/util/variados/interfaces/tabela/tabela';
+import { Tabela } from 'src/app/util/variados/interfaces/tabela/Tabela';
 import { th } from 'date-fns/locale';
 
 @Component({
@@ -43,8 +43,6 @@ export class EditarConsultasComponent implements OnInit {
   showResultadoPaciente: boolean = false;
   showResultadoMedico: boolean = false;
 
-  MedicoEscolhido!: any;
-  PacienteEscolhido!: any;
   horariosDisponiveis: string[] = [];
   FormGroupConsulta!: FormGroup;
   DataSelecionada: any;
@@ -100,11 +98,7 @@ export class EditarConsultasComponent implements OnInit {
       if (Usuario) this.UsuarioLogado = Usuario;
     });
 
-    this.PacienteEscolhido = this.data.DadoSelecionadoParaEdicao.paciente;
-    this.MedicoEscolhido = this.data.DadoSelecionadoParaEdicao.medico;
   }
-
-
 
   async ngOnInit() {
     this.FormGroupConsulta = this.form.group({
@@ -130,8 +124,6 @@ export class EditarConsultasComponent implements OnInit {
       FiltroPesquisaMedico: this.DadosAntigosDeConsulta.medico,
     });
   }
-
-
 
   Salvar() {
     Swal.fire({
@@ -239,86 +231,20 @@ export class EditarConsultasComponent implements OnInit {
     });
   }
 
-  PesquisarPacientes() {
-    const pesquisa: string =
-      this.FormGroupConsulta.get('PesquisaPaciente')?.value;
-    const FiltroPesquisaPaciente: number = this.FormGroupConsulta.get(
-      'FiltroPesquisaPaciente'
-    )?.value;
+  async PesquisarPacientes() {
+    const pesquisa: string = this.FormGroupConsulta.get('PesquisaPaciente')?.value;
+    const FiltroPesquisaPaciente: number = this.FormGroupConsulta.get('FiltroPesquisaPaciente')?.value;
+    try {
+      const dados = await this.PacientesService.PesquisarPacientes(FiltroPesquisaPaciente, pesquisa);
+      console.log(dados);
+      this.showResultadoPaciente = true;
+      this.dadosPacientePassandoTabela  = dados ;
+      console.log('this.dadosPacientePassandoTabela', this.dadosPacientePassandoTabela);
 
-    if (FiltroPesquisaPaciente === 1) {
-      this.PacientesService.buscarListaPacientesPorNome(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPacientePassandoTabela = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
-      );
-    } else if (FiltroPesquisaPaciente === 2) {
-      this.PacientesService.buscarListaPacientesPorCPF(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPacientePassandoTabela = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
-      );
-    } else if (FiltroPesquisaPaciente === 3) {
-      this.PacientesService.buscarListaPacientesPor_RG(pesquisa).subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPacientePassandoTabela = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
-      );
-    } else if (FiltroPesquisaPaciente === 4) {
-      this.PacientesService.buscarListaPacientesPorTelefone(pesquisa).subscribe(
-        (dados) => {
-          console.log(dados);
-
-          if (dados && dados.length > 0) {
-            this.dadosPacientePassandoTabela = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
-      );
-    } else if (FiltroPesquisaPaciente === 5) {
-      this.PacientesService.buscarTodosPacientes().subscribe(
-        (dados) => {
-          if (dados && dados.length > 0) {
-            this.dadosPacientePassandoTabela = dados;
-            this.showResultadoPaciente = true;
-          } else {
-            this.exibirMensagemErro();
-          }
-        },
-        (erros) => {
-          this.exibirMensagemErro();
-        }
-      );
+    } catch (error) {
+      this.PacientesService.exibirMensagemErro();
     }
+
   }
 
   PesquisarMedicosFiltro() {
@@ -420,20 +346,20 @@ export class EditarConsultasComponent implements OnInit {
   }
 
   PacienteSelecionado(elemento: any) {
+  const PacienteEscolhido: any = elemento;
     this.FormGroupConsulta.patchValue({
       FiltroPesquisaPaciente: elemento,
-    })
-   //this.PacienteEscolhido = elemento;
-  }
+    });
+    this.DadosAntigosDeConsulta.paciente = PacienteEscolhido as Paciente;
+   }
 
   MedicoSelecionado(elemento: Event) {
-     this.FormGroupConsulta.patchValue({
+    const MedicoEscolhido: any = elemento;
+    this.FormGroupConsulta.patchValue({
       FiltroPesquisaMedico: elemento,
     });
-    console.log('FormGroupConsulta', this.FormGroupConsulta.value);
-
-   // this.MedicoEscolhido = elemento;
-  }
+    this.DadosAntigosDeConsulta.medico = MedicoEscolhido as Medico;
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -461,26 +387,26 @@ export class EditarConsultasComponent implements OnInit {
     const dayOfWeek = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
     this.DataSelecionada = selectedDate;
     this.DiaDaSemana = dayOfWeek;
-    this.verificarCondicoesParaConsulta(); // Chama a função ao mudar a data
+    //this.verificarCondicoesParaConsulta(); // Chama a função ao mudar a data
   }
 
-  verificarCondicoesParaConsulta() {
-    this.horariosDisponiveis = []; // Limpa os horários disponíveis ao iniciar a consulta
-    if (this.MedicoEscolhido && this.DataSelecionada) {
-      this.ConsultaService.VerificarHorariosDisponiveisReferentesAoMedicoEData(
-        this.MedicoEscolhido.medCodigo,
-        this.DataSelecionada
-      ).subscribe(
-        (data) => {
-          this.horariosDisponiveis = data;
-          this.atualizarHorarios(); // Atualiza os horários disponíveis ao receber os dados
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
-  }
+  // verificarCondicoesParaConsulta() {
+  //   this.horariosDisponiveis = []; // Limpa os horários disponíveis ao iniciar a consulta
+  //   if (this.MedicoEscolhido && this.DataSelecionada) {
+  //     this.ConsultaService.VerificarHorariosDisponiveisReferentesAoMedicoEData(
+  //       this.MedicoEscolhido.medCodigo,
+  //       this.DataSelecionada
+  //     ).subscribe(
+  //       (data) => {
+  //         this.horariosDisponiveis = data;
+  //         this.atualizarHorarios(); // Atualiza os horários disponíveis ao receber os dados
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+  // }
 
   atualizarHorarios() {
     if (this.horariosDisponiveis) {

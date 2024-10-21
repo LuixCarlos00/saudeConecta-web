@@ -42,15 +42,15 @@
     <app-tabela-de-pacientes *ngIf="showResultadoPaciente" [dadosPaciente]="dadosPacientePassandoTabela"
       (fechar)="fecharTabela()" (selecionaPaciente)="PacienteSelecionado($event)"></app-tabela-de-pacientes>
 
-    <div *ngIf="PacienteEscolhido" style=" margin-left: 20px;   width: 600px;">
+    <div *ngIf="DadosAntigosDeConsulta.paciente" style=" margin-left: 20px;   width: 600px;">
       <div style="border: 1px solid ; border: hidden;">
         <i class="fa-solid fa-user fa-xl" style="color: #63E6BE; margin-left: 5px;"></i>
         <label style="font-size: 12px;margin-left: 10px;"> <br>
-          <strong>Nome</strong> {{PacienteEscolhido.paciNome}} <br>
-          <strong>CPF</strong> {{PacienteEscolhido.paciCpf}}<br>
-          <strong>Data Nac.</strong> {{PacienteEscolhido.paciDataNacimento ? PacienteEscolhido.paciDataNacimento : 'Não informado'}}<br>
-          <strong>Email</strong> {{PacienteEscolhido.paciEmail}}<br>
-          <strong>RG</strong> {{PacienteEscolhido.paciRg}}
+          <strong>Nome</strong> {{DadosAntigosDeConsulta.paciente.paciNome}} <br>
+          <strong>CPF</strong> {{DadosAntigosDeConsulta.paciente.paciCpf}}<br>
+          <strong>Data Nac.</strong> {{DadosAntigosDeConsulta.paciente.paciDataNacimento ? DadosAntigosDeConsulta.paciente.paciDataNacimento : 'Não informado'}}<br>
+          <strong>Email</strong> {{DadosAntigosDeConsulta.paciente.paciEmail}}<br>
+          <strong>RG</strong> {{DadosAntigosDeConsulta.paciente.paciRg}}
         </label>
       </div>
       <br>
@@ -102,7 +102,7 @@
       (fechar)="fecharTabelaMedicos()" (selecionaMedico)="MedicoSelecionado($event)">
     </app-tabela-editar-Medicos-Consultas>
 
-    <div *ngIf="DadosAntigosDeConsulta" style=" margin-left: 20px;   width: 600px;">
+    <div *ngIf="DadosAntigosDeConsulta.medico" style=" margin-left: 20px;   width: 600px;">
       <div style="border: 1px solid ; border: hidden;">
         <i class="fa-solid fa-user fa-xl" style="color: #63E6BE; margin-left: 5px;"></i>
         <label style="font-size: 12px;margin-left: 10px;"> <br>

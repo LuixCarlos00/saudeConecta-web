@@ -11,7 +11,19 @@ export interface Paciente {
   endereco: number;
   PaciStatus: number;
 
-  paciTelefone?: number;
-  paciEmail?: number;
+
+
+
+
+
+ paciCodigo?: number;
+ paciNome?: string;
+ paciSexo?: number;
+ paciDataNacimento?: string;
+ paciCpf?: string;
+ paciRg?: string;
+paciStatus?: number;
+ paciTelefone?: number;
+ paciEmail?: number;
 
 }

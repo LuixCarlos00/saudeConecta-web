@@ -7,7 +7,7 @@ import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 import { CronologiaService } from '../cronologia/Cronologia.service';
 import { tr } from 'date-fns/locale';
-import { Tabela } from 'src/app/util/variados/interfaces/tabela/tabela';
+import { Tabela } from 'src/app/util/variados/interfaces/tabela/Tabela';
 
 
 

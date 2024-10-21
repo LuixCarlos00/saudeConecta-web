@@ -16,7 +16,7 @@ import { EditarConsultasComponent } from './tabela-agenda/Editar-Consultas/Edita
 import { Template_PDFComponent } from './template_PDF/template_PDF.component';
 import { AvisosLembretesComponent } from './tabela-agenda/Avisos-Lembretes/Avisos-Lembretes.component';
 import { ObservacoesComponent } from './tabela-agenda/Observacoes/Observacoes.component';
-import { Tabela } from 'src/app/util/variados/interfaces/tabela/tabela';
+import { Tabela } from 'src/app/util/variados/interfaces/tabela/Tabela';
 
 @Component({
   selector: 'app-agenda',

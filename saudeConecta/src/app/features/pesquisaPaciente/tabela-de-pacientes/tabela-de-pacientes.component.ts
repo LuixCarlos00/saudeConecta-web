@@ -18,6 +18,8 @@ export class TabelaDePacientesComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    console.log('this.dadosPaciente tabela ', this.dadosPaciente);
+
     this.dataSource = this.dadosPaciente;
 
   }
