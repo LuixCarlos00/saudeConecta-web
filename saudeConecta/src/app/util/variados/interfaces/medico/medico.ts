@@ -9,7 +9,7 @@ export interface Medico {
   MedEspecialidade: string;
   MedEmail: string;
   MedTelefone: string;
-  MedTempoDeConsulta ?: string;
+  MedTempoDeConsulta?: string;
 
 
 
@@ -29,7 +29,7 @@ export interface Medico {
   endereco?: number;
   usuario?: number;
 
-  medTempoDeConsulta ?: string;
+  medTempoDeConsulta?: number;
 
   //padronizar
 }

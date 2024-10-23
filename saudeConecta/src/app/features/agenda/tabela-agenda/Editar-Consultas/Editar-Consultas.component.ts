@@ -22,7 +22,7 @@ import Swal from 'sweetalert2';
 import { Adiministrador } from 'src/app/util/variados/interfaces/administrado/adiministrador';
 import { tokenService } from 'src/app/util/Token/Token.service';
 import { Tabela } from 'src/app/util/variados/interfaces/tabela/Tabela';
-import { th } from 'date-fns/locale';
+import { el, th } from 'date-fns/locale';
 
 @Component({
   selector: 'app-Editar-Consultas',
@@ -35,7 +35,7 @@ export class EditarConsultasComponent implements OnInit {
   //
 
   DiaDaSemana: string = '';
-  Hora = HoradaConsulta;
+  Hora = [] as any;
 
   dadosPacientePassandoTabela: any;
   dadosMedicoPassandoTabela: any;
@@ -122,6 +122,11 @@ export class EditarConsultasComponent implements OnInit {
       FiltroPesquisaPaciente: this.DadosAntigosDeConsulta.paciente,
       FiltroPesquisaMedico: this.DadosAntigosDeConsulta.medico,
     });
+
+    this.Hora = this.atualizarHorarios([]);
+    console.log('this.Hora', this.Hora);
+
+
   }
 
   Salvar() {
@@ -271,6 +276,7 @@ export class EditarConsultasComponent implements OnInit {
     }
   }
 
+
   fecharTabela() {
     this.showResultadoPaciente = false;
   }
@@ -299,15 +305,15 @@ export class EditarConsultasComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  FormataçãoDeDatasParaDiasDaSemanas(selectedDate: string): void {
-    if (!selectedDate) return; // Adiciona verificação para lidar com valores vazios
-    const date = new Date(selectedDate + 'T00:00:00'); // Adiciona a hora para evitar problemas com fuso horário
-    const utcDate = new Date(date.toUTCString()); // Normaliza a data para UTC
-    const options = { weekday: 'long' as const };
-    const dayOfWeek = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
-    this.DiaDaSemana = dayOfWeek;
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  }
+  // FormataçãoDeDatasParaDiasDaSemanas(selectedDate: string): void {
+  //   if (!selectedDate) return; // Adiciona verificação para lidar com valores vazios
+  //   const date = new Date(selectedDate + 'T00:00:00'); // Adiciona a hora para evitar problemas com fuso horário
+  //   const utcDate = new Date(date.toUTCString()); // Normaliza a data para UTC
+  //   const options = { weekday: 'long' as const };
+  //   const dayOfWeek = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
+  //   this.DiaDaSemana = dayOfWeek;
+  //   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // }
 
   onDateChange(event: Event) {
     const selectedDate: string = (event.target as HTMLInputElement).value;
@@ -330,8 +336,8 @@ export class EditarConsultasComponent implements OnInit {
         (data) => {
           console.log('horariosDisponiveis', data);
 
-          this.horariosDisponiveis = data;
-          this.atualizarHorarios(); // Atualiza os horários disponíveis ao receber os dados
+          //  this.horariosDisponiveis = data;
+          this.atualizarHorarios(data); // Atualiza os horários disponíveis ao receber os dados
         },
         (error) => {
           console.log(error);
@@ -340,17 +346,66 @@ export class EditarConsultasComponent implements OnInit {
     }
   }
 
-  atualizarHorarios() {
-    if (this.horariosDisponiveis) {
-      const horariosDisponiveisFormatados = this.horariosDisponiveis.map(
+  atualizarHorarios(horariosDisponiveis?: string[]) {
+    const medico = this.DadosAntigosDeConsulta.medico;
+    let horariosDisponiveisFormatados: string[] = [];
+
+    if (horariosDisponiveis) {
+      horariosDisponiveisFormatados = horariosDisponiveis.map(
         (horario) => horario.substring(0, 5)
       );
-      this.Hora = HoradaConsulta.filter((horario) => {
-        const horarioFormatado = horario.value.substring(0, 5);
-        return !horariosDisponiveisFormatados.includes(horarioFormatado);
-      });
+    }
+
+    if (medico.medTempoDeConsulta) {
+      const horarioDinamico = this.gerarHorariosDinamicos(medico.medTempoDeConsulta);
+
+      if (horariosDisponiveis && horariosDisponiveis.length > 0) {
+        this.Hora = horarioDinamico.filter((horario: any) => {
+          const horarioFormatado = horario.value.substring(0, 5);
+          return !horariosDisponiveisFormatados.includes(horarioFormatado);
+        });
+      } else {
+        this.Hora = horarioDinamico;
+      }
     } else {
-      this.Hora = HoradaConsulta;
+      if (horariosDisponiveis && horariosDisponiveis.length > 0) {
+        this.Hora = HoradaConsulta.filter((horario) => {
+          const horarioFormatado = horario.value.substring(0, 5);
+          return !horariosDisponiveisFormatados.includes(horarioFormatado);
+        });
+      } else {
+        this.Hora = HoradaConsulta;
+      }
     }
   }
+
+  gerarHorariosDinamicos(MedTempoDeConsulta: number): any {
+    if (!MedTempoDeConsulta || MedTempoDeConsulta <= 0) {
+      return HoradaConsulta;
+    }
+
+    const horarios: { value: string; label: string; }[] = [];
+    const tempoConsultaMinutos = Number(MedTempoDeConsulta);
+
+    let horaAtual = 8 * 60; // 8:00 em minutos
+    const fimDoDia = 18 * 60; // 18:00 em minutos
+
+    while (horaAtual < fimDoDia) {
+      const horas = Math.floor(horaAtual / 60);
+      const minutos = horaAtual % 60;
+      const horarioFormatado = `${this.formatarNumero(horas)}:${this.formatarNumero(minutos)}`;
+      horarios.push({ value: horarioFormatado, label: horarioFormatado });
+
+      horaAtual += tempoConsultaMinutos;
+    }
+
+    return horarios;
+  }
+
+  formatarNumero(numero: number): string {
+    return numero < 10 ? `0${numero}` : `${numero}`;
+  }
+
+
+
 } //fim da classe

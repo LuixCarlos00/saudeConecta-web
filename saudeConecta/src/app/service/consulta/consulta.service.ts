@@ -190,6 +190,8 @@ export class ConsultaService {
     medCodigo: any,
     DataSelecionada: any
   ) {
+    console.log('VerificarHorariosDisponiveisReferentesAoMedicoEData', medCodigo, DataSelecionada);
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.Token}`,
