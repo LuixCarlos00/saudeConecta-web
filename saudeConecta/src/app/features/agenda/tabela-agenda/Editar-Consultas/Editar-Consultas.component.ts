@@ -5,6 +5,7 @@ import {
   Component,
   EventEmitter,
   Inject,
+  input,
   Input,
   OnInit,
   Output,
@@ -57,7 +58,7 @@ export class EditarConsultasComponent implements OnInit {
     sub: '',
   };
   DadosAntigosDeConsulta: Tabela = {
-    consulta: '',
+    consulta: 0,
     diaSemana: '',
     data: '',
     horario: '',
@@ -70,7 +71,7 @@ export class EditarConsultasComponent implements OnInit {
     dadaCriacao: '',
   };
   DadosDeEdicaoConsulta: Tabela = {
-    consulta: '',
+    consulta: 0,
     diaSemana: '',
     data: '',
     horario: '',
@@ -130,8 +131,46 @@ export class EditarConsultasComponent implements OnInit {
   }
 
   Salvar() {
+    let Pagamento = '';
+    if (this.FormGroupConsulta.value.Pagamento === 1) {
+      Pagamento = 'Dinheiro';
+    } else if (this.FormGroupConsulta.value.Pagamento === 2) {
+      Pagamento = 'Cartão  ';
+    } else if (this.FormGroupConsulta.value.Pagamento === 3) {
+      Pagamento = 'Pix';
+    }
     Swal.fire({
-      title: 'Tem certeza que deseja editar esses registro?',
+      html: `
+            <div style="text-align: left;">
+                <p>Tem certeza que deseja editar esses registro?</p>
+                <table style="width: 100%;">
+                    <tr>
+                        <td><strong>Médico:</strong></td>
+                        <td>${this.DadosAntigosDeConsulta.medico.medNome}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paciente:</strong></td>
+                        <td>${this.DadosAntigosDeConsulta.paciente.paciNome}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Horário:</strong></td>
+                        <td>${this.DadosAntigosDeConsulta.horario}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data:</strong></td>
+                        <td>${this.DadosAntigosDeConsulta.data}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pagamento:</strong></td>
+                        <td>${Pagamento}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Observação:</strong></td>
+                        <td>${this.DadosAntigosDeConsulta.observacao || ''}</td>
+                    </tr>
+                </table>
+            </div>
+        `,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#5ccf6c',
@@ -141,39 +180,42 @@ export class EditarConsultasComponent implements OnInit {
       if (result.isConfirmed) {
         console.log('Editando consulta...', this.FormGroupConsulta.value);
 
-        // this.DadosDeEdicaoConsulta.ConPaciente = this.PacienteEscolhido.paciCodigo;
-        // this.DadosDeEdicaoConsulta.ConMedico = this.MedicoEscolhido.medCodigo;
-        // this.DadosDeEdicaoConsulta.ConAdm = this.UsuarioLogado.id;
-        // this.DadosDeEdicaoConsulta.ConDia_semana = this.DiaDaSemana;
+        let novaConsulta: any = {
+          conCodigoConsulta: this.DadosAntigosDeConsulta.consulta,
+          conMedico: this.DadosAntigosDeConsulta.medico.medCodigo,
+          conPaciente: this.DadosAntigosDeConsulta.paciente.paciCodigo,
+          conDia_semana: this.DadosAntigosDeConsulta.diaSemana,
+          conHorario: this.DadosAntigosDeConsulta.horario,
+          conData: this.DadosAntigosDeConsulta.data,
+          conObservacoes: this.DadosAntigosDeConsulta.observacao || '',
+          conDadaCriacao: this.DadosAntigosDeConsulta.dadaCriacao,
+          conFormaPagamento: this.DadosAntigosDeConsulta.formaPagamento,
+          conStatus: this.DadosAntigosDeConsulta.status || 0,
+          conAdm: this.DadosAntigosDeConsulta.adm.admCodigo
+        };
 
-        // if (this.DadosDeEdicaoConsulta.ConHorario ===  this.DadosAntigosDeConsulta.ConHorario &&
-        //   this.DadosDeEdicaoConsulta.ConData === this.DadosAntigosDeConsulta.ConData &&
-        //   this.DadosDeEdicaoConsulta.ConMedico === this.DadosAntigosDeConsulta.ConMedico.medCodigo ) {
 
-        //   this.ConsultaService.EditarConsultas(
-        //     this.DadosDeEdicaoConsulta.ConCodigoConsulta,
-        //     this.DadosDeEdicaoConsulta
-        //   ).subscribe(
-        //     (dados) => {
-        //       Swal.fire({
-        //         icon: 'success',
-        //         title: 'OK',
-        //         text: 'Consulta editada com sucesso .',
-        //       }).then((result) => {
-        //         if (result.isConfirmed) {
-        //          //window.location.reload();
-        //         }
-        //       });
-        //     },
-        //     (erros) => {
-        //       Swal.fire({
-        //         icon: 'error',
-        //         title: 'Oops...',
-        //         text: 'Algo deu errado !',
-        //       });
-        //     }
-        //   );
-        // }
+        this.ConsultaService.EditarConsultas(this.DadosAntigosDeConsulta.consulta, novaConsulta).subscribe(
+          (dados) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: 'Consulta editada com sucesso .',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                //window.location.reload();
+              }
+            });
+          },
+          (erros) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Algo deu errado !',
+            });
+          }
+        );
+
 
         // else if (this.DadosDeEdicaoConsulta.ConHorario != this.DadosAntigosDeConsulta.ConHorario ||
         //   this.DadosDeEdicaoConsulta.ConData != this.DadosAntigosDeConsulta.ConData ||

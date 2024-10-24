@@ -4,6 +4,9 @@ export interface Adiministrador {
   AdmUsuario: number;
   AdmStatus: number;
   AdmEmail: string;
-  AdmCodigoAtorizacao : string;
+  AdmCodigoAtorizacao: string;
   AdmDataCriacao: string;
+
+
+  admCodigo?: number;
 }

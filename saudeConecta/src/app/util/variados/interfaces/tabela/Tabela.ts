@@ -3,7 +3,7 @@ import { Medico } from "../medico/medico";
 import { Paciente } from "../paciente/paciente";
 
 export interface Tabela {
-  consulta: string;
+  consulta: number;
   medico: Medico;
   paciente: Paciente;
   diaSemana: string;
@@ -12,7 +12,7 @@ export interface Tabela {
   observacao: string;
   dadaCriacao: string;
   status: number;
-  adm :Adiministrador
-  formaPagamento : number
+  adm: Adiministrador
+  formaPagamento: number
 }
 

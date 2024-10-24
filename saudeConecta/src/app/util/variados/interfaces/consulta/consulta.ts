@@ -12,4 +12,16 @@ export interface Consulta {
   ConFormaPagamento: number;
   ConStatus: number;
   ConAdm: number;
+
+  conCodigoConsulta?: number;
+  conMedico?: number;
+  conPaciente?: number;
+  conDia_semana?: string;
+  conHorario?: string;
+  conData?: string;
+  conObservacoes?: string;
+  conDadaCriacao?: string;
+  conFormaPagamento?: number;
+  conStatus?: number;
+  conAdm?: number;
 }

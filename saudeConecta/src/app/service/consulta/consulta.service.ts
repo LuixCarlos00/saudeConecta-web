@@ -152,6 +152,8 @@ export class ConsultaService {
     consultaId: any,
     novaConsulta: Consulta
   ): Observable<Consulta> {
+    console.log('Editando consulta:', novaConsulta, 'Id:', consultaId);
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.Token}`,
@@ -217,7 +219,7 @@ export class ConsultaService {
 
 
 
-  filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados: any,dataSource: Tabela[]): Promise<Tabela[]> {
+  filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados: any, dataSource: Tabela[]): Promise<Tabela[]> {
     return new Promise((resolve, reject) => {
       try {
         // Função para normalizar e remover acentos e caracteres especiais
@@ -278,8 +280,8 @@ export class ConsultaService {
         let resultadoFiltrado = dataSource.filter(
           (item) =>
             safeNormalize(item.consulta).includes(dadosUpper) ||
-            safeNormalize(item.medico.medNome ).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
-            safeNormalize(item.paciente.PaciNome ).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
+            safeNormalize(item.medico.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
+            safeNormalize(item.paciente.PaciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
             safeNormalize(item.diaSemana).includes(dadosUpper) ||
             isDateMatch(item.data, dados.trim()) || // Compara as datas sem normalizar
             isTimeMatch(item.horario, dados.trim()) || // Compara os horários diretamente
