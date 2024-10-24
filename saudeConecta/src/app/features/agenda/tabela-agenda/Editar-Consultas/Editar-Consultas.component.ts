@@ -35,7 +35,7 @@ export class EditarConsultasComponent implements OnInit {
   //
 
   DiaDaSemana: string = '';
-  Hora = [] as any;
+  Hora = [] as any[];
 
   dadosPacientePassandoTabela: any;
   dadosMedicoPassandoTabela: any;
@@ -123,7 +123,7 @@ export class EditarConsultasComponent implements OnInit {
       FiltroPesquisaMedico: this.DadosAntigosDeConsulta.medico,
     });
 
-    this.Hora = this.atualizarHorarios([]);
+    this.Hora.push(await this.atualizarHorarios());
     console.log('this.Hora', this.Hora);
 
 
@@ -334,10 +334,15 @@ export class EditarConsultasComponent implements OnInit {
         this.DataSelecionada
       ).subscribe(
         (data) => {
-          console.log('horariosDisponiveis', data);
+          console.log('data', data);
 
-          //  this.horariosDisponiveis = data;
-          this.atualizarHorarios(data); // Atualiza os horários disponíveis ao receber os dados
+          const horarioDidisponivelFormatado = data.map((horario) => horario.substring(0, 5));
+          this.Hora = this.Hora.filter((horario) => {
+            const horarioFormatado = horario.value.substring(0, 5);
+            return !horarioDidisponivelFormatado.includes(horarioFormatado);
+          })
+          console.log('this.Hora', this.Hora);
+
         },
         (error) => {
           console.log(error);
@@ -346,36 +351,13 @@ export class EditarConsultasComponent implements OnInit {
     }
   }
 
-  atualizarHorarios(horariosDisponiveis?: string[]) {
+  async atualizarHorarios() {
     const medico = this.DadosAntigosDeConsulta.medico;
-    let horariosDisponiveisFormatados: string[] = [];
-
-    if (horariosDisponiveis) {
-      horariosDisponiveisFormatados = horariosDisponiveis.map(
-        (horario) => horario.substring(0, 5)
-      );
-    }
-
     if (medico.medTempoDeConsulta) {
       const horarioDinamico = this.gerarHorariosDinamicos(medico.medTempoDeConsulta);
-
-      if (horariosDisponiveis && horariosDisponiveis.length > 0) {
-        this.Hora = horarioDinamico.filter((horario: any) => {
-          const horarioFormatado = horario.value.substring(0, 5);
-          return !horariosDisponiveisFormatados.includes(horarioFormatado);
-        });
-      } else {
-        this.Hora = horarioDinamico;
-      }
+      this.Hora = horarioDinamico
     } else {
-      if (horariosDisponiveis && horariosDisponiveis.length > 0) {
-        this.Hora = HoradaConsulta.filter((horario) => {
-          const horarioFormatado = horario.value.substring(0, 5);
-          return !horariosDisponiveisFormatados.includes(horarioFormatado);
-        });
-      } else {
-        this.Hora = HoradaConsulta;
-      }
+      this.Hora = HoradaConsulta;
     }
   }
 
@@ -383,13 +365,10 @@ export class EditarConsultasComponent implements OnInit {
     if (!MedTempoDeConsulta || MedTempoDeConsulta <= 0) {
       return HoradaConsulta;
     }
-
     const horarios: { value: string; label: string; }[] = [];
     const tempoConsultaMinutos = Number(MedTempoDeConsulta);
-
     let horaAtual = 8 * 60; // 8:00 em minutos
     const fimDoDia = 18 * 60; // 18:00 em minutos
-
     while (horaAtual < fimDoDia) {
       const horas = Math.floor(horaAtual / 60);
       const minutos = horaAtual % 60;
@@ -398,7 +377,6 @@ export class EditarConsultasComponent implements OnInit {
 
       horaAtual += tempoConsultaMinutos;
     }
-
     return horarios;
   }
 
