@@ -50,7 +50,7 @@ export class AgendaComponent implements OnInit {
     private consultaService: ConsultaService,
     public dialog: MatDialog,
     private consultaStatusService: ConsultaStatusService
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.buscarDados();
@@ -140,9 +140,16 @@ export class AgendaComponent implements OnInit {
     this.dialog.open(EditarConsultasComponent, {
       width: '800px',
       height: '550px',
-      data: { DadoSelecionadoParaEdicao: consulta },
+      data: { DadoSelecionadoParaEdicao: consulta, },
     });
+
+    this.dialog.afterAllClosed.subscribe(() => {
+      console.log('Dialogo fechado');
+
+      this.buscarDados();
+    })
   }
+
 
   GerarPDF(consulta: any) {
     this.dialog.open(Template_PDFComponent, {
@@ -184,7 +191,7 @@ export class AgendaComponent implements OnInit {
   }
 
   tratarDadosParaTabela(dados: any[]): Tabela[] {
-     return dados.map((dado) => ({
+    return dados.map((dado) => ({
       consulta: dado.conCodigoConsulta || dado.conSttCodigoConsulta,
       medico: dado.conMedico || dado.conSttMedico,
       paciente: dado.conPaciente || dado.conSttPaciente,
