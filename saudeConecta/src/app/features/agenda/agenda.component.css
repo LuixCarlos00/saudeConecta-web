@@ -13,15 +13,16 @@ table {
 
 }
 
-.custom-table .NomeCod{
+.custom-table .NomeCod {
   color: rgb(69, 118, 211);
   font-weight: bold;
-  width: 1% ;
+  width: 1%;
   align-items: center;
   background: #efefef;
   border-right: 1px solid black;
 }
-.custom-table .colunascod{
+
+.custom-table .colunascod {
   background: #efefef;
   border-right: 1px solid black;
 
@@ -47,7 +48,7 @@ table {
   font-size: 10.5px;
 }
 
-.custom-table .NomeDiaSemana ,
+.custom-table .NomeDiaSemana,
 .custom-table .NomeHorario,
 .custom-table .Nomedata {
   color: rgb(69, 118, 211);
@@ -59,7 +60,7 @@ table {
   background: #efefef;
 }
 
-.custom-table .NomeObecervacao{
+.custom-table .NomeObecervacao {
   color: rgb(69, 118, 211);
   border-color: black;
   font: bold;
@@ -70,28 +71,28 @@ table {
 }
 
 .custom-table .colunasDiaSemana,
-.custom-table .colunasHorario{
+.custom-table .colunasHorario {
   width: 85px;
   background: #efefef;
 
   padding: 0.0;
 }
 
-.custom-table .colunasData{
+.custom-table .colunasData {
   width: 85px;
   background: #efefef;
   padding: 0.0;
 }
 
 
-.custom-table .colunasHorario{
+.custom-table .colunasHorario {
   width: 65px;
   background: #efefef;
 
 }
 
-.custom-table .colunasObecervacao{
-  width: 150px;
+.custom-table .colunasObecervacao {
+  width: 200px;
   text-align: center;
   background: #efefef;
 

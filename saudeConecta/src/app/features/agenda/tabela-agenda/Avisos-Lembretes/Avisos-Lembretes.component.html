@@ -9,7 +9,7 @@
             <input formControlName="destinatario" type="radio" [value]="1">
             <label>Email :
               <strong>
-                <p>{{ data.Medico.MedEmail || data.Medico.medEmail || 'Não informado' }}</p>
+                <p>{{ data.Consulta.medico.medEmail || 'Não informado' }}</p>
               </strong>
             </label>
           </div>
@@ -17,7 +17,7 @@
             <input formControlName="destinatario" type="radio" [value]="2">
             <label>Telefone :
               <strong>
-                <p>{{ data.Medico.MedTelefone || data.Medico.medTelefone || 'Não informado'}}</p>
+                <p>{{ data.Consulta.medico.medTelefone || 'Não informado'}}</p>
               </strong>
             </label>
           </div>
@@ -32,7 +32,7 @@
             <input formControlName="destinatario" type="radio" [value]="3">
             <label>Email :
               <strong>
-                <p>{{ data.Paciente.PaciEmail || data.Paciente.paciEmail || 'Não informado' }}</p>
+                <p>{{ data.Consulta.paciente.paciEmail || 'Não informado' }}</p>
               </strong>
             </label>
           </div>
@@ -40,7 +40,7 @@
             <input formControlName="destinatario" type="radio" [value]="4">
             <label>Telefone :
               <strong>
-                <p>{{ data.Paciente.PaciTelefone || data.Paciente.paciTelefone || 'Não informado'}}</p>
+                <p>{{ data.Consulta.paciente.paciTelefone || 'Não informado'}}</p>
               </strong>
             </label>
           </div>

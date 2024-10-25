@@ -173,15 +173,8 @@ export class ConsultaService {
   }
 
   ConcluirDadosDaTabela(IdConclusao: number): Observable<Consulta> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    });
-    return this.http.put<Consulta>(
-      `${this.apiUrl}/consulta/concluido/${IdConclusao}`,
-      {},
-      { headers }
-    );
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}`, });
+    return this.http.put<Consulta>(`${this.apiUrl}/consulta/concluido/${IdConclusao}`, {}, { headers });
   }
 
   ChangeCadastroRealizadoComSucesso(cadastro: Consulta) {

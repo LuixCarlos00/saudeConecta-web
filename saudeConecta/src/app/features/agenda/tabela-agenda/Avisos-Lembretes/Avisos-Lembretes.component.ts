@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Tabela } from 'src/app/util/variados/interfaces/tabela/Tabela';
 
 @Component({
   selector: 'app-Avisos-Lembretes',
@@ -18,11 +19,11 @@ export class AvisosLembretesComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AvisosLembretesComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { Consulta: Consulta; Medico: Medico; Paciente: Paciente },
+    public data: { Consulta: Tabela; Medico: Medico; Paciente: Paciente },
     private form: FormBuilder,
     private consultaService: ConsultaService
   ) {
-    console.log(this.data);
+    console.log('avisos', this.data.Consulta);
   }
 
   onNoClick(): void {

@@ -11,7 +11,7 @@
           DadosPDFConsulta.ConMedico.medCodigo }}</p>
         <hr>
         <p><strong>Nome:</strong> {{ DadosPDFConsulta.ConMedico.medNome }}</p>
-        <p><strong>Sexo:</strong> {{ SexoMedico }}</p>
+        <p><strong>Sexo:</strong> {{ DadosPDFConsulta.medico.medSexo === 1 ? 'Masculino' : 'Feminino' }}</p>
         <p><strong>Idade:</strong> {{ IdadeMedico }} anos </p>
         <p><strong>Data de Nascimento:</strong> {{ DadosPDFConsulta.ConMedico.medDataNacimento }}</p>
         <p><strong>CRM:</strong> {{ DadosPDFConsulta.ConMedico.medCrm }}</p>
@@ -29,7 +29,7 @@
           DadosPDFConsulta.ConPaciente.paciCodigo }}</p>
         <hr>
         <p><strong>Nome:</strong> {{ DadosPDFConsulta.ConPaciente.paciNome }}</p>
-        <p><strong>Sexo:</strong> {{ SexoPaciente }}</p>
+        <p><strong>Sexo:</strong> {{ DadosPDFConsulta.paciente.paciSexo ? 'Masculino' : 'Feminino' }}</p>
         <p><strong>Idade:</strong> {{ IdadePaciente }} anos</p>
         <p><strong>Data de Nascimento:</strong> {{ DadosPDFConsulta.ConPaciente.paciDataNacimento }}</p>
         <p><strong>CPF:</strong> {{ DadosPDFConsulta.ConPaciente.paciCpf }}</p>
@@ -55,7 +55,7 @@
           <hr>
           <p><strong>Hora:</strong> {{ DadosPDFConsulta.ConHorario }}</p>
           <hr>
-          <p><strong>Data de Criação:</strong> {{ dataCriacaoPadraoBr }}</p>
+          <p><strong>Data de Criação:</strong> {{ DadosPDFConsulta.dadaCriacao | date: 'dd/MM/yyyy' }}</p>
           <hr>
           <div *ngIf="DadosPDFConsulta.ConFormaPagamento">
             <div *ngIf="DadosPDFConsulta.ConFormaPagamento === 1">
@@ -93,7 +93,7 @@
           <mat-card class="demo-inline-calendar-card">
             <mat-calendar #calendar [(selected)]="selected"></mat-calendar>
           </mat-card>
-          <div  >
+          <div>
 
 
             <div>
