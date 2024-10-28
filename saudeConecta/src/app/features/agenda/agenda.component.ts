@@ -79,11 +79,9 @@ export class AgendaComponent implements OnInit {
 
     try {
       const dados = await this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).toPromise();
-      console.log('PesquisarNaTabelaConcluidos', dados);
       if (dados) {
         this.dataSource = this.tratarDadosParaTabela(dados);
       }
-      console.log('this.PesquisarNaTabelaConcluidos', this.dataSource);
     } catch (error) {
       console.error(error);
     }

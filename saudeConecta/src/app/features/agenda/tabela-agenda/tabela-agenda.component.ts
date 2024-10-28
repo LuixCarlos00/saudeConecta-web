@@ -138,7 +138,6 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
         }
       }
       if (this.ValorOpcao.tipo == 7) {
-        console.log('Gerar PDF 7 ', this.ValorOpcao.tipo, this.DadoSelecionadoParaGerarPDF);
 
         //Gerar PDF
         if (this.DadoSelecionadoParaGerarPDF.length > 0) {
@@ -153,7 +152,6 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
       }
 
       if (this.ValorOpcao.tipo == 8) {
-        console.log('Gerar PDF 8', this.ValorOpcao.tipo, this.DadoSelecionadoParaGerarPDF);
 
         if (this.DadoSelecionadoParaGerarPDF.length > 0) {
           this.GerarPDFConcluidos(this.DadoSelecionadoParaGerarPDF);
@@ -173,8 +171,7 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('ValorOpcao', this.ValorOpcao);
-    this.BuscarTodosRegistrosDeConsulta();
+    // this.BuscarTodosRegistrosDeConsulta();
 
     //buscar todos os registros
     // this.consultaService.CadastroRealizadoComSucesso$.subscribe((dados) => {
@@ -221,13 +218,11 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     // this.consultaService.dadosFiltrados$.subscribe((dados) => {
     //   if (!dados.toString()) {
     //     this.consultaService
-    //       .BuscarTodosRegistrosDeConsulta()
     //       .subscribe((response) => {
     //         this.dataSource = response.content;
     //       });
     //   } else if (dados.toString()) {
     //     // pesquisa por dado filtrado
-    //     console.log('tentou 1');
 
     //     //this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados);
     //   }
@@ -266,7 +261,6 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
             .pipe(take(1))
             .subscribe(
               (dados) => {
-                console.log(dados);
               },
               (error) => {
                 console.error('Erro ao concluir dados:', error);
@@ -295,23 +289,11 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     });
   }
 
-  BuscarTodosRegistrosDeConsulta() {
-    // this.consultaService
-    //   .BuscarTodosRegistrosDeConsulta()
-    //   .pipe(take(1))
-    //   .subscribe((response) => {
-    //     console.log(response.content, 'consulta');
 
-    //     this.DadosDeConsulta = [];
-    //     this.DadosDeConsulta.push(...response.content);
-    //     this.dataSource = response.content;
-    //   });
-  }
 
   filtrandoDadosDoBancoPassadoParametros_Cronologia(dados: any) {
     this.LimparTabela();
 
-    console.log('tentou 2', dados);
 
     let novaConsulta: Consulta[] = [];
     for (let i = 0; i < dados.length; i++) {
@@ -338,13 +320,7 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     } else {
       this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
       this.LimparTabela();
-      // this.consultaService
-      //   .BuscarTodosRegistrosDeConsulta()
-      //   .pipe(take(1))
-      //   .subscribe((response) => {
-      //     this.DadosDeConsulta.push(...response.content);
-      //     this.dataSource = response.content;
-      //   });
+
     }
   }
 
@@ -374,7 +350,6 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
   }
 
   DadoSelecionadoParaAcao(dados: any, event: any) {
-    console.log('DadoSelecionadoParaAcao', dados);
 
     if (event.checked) {
       this.DadoSelecionaParaExclusao.push(dados);
@@ -414,17 +389,11 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
 
   RecaregarTabela() {
     this.LimparTabela();
-    // this.consultaService
-    //   .BuscarTodosRegistrosDeConsulta()
-    //   .subscribe((response) => {
-    //     this.DadosDeConsulta.push(...response.content);
-    //     this.dataSource = response.content;
-    //   });
+
     this.consultaService.ExcluirDadosDaTabelaSubject(false);
   }
 
   DeletarDadoDaTabela(DadoSelecionaParaExclusao: any) {
-    console.log('DadoSelecionaParaExclusao', DadoSelecionaParaExclusao);
 
     Swal.fire({
       title: 'Tem certeza que deseja excluir esses registro?',
@@ -453,7 +422,6 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
             );
         }
       } else {
-        // this.consultaService.ExcluirDadosDaTabelaSubject(false);
         this.DadoSelecionaParaExclusao = [];
       }
     });
@@ -462,7 +430,6 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
   }
 
   GerarPDF(DadoSelecionadoParaGerarPDF: any) {
-    console.log(DadoSelecionadoParaGerarPDF, 'DadoSelecionadoParaGerarPDF');
     this.dialog.open(Template_PDFComponent, {
       width: '800px',
       height: '550px',
@@ -491,11 +458,6 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).subscribe((response) => {
       this.LimparTabela();
 
-      // this.DadosDeConsulta = response.content;
-      // console.log('this.DadosDeConsulta', this.DadosDeConsulta);
-
-      // this.dataSource = response.content;
-      // console.log('this.dataSource', this.dataSource);
 
     });
   }

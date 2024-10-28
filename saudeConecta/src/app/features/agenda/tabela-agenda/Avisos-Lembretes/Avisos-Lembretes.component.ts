@@ -23,7 +23,6 @@ export class AvisosLembretesComponent implements OnInit {
     private form: FormBuilder,
     private consultaService: ConsultaService
   ) {
-    console.log('avisos', this.data.Consulta);
   }
 
   onNoClick(): void {

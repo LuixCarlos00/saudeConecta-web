@@ -56,10 +56,9 @@ export class CalendarDialogComponent implements OnInit {
     if (dataInicio && dataFim) {
       const DataInicioFormatada = dataInicio.toISOString().split('T')[0];
       const DataFimFormatada = dataFim.toISOString().split('T')[0];
-      console.log('DataInicioFormatada', DataInicioFormatada, '++', DataFimFormatada);
 
       this.CronologiaService.BuscandoTodasConsultasEmIntervaloDeDatas(DataInicioFormatada, DataFimFormatada).subscribe((dados) => {
-        console.log('dados', dados);
+
         if (Object.keys(dados).length > 0) {
           this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
         } else {
@@ -154,8 +153,6 @@ export class CalendarDialogComponent implements OnInit {
     const especialidades = this.OpcoesCategorias.get('Especialidade')?.value;
     const dataInicio: Date | null = this.IntervaloDeDatas.get('start')?.value;
     const dataFim: Date | null = this.IntervaloDeDatas.get('end')?.value;
-
-    console.log('VerificaTipoDePesquisa', medico, '++', especialidades, '++', dataInicio, '++', dataFim);
     if (especialidades && dataInicio && dataFim) {// busca por intervalo de datas e especialidade
       this.PesquisaPorIntervaloDeDatasMaisEspecialidade(
         dataInicio,

@@ -40,7 +40,7 @@ export class RecuperaCadastroComponent implements OnInit {
     private route: Router,
     private form: FormBuilder,
     private recuperaCadastroService: RecuperaCadastroService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.FormularioEmail = this.form.group({
@@ -108,7 +108,6 @@ export class RecuperaCadastroComponent implements OnInit {
         this.verificarSucesso();
       },
       (error) => {
-        console.log('Erro ao verificar email:', error);
         this.verificarSucesso();
       }
     );
@@ -118,7 +117,6 @@ export class RecuperaCadastroComponent implements OnInit {
     return this.recuperaCadastroService.recuperaCadastroMedico(email).pipe(
       map((dadosUsuario) => ({ success: true, usuario: dadosUsuario })),
       catchError((error) => {
-        console.log('Erro ao verificar email de médico:', error);
         return of({ success: false });
       })
     );
@@ -128,7 +126,6 @@ export class RecuperaCadastroComponent implements OnInit {
     return this.recuperaCadastroService.recuperaCadastroPaciente(email).pipe(
       map((dadosUsuario) => ({ success: true, usuario: dadosUsuario })),
       catchError((error) => {
-        console.log('Erro ao verificar email de paciente:', error);
         return of({ success: false });
       })
     );
@@ -232,14 +229,14 @@ export class RecuperaCadastroComponent implements OnInit {
     if (this.InstanciaUsuario.usuario.paciNome) {
       this.recuperaCadastroService.recuperaLogin(id, 'Paciente').subscribe(
         () => {
-         this.route.navigate(['']);
+          this.route.navigate(['']);
         },
 
       );
     } else if (this.InstanciaUsuario.usuario.MedNome) {
       this.recuperaCadastroService.recuperaLogin(id, 'Medico').subscribe(
         () => {
-           this.route.navigate(['']);
+          this.route.navigate(['']);
         },
 
       );

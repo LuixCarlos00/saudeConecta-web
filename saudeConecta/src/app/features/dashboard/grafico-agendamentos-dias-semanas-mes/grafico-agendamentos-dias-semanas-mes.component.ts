@@ -21,7 +21,7 @@ export class GraficoAgendamentosDiasSemanasMesComponent implements OnInit {
   constructor(
     private graficoAgendamentoDiaService: GraficoAgendamentoDiaService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.IntervaloDeDatas = this.formBuilder.group({
@@ -56,7 +56,6 @@ export class GraficoAgendamentosDiasSemanasMesComponent implements OnInit {
         dateHoje.toISOString().split('T')[0].toString()
       )
       .subscribe((dados) => {
-        console.log('agendamentos por dia  ', dados);
 
         this.TodasConsultas = [];
         this.TodasConsultas = dados;

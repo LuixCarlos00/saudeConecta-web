@@ -151,7 +151,6 @@ export class ConsultaService {
     consultaId: any,
     novaConsulta: Consulta
   ): Observable<Consulta> {
-    console.log('Editando consulta:', novaConsulta, 'Id:', consultaId);
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -184,7 +183,6 @@ export class ConsultaService {
     medCodigo: any,
     DataSelecionada: any
   ) {
-    console.log('VerificarHorariosDisponiveisReferentesAoMedicoEData', medCodigo, DataSelecionada);
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -280,7 +278,6 @@ export class ConsultaService {
             safeNormalize(item.observacao).includes(dadosUpper)
         );
 
-        console.log('resultadoFiltrado', resultadoFiltrado);
 
         if (resultadoFiltrado.length > 0) {
           resolve(resultadoFiltrado);

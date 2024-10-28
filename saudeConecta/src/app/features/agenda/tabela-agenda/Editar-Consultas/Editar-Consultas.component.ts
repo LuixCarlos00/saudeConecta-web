@@ -201,13 +201,10 @@ export class EditarConsultasComponent implements OnInit {
         FiltroPesquisaPaciente,
         pesquisa
       );
-      console.log(dados);
+
       this.showResultadoPaciente = true;
       this.dadosPacientePassandoTabela = dados;
-      console.log(
-        'this.dadosPacientePassandoTabela',
-        this.dadosPacientePassandoTabela
-      );
+
     } catch (error) {
       this.PacientesService.exibirMensagemErro();
     }

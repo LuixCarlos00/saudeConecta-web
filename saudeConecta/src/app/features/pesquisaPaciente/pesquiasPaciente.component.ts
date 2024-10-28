@@ -100,7 +100,6 @@ export class PesquiasPacienteComponent implements OnInit {
       console.log(dados);
       this.showResultadoPaciente = true;
       this.dadosPaciente = dados;
-      console.log('this.dadosPaciente', this.dadosPaciente);
     } catch (error) {
       this.PacientesService.exibirMensagemErro();
     }
@@ -150,7 +149,6 @@ export class PesquiasPacienteComponent implements OnInit {
         ConAdm: this.UsuarioLogado.id,
         ConStatus: 0,
       };
-      console.log('consult', consult);
 
       this.consultaService.VericarSeExetemConsultasMarcadas(consult).subscribe(
         (data) => {

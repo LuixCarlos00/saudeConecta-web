@@ -15,10 +15,9 @@ export class TabelaDePacientesComponent implements OnInit {
   highValue: number = 5;
   lowValue!: number;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    console.log('this.dadosPaciente tabela ', this.dadosPaciente);
 
     this.dataSource = this.dadosPaciente;
 
@@ -28,7 +27,7 @@ export class TabelaDePacientesComponent implements OnInit {
 
   SelecionaPaciente(elemento: Paciente) {
     this.fecharTabela()
-   this.selecionaPaciente.emit(elemento )
+    this.selecionaPaciente.emit(elemento)
   }
 
   fecharTabela() {

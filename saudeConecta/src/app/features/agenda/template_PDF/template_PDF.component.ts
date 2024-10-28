@@ -53,20 +53,9 @@ export class Template_PDFComponent implements OnInit, AfterViewInit {
     private consultaService: ConsultaService,
     private cdr: ChangeDetectorRef
   ) {
-
-
     this.DadosPDFConsulta = this.data.DadoSelecionadoParaGerarPDF;
-
-    console.log('gererPDF', this.DadosPDFConsulta);
-
     this.activeDate = this.criarDataComTimeZone(this.DadosPDFConsulta.data); // Set the initial active date
-    console.log('activeDate', this.activeDate);
-
-    console.log('data nacimento ', this.DadosPDFConsulta.medico.medDataNacimento, this.DadosPDFConsulta.paciente.paciDataNacimento);
-
-
     this.converteDatadeNacimentoParaIdade(this.DadosPDFConsulta.medico.medDataNacimento, this.DadosPDFConsulta.paciente.paciDataNacimento);
-
     this.formataNivelHierarquico(this.DadosPDFConsulta.adm.admStatus);
   }
 

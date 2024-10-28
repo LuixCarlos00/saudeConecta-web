@@ -15,47 +15,45 @@ export class GuardaRotasLogin {
   constructor(
     private login: LoginService,
     private router: Router,
-    private tokenService: tokenService ,
+    private tokenService: tokenService,
 
-     ) {
-      this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          this.lastUrl = event.urlAfterRedirects;
-        }
-      });
-     }
-
-
-
-
-     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
-
-
-      const isUsuarioLogado = this.tokenService.possuiToken();
-
-      if (isUsuarioLogado && this.lastUrl==='/Dashboard') {
-        return this.router.parseUrl('/Dashboard');
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.lastUrl = event.urlAfterRedirects;
       }
-
-      if(isUsuarioLogado ) {
-        return this.router.parseUrl('/Dashboard');
-      }
+    });
+  }
 
 
-      // if (isUsuarioLogado && this.lastUrl==='/cadastroadmin') {
-      //   console.log('3');
-      //   // Se o usuário estiver logado e tentar acessar a rota de cadastro, redirecione-o para a página inicial
-      //   return true
-      // }
 
-      // if (!isUsuarioLogado && !state.url.includes('cadastroadmin')) {
-      //   console.log('4');
-      //   // Se o usuário não estiver logado e tentar acessar uma rota diferente de cadastroadmin, redirecione-o para a página de login
-      //   return this.router.parseUrl('/login');
-      // }
 
-      // Permita o acesso para todas as outras situações
-      return true;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+
+
+    const isUsuarioLogado = this.tokenService.possuiToken();
+
+    if (isUsuarioLogado && this.lastUrl === '/Dashboard') {
+      return this.router.parseUrl('/Dashboard');
     }
+
+    if (isUsuarioLogado) {
+      return this.router.parseUrl('/Dashboard');
+    }
+
+
+    // if (isUsuarioLogado && this.lastUrl==='/cadastroadmin') {
+    //   // Se o usuário estiver logado e tentar acessar a rota de cadastro, redirecione-o para a página inicial
+    //   return true
+    // }
+
+    // if (!isUsuarioLogado && !state.url.includes('cadastroadmin')) {
+    //   // Se o usuário não estiver logado e tentar acessar uma rota diferente de cadastroadmin, redirecione-o para a página de login
+    //   return this.router.parseUrl('/login');
+    // }
+
+    // Permita o acesso para todas as outras situações
+    return true;
+  }
 }
 
