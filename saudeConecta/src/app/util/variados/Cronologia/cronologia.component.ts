@@ -28,11 +28,12 @@ export class CalendarDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private CronologiaService: CronologiaService,
     private ConsultaService: ConsultaService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.MedicosService.buscarPorTodosOsMedicos().subscribe((dados) => {
       this.ListaMedicos = dados;
+
     });
 
     this.IntervaloDeDatas = this.formBuilder.group({
@@ -110,7 +111,7 @@ export class CalendarDialogComponent implements OnInit {
         DataInicioFormatada,
         DataFimFormatada
       ).subscribe((dados) => {
-         this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
+        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
         this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
       });
     }

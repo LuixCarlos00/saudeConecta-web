@@ -211,7 +211,6 @@ export class AgendaComponent implements OnInit {
 
 
   tratarDadosParaTabela(dados: any[]): Tabela[] {
-    console.log();
 
     return dados.map((dado) => ({
       consulta: dado.conCodigoConsulta || dado.conSttCodigoConsulta,

@@ -8,40 +8,41 @@
       <div>
         <h3>Médico</h3>
         <p style="margin-top: -20px; font-size: 12px;"><strong>Codigo Médico:</strong> {{
-          DadosPDFConsulta.ConMedico.medCodigo }}</p>
+          DadosPDFConsulta.medico.medCodigo }}</p>
         <hr>
-        <p><strong>Nome:</strong> {{ DadosPDFConsulta.ConMedico.medNome }}</p>
+        <p><strong>Nome:</strong> {{ DadosPDFConsulta.medico.medNome }}</p>
         <p><strong>Sexo:</strong> {{ DadosPDFConsulta.medico.medSexo === 1 ? 'Masculino' : 'Feminino' }}</p>
         <p><strong>Idade:</strong> {{ IdadeMedico }} anos </p>
-        <p><strong>Data de Nascimento:</strong> {{ DadosPDFConsulta.ConMedico.medDataNacimento }}</p>
-        <p><strong>CRM:</strong> {{ DadosPDFConsulta.ConMedico.medCrm }}</p>
-        <p><strong>Email:</strong> {{ DadosPDFConsulta.ConMedico.medEmail }}</p>
-        <p><strong>Especialidade:</strong> {{ DadosPDFConsulta.ConMedico.medEspecialidade }}</p>
-        <p><strong>CPF:</strong> {{ DadosPDFConsulta.ConMedico.medCpf }}</p>
-        <p><strong>RG:</strong> {{ DadosPDFConsulta.ConMedico.medRg }}</p>
-        <p><strong>Telefone:</strong> {{ DadosPDFConsulta.ConMedico.medTelefone }}</p>
-        <p><strong>Formacao:</strong> {{ DadosPDFConsulta.ConMedico.medFormacoes }}</p>
-        <p><strong>Graduacao:</strong> {{ DadosPDFConsulta.ConMedico.medGraduacao }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ DadosPDFConsulta.medico.medDataNacimento || 'Não Informado' }}</p>
+        <p><strong>CRM:</strong> {{ DadosPDFConsulta.medico.medCrm }}</p>
+        <p><strong>Email:</strong> {{ DadosPDFConsulta.medico.medEmail }}</p>
+        <p><strong>Especialidade:</strong> {{ DadosPDFConsulta.medico.medEspecialidade }}</p>
+        <p><strong>CPF:</strong> {{ DadosPDFConsulta.medico.medCpf }}</p>
+        <p><strong>RG:</strong> {{ DadosPDFConsulta.medico.medRg }}</p>
+        <p><strong>Telefone:</strong> {{ DadosPDFConsulta.medico.medTelefone }}</p>
+        <p><strong>Formacao:</strong> {{ DadosPDFConsulta.medico.medFormacoes }}</p>
+        <p><strong>Graduacao:</strong> {{ DadosPDFConsulta.medico.medGraduacao }}</p>
       </div>
       <div>
         <h3>Paciente</h3>
         <p style="margin-top: -20px; font-size: 12px;"><strong>Codigo Paciente:</strong> {{
-          DadosPDFConsulta.ConPaciente.paciCodigo }}</p>
+          DadosPDFConsulta.paciente.paciCodigo }}</p>
         <hr>
-        <p><strong>Nome:</strong> {{ DadosPDFConsulta.ConPaciente.paciNome }}</p>
+        <p><strong>Nome:</strong> {{ DadosPDFConsulta.paciente.paciNome }}</p>
         <p><strong>Sexo:</strong> {{ DadosPDFConsulta.paciente.paciSexo ? 'Masculino' : 'Feminino' }}</p>
         <p><strong>Idade:</strong> {{ IdadePaciente }} anos</p>
-        <p><strong>Data de Nascimento:</strong> {{ DadosPDFConsulta.ConPaciente.paciDataNacimento }}</p>
-        <p><strong>CPF:</strong> {{ DadosPDFConsulta.ConPaciente.paciCpf }}</p>
-        <p><strong>RG:</strong> {{ DadosPDFConsulta.ConPaciente.paciRg }}</p>
-        <p><strong>Email:</strong> {{ DadosPDFConsulta.ConPaciente.paciEmail }}</p>
-        <p><strong>Telefone:</strong> {{ DadosPDFConsulta.ConPaciente.paciTelefone }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ DadosPDFConsulta.paciente.paciDataNacimento | date: 'dd/MM/yyyy' }}
+        </p>
+        <p><strong>CPF:</strong> {{ DadosPDFConsulta.paciente.paciCpf }}</p>
+        <p><strong>RG:</strong> {{ DadosPDFConsulta.paciente.paciRg }}</p>
+        <p><strong>Email:</strong> {{ DadosPDFConsulta.paciente.paciEmail }}</p>
+        <p><strong>Telefone:</strong> {{ DadosPDFConsulta.paciente.paciTelefone }}</p>
       </div>
     </div>
     <hr>
     <div style="  margin-left: 20px;">
-      <h3><strong>Nº Registro:</strong> {{ DadosPDFConsulta.ConCodigoConsulta }}</h3>
-      <div *ngIf="DadosPDFConsulta.ConStatus">
+      <h3><strong>Nº Registro:</strong> {{ DadosPDFConsulta.consulta }}</h3>
+      <div *ngIf="DadosPDFConsulta.status">
         <p><strong>Status:</strong>
           <span *ngIf="DadosPDFConsulta.ConStatus === 0">Aberta</span>
           <span *ngIf="DadosPDFConsulta.ConStatus === 1">Concluído</span>
@@ -50,25 +51,26 @@
       </div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         <div>
-          <p><strong>Data da Consulta:</strong> {{ DadosPDFConsulta.ConDia_semana.toUpperCase() }} - {{ dataPadraoBR }}
+          <p><strong>Data da Consulta:</strong> {{ DadosPDFConsulta.diaSemana.toUpperCase() }} - {{
+            DadosPDFConsulta.data | date :'dd/MM/yyyy' }}
           </p>
           <hr>
-          <p><strong>Hora:</strong> {{ DadosPDFConsulta.ConHorario }}</p>
+          <p><strong>Hora:</strong> {{ DadosPDFConsulta.horario.toUpperCase().substring(0, 5) }}</p>
           <hr>
           <p><strong>Data de Criação:</strong> {{ DadosPDFConsulta.dadaCriacao | date: 'dd/MM/yyyy' }}</p>
           <hr>
-          <div *ngIf="DadosPDFConsulta.ConFormaPagamento">
-            <div *ngIf="DadosPDFConsulta.ConFormaPagamento === 1">
+          <div *ngIf="DadosPDFConsulta.formaPagamento">
+            <div *ngIf="DadosPDFConsulta.formaPagamento === 1">
               <p style="margin-top: 20px;"><strong>Forma de Pagamento:</strong> Dinheiro </p>
               <img style="margin-left: 200px; margin-top: -100px" src="../../../../assets/imagens/logoDinheiro.png"
                 alt="Dinheiro">
             </div>
-            <div *ngIf="DadosPDFConsulta.ConFormaPagamento === 2">
+            <div *ngIf="DadosPDFConsulta.formaPagamento === 2">
               <p style="margin-top: 20px;"><strong>Forma de Pagamento:</strong> Cartao </p>
               <img style="margin-left: 200px; margin-top: -100px" src="../../../../assets/imagens/logoCartao.png"
                 alt="Cartao">
             </div>
-            <div *ngIf="DadosPDFConsulta.ConFormaPagamento === 3 ">
+            <div *ngIf="DadosPDFConsulta.formaPagamento === 3 ">
               <p style="margin-top: 20px;"><strong>Forma de Pagamento:</strong> Pix </p>
               <img style="margin-left: 200px; margin-top: -100px" src="../../../../assets/imagens/logoPix.png"
                 alt="Pix">
@@ -83,7 +85,7 @@
               <div style="width: 100%; height: 200px; margin: 10px; border-radius: 10px; border: 1px solid black;"
                 disabled>
                 <label style="margin: 10px;">
-                  {{ DadosPDFConsulta.ConObservacoes }}
+                  {{ DadosPDFConsulta.observacao }}
                 </label>
               </div>
             </div>
@@ -97,8 +99,8 @@
 
 
             <div>
-              <label> Responsável: {{DadosPDFConsulta.ConAdm.admNome}}</label><br>
-              <label> Código : {{DadosPDFConsulta.ConAdm.admCodigo}}</label><br>
+              <label> Responsável: {{DadosPDFConsulta.adm.admNome}}</label><br>
+              <label> Código : {{DadosPDFConsulta.adm.admCodigo}}</label><br>
               <label> Nivel : {{NivelDeHierarquico}}</label>
             </div>
 
