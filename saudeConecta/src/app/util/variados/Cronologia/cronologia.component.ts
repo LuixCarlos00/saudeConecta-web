@@ -7,6 +7,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { EspecialidadeMedicas } from '../options/options';
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import { Medico } from '../interfaces/medico/medico';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cronologia',
@@ -51,81 +52,100 @@ export class CalendarDialogComponent implements OnInit {
 
 
   PesquisaPorIntervaloDeDatas(dataInicio: Date, dataFim: Date) {
+
     if (dataInicio && dataFim) {
       const DataInicioFormatada = dataInicio.toISOString().split('T')[0];
       const DataFimFormatada = dataFim.toISOString().split('T')[0];
+      console.log('DataInicioFormatada', DataInicioFormatada, '++', DataFimFormatada);
 
-      this.CronologiaService.BuscandoTodasConsultasEmIntervaloDeDatas(
-        DataInicioFormatada,
-        DataFimFormatada
-      ).subscribe((dados) => {
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
-
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
-      });
+      this.CronologiaService.BuscandoTodasConsultasEmIntervaloDeDatas(DataInicioFormatada, DataFimFormatada).subscribe((dados) => {
+        console.log('dados', dados);
+        if (Object.keys(dados).length > 0) {
+          this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
+        } else {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      },
+        (error) => {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      );
     }
   }
 
-  PesquisaPorIntervaloDeDatasMaisEspecialidade(
-    dataInicio: Date,
-    dataFim: Date,
-    especialidades: any
-  ) {
+  PesquisaPorIntervaloDeDatasMaisEspecialidade(dataInicio: Date, dataFim: Date, especialidades: any) {
     if (dataInicio && dataFim && especialidades) {
       const DataInicioFormatada = dataInicio.toISOString().split('T')[0];
       const DataFimFormatada = dataFim.toISOString().split('T')[0];
-      this.CronologiaService.BuscandoTodasConsultasEmIntervaloDeDatasComEspecialidade(
-        DataInicioFormatada,
-        DataFimFormatada,
-        especialidades
-      ).subscribe((dados) => {
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
-
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
-      });
+      this.CronologiaService.BuscandoTodasConsultasEmIntervaloDeDatasComEspecialidade(DataInicioFormatada, DataFimFormatada, especialidades).subscribe((dados) => {
+        if (Object.keys(dados).length > 0) {
+          this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
+        } else {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      },
+        (error) => {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      );
     }
   }
+
+
 
   PesquisaPorMedico(medico: any) {
     if (medico) {
-      this.CronologiaService.BuscandoTodasConsultasPorMedico(
-        medico.medCodigo
-      ).subscribe((dados) => {
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
-
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
-      });
+      this.CronologiaService.BuscandoTodasConsultasPorMedico(medico.medCodigo).subscribe((dados) => {
+        if (Object.keys(dados).length > 0) {
+          this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
+        } else {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      },
+        (error) => {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      );
     }
   }
 
-  PesquisarMedicoEmUmIntervaloDeDatas(
-    medico: any,
-    dataInicio: Date,
-    dataFim: Date
-  ) {
+
+  PesquisarMedicoEmUmIntervaloDeDatas(medico: any, dataInicio: Date, dataFim: Date) {
+
     if (medico && dataInicio && dataFim) {
       const DataInicioFormatada = dataInicio.toISOString().split('T')[0];
       const DataFimFormatada = dataFim.toISOString().split('T')[0];
-      this.CronologiaService.BuscandoTodasConsultasPorMedicoEmIntervaloDeDatas(
-        medico.medCodigo,
-        DataInicioFormatada,
-        DataFimFormatada
-      ).subscribe((dados) => {
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
-      });
+      this.CronologiaService.BuscandoTodasConsultasPorMedicoEmIntervaloDeDatas(medico.medCodigo, DataInicioFormatada, DataFimFormatada).subscribe((dados) => {
+        if (Object.keys(dados).length > 0) {
+          this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
+        } else {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      },
+        (error) => {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      );
     }
   }
 
+
+
+
+
   PesquisaPorEspecialidade(especialidades: any) {
     if (especialidades) {
-      this.CronologiaService.BuscandoTodasConsultasPorEspecialidade(
-        especialidades
-      ).subscribe((dados) => {
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(null);
-
-        this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
-      });
+      this.CronologiaService.BuscandoTodasConsultasPorEspecialidade(especialidades).subscribe((dados) => {
+        if (Object.keys(dados).length > 0) {
+          this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
+        } else {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      },
+        (error) => {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      );
     }
   }
 
@@ -135,23 +155,24 @@ export class CalendarDialogComponent implements OnInit {
     const dataInicio: Date | null = this.IntervaloDeDatas.get('start')?.value;
     const dataFim: Date | null = this.IntervaloDeDatas.get('end')?.value;
 
-    if (especialidades && dataInicio && dataFim) {
+    console.log('VerificaTipoDePesquisa', medico, '++', especialidades, '++', dataInicio, '++', dataFim);
+    if (especialidades && dataInicio && dataFim) {// busca por intervalo de datas e especialidade
       this.PesquisaPorIntervaloDeDatasMaisEspecialidade(
         dataInicio,
         dataFim,
         especialidades
       );
     }
-    if (dataInicio && dataFim && !especialidades) {
+    if (dataInicio && dataFim && !especialidades) {// busca por intervalo de datas
       this.PesquisaPorIntervaloDeDatas(dataInicio, dataFim);
     }
-    if (medico) {
+    if (medico) { // busca por medico
       this.PesquisaPorMedico(medico);
     }
-    if (especialidades) {
+    if (especialidades) {// busca por especialidade
       this.PesquisaPorEspecialidade(especialidades);
     }
-    if (medico && dataInicio && dataFim) {
+    if (medico && dataInicio && dataFim) { // busca por medico e intervalo de datas
       this.PesquisarMedicoEmUmIntervaloDeDatas(medico, dataInicio, dataFim);
     }
   }

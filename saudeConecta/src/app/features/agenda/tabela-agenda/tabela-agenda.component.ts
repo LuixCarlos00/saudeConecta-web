@@ -87,15 +87,15 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     public dialog: MatDialog,
     protected DialogService: DialogService,
     private consultaStatusService: ConsultaStatusService
-  ) {}
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['ValorOpcao'].currentValue) {
       if (this.ValorOpcao.tipo == 1) {
         //pesquisa
-     //   this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(
-          this.ValorOpcao.date
-       // );
+        //   this.filtrandoDadosDoBancoPassadoParametros_Pesquisa(
+        this.ValorOpcao.date
+        // );
       }
       if (this.ValorOpcao.tipo == 2) {
         // pesquisa concluida
@@ -138,7 +138,7 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
         }
       }
       if (this.ValorOpcao.tipo == 7) {
-        console.log('Gerar PDF 7 ',this.ValorOpcao.tipo ,this.DadoSelecionadoParaGerarPDF);
+        console.log('Gerar PDF 7 ', this.ValorOpcao.tipo, this.DadoSelecionadoParaGerarPDF);
 
         //Gerar PDF
         if (this.DadoSelecionadoParaGerarPDF.length > 0) {
@@ -153,7 +153,7 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
       }
 
       if (this.ValorOpcao.tipo == 8) {
-        console.log('Gerar PDF 8',this.ValorOpcao.tipo , this.DadoSelecionadoParaGerarPDF);
+        console.log('Gerar PDF 8', this.ValorOpcao.tipo, this.DadoSelecionadoParaGerarPDF);
 
         if (this.DadoSelecionadoParaGerarPDF.length > 0) {
           this.GerarPDFConcluidos(this.DadoSelecionadoParaGerarPDF);
@@ -310,6 +310,8 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
 
   filtrandoDadosDoBancoPassadoParametros_Cronologia(dados: any) {
     this.LimparTabela();
+
+    console.log('tentou 2', dados);
 
     let novaConsulta: Consulta[] = [];
     for (let i = 0; i < dados.length; i++) {
@@ -489,12 +491,12 @@ export class TabelaAgendaComponent implements OnInit, OnChanges {
     this.consultaStatusService.BuscarTodosRegistrosDeConsultaStatus().pipe(take(1)).subscribe((response) => {
       this.LimparTabela();
 
-        // this.DadosDeConsulta = response.content;
-        // console.log('this.DadosDeConsulta', this.DadosDeConsulta);
+      // this.DadosDeConsulta = response.content;
+      // console.log('this.DadosDeConsulta', this.DadosDeConsulta);
 
-        // this.dataSource = response.content;
-        // console.log('this.dataSource', this.dataSource);
+      // this.dataSource = response.content;
+      // console.log('this.dataSource', this.dataSource);
 
-      });
+    });
   }
 }

@@ -47,8 +47,7 @@ export class ConsultaService {
     this.CadastroRealizadoComSucessoSubject.asObservable();
 
   private DadosParaCronologiaDoDiaSubject = new BehaviorSubject<any>(null);
-  BuscarDadoParaCronologia$ =
-    this.DadosParaCronologiaDoDiaSubject.asObservable();
+  BuscarDadoParaCronologia$ = this.DadosParaCronologiaDoDiaSubject.asObservable();
 
   constructor(
     private router: Router,

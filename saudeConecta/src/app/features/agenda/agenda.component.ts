@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
@@ -17,6 +17,7 @@ import { Template_PDFComponent } from './template_PDF/template_PDF.component';
 import { AvisosLembretesComponent } from './tabela-agenda/Avisos-Lembretes/Avisos-Lembretes.component';
 import { ObservacoesComponent } from './tabela-agenda/Observacoes/Observacoes.component';
 import { Tabela } from 'src/app/util/variados/interfaces/tabela/Tabela';
+import { el } from 'date-fns/locale';
 
 @Component({
   selector: 'app-agenda',
@@ -39,11 +40,22 @@ export class AgendaComponent implements OnInit {
     private consultaStatusService: ConsultaStatusService
   ) { }
 
+
+
   async ngOnInit() {
     this.buscarDadosParaTabela();
     this.FormularioAgenda = this.formBuilder.group({
       busca: [''],
     });
+
+
+    this.consultaService.BuscarDadoParaCronologia$.subscribe((dados) => {
+      if (dados) {
+        this.dataSource = this.tratarDadosParaTabela(dados);
+      }
+    })
+
+
   }
 
   async buscarDadosParaTabela() {
@@ -58,6 +70,9 @@ export class AgendaComponent implements OnInit {
       Swal.fire('Erro', 'Erro ao buscar dados da tabela.', 'error');
     }
   }
+
+
+
 
   async PesquisarNaTabelaConcluidos() {
     this.Finalizadas = true;
