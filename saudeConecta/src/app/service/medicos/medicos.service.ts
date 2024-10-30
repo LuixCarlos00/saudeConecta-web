@@ -21,10 +21,10 @@ export class MedicosService {
     private router: Router,
     private http: HttpClient,
     private tokenService: tokenService,
-    private apiUrl_Global : ApiUrlService,
-    private DialogService : DialogService
+    private apiUrl_Global: ApiUrlService,
+    private DialogService: DialogService
   ) {
-   this.apiUrl = this.apiUrl_Global.getUrl()
+    this.apiUrl = this.apiUrl_Global.getUrl()
   }
 
   private emitMedicosChange(medicos: Medico[]): void {
@@ -98,14 +98,7 @@ export class MedicosService {
   }
 
   buscarPorTodosOsMedicos(): Observable<Medico[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http
-      .get<Medico[]>(`${this.apiUrl}/medico/listatodosmedicos`, options)
-      .pipe(tap((medicos: Medico[]) => this.emitMedicosChange(medicos)));
+    return this.http.get<Medico[]>(`${this.apiUrl}/medico/listatodosmedicos`).pipe(tap((medicos: Medico[]) => this.emitMedicosChange(medicos)));
   }
 
 
