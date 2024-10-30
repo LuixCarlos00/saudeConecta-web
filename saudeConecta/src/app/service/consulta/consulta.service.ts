@@ -5,8 +5,6 @@ import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { tokenService } from 'src/app/util/Token/Token.service';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { ApiUrlService } from '../_Url-Global/Api-Url.service';
-import { CronologiaService } from '../cronologia/Cronologia.service';
-import { tr } from 'date-fns/locale';
 import { Tabela } from 'src/app/util/variados/interfaces/tabela/Tabela';
 
 
@@ -50,7 +48,6 @@ export class ConsultaService {
   BuscarDadoParaCronologia$ = this.DadosParaCronologiaDoDiaSubject.asObservable();
 
   constructor(
-    private router: Router,
     private http: HttpClient,
     private tokenService: tokenService,
     private apiUrl_Global: ApiUrlService
@@ -87,52 +84,25 @@ export class ConsultaService {
   }
 
   CriarConsulata(Consulta: Consulta): Observable<Consulta> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http.post<Consulta>(
-      `${this.apiUrl}/consulta/post`,
-      Consulta,
-      options
-    );
+    return this.http.post<Consulta>(`${this.apiUrl}/consulta/post`, Consulta);
   }
 
   VericarSeExetemConsultasMarcadas(consult: Consulta) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    };
-    const options = { headers, withCredentials: true };
     return this.http.get<Consulta>(
       `${this.apiUrl}/consulta/consultaData=${consult.ConData}&horario=${consult.ConHorario}&medico=${consult.ConMedico} `,
-      options
+
     );
   }
 
   BuscarTodosRegistrosDeConsulta(): Observable<Consulta[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http.get<Consulta[]>(
-      `${this.apiUrl}/consulta/Consultapagina`,
-      options
-    );
+    return this.http.get<Consulta[]>(`${this.apiUrl}/consulta/Consultapagina`);
   }
 
 
   DeletarConsulas(consultaId: any) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    };
-    const options = { headers, withCredentials: true };
     return this.http.delete<{ content: Consulta[] }>(
       `${this.apiUrl}/consulta/${consultaId}`,
-      options
+
     );
   }
 
@@ -141,15 +111,11 @@ export class ConsultaService {
     novaConsulta: Consulta
   ): Observable<Consulta> {
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    });
+
     return this.http
       .put<Consulta>(
         `${this.apiUrl}/consulta/editar/${consultaId}`,
         novaConsulta,
-        { headers }
       )
       .pipe(
         catchError((error) => {
@@ -160,39 +126,21 @@ export class ConsultaService {
   }
 
   ConcluirDadosDaTabela(IdConclusao: number): Observable<Consulta> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Authorization: `Bearer ${this.Token}`, });
-    return this.http.put<Consulta>(`${this.apiUrl}/consulta/concluido/${IdConclusao}`, {}, { headers });
+    return this.http.put<Consulta>(`${this.apiUrl}/consulta/concluido/${IdConclusao}`, {});
   }
 
   ChangeCadastroRealizadoComSucesso(cadastro: Consulta) {
     this.CadastroRealizadoComSucessoSubject.next(cadastro);
   }
 
-  VerificarHorariosDisponiveisReferentesAoMedicoEData(
-    medCodigo: any,
-    DataSelecionada: any
-  ) {
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    });
+  VerificarHorariosDisponiveisReferentesAoMedicoEData(medCodigo: any, DataSelecionada: any) {
     return this.http.get<string[]>(
-      `${this.apiUrl}/consulta/VerificarHorariosDisponiveisReferentesAoMedicoEData/medico=${medCodigo}&data=${DataSelecionada}`,
-      { headers }
+      `${this.apiUrl}/consulta/VerificarHorariosDisponiveisReferentesAoMedicoEData/medico=${medCodigo}&data=${DataSelecionada}`
     );
   }
 
   EnviarMensagem(EnviarMensagem: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Token}`,
-    });
-    return this.http.post<any>(
-      `${this.apiUrl}/consulta/EnviarMensagem `,
-      EnviarMensagem,
-      { headers }
-    );
+    return this.http.post<any>(`${this.apiUrl}/consulta/EnviarMensagem `, EnviarMensagem);
   }
 
 

@@ -17,9 +17,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BarraLateraComponent } from './util/variados/barra-Latera/barra-Latera.component';
 import { NgChartsModule } from 'ng2-charts';
 import { QuillModule } from 'ngx-quill';
- import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgrokInterceptor } from './util/variados/interceptor\'s/ngGrok.service';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ApiInterceptor } from './util/interceptors/api.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, BarraLateraComponent],
@@ -42,8 +43,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 
   ],
   providers: [provideAnimationsAsync(),
-    { provide: HTTP_INTERCEPTORS, useClass: NgrokInterceptor , multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: NgrokInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
