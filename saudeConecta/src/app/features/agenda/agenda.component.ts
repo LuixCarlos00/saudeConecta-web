@@ -93,14 +93,16 @@ export class AgendaComponent implements OnInit {
 
     try {
       const dados = await this.consultaService.filtrandoDadosDoBancoPassadoParametros_Pesquisa(busca, this.dataSource);
-      if (dados) {
+
+      if (Object.keys(dados).length > 0) {
+
         this.dataSource = dados;
       } else {
         this.buscarDadosParaTabela();
         Swal.fire('Erro', 'Pesquisa não encontrada.', 'error');
       }
     } catch (error) {
-      Swal.fire('Erro', 'Pesquisa falha ao fazer a busca.  ', 'error');
+      Swal.fire('Erro', ' Falha ao fazer a busca.  ', 'error');
       console.error(error);
     }
   }

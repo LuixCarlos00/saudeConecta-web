@@ -123,17 +123,6 @@ export class ConsultaService {
     );
   }
 
-  // BuscarRegistrosDeConsulta(busca: any) {
-  //   const headers = {
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Bearer ${this.Token}`,
-  //   };
-  //   const options = { headers, withCredentials: true };
-  //   return this.http.get<{ content: Consulta[] }>(
-  //     `${this.apiUrl}/consulta/BuscarRegistrosDeConsulta/${busca}`,
-  //     options
-  //   );
-  // }
 
   DeletarConsulas(consultaId: any) {
     const headers = {
@@ -212,7 +201,6 @@ export class ConsultaService {
   filtrandoDadosDoBancoPassadoParametros_Pesquisa(dados: any, dataSource: Tabela[]): Promise<Tabela[]> {
     return new Promise((resolve, reject) => {
       try {
-        // Função para normalizar e remover acentos e caracteres especiais
         const normalizeString = (str: string) => {
           return str
             .normalize('NFD')
@@ -234,7 +222,7 @@ export class ConsultaService {
           const parsedDate2 = parseDate(date2);
 
           if (!parsedDate1 || !parsedDate2) {
-            return false; // Se qualquer data for inválida, retorne false
+            return false;
           }
 
           return (
@@ -270,22 +258,23 @@ export class ConsultaService {
         let resultadoFiltrado = dataSource.filter(
           (item) =>
             safeNormalize(item.consulta).includes(dadosUpper) ||
-            safeNormalize(item.medico.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
-            safeNormalize(item.paciente.PaciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
+            safeNormalize(item.medico.medNome).includes(dadosUpper) ||
+            safeNormalize(item.paciente.PaciNome).includes(dadosUpper) ||
             safeNormalize(item.diaSemana).includes(dadosUpper) ||
-            isDateMatch(item.data, dados.trim()) || // Compara as datas sem normalizar
-            isTimeMatch(item.horario, dados.trim()) || // Compara os horários diretamente
+            isDateMatch(item.data, dados.trim()) ||
+            isTimeMatch(item.horario, dados.trim()) ||
             safeNormalize(item.observacao).includes(dadosUpper)
         );
 
 
         if (resultadoFiltrado.length > 0) {
+          console.log('dados filtrados:', resultadoFiltrado);
+
           resolve(resultadoFiltrado);
-          //this.LimparTabela();
-          //this.dataSource = resultadoFiltrado;
+
         } else {
-          // this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
-          // this.LimparTabela();
+          console.log('Nenhum dado encontrado.');
+          resolve([]);
         }
       } catch (error) {
         console.error('Erro ao filtrar dados:', error);
