@@ -193,7 +193,6 @@ export class AgendaComponent implements OnInit {
   CronogramaDoDia() {
 
     const DadosEditados = this.Finalizadas;
-    console.log('DadosEditados:', DadosEditados);
 
     this.dialog.open(CalendarDialogComponent, {
       width: '300px',
