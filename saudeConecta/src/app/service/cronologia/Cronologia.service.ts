@@ -54,6 +54,9 @@ export class CronologiaService {
   BuscandoTodasConsultas_Concluidas_PorMedico(medico: any) {
     return this.http.get<Consulta[]>(`${this.apiUrl}/consultaStatus/BuscandoTodasConsultas_Concluidas_PorMedico/${medico}`);
   }
+  BuscandoTodasConsultas_Concluidas_PorMedicoEmIntervaloDeDatas(medCodigo: any, DataInicioFormatada: string, DataFimFormatada: string) {
+    return this.http.get<Consulta[]>(`${this.apiUrl}/consultaStatus/BuscandoTodasConsultas_Concluidas_PorMedicoEmIntervaloDeDatas/medico=${medCodigo}&dataInicial=${DataInicioFormatada}&dataFinal=${DataFimFormatada}`);
+  }
 
 
 }
