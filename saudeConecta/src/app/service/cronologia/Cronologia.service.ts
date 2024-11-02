@@ -48,6 +48,10 @@ export class CronologiaService {
   BuscandoTodasConsultas_CONCLUIDADAS_EmIntervaloDeDatas(DataInicio: string, DataFim: string) {
     return this.http.get<ConsultaStatus[]>(`${this.apiUrl}/consultaStatus/BuscandoTodasConsultas_CONCLUIDADAS_EmIntervaloDeDatas/dataInicial=${DataInicio}&dataFinal=${DataFim}`);
   }
+  BuscandoTodasConsultas_Concluidas_EmIntervaloDeDatasComEspecialidade(DataInicioFormatada: string, DataFimFormatada: string, especialidades: any) {
+    return this.http.get<Consulta[]>(`${this.apiUrl}/consultaStatus/BuscandoTodasConsultas_Concluidas_EmIntervaloDeDatasComEspecialidade/dataInicial=${DataInicioFormatada}&dataFinal=${DataFimFormatada}&especialidades=${especialidades}`);
+  }
+
 
 
 }
