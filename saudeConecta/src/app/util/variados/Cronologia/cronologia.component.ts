@@ -237,7 +237,17 @@ export class CalendarDialogComponent implements OnInit {
       }
     }
     if (this.data.Pesquisa) {
-
+      this.CronologiaService.BuscandoTodasConsultas_Cocluidas_PorEspecialidade(especialidades).subscribe((dados) => {
+        if (Object.keys(dados).length > 0) {
+          this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
+        } else {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      },
+        (error) => {
+          Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+        }
+      );
     }
 
   }
