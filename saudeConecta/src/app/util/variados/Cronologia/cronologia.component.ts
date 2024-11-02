@@ -147,8 +147,6 @@ export class CalendarDialogComponent implements OnInit {
 
     if (!this.data.Pesquisa) {
       if (medico) {
-        console.log('entrou');
-
         this.CronologiaService.BuscandoTodasConsultasPorMedico(medico.medCodigo).subscribe((dados) => {
           if (Object.keys(dados).length > 0) {
             this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
@@ -163,7 +161,19 @@ export class CalendarDialogComponent implements OnInit {
       }
     }
     if (this.data.Pesquisa) {
-
+      if (medico) {
+        this.CronologiaService.BuscandoTodasConsultas_Concluidas_PorMedico(medico.medCodigo).subscribe((dados) => {
+          if (Object.keys(dados).length > 0) {
+            this.ConsultaService.PassarDadosParaCronologiaDoDia(dados);
+          } else {
+            Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+          }
+        },
+          (error) => {
+            Swal.fire('Erro', 'Erro ao filtrar parametros na tabela.', 'error');
+          }
+        );
+      }
     }
 
 
