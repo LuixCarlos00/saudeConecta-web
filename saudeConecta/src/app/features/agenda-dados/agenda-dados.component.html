@@ -1,0 +1,86 @@
+<body>
+  <main>
+
+
+
+    <form class="formulario">
+
+
+      <button style="border: hidden; background-color: rgb(206, 212, 212)" (click)="voltarParaHome()">
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
+      </button>
+
+
+      <div class="header">
+        <div class="header_pesquisa">
+          <div class="header_pesquisa_container">
+            <p class="label_filtro_PESQUISA">Pesquisar Médicos</p>
+            <div class="header_pesquisa_input">
+              <input type="text" id="Pesquisa" name="Pesquisa" required formControlName="Pesquisa">
+              <button>Pesquisar</button>
+            </div>
+
+
+
+
+          </div>
+
+
+          <div>
+            <ul class="header_options_Lista">
+              <li class="label_filtro">Nome
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="1" required>
+              </li>
+
+              <li class="label_filtro">CRM
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="2" required>
+              </li>
+
+              <li class="label_filtro">Cidade
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="3" required>
+              </li>
+
+              <li class="label_filtro">Especialidade
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="4" required>
+              </li>
+
+              <li class="label_filtro">Buscar todos
+                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="5" required>
+              </li>
+
+            </ul>
+          </div>
+
+
+        </div>
+
+        <div class="header_user">
+          <i class="fa-solid fa-user fa-xl" style="color: #2c3230;"></i>
+          <div>
+            <label style="font-size: 12px; margin-left: 10px;">
+              <strong>Código: </strong> ,
+              <strong>Nome: </strong> ,
+              <strong>Telefone: </strong> ,
+              <strong>CRM:</strong> ,
+              <strong>Email:</strong> ,
+              <strong>Especialidade:</strong> ,
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+
+
+    <div>
+
+      Tabela
+      <!-- <app-tabelas-Pesquisas-Medicos *ngIf="showResultadoMedico" [dadosMedico]="dadosMedico" (fechar)="fecharTabela()"
+      (selecionaMedico)="MedicoSelecionado($event)">
+    </app-tabelas-Pesquisas-Medicos> -->
+    </div>
+
+
+  </main>
+</body>

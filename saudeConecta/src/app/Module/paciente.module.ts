@@ -68,6 +68,7 @@ import { TrocaSenhaUsuariosComponent } from '../features/gerenciamento-usuario/t
 import { MatBadgeModule } from '@angular/material/badge';
 import { HistoricoCompletoComponent } from '../features-Medico/impressoes-PDF/historicoCompleto/historicoCompleto.component';
 import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
+import { AgendaDadosComponent } from '../features/agenda-dados/agenda-dados.component';
 
 
 @NgModule({
@@ -91,7 +92,7 @@ import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/Editar
     EditarConsultasComponent,
     TabelaEditarMedicosConsultasComponent,
     Template_PDFComponent,
-
+    AgendaDadosComponent,
     GerenciamentoComponent,
     DashboardComponent,
     GraficoAgendamentosDiasSemanasMesComponent,
