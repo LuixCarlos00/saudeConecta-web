@@ -12,7 +12,7 @@ import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialo
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import Swal from 'sweetalert2';
-import { ObservacoesComponent } from 'src/app/features/agenda/tabela-agenda/Observacoes/Observacoes.component';
+import { ObservacoesComponent } from 'src/app/features/agenda/Observacoes/Observacoes.component';
 import { id, is } from 'date-fns/locale';
 import { ImprimirSoliciatacaoDeExamesComponent } from '../impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
 import { AtestadoPacienteComponent } from '../impressoes-PDF/AtestadoPaciente/AtestadoPaciente.component';
@@ -45,7 +45,7 @@ export class HistoricosComponent implements OnInit {
     public dialog: MatDialog,
     private ProntuarioService: ProntuarioService,
     private DialogService: DialogService
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class HistoricosComponent implements OnInit {
     this.tokenService.UsuarioLogadoValue$.subscribe((Usuario) => {
       if (Usuario) {
         this.UsuarioLogado = Usuario;
-       }
+      }
     });
     if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
       this.BuscarDadosDeAgendaDoMedico();
@@ -100,7 +100,7 @@ export class HistoricosComponent implements OnInit {
         });
 
         if (Consulta.length > 0) {
-           this.dataSource = Consulta;
+          this.dataSource = Consulta;
           this.filteredDataSource = Consulta; // Inicializa o filtro
         } else {
           Swal.fire(
@@ -264,7 +264,7 @@ export class HistoricosComponent implements OnInit {
       });
 
       if (Consulta.length > 0) {
-         this.dataSource = Consulta;
+        this.dataSource = Consulta;
         this.filteredDataSource = Consulta; // Inicializa o filtro
       } else {
         Swal.fire('Nenhuma consulta encontrada', 'Tente novamente', 'warning');
@@ -366,11 +366,11 @@ export class HistoricosComponent implements OnInit {
         showCancelButton: true,
         inputValidator: (value) => {
           if (value === '1') {
-             this.ImprimirSolicitacaoDeExames(dados);
+            this.ImprimirSolicitacaoDeExames(dados);
           } else if (value === '2') {
-             this.ImprimirPrescricaoComponent(dados);
+            this.ImprimirPrescricaoComponent(dados);
           } else if (value === '3') {
-             this.ImprimirHistorioCompleto(dados);
+            this.ImprimirHistorioCompleto(dados);
           } else if (value === '4') {
             this.ImprimirAtestadoPacienteComponent(dados);
           }

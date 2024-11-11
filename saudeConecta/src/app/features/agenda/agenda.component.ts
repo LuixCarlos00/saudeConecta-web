@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
@@ -8,16 +8,13 @@ import { CadastroMedicoComponent } from '../cadastro/cadastro-medico/cadastro-me
 import { CadastroPacienteComponent } from '../cadastro/cadastro-paciente/cadastro-paciente.component';
 import { CadastroSecretariaComponent } from '../cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { CalendarDialogComponent } from 'src/app/util/variados/Cronologia/cronologia.component';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs';
 import Swal from 'sweetalert2';
-import { EditarConsultasComponent } from './tabela-agenda/Editar-Consultas/Editar-Consultas.component';
+import { EditarConsultasComponent } from './Editar-Consultas/Editar-Consultas.component';
 import { Template_PDFComponent } from './template_PDF/template_PDF.component';
-import { AvisosLembretesComponent } from './tabela-agenda/Avisos-Lembretes/Avisos-Lembretes.component';
-import { ObservacoesComponent } from './tabela-agenda/Observacoes/Observacoes.component';
+import { AvisosLembretesComponent } from './Avisos-Lembretes/Avisos-Lembretes.component';
+import { ObservacoesComponent } from './Observacoes/Observacoes.component';
 import { Tabela } from 'src/app/util/variados/interfaces/tabela/Tabela';
-import { el } from 'date-fns/locale';
 
 @Component({
   selector: 'app-agenda',

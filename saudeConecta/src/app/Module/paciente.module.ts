@@ -25,7 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -37,20 +37,16 @@ import { RecuperaCadastroComponent } from '../features/recupera-Cadastro/recuper
 import { PesquisaMedicosComponent } from '../features/pesquisaMedicos/pesquisaMedicos.component';
 import { TabelasPesquisasMedicosComponent } from '../features/pesquisaMedicos/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
 
- import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro-adm.component';
-import { TabelaAgendaComponent } from '../features/agenda/tabela-agenda/tabela-agenda.component';
+import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro-adm.component';
 import { AgendaComponent } from '../features/agenda/agenda.component';
-import { ObservacoesComponent } from '../features/agenda/tabela-agenda/Observacoes/Observacoes.component';
-import { EditarConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/Editar-Consultas.component';
-import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/tabela-agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
-import { TabelaAgendaStatusComponent } from '../features/agenda/tabela-agenda-status/tabela-agenda-status.component';
+import { ObservacoesComponent } from '../features/agenda/Observacoes/Observacoes.component';
+import { EditarConsultasComponent } from '../features/agenda/Editar-Consultas/Editar-Consultas.component';
 import { Template_PDFComponent } from '../features/agenda/template_PDF/template_PDF.component';
-import { Template_PDF_ConcluidosComponent } from '../features/agenda/template_PDF_Concluidos/template_PDF_Concluidos.component';
 import { CadastroSecretariaComponent } from '../features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { GerenciamentoComponent } from '../features/gerenciamento/gerenciamento.component';
 import { TabelaDePacientesComponent } from '../features/pesquisaPaciente/tabela-de-pacientes/tabela-de-pacientes.component';
 import { PesquiasPacienteComponent } from '../features/pesquisaPaciente/pesquiasPaciente.component';
-import { AvisosLembretesComponent } from '../features/agenda/tabela-agenda/Avisos-Lembretes/Avisos-Lembretes.component';
+import { AvisosLembretesComponent } from '../features/agenda/Avisos-Lembretes/Avisos-Lembretes.component';
 import { DashboardComponent } from '../features/dashboard/dashboard.component';
 import { GraficoQntConsultasDiaAnteriorComponent } from '../features/dashboard/grafico-qnt-consultas-dia-anterior/grafico-qnt-consultas-dia-anterior.component';
 import { GraficoAgendamentosDiasSemanasMesComponent } from '../features/dashboard/grafico-agendamentos-dias-semanas-mes/grafico-agendamentos-dias-semanas-mes.component';
@@ -60,17 +56,18 @@ import { GerenciamentoUsuarioComponent } from '../features/gerenciamento-usuario
 import { TabelaTodosUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/tabela-todos-usuarios.component';
 import { TabelaAgendaMedicoComponent } from '../features-Medico/tabela-agenda-medico/tabela-agenda-medico.component';
 import { ProntuarioComponent } from '../features-Medico/prontuario/prontuario.component';
- import { DiagnosticoComponent } from '../features-Medico/gerenciamentoProntuario/D_diagnostico/diagnostico.component';
+import { DiagnosticoComponent } from '../features-Medico/gerenciamentoProntuario/D_diagnostico/diagnostico.component';
 import { PediatriaExamesFisicosComponent } from '../features-Medico/gerenciamentoProntuario/A_pediatria-exames-fisicos/pediatria-exames-fisicos.component';
 import { PrescricaoComponent } from '../features-Medico/gerenciamentoProntuario/E_prescricao/prescricao.component';
- import { ImprimirPrescricaoComponent } from '../features-Medico/impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
+import { ImprimirPrescricaoComponent } from '../features-Medico/impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
 import { ImprimirSoliciatacaoDeExamesComponent } from '../features-Medico/impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
 import { HistoricosComponent } from '../features-Medico/historicos/historicos.component';
 import { DadosPessoaisComponent } from '../features-Medico/DadosPessoais/DadosPessoais.component';
 import { AtestadoPacienteComponent } from '../features-Medico/impressoes-PDF/AtestadoPaciente/AtestadoPaciente.component';
 import { TrocaSenhaUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/TrocaSenhaUsuarios/TrocaSenhaUsuarios.component';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 import { HistoricoCompletoComponent } from '../features-Medico/impressoes-PDF/historicoCompleto/historicoCompleto.component';
+import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
 
 
 @NgModule({
@@ -88,15 +85,13 @@ import { HistoricoCompletoComponent } from '../features-Medico/impressoes-PDF/hi
     PesquiasPacienteComponent,
     TrocaSenhaComponent,
     CadastroAdmComponent,
-    TabelaAgendaComponent,
     AgendaComponent,
     ObservacoesComponent,
     AvisosLembretesComponent,
     EditarConsultasComponent,
     TabelaEditarMedicosConsultasComponent,
-    TabelaAgendaStatusComponent,
     Template_PDFComponent,
-    Template_PDF_ConcluidosComponent,
+
     GerenciamentoComponent,
     DashboardComponent,
     GraficoAgendamentosDiasSemanasMesComponent,
@@ -157,4 +152,4 @@ import { HistoricoCompletoComponent } from '../features-Medico/impressoes-PDF/hi
 
   ],
 })
-export class PacienteModule {}
+export class PacienteModule { }

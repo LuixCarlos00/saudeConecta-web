@@ -1,6 +1,6 @@
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
-import { Medico } from './../../../../util/variados/interfaces/medico/medico';
+import { Medico } from '../../../util/variados/interfaces/medico/medico';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
