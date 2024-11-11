@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+hr {
+  border: 2px solid black;
+}
+
 main {
   background-color: #f5f5f5;
   font-family: Arial, sans-serif;
@@ -22,30 +26,24 @@ main {
 }
 
 
-.header_pesquisa_container {
+.header_pesquisa_container,
+.header_user {
   margin: 0 50px;
 }
 
 .label_filtro_PESQUISA {
-  top: 10px;
+  margin: 5px 0px;
   position: relative;
   font-size: 28px;
   font-weight: 700;
 }
 
 
-.header_pesquisa_input {}
-
-
-
-
 .header_options_Lista {
   display: flex;
-  justify-content: space-between;
   list-style-type: none;
   margin: 0 10px;
   gap: 5px;
-
 }
 
 
@@ -67,4 +65,15 @@ button {
   border-radius: 4px;
   margin-left: 20px;
   cursor: pointer;
+}
+
+
+.header_user_info {
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+}
+
+.header_user_info p {
+  margin: -2px;
 }
