@@ -45,11 +45,10 @@ export class PesquisaMedicosComponent implements OnInit {
   }
 
   async PesquisarMedicosFiltro() {
-    const pesquisa: string =
-      this.FormularioPesquisa.get('PesquisaMedico')?.value;
-    const FiltroPesquisa: number = this.FormularioPesquisa.get(
-      'FiltroPesquisaMedico'
-    )?.value;
+    const pesquisa: string = this.FormularioPesquisa.get('PesquisaMedico')?.value;
+
+    const FiltroPesquisa: number = this.FormularioPesquisa.get('FiltroPesquisaMedico')?.value;
+
     try {
       const dados = await this.medicosService.PesquisaMedicoFiltro(
         FiltroPesquisa,

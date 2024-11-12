@@ -42,6 +42,7 @@ main {
 
 
 .header_options_Lista {
+  font-size: 12px;
   display: flex;
   list-style-type: none;
   margin: 0 10px;

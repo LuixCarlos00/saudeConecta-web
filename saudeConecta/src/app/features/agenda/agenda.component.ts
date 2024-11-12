@@ -94,7 +94,6 @@ export class AgendaComponent implements OnInit {
       const dados = await this.consultaService.filtrandoDadosDoBancoPassadoParametros_Pesquisa(busca, this.dataSource);
 
       if (Object.keys(dados).length > 0) {
-
         this.dataSource = dados;
       } else {
         this.buscarDadosParaTabela();
@@ -190,9 +189,7 @@ export class AgendaComponent implements OnInit {
 
 
   CronogramaDoDia() {
-
     const DadosEditados = this.Finalizadas;
-
     this.dialog.open(CalendarDialogComponent, {
       width: '300px',
       height: '300px',

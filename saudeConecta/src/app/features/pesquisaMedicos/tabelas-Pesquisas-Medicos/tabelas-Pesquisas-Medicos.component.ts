@@ -1,6 +1,8 @@
+
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -12,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Medico } from './../../../util/variados/interfaces/medico/medico';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tabelas-Pesquisas-Medicos',
@@ -29,10 +32,15 @@ export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
   @Output() selecionaMedico = new EventEmitter<any>();
   @Output() fechar = new EventEmitter<void>();
 
-  constructor(private medicosService: MedicosService, private router: Router) {}
+  constructor(
+    public dialogRef: MatDialogRef<TabelasPesquisasMedicosComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: { datasource: any; },
+
+    private medicosService: MedicosService, private router: Router) { }
 
   ngOnInit() {
-    this.dataSource = this.dadosMedico;
+    this.dataSource = this.data.datasource;
   }
 
   ngOnDestroy() {
@@ -49,7 +57,8 @@ export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['position', 'Especialidade', 'MarcaConsulta'];
 
   marcarConsulta(elemento: Medico) {
-    this.fecharTabela();
+    this.dialogRef.close(elemento);
+
     this.selecionaMedico.emit(elemento);
   }
 
@@ -57,7 +66,4 @@ export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
     this.selecionaMedico.emit(Medico);
   }
 
-  fecharTabela() {
-    this.fechar.emit();
-  }
 }
