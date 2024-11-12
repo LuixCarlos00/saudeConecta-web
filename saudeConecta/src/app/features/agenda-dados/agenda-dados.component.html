@@ -16,23 +16,23 @@
           <div>
             <ul class="header_options_Lista">
               <li>Nome
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="1" required>
+                <input formControlName="OptionsFindMedicos" class="input_filtro" type="radio" [value]="1" required>
               </li>
 
               <li>CRM
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="2" required>
+                <input formControlName="OptionsFindMedicos" class="input_filtro" type="radio" [value]="2" required>
               </li>
 
               <li>Cidade
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="3" required>
+                <input formControlName="OptionsFindMedicos" class="input_filtro" type="radio" [value]="3" required>
               </li>
 
               <li>Especialidade
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="4" required>
+                <input formControlName="OptionsFindMedicos" class="input_filtro" type="radio" [value]="4" required>
               </li>
 
               <li>Buscar todos
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="5" required>
+                <input formControlName="OptionsFindMedicos" class="input_filtro" type="radio" [value]="5" required>
               </li>
 
             </ul>
@@ -43,10 +43,11 @@
           <div class="header_user_info">
             <p>Código:</p>
             <p>Nome do Medico :</p>
+            <p>Especialidade:</p>
             <p>Telefone:</p>
             <p>Email:</p>
             <p>CRM:</p>
-            <p>Especialidade:</p>
+
           </div>
         </div>
       </div>
@@ -68,23 +69,23 @@
           <div>
             <ul class="header_options_Lista">
               <li>Nome
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="1" required>
+                <input formControlName="OptionsFindPaciente" class="input_filtro" type="radio" [value]="1" required>
               </li>
 
-              <li>CRM
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="2" required>
+              <li>CPF
+                <input formControlName="OptionsFindPaciente" class="input_filtro" type="radio" [value]="2" required>
               </li>
 
-              <li>Cidade
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="3" required>
+              <li>RG
+                <input formControlName="OptionsFindPaciente" class="input_filtro" type="radio" [value]="3" required>
               </li>
 
-              <li>Especialidade
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="4" required>
+              <li>Telefone
+                <input formControlName="OptionsFindPaciente" class="input_filtro" type="radio" [value]="4" required>
               </li>
 
               <li>Buscar todos
-                <input formControlName="FiltroPesquisaMedico" class="input_filtro" type="radio" [value]="5" required>
+                <input formControlName="OptionsFindPaciente" class="input_filtro" type="radio" [value]="5" required>
               </li>
 
             </ul>
@@ -94,20 +95,60 @@
           <i class="fa-solid fa-user fa-xl"></i>
           <div class="header_user_info">
             <p>Código:</p>
-            <p>Nome do Medico :</p>
+            <p>Nome do paciente :</p>
             <p>Telefone:</p>
             <p>Email:</p>
-            <p>CRM:</p>
-            <p>Especialidade:</p>
+            <p>CPF:</p>
+            <p>RG:</p>
           </div>
         </div>
       </div>
     </form>
 
+    <hr>
+
+
+
+    <div class="comment">
+
+      <div>
+        <p class="comment_title">Observação:</p>
+        <textarea formControlName="observacao" class="textarea" type="text"
+          placeholder="Tem alguma observação? Quais:"> </textarea>
+      </div>
+
+      <div>
+        <p>
+          <font style="color: red; font-size: 12px;">* </font>Data
+        </p>
+        <input class="input_DATA" formControlName="date" type="date" id="date" name="date">
+      </div>
+
+      <div>
+        <p>
+          <font style="color: red; font-size: 12px;">* </font>Hora
+        </p>
+        <select class="input_HORA" formControlName="time" name="time" id="time">
+          <option> </option>
+        </select>
+      </div>
+
+
+      <select class="input_Forma_Pagamento" formControlName="Pagamento" name="Pagamento" id="Pagamento">
+        <option>Forma de Pagamento</option>
+        <option>Cartao</option>
+        <option>Dinheiro</option>
+        <option>Pix</option>
+      </select>
 
 
 
 
+    </div>
+
+    <div class="folder">
+      <button class="btnMarcar_consulta">Marca Consulta</button>
+    </div>
 
   </main>
 </body>

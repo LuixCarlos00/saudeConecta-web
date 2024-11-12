@@ -27,14 +27,16 @@ main {
 
 
 .header_pesquisa_container,
-.header_user {
+.header_user,
+.comment {
   margin: 0 50px;
 }
 
-.label_filtro_PESQUISA {
+.label_filtro_PESQUISA,
+.comment_title {
   margin: 5px 0px;
   position: relative;
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -76,4 +78,61 @@ button {
 
 .header_user_info p {
   margin: -2px;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textarea {
+  width: 550px;
+  height: 100px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.btnMarcar_consulta {
+  width: 500px;
+  margin: 10px;
+  padding: 10px;
+  background-color: rgba(121, 165, 124, 0.863);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btnMarcar_consulta:hover {
+  background-color: rgb(49, 168, 59);
+  scale: 1.1;
+  transform: translateY(-5px);
+}
+
+.folder {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.input_DATA,
+.input_HORA,
+.input_Forma_Pagamento {
+  border-radius: 5px;
+  margin-left: 10px;
+  border: 1px solid #007bff;
+  width: 150px;
+  height: 2%;
+}
+
+.input_HORA {
+  height: 40px;
+}
+
+.input_Forma_Pagamento {
+  margin-top: 30px;
+  height: 40px;
+  width: 200px;
 }

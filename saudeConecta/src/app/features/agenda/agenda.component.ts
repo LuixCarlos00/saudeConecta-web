@@ -1,3 +1,4 @@
+import { log } from 'node:console';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -59,6 +60,7 @@ export class AgendaComponent implements OnInit {
     try {
       const dados = await this.consultaService.BuscarTodosRegistrosDeConsulta().toPromise();
       if (dados) {
+        console.log('dados', dados);
         this.dataSource = []
         this.dataSource = this.tratarDadosParaTabela(dados);
       }
