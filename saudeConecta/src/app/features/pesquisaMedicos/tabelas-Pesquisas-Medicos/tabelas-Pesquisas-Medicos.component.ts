@@ -33,7 +33,7 @@ export class TabelasPesquisasMedicosComponent implements OnInit {
     public dialogRef: MatDialogRef<TabelasPesquisasMedicosComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: { datasource: any; },
-    private medicosService: MedicosService, private router: Router) { }
+  ) { }
 
   ngOnInit() {
     this.dataSource = this.data.datasource;

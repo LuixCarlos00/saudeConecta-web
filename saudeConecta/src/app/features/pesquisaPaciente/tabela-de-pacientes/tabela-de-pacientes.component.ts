@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 
@@ -8,31 +9,27 @@ import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
   styleUrls: ['./tabela-de-pacientes.component.css'],
 })
 export class TabelaDePacientesComponent implements OnInit {
-  @Input() dadosPaciente: any;
-  @Output() fechar = new EventEmitter<void>();
-  @Output() selecionaPaciente = new EventEmitter<any>();
+
+
   dataSource: Paciente[] = [];
   highValue: number = 5;
   lowValue!: number;
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<TabelaDePacientesComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: { datasource: any; },) { }
+
 
   ngOnInit() {
-
-    this.dataSource = this.dadosPaciente;
-
+    this.dataSource = this.data.datasource;
   }
 
 
 
   SelecionaPaciente(elemento: Paciente) {
-    this.fecharTabela()
-    this.selecionaPaciente.emit(elemento)
+    this.dialogRef.close(elemento);
   }
 
-  fecharTabela() {
-    this.fechar.emit();
-  }
 
   displayedColumns: string[] = [
     'paciCodigo',

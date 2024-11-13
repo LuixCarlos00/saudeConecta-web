@@ -8,6 +8,7 @@ import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { MatDialog } from '@angular/material/dialog';
 import { TabelasPesquisasMedicosComponent } from '../pesquisaMedicos/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
+import { TabelaDePacientesComponent } from '../pesquisaPaciente/tabela-de-pacientes/tabela-de-pacientes.component';
 
 @Component({
   selector: 'app-agenda-dados',
@@ -74,7 +75,7 @@ export class AgendaDadosComponent implements OnInit {
       const pesquisa: string = this.FormularioPaciente.get('PesquisaPaciente')?.value;
       try {
         const dados = await this.pacientesService.PesquisarPacientesFiltro(FiltroPesquisa, pesquisa);
-        this.AbirTabela(dados);
+        this.AbirTabela(dados, 'paciente');
       } catch (error) {
         this.medicosService.exibirMensagemErro();
       }
@@ -84,7 +85,7 @@ export class AgendaDadosComponent implements OnInit {
       const pesquisa: string = this.FormularioMedicos.get('PesquisaMedicos')?.value;
       try {
         const dados = await this.medicosService.PesquisaMedicoFiltro(FiltroPesquisa, pesquisa);
-        this.AbirTabela(dados);
+        this.AbirTabela(dados, 'medico');
       } catch (error) {
         this.medicosService.exibirMensagemErro();
       }
@@ -98,18 +99,35 @@ export class AgendaDadosComponent implements OnInit {
 
 
 
-  AbirTabela(Dados: any) {
-    const dialogRef = this.dialog.open(TabelasPesquisasMedicosComponent, {
-      width: '800px',
-      data: { datasource: Dados, },
-    });
+  AbirTabela(Dados: any, value: string) {
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log(result);
-        this.Medico = result;
-      }
-    })
+    if (value === 'paciente') {
+      const dialogRef = this.dialog.open(TabelaDePacientesComponent, {
+        width: '800px',
+        data: { datasource: Dados, },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          console.log(result);
+          this.Paciente = result;
+        }
+      })
+    }
+
+    if (value === 'medico') {
+      const dialogRef = this.dialog.open(TabelasPesquisasMedicosComponent, {
+        width: '800px',
+        data: { datasource: Dados, },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          console.log(result);
+          this.Medico = result;
+        }
+      })
+    }
   }
 
 
