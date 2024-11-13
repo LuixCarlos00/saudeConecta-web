@@ -1,0 +1,81 @@
+.container {
+  height: 400px;
+  width: 800px;
+  overflow: auto;
+}
+
+.custom-table {
+  width: 80%;
+  height: 300px;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.custom-table .cabecalho-coluna,
+.custom-table .colunas {
+  background: #efefef;
+}
+
+.custom-table .Nome,
+.custom-table .Consulta {
+  color: rgb(69, 118, 211);
+  font-weight: bold;
+}
+
+.custom-table .consulta-coluna {
+  width: 150px;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.close-button {
+  margin-top: -520px;
+  border: hidden;
+  background-color: rgb(204, 17, 17);
+  border-radius: 5px;
+  color: white;
+}
+
+/* Estilos para Mobile */
+@media screen and (max-width: 750px) {
+  .container {
+    height: 450px;
+    width: 350px;
+    overflow: auto;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo semi-transparente */
+    z-index: 9999; /* Garante que a sobreposição esteja acima de outros conteúdos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
