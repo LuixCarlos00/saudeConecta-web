@@ -14,6 +14,7 @@ import { GerenciamentoService } from 'src/app/service/gerenciamento/gerenciament
   styleUrls: ['./pesquisaMedicos.component.css'],
 })
 export class PesquisaMedicosComponent implements OnInit {
+
   showResultadoMedico: boolean = false;
   dadosMedico: any;
   MedicoEscolhido!: any;

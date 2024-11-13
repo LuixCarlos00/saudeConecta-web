@@ -10,7 +10,7 @@
             <p class="label_filtro_PESQUISA">Pesquisar Médicos</p>
             <div class="header_pesquisa_input">
               <input type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaMedicos">
-              <button (click)="PesquisarMedicos()">Pesquisar</button>
+              <button (click)="Pesquisar('medico')">Pesquisar</button>
             </div>
           </div>
           <div>
@@ -41,12 +41,12 @@
         <div class="header_user">
           <i class="fa-solid fa-user fa-xl"></i>
           <div class="header_user_info">
-            <p>Código:</p>
-            <p>Nome do Medico :</p>
-            <p>Especialidade:</p>
-            <p>Telefone:</p>
-            <p>Email:</p>
-            <p>CRM:</p>
+            <p>Código:{{Medico.medCodigo }}</p>
+            <p>Nome do Medico :{{Medico.medNome }}</p>
+            <p>Especialidade:{{Medico.medEspecialidade }}</p>
+            <p>Telefone:{{Medico.medTelefone }}</p>
+            <p>Email:{{Medico.medEmail }}</p>
+            <p>CRM:{{Medico.medCrm }}</p>
 
           </div>
         </div>
@@ -63,7 +63,7 @@
             <p class="label_filtro_PESQUISA">Pesquisar Pacientes</p>
             <div class="header_pesquisa_input">
               <input type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaPaciente">
-              <button>Pesquisar</button>
+              <button (click)="Pesquisar('paciente')">Pesquisar</button>
             </div>
           </div>
           <div>
@@ -94,12 +94,12 @@
         <div class="header_user">
           <i class="fa-solid fa-user fa-xl"></i>
           <div class="header_user_info">
-            <p>Código:</p>
-            <p>Nome do paciente :</p>
-            <p>Telefone:</p>
-            <p>Email:</p>
-            <p>CPF:</p>
-            <p>RG:</p>
+            <p>Código: {{Paciente.paciCodigo }}</p>
+            <p>Nome do paciente : {{Paciente.paciNome }}</p>
+            <p>Telefone: {{Paciente.paciTelefone }}</p>
+            <p>Email: {{Paciente.paciEmail }}</p>
+            <p>CPF: {{Paciente.paciCpf }}</p>
+            <p>RG: {{Paciente.paciRg }}</p>
           </div>
         </div>
       </div>

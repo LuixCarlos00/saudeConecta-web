@@ -21,31 +21,25 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './tabelas-Pesquisas-Medicos.component.html',
   styleUrls: ['./tabelas-Pesquisas-Medicos.component.css'],
 })
-export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
+export class TabelasPesquisasMedicosComponent implements OnInit {
+
   dataSource: Medico[] = [];
   highValue: number = 5;
   lowValue: number = 0;
-  private subscription: Subscription = new Subscription();
   clickedRows = new Set<Medico>();
 
-  @Input() dadosMedico: any;
-  @Output() selecionaMedico = new EventEmitter<any>();
-  @Output() fechar = new EventEmitter<void>();
 
   constructor(
     public dialogRef: MatDialogRef<TabelasPesquisasMedicosComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: { datasource: any; },
-
     private medicosService: MedicosService, private router: Router) { }
 
   ngOnInit() {
     this.dataSource = this.data.datasource;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+
 
   getPaginatorData(event: PageEvent): PageEvent {
     this.lowValue = event.pageIndex * event.pageSize;
@@ -58,12 +52,8 @@ export class TabelasPesquisasMedicosComponent implements OnInit, OnDestroy {
 
   marcarConsulta(elemento: Medico) {
     this.dialogRef.close(elemento);
-
-    this.selecionaMedico.emit(elemento);
   }
 
-  clicked(Medico: Medico) {
-    this.selecionaMedico.emit(Medico);
-  }
+
 
 }

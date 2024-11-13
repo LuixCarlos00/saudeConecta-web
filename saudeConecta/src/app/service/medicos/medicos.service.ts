@@ -45,55 +45,30 @@ export class MedicosService {
 
 
   cadastrarMedico(medico: Medico): Observable<Medico> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http.post<Medico>(`${this.apiUrl}/medico/post`, medico, options);
+    return this.http.post<Medico>(`${this.apiUrl}/medico/post`, medico);
   }
 
   buscarListaMedicosPorEspecialidade(pesquisa: string): Observable<Medico[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
     return this.http
-      .get<Medico[]>(`${this.apiUrl}/medico/buscarPorMedEspecialidade/${pesquisa}`, options)
+      .get<Medico[]>(`${this.apiUrl}/medico/buscarPorMedEspecialidade/${pesquisa}`)
       .pipe(tap((medicos: Medico[]) => this.emitMedicosChange(medicos)));
   }
 
   buscarListaMedicosPorCidade(pesquisa: string): Observable<Medico[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
     return this.http
-      .get<Medico[]>(`${this.apiUrl}/medico/buscarPorCidade/${pesquisa}`, options)
+      .get<Medico[]>(`${this.apiUrl}/medico/buscarPorCidade/${pesquisa}`)
       .pipe(tap((medicos: Medico[]) => this.emitMedicosChange(medicos)));
   }
 
   buscarListaMedicosPorCRM(pesquisa: string): Observable<Medico[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
     return this.http
-      .get<Medico[]>(`${this.apiUrl}/medico/buscarPorCRM/${pesquisa}`, options)
+      .get<Medico[]>(`${this.apiUrl}/medico/buscarPorCRM/${pesquisa}`)
       .pipe(tap((medicos: Medico[]) => this.emitMedicosChange(medicos)));
   }
 
   buscarListaMedicosPorNome(pesquisa: string): Observable<Medico[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
     return this.http
-      .get<Medico[]>(`${this.apiUrl}/medico/buscarPorNome/${pesquisa}`, options)
+      .get<Medico[]>(`${this.apiUrl}/medico/buscarPorNome/${pesquisa}`)
       .pipe(tap((medicos: Medico[]) => this.emitMedicosChange(medicos)));
   }
 

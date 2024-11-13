@@ -197,7 +197,7 @@ export class EditarConsultasComponent implements OnInit {
       'FiltroPesquisaPaciente'
     )?.value;
     try {
-      const dados = await this.PacientesService.PesquisarPacientes(
+      const dados = await this.PacientesService.PesquisarPacientesFiltro(
         FiltroPesquisaPaciente,
         pesquisa
       );

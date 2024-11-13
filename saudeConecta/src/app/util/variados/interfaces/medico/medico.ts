@@ -29,6 +29,7 @@ export interface Medico {
   endereco?: number;
   usuario?: number;
 
+
   medTempoDeConsulta?: number;
 
   //padronizar
