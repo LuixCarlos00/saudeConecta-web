@@ -39,9 +39,12 @@
       </div>
 
       <br>
-      <!--
-      <app-tabela-de-pacientes *ngIf="showResultadoPaciente" [dadosPaciente]="dadosPacientePassandoTabela"
-        (fechar)="fecharTabelaPacinte()" (selecionaPaciente)="PacienteSelecionado($event)"></app-tabela-de-pacientes> -->
+
+
+      <app-tabela-editar-Paciente-Consultas *ngIf="showResultadoPaciente" [dadosPaciente]="dadosPacientePassandoTabela"
+        (fechar)="fecharTabelaPacinte()" (selecionaPaciente)="PacienteSelecionado($event)">
+      </app-tabela-editar-Paciente-Consultas>
+
 
       <div *ngIf="DadosAntigosDeConsulta.paciente" style=" margin-left: 20px;   width: 600px;">
         <div style="border: 1px solid ; border: hidden;">

@@ -32,29 +32,11 @@ export class PacientesService {
   }
 
   cadastrarPaciente(Paciente: Paciente): Observable<Paciente> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http.post<Paciente>(
-      `${this.apiUrl}/paciente/post`,
-      Paciente,
-      options
-    );
+    return this.http.post<Paciente>(`${this.apiUrl}/paciente/post`, Paciente);
   }
 
   buscarListaPacientesPorCPF(pesquisa: string): Observable<Paciente[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http
-      .get<Paciente[]>(
-        `${this.apiUrl}/paciente/buscarPorCPF/${pesquisa}`,
-        options
-      )
+    return this.http.get<Paciente[]>(`${this.apiUrl}/paciente/buscarPorCPF/${pesquisa}`)
       .pipe(
         tap((Pacientes: Paciente[]) => {
           this.TodosPacientes = Pacientes;
@@ -63,16 +45,9 @@ export class PacientesService {
   }
 
   buscarListaPacientesPorTelefone(pesquisa: string): Observable<Paciente[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
     return this.http
       .get<Paciente[]>(
-        `${this.apiUrl}/paciente/buscarPorTelefone/${pesquisa}`,
-        options
-      )
+        `${this.apiUrl}/paciente/buscarPorTelefone/${pesquisa}`,)
       .pipe(
         tap((Pacientes: Paciente[]) => {
           this.TodosPacientes = Pacientes;
@@ -81,16 +56,9 @@ export class PacientesService {
   }
 
   buscarListaPacientesPor_RG(pesquisa: string): Observable<Paciente[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
     return this.http
       .get<Paciente[]>(
-        `${this.apiUrl}/paciente/buscarPorRG/${pesquisa}`,
-        options
-      )
+        `${this.apiUrl}/paciente/buscarPorRG/${pesquisa}`,)
       .pipe(
         tap((Pacientes: Paciente[]) => {
           this.TodosPacientes = Pacientes;
@@ -99,17 +67,7 @@ export class PacientesService {
   }
 
   buscarListaPacientesPorNome(pesquisa: string): Observable<Paciente[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-
-    return this.http
-      .get<Paciente[]>(
-        `${this.apiUrl}/paciente/buscarPorNome/${pesquisa}`,
-        options
-      )
+    return this.http.get<Paciente[]>(`${this.apiUrl}/paciente/buscarPorNome/${pesquisa}`,)
       .pipe(
         tap((Pacientes: Paciente[]) => {
           this.TodosPacientes = Pacientes;
@@ -118,13 +76,7 @@ export class PacientesService {
   }
 
   buscarTodosPacientes(): Observable<Paciente[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http
-      .get<Paciente[]>(`${this.apiUrl}/paciente/listatodospaciente`, options)
+    return this.http.get<Paciente[]>(`${this.apiUrl}/paciente/listatodospaciente`)
       .pipe(
         tap((Pacientes: Paciente[]) => {
           this.TodosPacientes = Pacientes;
@@ -133,18 +85,12 @@ export class PacientesService {
   }
 
   buscarPacientePorId(id: number): Observable<Paciente> {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.tokenService.retornaToken()}`,
-    };
-    const options = { headers, withCredentials: true };
-    return this.http.get<Paciente>(
-      `${this.apiUrl}/paciente/buscarId/${id}`,
-      options
-    );
+    return this.http.get<Paciente>(`${this.apiUrl}/paciente/buscarId/${id}`);
   }
 
-  PesquisarPacientes(FiltroPesquisaPaciente: number, pesquisa: string): Promise<any[]> {
+
+
+  PesquisarPacientesFiltro(FiltroPesquisaPaciente: number, pesquisa: string): Promise<any[]> {
     const searchMethods: { [key: number]: () => Observable<any[]> } = {
       1: () => this.buscarListaPacientesPorNome(pesquisa),
       2: () => this.buscarListaPacientesPorCPF(pesquisa),

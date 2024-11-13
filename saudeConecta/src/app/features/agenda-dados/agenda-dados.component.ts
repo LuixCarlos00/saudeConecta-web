@@ -6,9 +6,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { MatDialog } from '@angular/material/dialog';
-import { TabelasPesquisasMedicosComponent } from '../pesquisaMedicos/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
+import { TabelasPesquisasMedicosComponent } from './tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
 import { PacientesService } from 'src/app/service/pacientes/Pacientes.service';
-import { TabelaDePacientesComponent } from '../pesquisaPaciente/tabela-de-pacientes/tabela-de-pacientes.component';
+import { TabelaDePacientesComponent } from './tabela-de-pacientes/tabela-de-pacientes.component';
 
 @Component({
   selector: 'app-agenda-dados',
