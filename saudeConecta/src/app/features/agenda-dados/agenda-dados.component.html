@@ -109,7 +109,7 @@
 
 
 
-    <div class="comment">
+    <div class="comment" [formGroup]="FormularioConsulta">
 
       <div>
         <p class="comment_title">Observação:</p>
@@ -121,17 +121,20 @@
         <p>
           <font style="color: red; font-size: 12px;">* </font>Data
         </p>
-        <input class="input_DATA" formControlName="date" type="date" id="date" name="date">
+        <input class="input_DATA" formControlName="date" type="date" id="date" name="date"
+          (change)="onDateChange($event)">
       </div>
+
 
       <div>
         <p>
           <font style="color: red; font-size: 12px;">* </font>Hora
         </p>
         <select class="input_HORA" formControlName="time" name="time" id="time">
-          <option> </option>
+          <option *ngFor="let time of Hora" [value]="time.value">{{time.label}}</option>
         </select>
       </div>
+
 
 
       <select class="input_Forma_Pagamento" formControlName="Pagamento" name="Pagamento" id="Pagamento">
@@ -147,7 +150,7 @@
     </div>
 
     <div class="folder">
-      <button class="btnMarcar_consulta">Marca Consulta</button>
+      <button class="btnMarcar_consulta" (click)="marcarConsulta()">Marca Consulta</button>
     </div>
 
   </main>
