@@ -12,6 +12,11 @@ import { TabelaDePacientesComponent } from './tabela-de-pacientes/tabela-de-paci
 import Swal from 'sweetalert2';
 import { HoradaConsulta } from 'src/app/util/variados/options/options';
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
+import { tokenService } from 'src/app/util/Token/Token.service';
+import { LoginService } from 'src/app/service/service-login/login.service';
+import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
+import { async } from 'rxjs';
+import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 
 @Component({
   selector: 'app-agenda-dados',
@@ -48,9 +53,16 @@ export class AgendaDadosComponent implements OnInit {
     endereco: 0,
     PaciStatus: 0
   }
+  UsuarioLogado: Usuario = {
+    id: 0,
+    aud: '',
+    exp: '',
+    iss: '',
+    sub: '',
+  };
 
+  DiaDaSemana: string = ''
   MostraHora: boolean = false
-
   Hora = HoradaConsulta;
   horariosDisponiveis: string[] = [];
   DataSelecionada: any;
@@ -61,8 +73,16 @@ export class AgendaDadosComponent implements OnInit {
     private medicosService: MedicosService,
     private dialog: MatDialog,
     private pacientesService: PacientesService,
-    private consultaService: ConsultaService
-  ) { }
+    private consultaService: ConsultaService,
+    private LoginService: LoginService,
+    private tokenService: tokenService,
+    private DialogService: DialogService
+  ) {
+    this.LoginService.iniciarObservacaoDadosUsuario();
+    this.tokenService.UsuarioLogadoValue$.subscribe((UsuarioLogado) => {
+      if (UsuarioLogado) this.UsuarioLogado = UsuarioLogado;
+    });
+  }
 
   ngOnInit() {
     this.FormularioMedicos = this.FormBuilder.group({
@@ -79,6 +99,7 @@ export class AgendaDadosComponent implements OnInit {
       observacao: [''],
       date: [''],
       Hora: [''],
+      Pagamento: [''],
     })
   }
 
@@ -96,8 +117,6 @@ export class AgendaDadosComponent implements OnInit {
     if (value === 'medico') {
       const FiltroPesquisa = this.FormularioMedicos.get('OptionsFindMedicos')?.value;
       const pesquisa: string = this.FormularioMedicos.get('PesquisaMedicos')?.value;
-      this.DataSelecionada = '';
-      this.FormularioMedicos.reset();
       this.FormularioConsulta.patchValue({
         date: '',
         Hora: ''
@@ -138,12 +157,12 @@ export class AgendaDadosComponent implements OnInit {
   }
 
   onDateChange(event: Event) {
-    console.log('onDateChange', event);
     const selectedDate = this.FormularioConsulta.get('date')?.value
     const date = new Date(selectedDate + 'T00:00:00');
     const utcDate = new Date(date.toUTCString());
     const options = { weekday: 'long' as const };
     const diaDaSemana = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
+    this.DiaDaSemana = diaDaSemana;
     this.DataSelecionada = selectedDate;
     if (this.MostraHora) {
       this.verificarCondicoesParaConsulta(selectedDate)
@@ -242,9 +261,85 @@ export class AgendaDadosComponent implements OnInit {
   //======================================================================
 
 
-  marcarConsulta() {
+  async marcarConsulta() {
+    const input_Forma_Pagamento = this.FormularioConsulta.get('Pagamento')?.value;
+    const input_HORA = this.FormularioConsulta.get('Hora')?.value;
+    const input_OBSERVACAO = this.FormularioConsulta.get('observacao')?.value;
+    const dataAtual = new Date().toISOString().split('T')[0];
 
+    console.log('input_OBSERVACAO', input_OBSERVACAO),
+      console.log('input_HORA', input_HORA),
+      console.log('input_Forma_Pagamento', input_Forma_Pagamento),
+      console.log('this.Medico', this.Medico),
+      console.log('this.Paciente', this.Paciente),
+      console.log('this.DataSelecionada', this.DataSelecionada);
+
+    if (this.Medico && this.Paciente && this.DataSelecionada && input_Forma_Pagamento && input_HORA && input_OBSERVACAO) {
+      const consult: any = {
+        ConData: this.DataSelecionada,
+        ConHorario: input_HORA,
+        ConMedico: this.Medico,
+        ConPaciente: this.Paciente,
+        ConCodigoConsulta: 0,
+        ConDia_semana: this.DiaDaSemana,
+        ConObservacoes: input_OBSERVACAO,
+        ConDadaCriacao: dataAtual,
+        ConFormaPagamento: input_Forma_Pagamento,
+        ConAdm: this.UsuarioLogado.id,
+        ConStatus: 0,
+      };
+
+      try {
+        const dados = await this.consultaService.VericarSeExetemConsultasMarcadas(consult).toPromise();
+
+        if (dados) {
+          this.DialogService.JaexisteDadosCAdastradosComEssesParamentros();
+          this.FormularioConsulta.reset();
+          return;
+        }
+
+        this.consultaService.CriarConsulata(consult).subscribe(
+          (response) => {
+            this.consultaService.ChangeCadastroRealizadoComSucesso(response);
+            this.FormularioPaciente.reset();
+            this.FormularioMedicos.reset();
+            this.FormularioConsulta.reset();
+
+            const texto: string = `O cadastro da consulta foi realizado com sucesso.\nCodigo de consulta: ${response.ConCodigoConsulta} `;
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: texto,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.DialogService.exibirMensagemDeRetornoAposCriaConsultaDeMedico();
+              }
+            });
+          },
+          (error) => {
+            console.error('Erro ao criar consulta:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Algo deu errado. Tente novamente mais tarde.',
+            });
+          }
+        );
+      } catch (error) {
+        console.error('Erro ao verificar consultas:', error);
+        this.DialogService.JaexisteDadosCAdastradosComEssesParamentros();
+        this.FormularioConsulta.reset();
+      }
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Por favor, preencha todos os campos obrigatórios.',
+      });
+    }
   }
+
+
 
 
 
@@ -277,3 +372,4 @@ export class AgendaDadosComponent implements OnInit {
     this.router.navigate(['/Dashboard']);
   }
 }
+

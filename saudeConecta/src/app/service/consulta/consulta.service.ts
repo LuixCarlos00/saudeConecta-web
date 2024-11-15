@@ -87,11 +87,8 @@ export class ConsultaService {
     return this.http.post<Consulta>(`${this.apiUrl}/consulta/post`, Consulta);
   }
 
-  VericarSeExetemConsultasMarcadas(consult: Consulta) {
-    return this.http.get<Consulta>(
-      `${this.apiUrl}/consulta/consultaData=${consult.ConData}&horario=${consult.ConHorario}&medico=${consult.ConMedico} `,
-
-    );
+  VericarSeExetemConsultasMarcadas(consult: Consulta): Observable<Consulta> {
+    return this.http.get<Consulta>(`${this.apiUrl}/consulta/consultaData=${consult.ConData}&horario=${consult.ConHorario}&medico=${consult.ConMedico} `);
   }
 
   BuscarTodosRegistrosDeConsulta(): Observable<Consulta[]> {

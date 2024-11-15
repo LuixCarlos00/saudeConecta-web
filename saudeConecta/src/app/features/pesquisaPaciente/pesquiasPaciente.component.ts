@@ -106,17 +106,6 @@ export class PesquiasPacienteComponent implements OnInit {
   }
 
   marcarConsulta() {
-    this.gerenciamentoService.medicoEscolhido$.subscribe((medico) => {
-      if (medico) {
-        this.Medico = medico;
-      }
-    });
-
-    this.gerenciamentoService.pacienteEscolhido$.subscribe((paciente) => {
-      if (paciente) {
-        this.PacienteEscolhido = paciente;
-      }
-    });
 
     let time = this.FormGroupConsulta.get('time')?.value;
     const data = this.FormGroupConsulta.get('date')?.value;
