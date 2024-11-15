@@ -126,7 +126,7 @@
       </div>
 
 
-      <div>
+      <div *ngIf="MostraHora && FormularioConsulta.get('date')?.value;  ">
         <p>
           <font style="color: red; font-size: 12px;">* </font>Hora
         </p>

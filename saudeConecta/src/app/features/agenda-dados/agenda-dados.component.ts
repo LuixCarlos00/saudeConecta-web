@@ -49,6 +49,8 @@ export class AgendaDadosComponent implements OnInit {
     PaciStatus: 0
   }
 
+  MostraHora: boolean = false
+
   Hora = HoradaConsulta;
   horariosDisponiveis: string[] = [];
   DataSelecionada: any;
@@ -94,6 +96,12 @@ export class AgendaDadosComponent implements OnInit {
     if (value === 'medico') {
       const FiltroPesquisa = this.FormularioMedicos.get('OptionsFindMedicos')?.value;
       const pesquisa: string = this.FormularioMedicos.get('PesquisaMedicos')?.value;
+      this.DataSelecionada = '';
+      this.FormularioMedicos.reset();
+      this.FormularioConsulta.patchValue({
+        date: '',
+        Hora: ''
+      });
       try {
         const dados = await this.medicosService.PesquisaMedicoFiltro(FiltroPesquisa, pesquisa);
         this.AbirTabela(dados, 'medico');
@@ -111,7 +119,6 @@ export class AgendaDadosComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          console.log(result);
           this.Paciente = result;
         }
       })
@@ -123,7 +130,7 @@ export class AgendaDadosComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          console.log(result);
+          this.MostraHora = true
           this.Medico = result;
         }
       })
@@ -138,7 +145,9 @@ export class AgendaDadosComponent implements OnInit {
     const options = { weekday: 'long' as const };
     const diaDaSemana = new Intl.DateTimeFormat('pt-BR', options).format(utcDate);
     this.DataSelecionada = selectedDate;
-    this.verificarCondicoesParaConsulta(selectedDate);
+    if (this.MostraHora) {
+      this.verificarCondicoesParaConsulta(selectedDate)
+    }
   }
 
   verificarCondicoesParaConsulta(selectedDate: Date) {
