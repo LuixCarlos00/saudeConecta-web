@@ -137,3 +137,106 @@ button {
   height: 40px;
   width: 200px;
 }
+
+@media screen and (max-width: 750px) {
+
+  .voltar {
+    margin-top: 10px;
+    width: 100%;
+    margin-left: 0px;
+    border: hidden;
+    background-color: rgb(206, 212, 212);
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 10px;
+    /* Added padding for better spacing */
+  }
+
+  .header_pesquisa {
+    width: 100%;
+    /* Make it full width */
+  }
+
+  .header_pesquisa_container,
+  .comment {
+    margin: 0 10px;
+    width: 100%;
+    /* Ensure full width usage */
+  }
+
+  .header_options_Lista {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Align items to start */
+    gap: 10px;
+    /* Increased gap for better spacing */
+    width: 100%;
+    /* Full width */
+  }
+
+  .header_user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Center align */
+    background-color: rgb(49, 168, 59);
+    width: 100%;
+    /* Full width */
+    padding: 10px;
+    /* Added padding for better spacing */
+    margin-top: 20px;
+    /* Margin for spacing from previous section */
+  }
+
+  .header_user_info {
+    width: 100%;
+    /* Full width */
+    text-align: center;
+    /* Center text */
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    border: 1px solid #c50b0b;
+    border-radius: 4px;
+    width: 100%;
+    margin: 10px 0;
+    /* Added margin for better spacing */
+  }
+
+  .textarea {
+    width: 100%;
+    /* Full width */
+  }
+
+  .input_DATA,
+  .input_HORA,
+  .input_Forma_Pagamento {
+    width: 100%;
+    /* Full width */
+    margin: 10px 0;
+    /* Added margin for better spacing */
+  }
+
+  .btnMarcar_consulta {
+    width: 100%;
+    /* Full width */
+    margin: 10px 0;
+    /* Added margin for better spacing */
+  }
+
+  .folder {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    /* Added padding for better spacing */
+  }
+}

@@ -1,15 +1,29 @@
-
+:root {
+  --BrancoPrincipal: #ffffff;
+}
 
 body {
-   margin: 30px;
+  margin: 30px;
   padding: 0;
-  background-color: rgb(206, 212, 212);
-
+  background-color: var(--BrancoPrincipal);
   font-family: Arial, sans-serif;
-  overflow-x: hidden; /* Impede a rolagem horizontal */
+  overflow-x: hidden;
 }
 
 .container {
   border: 1px solid black;
-  border-radius: 10px;
+}
+
+
+
+@media screen and (max-width: 750px) {
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+  }
 }
