@@ -54,13 +54,18 @@ export class AgendaComponent implements OnInit {
     })
 
 
+    this.consultaService.CadastroRealizadoComSucesso$.subscribe((dados) => {
+      if (dados) {
+        this.Recarregar();
+      }
+    });
+
   }
 
   async buscarDadosParaTabela() {
     try {
       const dados = await this.consultaService.BuscarTodosRegistrosDeConsulta().toPromise();
       if (dados) {
-        console.log('dados', dados);
         this.dataSource = []
         this.dataSource = this.tratarDadosParaTabela(dados);
       }
