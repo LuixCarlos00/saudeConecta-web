@@ -38,11 +38,8 @@ export class ConsultaService {
   private GeraPDFRegistroTabelaSubject = new BehaviorSubject<Boolean>(false);
   GeraPDFRegistroTabela$ = this.GeraPDFRegistroTabelaSubject.asObservable();
 
-  private CadastroRealizadoComSucessoSubject = new BehaviorSubject<Consulta>(
-    {} as Consulta
-  );
-  CadastroRealizadoComSucesso$ =
-    this.CadastroRealizadoComSucessoSubject.asObservable();
+  private CadastroRealizadoComSucessoSubject = new BehaviorSubject<Consulta>({} as Consulta);
+  CadastroRealizadoComSucesso$ = this.CadastroRealizadoComSucessoSubject.asObservable();
 
   private DadosParaCronologiaDoDiaSubject = new BehaviorSubject<any>(null);
   BuscarDadoParaCronologia$ = this.DadosParaCronologiaDoDiaSubject.asObservable();
@@ -88,7 +85,8 @@ export class ConsultaService {
   }
 
   VericarSeExetemConsultasMarcadas(consult: Consulta): Observable<Consulta> {
-    return this.http.get<Consulta>(`${this.apiUrl}/consulta/consultaData=${consult.ConData}&horario=${consult.ConHorario}&medico=${consult.ConMedico} `);
+    console.log(consult.conData, consult.conHorario, consult.conMedico);
+    return this.http.get<Consulta>(`${this.apiUrl}/consulta/consultaData=${consult.conData}&horario=${consult.conHorario}&medico=${consult.conMedico} `);
   }
 
   BuscarTodosRegistrosDeConsulta(): Observable<Consulta[]> {

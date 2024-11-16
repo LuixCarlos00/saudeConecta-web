@@ -262,7 +262,7 @@ export class AgendaDadosComponent implements OnInit {
 
 
   async marcarConsulta() {
-    const input_Forma_Pagamento = this.FormularioConsulta.get('Pagamento')?.value;
+    const input_Forma_Pagamento = this.transformaFormaPagamento();
     const input_HORA = this.FormularioConsulta.get('Hora')?.value;
     const input_OBSERVACAO = this.FormularioConsulta.get('observacao')?.value;
     const dataAtual = new Date().toISOString().split('T')[0];
@@ -274,48 +274,48 @@ export class AgendaDadosComponent implements OnInit {
       console.log('this.Paciente', this.Paciente),
       console.log('this.DataSelecionada', this.DataSelecionada);
 
-    if (this.Medico && this.Paciente && this.DataSelecionada && input_Forma_Pagamento && input_HORA && input_OBSERVACAO) {
+    if (this.Medico && this.Paciente && this.DataSelecionada && input_Forma_Pagamento && input_HORA) {
       const consult: any = {
-        ConData: this.DataSelecionada,
-        ConHorario: input_HORA,
-        ConMedico: this.Medico,
-        ConPaciente: this.Paciente,
-        ConCodigoConsulta: 0,
-        ConDia_semana: this.DiaDaSemana,
-        ConObservacoes: input_OBSERVACAO,
-        ConDadaCriacao: dataAtual,
-        ConFormaPagamento: input_Forma_Pagamento,
-        ConAdm: this.UsuarioLogado.id,
-        ConStatus: 0,
+        conData: this.DataSelecionada,
+        conHorario: input_HORA,
+        conMedico: this.Medico.medCodigo,
+        conPaciente: this.Paciente.paciCodigo,
+        conCodigoConsulta: 0,
+        conDia_semana: this.DiaDaSemana,
+        conObservacoes: input_OBSERVACAO,
+        conDadaCriacao: dataAtual,
+        conFormaPagamento: input_Forma_Pagamento,
+        conAdm: this.UsuarioLogado.id,
+        conStatus: 0,
       };
-
+      console.log('consult', consult);
       try {
         const dados = await this.consultaService.VericarSeExetemConsultasMarcadas(consult).toPromise();
-
+        console.log('dados', dados);
         if (dados) {
           this.DialogService.JaexisteDadosCAdastradosComEssesParamentros();
           this.FormularioConsulta.reset();
           return;
         }
 
-        this.consultaService.CriarConsulata(consult).subscribe(
-          (response) => {
-            this.consultaService.ChangeCadastroRealizadoComSucesso(response);
-            this.FormularioPaciente.reset();
-            this.FormularioMedicos.reset();
-            this.FormularioConsulta.reset();
+        this.consultaService.CriarConsulata(consult).subscribe((response) => {
 
-            const texto: string = `O cadastro da consulta foi realizado com sucesso.\nCodigo de consulta: ${response.ConCodigoConsulta} `;
-            Swal.fire({
-              icon: 'success',
-              title: 'OK',
-              text: texto,
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.DialogService.exibirMensagemDeRetornoAposCriaConsultaDeMedico();
-              }
-            });
-          },
+          const texto: string = `O cadastro da consulta foi realizado com sucesso.\nCodigo de consulta: ${response.conCodigoConsulta} `;
+          Swal.fire({
+            icon: 'success',
+            title: 'OK',
+            text: texto,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.FormularioPaciente.reset();
+              this.FormularioMedicos.reset();
+              this.FormularioConsulta.reset();
+              this.Paciente = {} as Paciente;
+              this.Medico = {} as Medico;
+              this.consultaService.ChangeCadastroRealizadoComSucesso(response);
+            }
+          });
+        },
           (error) => {
             console.error('Erro ao criar consulta:', error);
             Swal.fire({
@@ -345,7 +345,24 @@ export class AgendaDadosComponent implements OnInit {
 
 
 
+  transformaFormaPagamento() {
+    const pagamentoValue = this.FormularioConsulta.get('Pagamento')?.value;
+    let FornaPAgamento: number;
 
+    switch (pagamentoValue) {
+      case 'Cartao':
+        return (FornaPAgamento = 1);
+        break;
+      case 'Dinheiro':
+        return (FornaPAgamento = 2);
+        break;
+      case 'Pix':
+        return (FornaPAgamento = 3);
+        break;
+      default:
+        return (FornaPAgamento = 0); // Valor padrão, caso nenhuma das opções seja selecionada
+    }
+  }
 
 
 

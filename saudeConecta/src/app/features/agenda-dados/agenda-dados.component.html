@@ -1,18 +1,21 @@
 <body>
   <main>
     <form class="formulario" [formGroup]="FormularioMedicos">
-      <button style="border: hidden; background-color: rgb(206, 212, 212)" (click)="voltarParaHome()">
+      <button class="voltar" style="border: hidden; background-color: rgb(206, 212, 212)  " (click)="voltarParaHome()">
         <i class="fa-solid fa-arrow-left fa-xl"></i>
       </button>
       <div class="header">
+
         <div class="header_pesquisa">
+
           <div class="header_pesquisa_container">
             <p class="label_filtro_PESQUISA">Pesquisar Médicos</p>
-            <div class="header_pesquisa_input">
+            <div>
               <input type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaMedicos">
               <button (click)="Pesquisar('medico')">Pesquisar</button>
             </div>
           </div>
+
           <div>
             <ul class="header_options_Lista">
               <li>Nome
@@ -37,7 +40,9 @@
 
             </ul>
           </div>
+
         </div>
+
         <div class="header_user">
           <i class="fa-solid fa-user fa-xl"></i>
           <div class="header_user_info">
@@ -50,6 +55,7 @@
 
           </div>
         </div>
+
       </div>
     </form>
 
@@ -61,7 +67,7 @@
         <div class="header_pesquisa">
           <div class="header_pesquisa_container">
             <p class="label_filtro_PESQUISA">Pesquisar Pacientes</p>
-            <div class="header_pesquisa_input">
+            <div>
               <input type="text" id="Pesquisa" name="Pesquisa" required formControlName="PesquisaPaciente">
               <button (click)="Pesquisar('paciente')">Pesquisar</button>
             </div>
