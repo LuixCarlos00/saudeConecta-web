@@ -210,75 +210,6 @@ form {
 
 
 
-@media screen and (min-width: 750px) {
-
-  .input_filtro {
-    margin-left: -9px;
-  }
-
-
-
-  button {
-    cursor: pointer;
-  }
-
-  .input_DATA {
-    display: flex;
-    border-radius: 5px;
-    margin-left: 10px;
-    padding: 10px;
-    width: 105px;
-    border-color: #000000;
-  }
-
-  .label_filtro_DATA {
-    padding: 10px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-
-  .label_filtro_Hora {
-    font-family: 'Times New Roman', Times, serif;
-    padding: 10px;
-    margin-left: 50%;
-    display: flex;
-    margin-top: -110px;
-  }
-
-  .input_HORA {
-    border-color: #000000;
-    margin-top: -10px;
-    display: flex;
-    border-radius: 5px;
-    margin-left: 155px;
-    padding: 10px;
-    width: 105px;
-  }
-
-  .label_filtro_PESQUISA {
-    padding: 10px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-
-  .disabled-button {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-
-
-  .label_filtro {
-    padding: 10px;
-    margin-left: 10px;
-    margin: 5px;
-    font-size: 12px;
-  }
-
-
-
-
-}
-
-
 
 
 
@@ -370,10 +301,20 @@ form {
     margin: 0px;
   }
 
+  .custom-table .NomeObecervacao {
+    color: rgb(69, 118, 211);
+    border-color: black;
+    font: bold;
+    padding: 0;
+    font-size: 12.5px;
+    text-align: center;
+    background: var(--CorFundo);
+  }
 
-
-
-
-
+  .custom-table .colunasObecervacao {
+    width: 200px;
+    text-align: center;
+    background: var(--CorFundo);
+  }
 
 }
