@@ -34,19 +34,15 @@ import { CadastroComponent } from '../features/cadastro/cadastro/cadastro.compon
 import { CadastroMedicoComponent } from '../features/cadastro/cadastro-medico/cadastro-medico.component';
 import { CadastroUsuarioComponent } from '../features/cadastro/cadastro-usuario/cadastro-usuario.component';
 import { RecuperaCadastroComponent } from '../features/recupera-Cadastro/recupera-cadastro/recupera-cadastro.component';
-import { PesquisaMedicosComponent } from '../features/pesquisaMedicos/pesquisaMedicos.component';
-import { TabelasPesquisasMedicosComponent } from '../features/agenda-dados/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
 
 import { CadastroAdmComponent } from '../features/cadastro/cadastro-adm/cadastro-adm.component';
-import { AgendaComponent } from '../features/agenda/agenda.component';
-import { ObservacoesComponent } from '../features/agenda/Observacoes/Observacoes.component';
-import { EditarConsultasComponent } from '../features/agenda/Editar-Consultas/Editar-Consultas.component';
-import { Template_PDFComponent } from '../features/agenda/template_PDF/template_PDF.component';
+import { AgendaComponent } from '../features/gerenciamento/agenda/agenda.component';
+import { ObservacoesComponent } from '../features/gerenciamento/agenda/Observacoes/Observacoes.component';
+import { EditarConsultasComponent } from '../features/gerenciamento/agenda/Editar-Consultas/Editar-Consultas.component';
+import { Template_PDFComponent } from '../features/gerenciamento/agenda/template_PDF/template_PDF.component';
 import { CadastroSecretariaComponent } from '../features/cadastro/cadastro-secretaria/cadastro-secretaria.component';
 import { GerenciamentoComponent } from '../features/gerenciamento/gerenciamento.component';
-import { TabelaDePacientesComponent } from '../features/agenda-dados/tabela-de-pacientes/tabela-de-pacientes.component';
-import { PesquiasPacienteComponent } from '../features/pesquisaPaciente/pesquiasPaciente.component';
-import { AvisosLembretesComponent } from '../features/agenda/Avisos-Lembretes/Avisos-Lembretes.component';
+import { AvisosLembretesComponent } from '../features/gerenciamento/agenda/Avisos-Lembretes/Avisos-Lembretes.component';
 import { DashboardComponent } from '../features/dashboard/dashboard.component';
 import { GraficoQntConsultasDiaAnteriorComponent } from '../features/dashboard/grafico-qnt-consultas-dia-anterior/grafico-qnt-consultas-dia-anterior.component';
 import { GraficoAgendamentosDiasSemanasMesComponent } from '../features/dashboard/grafico-agendamentos-dias-semanas-mes/grafico-agendamentos-dias-semanas-mes.component';
@@ -67,9 +63,11 @@ import { AtestadoPacienteComponent } from '../features-Medico/impressoes-PDF/Ate
 import { TrocaSenhaUsuariosComponent } from '../features/gerenciamento-usuario/tabela-todos-usuarios/TrocaSenhaUsuarios/TrocaSenhaUsuarios.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { HistoricoCompletoComponent } from '../features-Medico/impressoes-PDF/historicoCompleto/historicoCompleto.component';
-import { TabelaEditarMedicosConsultasComponent } from '../features/agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
-import { AgendaDadosComponent } from '../features/agenda-dados/agenda-dados.component';
-import { TabelaEditarPacienteConsultasComponent } from '../features/agenda/Editar-Consultas/tabela-editar-Paciente-Consultas/tabela-editar-Paciente-Consultas.component';
+import { TabelaEditarMedicosConsultasComponent } from '../features/gerenciamento/agenda/Editar-Consultas/tabela-editar-Medicos-Consultas/tabela-editar-Medicos-Consultas.component';
+import { AgendaDadosComponent } from '../features/gerenciamento/agenda-dados/agenda-dados.component';
+import { TabelaEditarPacienteConsultasComponent } from '../features/gerenciamento/agenda/Editar-Consultas/tabela-editar-Paciente-Consultas/tabela-editar-Paciente-Consultas.component';
+import { TabelasPesquisasMedicosComponent } from '../features/gerenciamento/agenda-dados/tabelas-Pesquisas-Medicos/tabelas-Pesquisas-Medicos.component';
+import { TabelaDePacientesComponent } from '../features/gerenciamento/agenda-dados/tabela-de-pacientes/tabela-de-pacientes.component';
 
 
 @NgModule({
@@ -79,12 +77,10 @@ import { TabelaEditarPacienteConsultasComponent } from '../features/agenda/Edita
     CadastroComponent,
     CadastroUsuarioComponent,
     CadastroSecretariaComponent,
-    PesquisaMedicosComponent,
     RecuperaCadastroComponent,
 
     TabelasPesquisasMedicosComponent,
     TabelaDePacientesComponent,
-    PesquiasPacienteComponent,
     TrocaSenhaComponent,
     CadastroAdmComponent,
     AgendaComponent,

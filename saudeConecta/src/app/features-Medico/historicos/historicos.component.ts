@@ -6,14 +6,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { ProntuarioService } from 'src/app/service/MEDICO-prontuario/prontuario.service';
-import { TabelaAgendaMedicoService } from 'src/app/service/MEDICO-tabela-agenda-medico/tabelaAgendaMedico.service';
 import { tokenService } from 'src/app/util/Token/Token.service';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
-import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { Usuario } from 'src/app/util/variados/interfaces/usuario/usuario';
 import Swal from 'sweetalert2';
-import { ObservacoesComponent } from 'src/app/features/agenda/Observacoes/Observacoes.component';
-import { id, is } from 'date-fns/locale';
+import { ObservacoesComponent } from 'src/app/features/gerenciamento/agenda/Observacoes/Observacoes.component';
 import { ImprimirSoliciatacaoDeExamesComponent } from '../impressoes-PDF/ImprimirSoliciatacaoDeExames/ImprimirSoliciatacaoDeExames.component';
 import { AtestadoPacienteComponent } from '../impressoes-PDF/AtestadoPaciente/AtestadoPaciente.component';
 import { HistoricoCompletoComponent } from '../impressoes-PDF/historicoCompleto/historicoCompleto.component';
@@ -31,6 +28,7 @@ export class HistoricosComponent implements OnInit {
   clickedRows = new Set<any>();
   pesquisa: string = '';
   displayedColumns: any = [];
+
   UsuarioLogado: Usuario = {
     id: 0,
     aud: '',
@@ -56,89 +54,30 @@ export class HistoricosComponent implements OnInit {
       }
     });
     if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
-      this.BuscarDadosDeAgendaDoMedico();
+      this.BuscarAgendaMedica();
       this.displayedColumnsMedico();
     }
 
     if (this.UsuarioLogado.aud == '[ROLE_ADMIN]') {
-      this.BuscarDadosDeAgendaDeTodosOsMedicos();
+      this.BuscarDadosDeComoAdmin();
       this.displayedColumnsAdmin();
     }
   }
 
-  BuscarDadosDeAgendaDeTodosOsMedicos() {
-    this.ConsultaStatusService.BuscarDadosDeAgendaDeTodosOsMedicos().subscribe(
-      (dados) => {
-        let Consulta: ConsultaStatus[] = [];
-        for (let i = 0; i < dados.length; i++) {
-          Consulta[i] = {
-            ConSttCodigoConsulata: dados[i].ConSttCodigoConsulata,
-            ConSttMedico: dados[i].ConSttMedico,
-            ConSttPaciente: dados[i].ConSttPaciente,
-            ConSttDia_semana: dados[i].ConSttDia_semana,
-            ConSttHorario: dados[i].ConSttHorario,
-            ConSttData: dados[i].ConSttData,
-            ConSttObservacao: dados[i].ConSttObservacao,
-            ConSttDataCriacao: dados[i].ConSttDataCriacao,
-            ConSttFormaPagamento: dados[i].ConSttFormaPagamento,
-            ConSttAdm: dados[i].ConSttStatus,
-            ConSttStatus: dados[i].conAdm,
-          };
-        }
-
-        // Ordenar a novaConsulta pelo horário
-        Consulta.sort((a, b) => {
-          const horaA = a.ConSttData.split('-').map(Number);
-          const horaB = b.ConSttData.split('-').map(Number);
-
-          // Comparar horas
-          if (horaA[0] !== horaB[0]) {
-            return horaA[0] - horaB[0];
-          }
-          // Comparar minutos se horas forem iguais
-          return horaA[1] - horaB[1];
-        });
-
-        if (Consulta.length > 0) {
-          this.dataSource = Consulta;
-          this.filteredDataSource = Consulta; // Inicializa o filtro
-        } else {
-          Swal.fire(
-            'Nenhuma consulta encontrada',
-            'Tente novamente',
-            'warning'
-          );
-          Consulta[0] = {
-            ConSttCodigoConsulata: 0,
-            ConSttMedico: 0,
-            ConSttPaciente: 0,
-            ConSttDia_semana: 'Sem Dados',
-            ConSttHorario: 'Sem Dados',
-            ConSttData: 'Sem Dados',
-            ConSttObservacao: 'Sem Dados',
-            ConSttDataCriacao: 'Sem Dados',
-            ConSttFormaPagamento: 0,
-            ConSttStatus: 0,
-            ConSttAdm: 0,
-          };
-          this.dataSource = Consulta;
-
-          this.filteredDataSource = Consulta; // Inicializa o filtro
-        }
-      }
-    );
+  async BuscarDadosDeComoAdmin() {
+    this.dataSource = await this.ConsultaStatusService.BuscarDadosDeComoAdmin(this.dataSource, this.filteredDataSource)
   }
 
 
 
 
   filtrandoDadosDoBancoPassadoParametros(dados: any) {
-    // Função para normalizar e remover acentos e caracteres especiais
+
     const normalizeString = (str: string) => {
       return str
         .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') // Remove diacríticos
-        .toUpperCase(); // Converte para maiúsculas
+        .replace(/[\u0300-\u036f]/g, '')
+        .toUpperCase();
     };
 
     const safeNormalize = (value: any) => {
@@ -190,12 +129,12 @@ export class HistoricosComponent implements OnInit {
     let resultadoFiltrado = this.filteredDataSource.filter(
       (item) =>
 
-        safeNormalize(item.ConSttMedico?.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
-        safeNormalize(item.ConSttPaciente?.paciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
-        safeNormalize(item.ConSttDia_semana).includes(dadosUpper) ||
-        isDateMatch(item.ConSttData, dados.trim()) || // Compara as datas sem normalizar
-        isTimeMatch(item.ConSttHorario, dados.trim()) || // Compara os horários diretamente
-        safeNormalize(item.ConSttObservacao).includes(dadosUpper)
+        safeNormalize(item.conSttMedico?.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
+        safeNormalize(item.conSttPaciente?.paciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
+        safeNormalize(item.conSttDia_semana).includes(dadosUpper) ||
+        isDateMatch(item.conSttData, dados.trim()) || // Compara as datas sem normalizar
+        isTimeMatch(item.conSttHorario, dados.trim()) || // Compara os horários diretamente
+        safeNormalize(item.conSttObservacao).includes(dadosUpper)
     );
 
 
@@ -206,11 +145,11 @@ export class HistoricosComponent implements OnInit {
       this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
       this.LimparTabela();
       if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
-        this.BuscarDadosDeAgendaDoMedico();
+        this.BuscarAgendaMedica();
         this.displayedColumnsMedico();
       }
       if (this.UsuarioLogado.aud == '[ROLE_ADMIN]') {
-        this.BuscarDadosDeAgendaDeTodosOsMedicos();
+        this.BuscarDadosDeComoAdmin();
         this.displayedColumnsAdmin();
       }
     }
@@ -229,73 +168,20 @@ export class HistoricosComponent implements OnInit {
     this.filtrandoDadosDoBancoPassadoParametros(this.pesquisa);
   }
 
-  BuscarDadosDeAgendaDoMedico() {
-    this.ConsultaStatusService.BuscarHistoricoDeAgendaDoMedico(
-      this.UsuarioLogado.id
-    ).subscribe((dados) => {
-      let Consulta: ConsultaStatus[] = [];
-      for (let i = 0; i < dados.length; i++) {
-        Consulta[i] = {
-          ConSttCodigoConsulata: dados[i].ConSttCodigoConsulata,
-          ConSttMedico: dados[i].ConSttMedico,
-          ConSttPaciente: dados[i].ConSttPaciente,
-          ConSttDia_semana: dados[i].ConSttDia_semana,
-          ConSttHorario: dados[i].ConSttHorario,
-          ConSttData: dados[i].ConSttData,
-          ConSttObservacao: dados[i].ConSttObservacao,
-          ConSttDataCriacao: dados[i].ConSttDataCriacao,
-          ConSttFormaPagamento: dados[i].ConSttFormaPagamento,
-          ConSttAdm: dados[i].ConSttStatus,
-          ConSttStatus: dados[i].conAdm,
-        };
-      }
-
-      // Ordenar a novaConsulta pelo horário
-      Consulta.sort((a, b) => {
-        const horaA = a.ConSttData.split('-').map(Number);
-        const horaB = b.ConSttData.split('-').map(Number);
-
-        // Comparar horas
-        if (horaA[0] !== horaB[0]) {
-          return horaA[0] - horaB[0];
-        }
-        // Comparar minutos se horas forem iguais
-        return horaA[1] - horaB[1];
-      });
-
-      if (Consulta.length > 0) {
-        this.dataSource = Consulta;
-        this.filteredDataSource = Consulta; // Inicializa o filtro
-      } else {
-        Swal.fire('Nenhuma consulta encontrada', 'Tente novamente', 'warning');
-        Consulta[0] = {
-          ConSttCodigoConsulata: 0,
-          ConSttMedico: 0,
-          ConSttPaciente: 0,
-          ConSttDia_semana: 'Sem Dados',
-          ConSttHorario: 'Sem Dados',
-          ConSttData: 'Sem Dados',
-          ConSttObservacao: 'Sem Dados',
-          ConSttDataCriacao: 'Sem Dados',
-          ConSttFormaPagamento: 0,
-          ConSttStatus: 0,
-          ConSttAdm: 0,
-        };
-        this.dataSource = Consulta;
-        this.filteredDataSource = Consulta; // Inicializa o filtro
-      }
-    });
+  async BuscarAgendaMedica() {
+    this.dataSource = await this.ConsultaStatusService.BuscarDadosDoMedico(this.UsuarioLogado.id, this.dataSource, this.filteredDataSource);
   }
+
 
   resetarPesquisa() {
     this.pesquisa = '';
 
     if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
-      this.BuscarDadosDeAgendaDoMedico();
+      this.BuscarAgendaMedica();
     }
 
     if (this.UsuarioLogado.aud == '[ROLE_ADMIN]') {
-      this.BuscarDadosDeAgendaDeTodosOsMedicos();
+      this.BuscarDadosDeComoAdmin();
     }
   }
 
@@ -349,6 +235,8 @@ export class HistoricosComponent implements OnInit {
     });
   }
 
+
+
   openImprimirDialog(value: any) {
     this.ProntuarioService.BuscarPorProntuarioPassadoIdDeConsultaStatus(
       value
@@ -382,6 +270,8 @@ export class HistoricosComponent implements OnInit {
       });
     });
   }
+
+
 
   getPaginatorData(event: PageEvent): PageEvent {
     this.lowValue = event.pageIndex * event.pageSize;

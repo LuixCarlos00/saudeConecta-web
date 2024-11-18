@@ -1,5 +1,5 @@
-import { Paciente } from '../../../util/variados/interfaces/paciente/paciente';
-import { Medico } from '../../../util/variados/interfaces/medico/medico';
+import { Paciente } from '../../../../util/variados/interfaces/paciente/paciente';
+import { Medico } from '../../../../util/variados/interfaces/medico/medico';
 import { ConsultaService } from 'src/app/service/consulta/consulta.service';
 import {
   Component,

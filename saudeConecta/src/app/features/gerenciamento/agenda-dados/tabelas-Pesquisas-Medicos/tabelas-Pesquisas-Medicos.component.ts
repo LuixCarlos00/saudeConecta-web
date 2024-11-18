@@ -12,7 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Medico } from '../../../util/variados/interfaces/medico/medico';
+import { Medico } from '../../../../util/variados/interfaces/medico/medico';
 import { MedicosService } from 'src/app/service/medicos/medicos.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 

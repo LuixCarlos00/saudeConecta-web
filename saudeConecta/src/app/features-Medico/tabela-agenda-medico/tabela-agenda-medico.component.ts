@@ -7,7 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { ObservacoesComponent } from 'src/app/features/agenda/Observacoes/Observacoes.component';
+import { ObservacoesComponent } from 'src/app/features/gerenciamento/agenda/Observacoes/Observacoes.component';
 import { DialogService } from 'src/app/util/variados/dialogo-confirmação/dialog.service';
 import { elements } from 'chart.js';
 import { el } from 'date-fns/locale';
