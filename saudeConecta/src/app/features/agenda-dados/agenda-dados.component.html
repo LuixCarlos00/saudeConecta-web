@@ -117,13 +117,13 @@
 
     <div class="comment" [formGroup]="FormularioConsulta">
 
-      <div>
+      <div class="comment_box">
         <p class="comment_title">Observação:</p>
         <textarea formControlName="observacao" class="textarea" type="text"
           placeholder="Tem alguma observação? Quais:"> </textarea>
       </div>
 
-      <div>
+      <div class="comment_box">
         <p>
           <font style="color: red; font-size: 12px;">* </font>Data
         </p>
@@ -132,7 +132,7 @@
       </div>
 
 
-      <div *ngIf="MostraHora && FormularioConsulta.get('date')?.value;  ">
+      <div class="comment_box">
         <p>
           <font style="color: red; font-size: 12px;">* </font>Hora
         </p>
@@ -142,15 +142,16 @@
       </div>
 
 
-
-      <select class="input_Forma_Pagamento" formControlName="Pagamento" name="Pagamento" id="Pagamento">
-        <option>Forma de Pagamento</option>
-        <option>Cartao</option>
-        <option>Dinheiro</option>
-        <option>Pix</option>
-      </select>
-
-
+      <div class="comment_box">
+        <p>
+          <font style="color: red; font-size: 12px;">* </font>Forma de Pagamento
+        </p>
+        <select class="input_Forma_Pagamento" formControlName="Pagamento" name="Pagamento" id="Pagamento">
+          <option>Cartao</option>
+          <option>Dinheiro</option>
+          <option>Pix</option>
+        </select>
+      </div>
 
 
     </div>

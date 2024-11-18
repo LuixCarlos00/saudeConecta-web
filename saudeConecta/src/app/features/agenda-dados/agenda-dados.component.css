@@ -13,8 +13,6 @@ main {
   font-family: Arial, sans-serif;
 }
 
-
-
 .header {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -24,7 +22,6 @@ main {
 .header_pesquisa {
   flex-direction: column;
 }
-
 
 .header_pesquisa_container,
 .header_user,
@@ -40,7 +37,6 @@ main {
   font-weight: 700;
 }
 
-
 .header_options_Lista {
   font-size: 12px;
   display: flex;
@@ -48,7 +44,6 @@ main {
   margin: 0 10px;
   gap: 5px;
 }
-
 
 input {
   padding: 10px;
@@ -70,7 +65,6 @@ button {
   cursor: pointer;
 }
 
-
 .header_user_info {
   display: flex;
   flex-direction: column;
@@ -87,7 +81,7 @@ button {
   align-items: center;
 }
 
-.textarea {
+textarea {
   width: 550px;
   height: 100px;
   border: 1px solid #007bff;
@@ -133,10 +127,17 @@ button {
 }
 
 .input_Forma_Pagamento {
-  margin-top: 30px;
   height: 40px;
   width: 200px;
+
 }
+
+
+
+
+
+
+
 
 @media screen and (max-width: 750px) {
 
@@ -154,52 +155,43 @@ button {
     align-items: center;
     justify-content: flex-start;
     padding: 0 10px;
-    /* Added padding for better spacing */
   }
 
   .header_pesquisa {
     width: 100%;
-    /* Make it full width */
   }
 
-  .header_pesquisa_container,
-  .comment {
-    margin: 0 10px;
-    width: 100%;
-    /* Ensure full width usage */
+  .header_pesquisa_container button {
+    width: 50%;
+    margin-left: 0px;
+    margin: 0 0 10px 0;
+    border: none;
+    cursor: pointer;
   }
 
   .header_options_Lista {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: flex-start;
-    /* Align items to start */
-    gap: 10px;
-    /* Increased gap for better spacing */
-    width: 100%;
-    /* Full width */
+    gap: 50px;
   }
 
-  .header_user {
+  .header_user i {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* Center align */
-    background-color: rgb(49, 168, 59);
-    width: 100%;
-    /* Full width */
-    padding: 10px;
-    /* Added padding for better spacing */
-    margin-top: 20px;
-    /* Margin for spacing from previous section */
+    margin: 10px 50px;
   }
 
-  .header_user_info {
-    width: 100%;
-    /* Full width */
-    text-align: center;
-    /* Center text */
+  .header_user div {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .header_user_info p {
+    display: flex;
+    font-size: 10px;
+    justify-content: flex-start;
+    margin: 0;
   }
 
   input[type="text"] {
@@ -208,28 +200,11 @@ button {
     border-radius: 4px;
     width: 100%;
     margin: 10px 0;
-    /* Added margin for better spacing */
-  }
-
-  .textarea {
-    width: 100%;
-    /* Full width */
-  }
-
-  .input_DATA,
-  .input_HORA,
-  .input_Forma_Pagamento {
-    width: 100%;
-    /* Full width */
-    margin: 10px 0;
-    /* Added margin for better spacing */
   }
 
   .btnMarcar_consulta {
-    width: 100%;
-    /* Full width */
+    width: 50%;
     margin: 10px 0;
-    /* Added margin for better spacing */
   }
 
   .folder {
@@ -237,6 +212,43 @@ button {
     justify-content: center;
     width: 100%;
     padding: 10px;
-    /* Added padding for better spacing */
   }
+
+  .comment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .comment_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .comment_box p {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  textarea,
+  .input_HORA,
+  .input_Forma_Pagamento {
+    width: 300px;
+  }
+
+  .input_DATA {
+    width: 280px;
+  }
+
+
+
 }
