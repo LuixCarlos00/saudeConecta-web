@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
- import { tokenService } from 'src/app/util/Token/Token.service';
+import { tokenService } from 'src/app/util/Token/Token.service';
 import Swal from 'sweetalert2';
 import { Observable, map } from 'rxjs';
 import { el } from 'date-fns/locale';
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     private form: FormBuilder,
     private LoginService: LoginService,
     private tokenService: tokenService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.FormularioUsuario = this.form.group({
@@ -63,61 +63,54 @@ export class LoginComponent implements OnInit {
 
 
 
-    this.ExisteUsuario(username).subscribe((existe) => {
-      if (existe) {
-        this.LoginService.fazerLogin(Usuario).subscribe(
-          (response) => {
 
-            if (response.body && response.body.token) {
-              const token = response.body.token;
-              this.tokenService.salvarToken(token);
-              this.tokenService.decodificaToken();
+    this.LoginService.fazerLogin(Usuario).subscribe(
+      (response) => {
 
-               this.tokenService.UsuarioLogadoValue$.subscribe(
-                (UsuarioLogado) => {
-                  this.Usuario = UsuarioLogado;
+        if (response.body && response.body.token) {
+          const token = response.body.token;
+          this.tokenService.salvarToken(token);
+          this.tokenService.decodificaToken();
 
-                }
-              );
+          this.tokenService.UsuarioLogadoValue$.subscribe(
+            (UsuarioLogado) => {
+              this.Usuario = UsuarioLogado;
 
-              if (
-                this.Usuario.aud === '[ROLE_ADMIN]' ||
-                this.Usuario.aud === '[ROLE_Secretaria]' ||
-                this.Usuario.aud === '[ROLE_Medico]'
-              ) {
-
-
-                this.tokenService.setAuthTwof(true);
-                this.router.navigate(['/Dashboard']);
-              }
-
-              else {
-
-                this.tokenService.removeToken();
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: 'Parece que você não tem permissão para acessar esta página',
-                });
-               }
             }
-          },
-          (error) => {
+          );
+
+          if (
+            this.Usuario.aud === '[ROLE_ADMIN]' ||
+            this.Usuario.aud === '[ROLE_Secretaria]' ||
+            this.Usuario.aud === '[ROLE_Medico]'
+          ) {
+
+
+            this.tokenService.setAuthTwof(true);
+            this.router.navigate(['/Dashboard']);
+          }
+
+          else {
+
+            this.tokenService.removeToken();
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Email ou senha inválidos',
+              text: 'Parece que você não tem permissão para acessar esta página',
             });
           }
-        );
-      } else {
+        }
+      },
+      (error) => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Nao foi encontrado seu cadastro',
+          text: 'Email ou senha inválidos',
         });
       }
-    });
+    );
+
+
   }
   ExisteUsuario(username: any): Observable<boolean> {
     return this.LoginService.buscarUsuarioExistente(username).pipe(

@@ -67,7 +67,7 @@ export class LoginService {
 
 
   fazerLogin(usuario: any) {
-    return this.http.post<any>(`${this.apiUrl}/Home/login`, usuario, {observe: 'response',});
+    return this.http.post<any>(`${this.apiUrl}/Home/login`, usuario, { observe: 'response', });
   }
 
 
