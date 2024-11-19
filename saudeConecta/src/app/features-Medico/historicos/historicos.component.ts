@@ -1,3 +1,5 @@
+import { log } from 'node:console';
+import { da, el } from 'date-fns/locale';
 import { ImprimirPrescricaoComponent } from './../impressoes-PDF/ImprimirPrescricao/ImprimirPrescricao.component';
 import { Prontuario } from './../../util/variados/interfaces/Prontuario/Prontuario';
 import { ConsultaStatusService } from 'src/app/service/service-consulta-status/consulta-status.service';
@@ -71,79 +73,14 @@ export class HistoricosComponent implements OnInit {
 
 
 
-  filtrandoDadosDoBancoPassadoParametros(dados: any) {
-
-    const normalizeString = (str: string) => {
-      return str
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toUpperCase();
-    };
-
-    const safeNormalize = (value: any) => {
-      return value ? normalizeString(value.toString()) : ''; // Verifica se o valor não é nulo ou undefined
-    };
-
-    const isDateMatch = (date1: string, date2: string) => {
-      const parseDate = (dateStr: string) => {
-        const date = new Date(dateStr);
-        return isNaN(date.getTime()) ? null : date;
-      };
-
-      const parsedDate1 = parseDate(date1);
-      const parsedDate2 = parseDate(date2);
-
-      if (!parsedDate1 || !parsedDate2) {
-        return false; // Se qualquer data for inválida, retorne false
-      }
-
-      return parsedDate1.toISOString().split('T')[0] === parsedDate2.toISOString().split('T')[0];
-    };
+  async filtrandoDadosDoBancoPassadoParametros(dados: any) {
 
 
-    const isTimeMatch = (time1: string, time2: string) => {
-      const formatTime = (time: string) => {
-        let [hour, minute] = time.split(':');
-        if (!hour || !minute) {
-          return null; // Se não for possível dividir corretamente, retorne null
-        }
-        hour = hour.padStart(2, '0'); // Garante que a hora tenha 2 dígitos
-        minute = minute.padStart(2, '0'); // Garante que os minutos tenham 2 dígitos
-        return `${hour}:${minute}`;
-      };
-
-      const formattedTime1 = formatTime(time1.trim());
-      const formattedTime2 = formatTime(time2.trim());
-
-      if (!formattedTime1 || !formattedTime2) {
-        return false; // Se qualquer hora for inválida, retorne false
-      }
-
-      return formattedTime1 === formattedTime2;
-    };
-
-
-    const dadosUpper = safeNormalize(dados.trim());
-
-    // Filtrar os dados da consulta, comparando as strings normalizadas e tratando a data e o horário de forma específica
-    let resultadoFiltrado = this.filteredDataSource.filter(
-      (item) =>
-
-        safeNormalize(item.conSttMedico?.medNome).includes(dadosUpper) || // Verifica se ConMedico existe antes de acessar medNome
-        safeNormalize(item.conSttPaciente?.paciNome).includes(dadosUpper) || // Verifica se ConPaciente existe antes de acessar paciNome
-        safeNormalize(item.conSttDia_semana).includes(dadosUpper) ||
-        isDateMatch(item.conSttData, dados.trim()) || // Compara as datas sem normalizar
-        isTimeMatch(item.conSttHorario, dados.trim()) || // Compara os horários diretamente
-        safeNormalize(item.conSttObservacao).includes(dadosUpper)
-    );
-
-
-    if (resultadoFiltrado.length > 0) {
-      this.LimparTabela();
-      this.dataSource = resultadoFiltrado;
+    const dadosFoltrados = await this.ConsultaStatusService.filtrandoDadosDoBancoPassadoParametros(this.dataSource, dados)
+    console.log('dadosFoltrados', dadosFoltrados)
+    if (dadosFoltrados) {
+      this.dataSource = dadosFoltrados;
     } else {
-      this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
-      this.LimparTabela();
       if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
         this.BuscarAgendaMedica();
         this.displayedColumnsMedico();
@@ -153,6 +90,8 @@ export class HistoricosComponent implements OnInit {
         this.displayedColumnsAdmin();
       }
     }
+
+
   }
 
 

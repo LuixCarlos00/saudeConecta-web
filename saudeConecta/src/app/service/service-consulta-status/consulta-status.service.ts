@@ -1,20 +1,23 @@
+import { DialogService } from './../../util/variados/dialogo-confirmação/dialog.service';
 import { log } from 'node:console';
 import { Paciente } from 'src/app/util/variados/interfaces/paciente/paciente';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, retry } from 'rxjs';
 import { tokenService } from "src/app/util/Token/Token.service";
 import { Consulta } from 'src/app/util/variados/interfaces/consulta/consulta';
 import { ConsultaStatus } from 'src/app/util/variados/interfaces/consultaStatus/consultaStatus';
 import { ApiUrlService } from '../_Url-Global/Api-Url.service';
 import Swal from 'sweetalert2';
+import { da } from 'date-fns/locale';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConsultaStatusService {
+
 
 
 
@@ -38,7 +41,8 @@ export class ConsultaStatusService {
     private router: Router,
     private http: HttpClient,
     private tokenService: tokenService,
-    private apiUrl_Global: ApiUrlService
+    private apiUrl_Global: ApiUrlService,
+    private DialogService: DialogService
   ) {
     this.apiUrl = this.apiUrl_Global.getUrl()
   }
@@ -75,6 +79,9 @@ export class ConsultaStatusService {
   BuscarDadosDeAgendaDeTodosOsMedicos() {
     return this.http.get<any[]>(`${this.apiUrl}/consultaStatus/BuscarDadosDeAgendaDeTodosOsMedicos`);
   }
+
+
+
 
 
 
@@ -214,6 +221,89 @@ export class ConsultaStatusService {
           console.warn('error:', error);
         });
 
+    })
+  }
+
+
+
+  filtrandoDadosDoBancoPassadoParametros(dataSource: any[], dados: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+
+
+
+      // Arrumar busca de data padrao br
+
+
+      const normalizeString = (str: string) => {
+        return str
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toUpperCase();
+      };
+
+      const safeNormalize = (value: any) => {
+        return value ? normalizeString(value.toString()) : '';
+      };
+
+      const isDateMatch = (date1: string, date2: string) => {
+        const parseDate = (dateStr: string) => {
+          const date = new Date(dateStr);
+          return isNaN(date.getTime()) ? null : date;
+        };
+
+        const parsedDate1 = parseDate(date1);
+        const parsedDate2 = parseDate(date2);
+
+        if (!parsedDate1 || !parsedDate2) {
+          return false;
+        }
+
+        return parsedDate1.toISOString().split('T')[0] === parsedDate2.toISOString().split('T')[0];
+      };
+
+
+      const isTimeMatch = (time1: string, time2: string) => {
+        const formatTime = (time: string) => {
+          let [hour, minute] = time.split(':');
+          if (!hour || !minute) {
+            return null;
+          }
+          hour = hour.padStart(2, '0');
+          minute = minute.padStart(2, '0');
+          return `${hour}:${minute}`;
+        };
+
+        const formattedTime1 = formatTime(time1.trim());
+        const formattedTime2 = formatTime(time2.trim());
+
+        if (!formattedTime1 || !formattedTime2) {
+          return false;
+        }
+
+        return formattedTime1 === formattedTime2;
+      };
+
+
+      const dadosUpper = safeNormalize(dados.trim());
+
+      let resultadoFiltrado = dataSource.filter(
+        (item) =>
+
+          safeNormalize(item.conSttMedico?.medNome).includes(dadosUpper) ||
+          safeNormalize(item.conSttPaciente?.paciNome).includes(dadosUpper) ||
+          safeNormalize(item.conSttDia_semana).includes(dadosUpper) ||
+          isDateMatch(item.conSttData, dados.trim()) ||
+          isTimeMatch(item.conSttHorario, dados.trim()) ||
+          safeNormalize(item.conSttObservacao).includes(dadosUpper)
+      );
+
+
+      if (resultadoFiltrado.length > 0) {
+        resolve(resultadoFiltrado);
+      } else {
+        this.DialogService.NaoFoiEncontradoConsultasComEssesParametros();
+        reject('Nenhuma consulta encontrada');
+      }
     })
   }
 
