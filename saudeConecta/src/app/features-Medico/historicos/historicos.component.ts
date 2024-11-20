@@ -68,6 +68,7 @@ export class HistoricosComponent implements OnInit {
 
   async BuscarDadosDeComoAdmin() {
     this.dataSource = await this.ConsultaStatusService.BuscarDadosDeComoAdmin(this.dataSource, this.filteredDataSource)
+
   }
 
 
@@ -77,7 +78,6 @@ export class HistoricosComponent implements OnInit {
 
 
     const dadosFoltrados = await this.ConsultaStatusService.filtrandoDadosDoBancoPassadoParametros(this.dataSource, dados)
-    console.log('dadosFoltrados', dadosFoltrados)
     if (dadosFoltrados) {
       this.dataSource = dadosFoltrados;
     } else {
@@ -108,7 +108,22 @@ export class HistoricosComponent implements OnInit {
   }
 
   async BuscarAgendaMedica() {
-    this.dataSource = await this.ConsultaStatusService.BuscarDadosDoMedico(this.UsuarioLogado.id, this.dataSource, this.filteredDataSource);
+
+    const dadosFoltrados = await this.ConsultaStatusService.BuscarDadosDoMedico(this.UsuarioLogado.id, this.dataSource, this.filteredDataSource);
+    console.log('dadosFoltrados', dadosFoltrados);
+    if (dadosFoltrados) {
+      this.dataSource = dadosFoltrados;
+    } else {
+      if (this.UsuarioLogado.aud == '[ROLE_Medico]') {
+        this.BuscarAgendaMedica();
+        this.displayedColumnsMedico();
+      }
+      if (this.UsuarioLogado.aud == '[ROLE_ADMIN]') {
+        this.BuscarDadosDeComoAdmin();
+        this.displayedColumnsAdmin();
+      }
+    }
+
   }
 
 
@@ -177,9 +192,8 @@ export class HistoricosComponent implements OnInit {
 
 
   openImprimirDialog(value: any) {
-    this.ProntuarioService.BuscarPorProntuarioPassadoIdDeConsultaStatus(
-      value
-    ).subscribe((dados) => {
+    console.log('value', value)
+    this.ProntuarioService.BuscarPorProntuarioPassadoIdDeConsultaStatus(value).subscribe((dados) => {
 
       Swal.fire({
         title: 'Selecione uma opção para imprimir',

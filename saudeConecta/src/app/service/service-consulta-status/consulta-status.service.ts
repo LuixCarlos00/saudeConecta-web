@@ -94,7 +94,7 @@ export class ConsultaStatusService {
         console.log('dados', dados)
         for (let i = 0; i < dados.length; i++) {
           Consulta[i] = {
-            conSttCodigoConsulata: dados[i].conSttCodigoConsulata,
+            conSttCodigoConsulata: dados[i].conSttCodigoConsulta,
             conSttMedico: dados[i].conSttMedico,
             conSttPaciente: dados[i].conSttPaciente,
             conSttDia_semana: dados[i].conSttDia_semana,
@@ -171,7 +171,7 @@ export class ConsultaStatusService {
         let Consulta: ConsultaStatus[] = [];
         for (let i = 0; i < dados.length; i++) {
           Consulta[i] = {
-            conSttCodigoConsulata: dados[i].conSttCodigoConsulata,
+            conSttCodigoConsulata: dados[i].conSttCodigoConsulta,
             conSttMedico: dados[i].conSttMedico,
             conSttPaciente: dados[i].conSttPaciente,
             conSttDia_semana: dados[i].conSttDia_semana,
